@@ -1,8 +1,16 @@
 import "./TimecardEntry.scss";
 import React, { useState } from "react";
+import Axios from "axios";
 
 export default function TimecardEntry() {
   const [code, setCode] = useState("");
+
+  const punchin = (code) => {
+    const data = { pin: code };
+    Axios.post("http://localhost:8080/api/timecards", data).then((res) => {
+      console.log(res);
+    });
+  };
 
   const addNumber = (num) => {
     setCode(code + num);

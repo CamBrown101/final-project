@@ -1,7 +1,7 @@
 INSERT INTO employees (firstName, lastName, email, pin, is_admin, start_date)
-VALUES ('Cam', 'Brown', 'cameron-brown@live.com', '$2b$10$bpCkRK1daxonS9udyQIyWeUp4/YJi.fARai2MBY3f.f6JSJcPC5jS',  TRUE, CLOCK_TIMESTAMP()),
-('Michael', 'Krishna', 'test@test.com', '$2b$10$2.pX6e859eHs6Wf35zJgjetxFsBs77yCn5aLC2uCXnjjmZsjUIW.e',  TRUE, CLOCK_TIMESTAMP()),
-('Marcel', 'Mueller', 'mail.marcelm@gmail.com', '	$2b$10$Zyd6gub2Rj/7h6pEi5dNT.juUVnsTOBvQmE0Vn0LZrEcDs1pTlgzS',  TRUE, CLOCK_TIMESTAMP());
+VALUES ('Cam', 'Brown', 'cameron-brown@live.com', '1111',  TRUE, CLOCK_TIMESTAMP()),
+('Michael', 'Krishna', 'test@test.com', '2222',  TRUE, CLOCK_TIMESTAMP()),
+('Marcel', 'Mueller', 'mail.marcelm@gmail.com', '3333',  TRUE, CLOCK_TIMESTAMP());
 
 INSERT INTO categories (name, is_food)
 VALUES('Beer', false),
