@@ -40,7 +40,7 @@ module.exports = (db) => {
     const pin = req.body.pn;
     const isAdmin = req.body.isAdmin;
     db.query(
-      `SELECT * FROM users
+      `SELECT * FROM employees
               WHERE email = $1;`,
       [email]
     ).then((data) => {
