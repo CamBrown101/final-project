@@ -18,7 +18,7 @@ export default function TimecardEntry() {
 
   return (
     <div className="punchin-container">
-      <h1>Sign In</h1>
+      <h1>Clock in</h1>
       <p className="input">{code}</p>
       <div className="button-container">
         <button
