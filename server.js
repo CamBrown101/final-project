@@ -19,10 +19,14 @@ const PORT = process.env.PORT || 8080;
 //import routes
 const loginRoutes = require("./src/routes/login");
 const employeeRoutes = require("./src/routes/employees");
+const menuRoutes = require("./src/routes/menu");
+const tableRoutes = require("./src/routes/tables");
 
 //use routes
 app.use("/login", loginRoutes(db));
 app.use("/api/employees", employeeRoutes(db));
+app.use("/api/menu", menuRoutes(db));
+app.use("/api/tables", tableRoutes(db));
 
 app.get("/", (req, res) => {
   console.log(req.session);
