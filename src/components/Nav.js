@@ -3,7 +3,6 @@ import { useContext } from 'react';
 
 import './Nav.scss';
 import { UserContext } from '../UserContext';
-import userEvent from '@testing-library/user-event';
 
 export default function Nav(props) {
   const { user } = useContext(UserContext);
@@ -12,18 +11,6 @@ export default function Nav(props) {
     <nav id="nav-bar">
       {user.auth ? (
         <nav id="nav-menu">
-          <NavLink className="nav-menu-item" id="nav-menu-home" exact to="/">
-            Home
-          </NavLink>
-          <NavLink
-            className="nav-menu-item"
-            id="nav-menu-home"
-            exact
-            to="/login"
-          >
-            Login
-          </NavLink>
-
           <NavLink
             className="nav-menu-item"
             id="nav-menu-home"
@@ -31,6 +18,14 @@ export default function Nav(props) {
             to="/menu"
           >
             Menu
+          </NavLink>
+          <NavLink
+            className="nav-menu-item"
+            id="nav-menu-manager"
+            exact
+            to="/manager"
+          >
+            Manager
           </NavLink>
         </nav>
       ) : null}

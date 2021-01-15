@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CreateItem.scss';
+import ManagerNav from './ManagerNav';
 
-export default function Create(props) {
+export default function CreateItem(props) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -81,75 +82,78 @@ export default function Create(props) {
   };
 
   return (
-    <section className="new-menu-item">
-      <form className="menu-item-form" method="POST" action="/login">
-        <h2 id="menu-item-title">Create menu-item</h2>
-        <h3>Name:</h3>
-        <input
-          type="text"
-          className="menu-item-name"
-          required
-          name="name"
-          onChange={nameOnChange}
-        />
-        <h3>Description:</h3>
-        <input
-          type="description"
-          className="menu-item-description"
-          required
-          name="description"
-          onChange={descriptionOnChange}
-        />
-        <h3>Price:</h3>
-        <input
-          type="number"
-          max="9999"
-          className="menu-item-price"
-          required
-          name="price"
-          onChange={priceOnChange}
-        />
-        <h3>quantity:</h3>
-        <input
-          type="number"
-          max="9999"
-          className="menu-item-quantity"
-          required
-          name="quantity"
-          onChange={quantityOnChange}
-        />
-        <h3>Category:</h3>
-        <select
-          className="menu-item-category"
-          onChange={categoryOnChange}
-          name="category"
-        >
-          {categories.map((e, key) => {
-            return (
-              <option key={key} value={e.name}>
-                {e.name}
-              </option>
-            );
-          })}
-        </select>
-        <h3>Is active?:</h3>
-        <select
-          className="menu-item-is-active"
-          onChange={isActiveOnChange}
-          name="is-active"
-        >
-          <option value="false">False</option>
-          <option value="true">True</option>
-        </select>
-        <button
-          onClick={create}
-          type="submit"
-          className="create-menu-item-button"
-        >
-          Create menu-item
-        </button>
-      </form>
-      {/* {props.error ? <div id="error">{props.error}</div> : null} */}
-    </section>
+    <>
+      <ManagerNav></ManagerNav>
+      <section className="new-menu-item">
+        <form className="menu-item-form" method="POST" action="/login">
+          <h2 id="menu-item-title">Create menu-item</h2>
+          <h3>Name:</h3>
+          <input
+            type="text"
+            className="menu-item-name"
+            required
+            name="name"
+            onChange={nameOnChange}
+          />
+          <h3>Description:</h3>
+          <input
+            type="description"
+            className="menu-item-description"
+            required
+            name="description"
+            onChange={descriptionOnChange}
+          />
+          <h3>Price:</h3>
+          <input
+            type="number"
+            max="9999"
+            className="menu-item-price"
+            required
+            name="price"
+            onChange={priceOnChange}
+          />
+          <h3>quantity:</h3>
+          <input
+            type="number"
+            max="9999"
+            className="menu-item-quantity"
+            required
+            name="quantity"
+            onChange={quantityOnChange}
+          />
+          <h3>Category:</h3>
+          <select
+            className="menu-item-category"
+            onChange={categoryOnChange}
+            name="category"
+          >
+            {categories.map((e, key) => {
+              return (
+                <option key={key} value={e.name}>
+                  {e.name}
+                </option>
+              );
+            })}
+          </select>
+          <h3>Is active?:</h3>
+          <select
+            className="menu-item-is-active"
+            onChange={isActiveOnChange}
+            name="is-active"
+          >
+            <option value="false">False</option>
+            <option value="true">True</option>
+          </select>
+          <button
+            onClick={create}
+            type="submit"
+            className="create-menu-item-button"
+          >
+            Create menu-item
+          </button>
+        </form>
+        {/* {props.error ? <div id="error">{props.error}</div> : null} */}
+      </section>
+    </>
   );
 }

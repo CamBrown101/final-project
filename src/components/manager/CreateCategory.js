@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './CreateCategory.scss';
+import ManagerNav from './ManagerNav';
 
-export default function Create(props) {
+export default function CreateCategory(props) {
   const [name, setName] = useState('');
   const [isFood, setIsFood] = useState(false);
 
@@ -33,36 +34,39 @@ export default function Create(props) {
   };
 
   return (
-    <section className="new-category">
-      <form className="category-form" method="POST" action="/login">
-        <h2 id="category-title">Create category</h2>
-        <h3>Name:</h3>
-        <input
-          type="text"
-          className="category-name"
-          required
-          name="name"
-          onChange={nameOnChange}
-        />
+    <>
+      <ManagerNav></ManagerNav>
+      <section className="new-category">
+        <form className="category-form" method="POST" action="/login">
+          <h2 id="category-title">Create category</h2>
+          <h3>Name:</h3>
+          <input
+            type="text"
+            className="category-name"
+            required
+            name="name"
+            onChange={nameOnChange}
+          />
 
-        <h3>Is food?:</h3>
-        <select
-          className="category-is-food"
-          onChange={isFoodOnChange}
-          name="is-food"
-        >
-          <option value="false">False</option>
-          <option value="true">True</option>
-        </select>
-        <button
-          onClick={create}
-          type="submit"
-          className="create-category-button"
-        >
-          Create category
-        </button>
-      </form>
-      {/* {props.error ? <div id="error">{props.error}</div> : null} */}
-    </section>
+          <h3>Is food?:</h3>
+          <select
+            className="category-is-food"
+            onChange={isFoodOnChange}
+            name="is-food"
+          >
+            <option value="false">False</option>
+            <option value="true">True</option>
+          </select>
+          <button
+            onClick={create}
+            type="submit"
+            className="create-category-button"
+          >
+            Create category
+          </button>
+        </form>
+        {/* {props.error ? <div id="error">{props.error}</div> : null} */}
+      </section>
+    </>
   );
 }

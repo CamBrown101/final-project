@@ -9,7 +9,7 @@ export default function Login() {
   console.log(user);
 
   if (user.auth) {
-    return <Redirect to="/" />;
+    return <Redirect to="/menu" />;
   }
 
   const addNumber = (num) => {
