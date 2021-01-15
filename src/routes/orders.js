@@ -14,12 +14,33 @@ module.exports = (db) => {
       });
   });
 
+  //sends the order object
   router.get("/:id", (req, res) => {
     console.log("order id route");
     const order = req.params.id;
     db.query(
       `SELECT * FROM orders
               WHERE id = $1;`,
+      [order]
+    )
+      .then((data) => {
+        const order = data.rows[0];
+        res.send(order);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  //WIP sends items in an order
+  router.get("/:id/items", (req, res) => {
+    console.log("order id items route");
+    const order = req.params.id;
+    db.query(
+      `
+      SELECT * FROM order_items
+      JOIN orders ON order_id = orders.id
+      WHERE orders.id = $1;`,
       [order]
     )
       .then((data) => {

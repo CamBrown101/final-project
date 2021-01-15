@@ -14,6 +14,7 @@ module.exports = (db) => {
       });
   });
 
+  //Might be redundant with login route
   router.get("/:id", (req, res) => {
     console.log("employee id route");
     const employee = req.params.id;
