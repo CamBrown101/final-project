@@ -13,9 +13,9 @@ const UserProvider = ({ children }) => {
   const login = (code) => {
     const pin = code;
 
-    Axios.get('http://localhost:8080/login', pin).then((res) => {
-      console.log(res);
-    });
+    // Axios.get('http://localhost:8080/login', pin).then((res) => {
+    //   console.log(res);
+    // });
     setUser((user) => ({
       name: code,
       auth: true,
