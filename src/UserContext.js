@@ -11,9 +11,9 @@ const UserProvider = ({ children }) => {
 
   // Login updates the user data with a name parameter
   const login = (code) => {
-    const pin = code;
+    // const data = { pin: code };
 
-    // Axios.get('http://localhost:8080/login', pin).then((res) => {
+    // Axios.get('http://localhost:8080/login', data).then((res) => {
     //   console.log(res);
     // });
     setUser((user) => ({
