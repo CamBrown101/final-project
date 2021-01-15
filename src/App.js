@@ -1,13 +1,14 @@
-import './App.scss';
-import { useContext } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { UserContext } from './UserContext';
-import Login from './components/Login';
-import Home from './components/Home';
-import CreateEmployee from './components/manager/CreateEmployee';
-import CreateItem from './components/manager/CreateItem';
-import CreateCategory from './components/manager/CreateCategory';
-import Nav from './components/Nav';
+import "./App.scss";
+import { useContext } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { UserContext } from "./UserContext";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import CreateEmployee from "./components/manager/CreateEmployee";
+import CreateItem from "./components/manager/CreateItem";
+import CreateCategory from "./components/manager/CreateCategory";
+import Nav from "./components/Nav";
+import TimecardEntry from "./components/TimecardEntry";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -22,6 +23,7 @@ function App() {
       <CreateEmployee></CreateEmployee>
       <CreateItem></CreateItem>
       <CreateCategory></CreateCategory>
+      <TimecardEntry></TimecardEntry>
       <Nav></Nav>
     </Router>
   );
