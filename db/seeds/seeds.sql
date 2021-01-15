@@ -49,3 +49,12 @@ VALUES (1, 'Fat Tug', 5.75, 'A Hoppy IPA', 100, TRUE),
  (7, 'Pumpkin Pie', 11, 'The best pie hands down', 100, TRUE),
  (7, 'Some Fancy Desert', 20, 'Some desert, I am not sure what', 100, TRUE),
  (7, 'Chocolate Cake', 14, 'For the chocolate lover', 100, TRUE);
+
+INSERT INTO orders (employee_id, table_id, seat_id)
+VALUES (1, 1, 1);
+
+INSERT INTO order_items (order_id, seat_id, item)
+VALUES (1, 1, 1)
+(1, 1, 2)
+(1, 1, 3)
+(1, 1, 4);
