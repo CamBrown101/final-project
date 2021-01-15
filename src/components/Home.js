@@ -1,16 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../UserContext';
-import { Redirect } from 'react-router-dom';
-import MenuContainer from './MenuContainer';
-import Axios from 'axios';
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../UserContext";
+import { Redirect } from "react-router-dom";
+import MenuContainer from "./MenuContainer";
+import TableContainer from "./TableContainer";
+import Axios from "axios";
+import "./Home.scss";
 
 export default function Home() {
   const { user, logout } = useContext(UserContext);
   const [menu, setMenu] = useState([]);
+  const [tables, setTables] = useState([]);
 
   useEffect(() => {
-    Axios.get('/api/menu').then((res) => {
+    Axios.get("/api/menu").then((res) => {
       setMenu(res.data);
+    });
+    Axios.get("/api/tables").then((res) => {
+      setTables(res.data);
     });
   }, []);
 
@@ -22,7 +28,10 @@ export default function Home() {
     <div>
       <h1>Hello, {user.name}!</h1>
       <button onClick={logout}>Logout</button>
-      <MenuContainer menu={menu} />
+      <div class="home-main">
+        <TableContainer tables={tables} />
+        <MenuContainer menu={menu} />
+      </div>
     </div>
   );
 }
