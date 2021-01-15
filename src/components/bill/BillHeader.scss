@@ -2,5 +2,18 @@
 
 .bill-header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 10%;
+  .flex-row {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+  p {
+    font-size: small;
+  }
+  h1 {
+    text-align: center;
+  }
 }
