@@ -25,7 +25,7 @@ const menuRoutes = require("./src/routes/menu");
 const orderRoutes = require("./src/routes/orders");
 const tableRoutes = require("./src/routes/tables");
 const categoryRoutes = require("./src/routes/categories");
-const timecardRoutes = require("./src/routes/categories");
+const timecardRoutes = require("./src/routes/timecards");
 
 app.use(cors());
 //use routes
@@ -35,7 +35,7 @@ app.use("/api/menu", menuRoutes(db));
 app.use("/api/orders", orderRoutes(db));
 app.use("/api/tables", tableRoutes(db));
 app.use("/api/categories", categoryRoutes(db));
-app.use("/api/timecards", timecardRoutes);
+app.use("/api/timecards", timecardRoutes(db));
 
 app.get("/", (req, res) => {
   console.log(req.session);

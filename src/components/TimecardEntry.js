@@ -5,7 +5,7 @@ import Axios from "axios";
 export default function TimecardEntry() {
   const [code, setCode] = useState("");
 
-  const punchin = (code) => {
+  const punchIn = (code) => {
     const data = { pin: code };
     Axios.post("http://localhost:8080/api/timecards", data).then((res) => {
       console.log(res);
@@ -14,9 +14,6 @@ export default function TimecardEntry() {
 
   const addNumber = (num) => {
     setCode(code + num);
-  };
-  const punchIn = (num) => {
-    console.log(num);
   };
 
   return (

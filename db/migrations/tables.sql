@@ -20,8 +20,8 @@ CREATE TABLE employees (
 CREATE TABLE shifts (
   id SERIAL PRIMARY KEY NOT NULL,
   employee_id INTEGER REFERENCES employees(id) ON DELETE CASCADE,
-  shift_start TIMESTAMPTZ,
-  shift_end TIMESTAMPTZ DEFAULT NULL
+  punch_time TIMESTAMPTZ,
+  is_in BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE categories (

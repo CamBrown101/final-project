@@ -21,13 +21,6 @@ const UserProvider = ({ children }) => {
     });
   };
 
-  const punchin = (code) => {
-    const data = { pin: code };
-    Axios.post("http://localhost:8080/api/timecards", data).then((res) => {
-      console.log(res);
-    });
-  };
-
   // Logout updates the user data to empty
   const logout = () => {
     setUser((user) => ({
