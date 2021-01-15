@@ -39,9 +39,8 @@ module.exports = (db) => {
     const email = req.body.email;
     const pin = req.body.pin;
     const is_admin = req.body.isAdmin;
-    const hashedPin = bcrypt.hash(pin, 10);
+    const hashedPin = bcrypt.hashSync(pin, 10);
 
-    console.log(req.body);
     db.query(
       `SELECT * FROM employees
               WHERE email = $1;`,
