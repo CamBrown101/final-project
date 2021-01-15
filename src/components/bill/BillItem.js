@@ -1,11 +1,11 @@
 import React from 'react';
 import './BillItem.scss';
 
-export default function BillItem() {
+export default function BillItem({ name, price }) {
   return (
     <li className="bill-item">
-      <p className="item-name">item.name</p>
-      <p className="item-price">item.price</p>
+      <p className="item-name">{name}</p>
+      <p className="item-price">{price}</p>
     </li>
   );
 }

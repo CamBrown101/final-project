@@ -8,7 +8,8 @@ import Axios from 'axios';
 export default function Home() {
   const { user, logout } = useContext(UserContext);
   const [menu, setMenu] = useState([]);
-
+  const [bill, setBill] = useState([]);
+  console.log(bill);
   useEffect(() => {
     Axios.get('/api/menu').then((res) => {
       setMenu(res.data);
@@ -23,8 +24,8 @@ export default function Home() {
     <div>
       <h1>Hello, {user.name}!</h1>
       <button onClick={logout}>Logout</button>
-      <BillContainer />
-      <MenuContainer menu={menu} />
+      <BillContainer bill={bill} />
+      <MenuContainer menu={menu} setBill={setBill} bill={bill} />
     </div>
   );
 }
