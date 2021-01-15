@@ -44,8 +44,8 @@ module.exports = (db) => {
       [order]
     )
       .then((data) => {
-        const order = data.rows[0];
-        res.send(order);
+        const items = data.rows;
+        res.send(items);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
