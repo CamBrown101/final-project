@@ -1,14 +1,14 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
+const express = require("express");
+const bodyParser = require("body-parser");
+const path = require("path");
 const app = express();
-require('dotenv').config();
+require("dotenv").config();
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const { Pool } = require('pg');
+const { Pool } = require("pg");
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
@@ -17,12 +17,14 @@ db.connect();
 const PORT = process.env.PORT || 8080;
 
 //import routes
-const loginRoutes = require('./src/routes/login');
+const loginRoutes = require("./src/routes/login");
+const employeeRoutes = require("./src/routes/employees");
 
 //use routes
-app.use('/login', loginRoutes(db));
+app.use("/login", loginRoutes(db));
+app.use("/api/employees", employeeRoutes(db));
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   console.log(req.session);
 });
 
