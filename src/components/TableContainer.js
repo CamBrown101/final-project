@@ -1,17 +1,16 @@
 import React from "react";
 import TableItem from "./TableItem";
-import "./MenuContainer.scss";
+import "./TableContainer.scss";
 
-export default function MenuContainer(props) {
-  const menuItems = props.tables.map((item) => (
+export default function TableContainer(props) {
+  const menuItems = props.tables.map((table) => (
     <TableItem
-      key={item.id}
-      name={item.name}
-      price={item.price}
-      description={item.description}
-      category_id={item.category_id}
+      key={table.id}
+      employee={table.firstname}
+      seats={table.number_of_seats}
+      status={table.status}
     />
   ));
 
-  return <div className="item-container">{menuItems}</div>;
+  return <div className="table-container">{menuItems}</div>;
 }

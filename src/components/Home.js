@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import MenuContainer from "./MenuContainer";
 import TableContainer from "./TableContainer";
 import Axios from "axios";
+import "./Home.scss";
 
 export default function Home() {
   const { user, logout } = useContext(UserContext);
@@ -27,8 +28,10 @@ export default function Home() {
     <div>
       <h1>Hello, {user.name}!</h1>
       <button onClick={logout}>Logout</button>
-      <MenuContainer menu={menu} />
-      <TableContainer tables={tables} />
+      <div class="home-main">
+        <TableContainer tables={tables} />
+        <MenuContainer menu={menu} />
+      </div>
     </div>
   );
 }
