@@ -2,11 +2,25 @@ import React from 'react';
 import './MenuItem.scss';
 
 export default function MenuItem({ name, price, setBill, bill }) {
+  let newTotal = bill.total;
+  let newSubtotal = bill.subtotal;
+  let newTax = bill.tax;
+  const changePrice = () => {
+    newSubtotal += price;
+    newTax = newSubtotal * 0.13;
+    newTotal = newSubtotal + newTax;
+  };
   return (
     <div
       className="menu-item"
       onClick={() => {
-        setBill([...bill, { name, price }]);
+        changePrice();
+        setBill({
+          items: [...bill.items, { name, price }],
+          total: newTotal,
+          subtotal: newSubtotal,
+          tax: newTax,
+        });
       }}>
       <h3>{name}</h3>
       <h3>${price}</h3>
