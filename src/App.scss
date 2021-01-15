@@ -1,3 +1,5 @@
+@import 'base.scss';
+
 .App {
   text-align: center;
 }
@@ -25,7 +27,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: $project-white;
 }
 
 @keyframes App-logo-spin {
