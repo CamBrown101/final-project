@@ -39,30 +39,38 @@ module.exports = (db) => {
     const isActive = req.body.isActive;
     const category = req.body.category;
 
-    const queryParams = [
-      name,
-      price,
-      description,
-      quantity,
-      isActive,
-      category,
-    ];
-    console.log(queryParams);
     db.query(
-      `INSERT INTO menu_items (name, price, description, quantity, is_active, category_id)
+      `SELECT * FROM categories
+              WHERE name = $1;`,
+      [category]
+    ).then((data) => {
+      const categoryName = data.rows[0].id;
+      const queryParams = [
+        name,
+        price,
+        description,
+        quantity,
+        isActive,
+        categoryName,
+      ];
+      console.log(queryParams);
+
+      db.query(
+        `INSERT INTO menu_items (name, price, description, quantity, is_active, category_id)
               VALUES ($1, $2, $3, $4, $5, $6)
               RETURNING *;`,
-      queryParams
-    )
-      .then((data) => {
-        const employee = data.rows[0];
-        console.log(employee);
-        return res.status(200).send(employee);
-      })
-      .catch((err) => {
-        console.log('error');
-        return res.status(500).send('error');
-      });
+        queryParams
+      )
+        .then((data) => {
+          const employee = data.rows[0];
+          console.log(employee);
+          return res.status(200).send(employee);
+        })
+        .catch((err) => {
+          console.log('error');
+          return res.status(500).send('error');
+        });
+    });
   });
 
   return router;
