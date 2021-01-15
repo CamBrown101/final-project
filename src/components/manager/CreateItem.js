@@ -11,6 +11,8 @@ export default function Create(props) {
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState('Beer');
 
+  //fetch category data so we can dynamically
+  //place it in the select box
   useEffect(() => {
     const URL = `/api/categories/`;
     const promise = axios

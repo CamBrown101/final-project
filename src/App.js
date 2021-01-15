@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import CreateEmployee from './components/manager/CreateEmployee';
 import CreateItem from './components/manager/CreateItem';
+import CreateCategory from './components/manager/CreateCategory';
 
 function App() {
   const { user } = useContext(UserContext);
@@ -19,6 +20,7 @@ function App() {
       </Switch>
       <CreateEmployee></CreateEmployee>
       <CreateItem></CreateItem>
+      <CreateCategory></CreateCategory>
     </Router>
   );
 }

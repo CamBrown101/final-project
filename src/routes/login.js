@@ -3,20 +3,19 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 
 module.exports = (db) => {
-  router.get('/', (req, res) => {
+  router.post('/', (req, res) => {
     const pin = req.body.pin;
-
     //query user from db
+    const hashedPin = bcrypt.hashSync(pin, 1);
+    console.log(hashedPin);
     db.query(
       `SELECT * FROM employees
             WHERE pin = $1;`,
-      [pin]
+      [hashedPin]
     )
       .then((data) => {
-        const hashedPin = data.rows[0].pin;
-        const bcryptCheck = bcrypt.compareSync(pin, hashedPin);
-        if (bcryptCheck) {
-          res.status(200).send(data.rows[0]);
+        if (data.rows) {
+          res.status(200).send(data.rows);
         } else {
           res.send(false);
         }

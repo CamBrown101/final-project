@@ -13,7 +13,7 @@ const UserProvider = ({ children }) => {
   const login = (code) => {
     const pin = code;
 
-    // Axios.get('http://localhost:8080/login', pin).then((res) => {
+    // Axios.get('ht/login', pin).then((res) => {
     //   console.log(res);
     // });
     setUser((user) => ({
