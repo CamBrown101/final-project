@@ -1,12 +1,12 @@
 @import '../base';
 
 #nav-bar {
+  position: fixed;
+  top: 0;
   width: 100%;
   min-width: 100%;
   background-color: $dark;
   #nav-menu {
-    position: fixed;
-    top: 0;
     display: flex;
     background-color: $dark;
     width: 100%;
@@ -32,5 +32,6 @@
 }
 
 .active {
+  color: $dark;
   background-color: $project-white;
 }
