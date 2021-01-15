@@ -13,7 +13,9 @@ export default function Login() {
   }
 
   const addNumber = (num) => {
-    setCode(code + num);
+    if (code.length <= 3) {
+      setCode(code + num);
+    }
   };
 
   return (
