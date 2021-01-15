@@ -1,8 +1,8 @@
 @import '../../base';
 
 .new-employee {
-  color: white;
-  background-color: black;
+  color: $dark;
+  background-color: white;
   width: 300px;
   height: 440px;
   margin-left: auto;
@@ -20,28 +20,39 @@
     margin-left: auto;
     margin-right: auto;
 
-    .employee-email {
+    .employee-name {
       border: 0;
       border-bottom: solid;
-      border-color: black;
+      border-color: $dark;
       display: block;
       width: 90%;
       margin-bottom: 0.5em;
       padding-left: 30px;
-      // background: url(/img/icons/maildark.png) no-repeat scroll;
-      // background-size: 24px 24px;
+      background: url(/img/icons/userdark.png) no-repeat scroll;
+      background-size: 24px 24px;
+      padding-left: 30px;
+    }
+    .employee-email {
+      border: 0;
+      border-bottom: solid;
+      border-color: $dark;
+      display: block;
+      width: 90%;
+      margin-bottom: 0.5em;
+      padding-left: 30px;
+      background: url(/img/icons/maildark.png) no-repeat scroll;
+      background-size: 24px 24px;
       padding-left: 30px;
     }
 
     .employee-pin {
       border: 0;
       border-bottom: solid;
-      border-color: $border-dark;
       display: block;
       width: 90%;
       margin-bottom: 0.5em;
-      // background: url(/img/icons/lockdark.png) no-repeat scroll;
-      // background-size: 24px 24px;
+      background: url(/img/icons/lockdark.png) no-repeat scroll;
+      background-size: 24px 24px;
       padding-left: 30px;
     }
 
@@ -58,14 +69,14 @@
 .create-employee-button {
   display: block;
   background-color: $border-dark;
-  color: $base-color;
+  color: $dark;
   width: 100%;
   border: none;
   border-radius: 4px;
   padding: 0.4em;
 }
 .create-employee-button:hover {
-  color: $base-color;
+  color: $dark;
   background-color: $base-color;
 }
 textarea:focus,
