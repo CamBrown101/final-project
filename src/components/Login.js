@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../UserContext';
+import { Redirect } from 'react-router-dom';
 
 export default function Login() {
+  const { user, login } = useContext(UserContext);
   const [code, setCode] = useState('');
-  console.log(code);
+  console.log(user);
+
+  if (user.auth) {
+    return <Redirect to="/" />;
+  }
 
   const addNumber = (num) => {
     setCode(code + num);
@@ -71,7 +78,7 @@ export default function Login() {
       </button>
       <br />
 
-      <button type="submit">submit</button>
+      <button onClick={() => login(code)}>submit</button>
       <button
         onClick={() => {
           addNumber('0');

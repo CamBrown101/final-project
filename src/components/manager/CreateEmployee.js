@@ -7,6 +7,7 @@ export default function Create(props) {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [pin, setPin] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const firstNameOnChange = (event) => {
     setFirstName(event.target.value);
@@ -24,6 +25,10 @@ export default function Create(props) {
     setPin(event.target.value);
   };
 
+  const isAdminOnChange = (event) => {
+    setIsAdmin(event.target.value);
+  };
+
   const create = (event) => {
     event.preventDefault();
 
@@ -32,8 +37,10 @@ export default function Create(props) {
       lastName: lastName,
       email: email,
       pin: pin,
+      isAdmin: isAdmin,
     };
-    const URL = `/create/`;
+    console.log(data);
+    const URL = `/api/employees/`;
     const promise = axios
       .post(URL, data)
       .then((response) => {
@@ -89,7 +96,11 @@ export default function Create(props) {
         />
         <h3>Manager Priveleges:</h3>
 
-        <select className="employee-is-admin" name="is-admin">
+        <select
+          className="employee-is-admin"
+          onChange={isAdminOnChange}
+          name="is-admin"
+        >
           <option value="false">False</option>
           <option value="true">True</option>
         </select>
@@ -101,7 +112,7 @@ export default function Create(props) {
           Create Employee
         </button>
       </form>
-      {props.error ? <div id="error">{props.error}</div> : null}
+      {/* {props.error ? <div id="error">{props.error}</div> : null} */}
     </section>
   );
 }
