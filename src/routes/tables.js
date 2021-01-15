@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    console.log("table route");
+  router.get('/', (req, res) => {
+    console.log('table route');
     db.query(`SELECT * FROM tables;`)
       .then((data) => {
         const tables = data.rows;
