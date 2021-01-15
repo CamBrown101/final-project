@@ -24,6 +24,8 @@ const employeeRoutes = require('./src/routes/employees');
 const menuRoutes = require('./src/routes/menu');
 const orderRoutes = require('./src/routes/orders');
 const tableRoutes = require('./src/routes/tables');
+const categoryRoutes = require('./src/routes/categories');
+
 app.use(cors());
 //use routes
 app.use('/login', loginRoutes(db));
@@ -31,6 +33,7 @@ app.use('/api/employees', employeeRoutes(db));
 app.use('/api/menu', menuRoutes(db));
 app.use('/api/orders', orderRoutes(db));
 app.use('/api/tables', tableRoutes(db));
+app.use('/api/categories', categoryRoutes(db));
 
 app.get('/', (req, res) => {
   console.log(req.session);

@@ -40,8 +40,6 @@ CREATE TABLE menu_items (
   is_active BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-
-
 CREATE TABLE tables (
   id SERIAL PRIMARY KEY NOT NULL,
   employee_id INTEGER REFERENCES employees(id) ON DELETE CASCADE,
