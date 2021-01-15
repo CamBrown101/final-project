@@ -19,9 +19,6 @@ function App() {
         <Route path="/menu" component={Home} />
         <Route path="/" component={Home} />
       </Switch>
-      <CreateEmployee></CreateEmployee>
-      <CreateItem></CreateItem>
-      <CreateCategory></CreateCategory>
       <Nav></Nav>
     </Router>
   );
