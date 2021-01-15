@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../UserContext';
 import { Redirect } from 'react-router-dom';
 import MenuContainer from './MenuContainer';
+import BillContainer from './bill/BillContainer';
 import Axios from 'axios';
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
     <div>
       <h1>Hello, {user.name}!</h1>
       <button onClick={logout}>Logout</button>
+      <BillContainer />
       <MenuContainer menu={menu} />
     </div>
   );
