@@ -1,15 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../UserContext";
 import { Redirect } from "react-router-dom";
-import MenuContainer from "./MenuContainer";
+import MenuContainer from "./menu/MenuContainer";
+import BillContainer from "./bill/BillContainer";
 import TableContainer from "./TableContainer";
 import Axios from "axios";
+
 import "./Home.scss";
 
 export default function Home() {
   const { user, logout } = useContext(UserContext);
   const [menu, setMenu] = useState([]);
+  const [bill, setBill] = useState([]);
   const [tables, setTables] = useState([]);
+  const [table, setTable] = useState(null);
 
   useEffect(() => {
     Axios.get("/api/menu").then((res) => {
@@ -26,11 +30,12 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Hello, {user.name}!</h1>
-      <button onClick={logout}>Logout</button>
       <div class="home-main">
-        <TableContainer tables={tables} />
-        <MenuContainer menu={menu} />
+        <h1>Hello, {user.name}!</h1>
+        <button onClick={logout}>Logout</button>
+        <BillContainer bill={bill} />
+        <MenuContainer menu={menu} setBill={setBill} bill={bill} />
+        <TableContainer tables={tables} setTable={setTable} />
       </div>
     </div>
   );

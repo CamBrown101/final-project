@@ -5,10 +5,11 @@ import "./TableContainer.scss";
 export default function TableContainer(props) {
   const menuItems = props.tables.map((table) => (
     <TableItem
-      key={table.id}
+      id={table.id}
       employee={table.firstname}
       seats={table.number_of_seats}
       status={table.status}
+      setTable={props.setTable}
     />
   ));
 
