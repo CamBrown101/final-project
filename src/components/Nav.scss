@@ -1,0 +1,36 @@
+@import '../base';
+
+#nav-bar {
+  width: 100%;
+  min-width: 100%;
+  background-color: $dark;
+  #nav-menu {
+    position: fixed;
+    top: 0;
+    display: flex;
+    background-color: $dark;
+    width: 100%;
+    max-width: 300px;
+    height: 56px;
+    font-size: 20px;
+    font-weight: bolder;
+
+    .nav-menu-item {
+      margin: auto;
+      padding-top: 14px;
+      height: 42px;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      color: $base-lighter;
+    }
+
+    .nav-menu-item:hover {
+      color: $dark;
+      background-color: $border-dark;
+    }
+  }
+}
+
+.active {
+  background-color: $project-white;
+}

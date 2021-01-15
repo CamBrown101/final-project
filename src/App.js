@@ -7,6 +7,7 @@ import Home from './components/Home';
 import CreateEmployee from './components/manager/CreateEmployee';
 import CreateItem from './components/manager/CreateItem';
 import CreateCategory from './components/manager/CreateCategory';
+import Nav from './components/Nav';
 
 function App() {
   const { user } = useContext(UserContext);
@@ -21,6 +22,7 @@ function App() {
       <CreateEmployee></CreateEmployee>
       <CreateItem></CreateItem>
       <CreateCategory></CreateCategory>
+      <Nav></Nav>
     </Router>
   );
 }
