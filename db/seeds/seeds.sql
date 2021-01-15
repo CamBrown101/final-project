@@ -54,16 +54,16 @@ INSERT INTO tables (employee_id, number_of_seats)
 VALUES (1, 4);
 
 INSERT INTO seats (seat_number, table_id)
-VALUES(1, 1)
-(2, 1)
-(3, 1)
+VALUES(1, 1),
+(2, 1),
+(3, 1),
 (4, 1);
 
-INSERT INTO orders (employee_id, table_id, seat_id)
-VALUES (1, 1, 1);
+INSERT INTO orders (employee_id, table_id)
+VALUES (1, 1);
 
 INSERT INTO order_items (order_id, seat_id, item)
-VALUES (1, 1, 1)
-(1, 1, 2)
-(1, 1, 3)
+VALUES (1, 1, 1),
+(1, 1, 2),
+(1, 1, 3),
 (1, 1, 4);
