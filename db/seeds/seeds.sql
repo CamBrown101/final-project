@@ -51,7 +51,11 @@ VALUES (1, 'Fat Tug', 5.75, 'A Hoppy IPA', 100, TRUE),
  (7, 'Chocolate Cake', 14, 'For the chocolate lover', 100, TRUE);
 
 INSERT INTO tables (employee_id, number_of_seats)
-VALUES (1, 4);
+VALUES (1, 4),
+(1,6),
+(2,4),
+(3,4),
+(2,8);
 
 INSERT INTO seats (seat_number, table_id)
 VALUES(1, 1),

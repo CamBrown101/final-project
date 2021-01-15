@@ -4,7 +4,10 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     console.log("table route");
-    db.query(`SELECT * FROM tables;`)
+    db.query(
+      `SELECT tables.*, employees.firstName FROM tables
+      JOIN employees On employee_id = employees.id;`
+    )
       .then((data) => {
         const tables = data.rows;
         res.send(tables);
