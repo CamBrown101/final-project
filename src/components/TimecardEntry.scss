@@ -1,0 +1,27 @@
+@import "../base";
+.punchin-container {
+  margin: 0 20%;
+  .input {
+    height: 80px;
+    width: 450px;
+    font-size: 80px;
+    background-color: $project-white;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 2%;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 5%;
+  }
+
+  button {
+    width: 150px;
+    height: 150px;
+    font-size: 40px;
+    border-radius: 0;
+    padding: 0;
+  }
+}
