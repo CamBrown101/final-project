@@ -23,8 +23,8 @@ module.exports = (db) => {
       [employee]
     )
       .then((data) => {
-        const employees = data.rows;
-        res.send(employees);
+        const employee = data.rows[0];
+        res.send(employee);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
