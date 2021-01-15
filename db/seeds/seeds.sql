@@ -1,7 +1,7 @@
-INSERT INTO employee (firstName, lastName, email, pin, is_admin, start_date)
-VALUES ('Cam', 'Brown', 'cameron-brown@live.com', '1111',  TRUE, CLOCK_TIMESTAMP()),
-VALUES ('Michael', 'Krishna', 'test@test.com', '2222',  TRUE, CLOCK_TIMESTAMP()),
-VALUES ('Marcel', 'Mueller', 'mail.marcelm@gmail.com', '4444',  TRUE, CLOCK_TIMESTAMP());
+INSERT INTO employees (firstName, lastName, email, pin, is_admin, start_date)
+VALUES ('Cam', 'Brown', 'cameron-brown@live.com', 1111,  TRUE, CLOCK_TIMESTAMP()),
+('Michael', 'Krishna', 'test@test.com', 2222,  TRUE, CLOCK_TIMESTAMP()),
+('Marcel', 'Mueller', 'mail.marcelm@gmail.com', 4444,  TRUE, CLOCK_TIMESTAMP());
 
 INSERT INTO menu_items (category_id, name, price, description, quantity, is_active)
 VALUES (1, 'Fat Tug', 5.75, "A Hoppy IPA", 100, TRUE)
