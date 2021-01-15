@@ -1,0 +1,68 @@
+import { useState } from 'react';
+import axios from 'axios';
+import './CreateCategory.scss';
+
+export default function Create(props) {
+  const [name, setName] = useState('');
+  const [isFood, setIsFood] = useState(false);
+
+  const nameOnChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const isFoodOnChange = (event) => {
+    setIsFood(event.target.value);
+  };
+
+  const create = (event) => {
+    event.preventDefault();
+
+    const data = {
+      name: name,
+      isFood: isFood,
+    };
+    console.log(data);
+    const URL = `/api/categories/`;
+    const promise = axios
+      .post(URL, data)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch();
+    return promise;
+  };
+
+  return (
+    <section className="new-category">
+      <form className="category-form" method="POST" action="/login">
+        <h2 id="category-title">Create category</h2>
+        <h3>Name:</h3>
+        <input
+          type="text"
+          className="category-name"
+          required
+          name="name"
+          onChange={nameOnChange}
+        />
+
+        <h3>Is food?:</h3>
+        <select
+          className="category-is-food"
+          onChange={isFoodOnChange}
+          name="is-food"
+        >
+          <option value="false">False</option>
+          <option value="true">True</option>
+        </select>
+        <button
+          onClick={create}
+          type="submit"
+          className="create-category-button"
+        >
+          Create category
+        </button>
+      </form>
+      {/* {props.error ? <div id="error">{props.error}</div> : null} */}
+    </section>
+  );
+}
