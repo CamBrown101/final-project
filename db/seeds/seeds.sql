@@ -1,5 +1,5 @@
 INSERT INTO employees (firstName, lastName, email, pin, is_admin, start_date)
-VALUES ('Cam', 'Brown', 'cameron-brown@live.com', 1111,  TRUE, CLOCK_TIMESTAMP()),
+VALUES ('Cam', 'Brown', 'cameron-brown@live.com', '1111',  TRUE, CLOCK_TIMESTAMP()),
 ('Michael', 'Krishna', 'test@test.com', 2222,  TRUE, CLOCK_TIMESTAMP()),
 ('Marcel', 'Mueller', 'mail.marcelm@gmail.com', 4444,  TRUE, CLOCK_TIMESTAMP());
 
@@ -49,3 +49,21 @@ VALUES (1, 'Fat Tug', 5.75, 'A Hoppy IPA', 100, TRUE),
  (7, 'Pumpkin Pie', 11, 'The best pie hands down', 100, TRUE),
  (7, 'Some Fancy Desert', 20, 'Some desert, I am not sure what', 100, TRUE),
  (7, 'Chocolate Cake', 14, 'For the chocolate lover', 100, TRUE);
+
+INSERT INTO tables (employee_id, number_of_seats)
+VALUES (1, 4);
+
+INSERT INTO seats (seat_number, table_id)
+VALUES(1, 1)
+(2, 1)
+(3, 1)
+(4, 1);
+
+INSERT INTO orders (employee_id, table_id, seat_id)
+VALUES (1, 1, 1);
+
+INSERT INTO order_items (order_id, seat_id, item)
+VALUES (1, 1, 1)
+(1, 1, 2)
+(1, 1, 3)
+(1, 1, 4);
