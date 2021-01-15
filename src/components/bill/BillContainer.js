@@ -3,8 +3,23 @@ import './BillContainer.scss';
 import BillHeader from './BillHeader';
 import BillItem from './BillItem';
 
-export default function BillContainer({ bill, tableInfo }) {
-  const billItems = bill.items.map((item, index) => (
+export default function BillContainer({ bill, tableInfo, menu }) {
+  let itemsOnBill = { ...tableInfo.items };
+  itemsOnBill = itemsOnBill[0];
+
+  const itemsToRender = [...bill.items.reverse()];
+
+  if (itemsOnBill) {
+    for (let item of itemsOnBill) {
+      menu.forEach((element) => {
+        if (element.id === item.item) {
+          itemsToRender.push(element);
+        }
+      });
+    }
+  }
+
+  const billItems = itemsToRender.map((item, index) => (
     <BillItem key={index} name={item.name} price={item.price} />
   ));
   return (

@@ -18,7 +18,7 @@ export default function Home() {
     total: 0,
   });
   const [tables, setTables] = useState([]);
-  const [table, setTable] = useState(null);
+  const [table, setTable] = useState([]);
 
   useEffect(() => {
     Axios.get('/api/menu').then((res) => {
@@ -28,15 +28,17 @@ export default function Home() {
       setTables(res.data);
     });
   }, []);
+
   if (!user.auth) {
     return <Redirect to="/login" />;
   }
+
   return (
     <div>
       <div className="home-main">
         <h1>Hello, {user.name}!</h1>
         <button onClick={logout}>Logout</button>
-        <BillContainer bill={bill} tableInfo={table} />
+        <BillContainer bill={bill} tableInfo={table} menu={menu} />
         <MenuContainer menu={menu} setBill={setBill} bill={bill} />
         <TableContainer tables={tables} setTable={setTable} />
       </div>
