@@ -7,7 +7,7 @@ export default function Create(props) {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [pin, setPin] = useState('');
-  const [isAdmin, setIsAdmin] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const firstNameOnChange = (event) => {
     setFirstName(event.target.value);
@@ -39,7 +39,8 @@ export default function Create(props) {
       pin: pin,
       isAdmin: isAdmin,
     };
-    const URL = `/employees/`;
+    console.log(data);
+    const URL = `/api/employees/`;
     const promise = axios
       .post(URL, data)
       .then((response) => {
@@ -111,7 +112,7 @@ export default function Create(props) {
           Create Employee
         </button>
       </form>
-      {props.error ? <div id="error">{props.error}</div> : null}
+      {/* {props.error ? <div id="error">{props.error}</div> : null} */}
     </section>
   );
 }
