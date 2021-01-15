@@ -1,23 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../UserContext';
-import { Redirect } from 'react-router-dom';
-import MenuContainer from './menu/MenuContainer';
-import BillContainer from './bill/BillContainer';
-import TableContainer from './TableContainer';
-import Axios from 'axios';
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../UserContext";
+import { Redirect } from "react-router-dom";
+import MenuContainer from "./menu/MenuContainer";
+import BillContainer from "./bill/BillContainer";
+import TableContainer from "./TableContainer";
+import Axios from "axios";
 
-import './Home.scss';
+import "./Home.scss";
 
 export default function Home() {
   const { user, logout } = useContext(UserContext);
   const [menu, setMenu] = useState([]);
   const [bill, setBill] = useState([]);
-  console.log(bill);
+  const [tables, setTables] = useState([]);
   useEffect(() => {
-    Axios.get('/api/menu').then((res) => {
+    Axios.get("/api/menu").then((res) => {
       setMenu(res.data);
     });
-    Axios.get('/api/tables').then((res) => {
+    Axios.get("/api/tables").then((res) => {
       setTables(res.data);
     });
   }, []);
