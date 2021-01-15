@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
@@ -39,7 +38,6 @@ module.exports = (db) => {
     const email = req.body.email;
     const pin = req.body.pin;
     const is_admin = req.body.isAdmin;
-    const hashedPin = bcrypt.hashSync(pin, 1);
 
     db.query(
       `SELECT * FROM employees
@@ -51,7 +49,7 @@ module.exports = (db) => {
           return res.send('exists');
         }
 
-        const queryParams = [firstName, lastName, email, hashedPin, is_admin];
+        const queryParams = [firstName, lastName, email, pin, is_admin];
         console.log(queryParams);
         db.query(
           `INSERT INTO employees (firstName, lastName, email, pin, start_date, is_admin)

@@ -6,7 +6,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import Manager from './components/manager/Manager';
 import Nav from './components/Nav';
-import CreateEmployee from './components/manager/CreateEmployee.js';
+import Employees from './components/manager/Employees.js';
 import CreateItem from './components/manager/CreateItem.js';
 import CreateCategory from './components/manager/CreateCategory.js';
 function App() {
@@ -18,11 +18,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/menu" component={Home} />
         <Route path="/manager" exact component={Manager} />
-        <Route
-          path="/manager/create-employee"
-          exact
-          component={CreateEmployee}
-        />
+        <Route path="/manager/employees" exact component={Employees} />
         <Route path="/manager/create-menu-item" exact component={CreateItem} />
         <Route
           path="/manager/create-category"

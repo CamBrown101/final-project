@@ -1,0 +1,29 @@
+.employee-card {
+  width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 3fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  font-size: 20px;
+  margin: 10px;
+
+  .employee-card-id {
+    margin: 10px;
+  }
+  .employee-card-firstname {
+    margin: 10px;
+  }
+
+  .employee-card-lastname {
+    margin: 10px;
+  }
+
+  .employee-card-email {
+    margin: 10px;
+  }
+
+  .employee-card-employee-since {
+    margin: 10px;
+  }
+}

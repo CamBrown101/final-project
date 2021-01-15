@@ -8,11 +8,11 @@ export default function Nav(props) {
       <nav id="manager-nav-menu">
         <NavLink
           className="nav-menu-item"
-          id="nav-menu-create-employee"
+          id="nav-menu-employees"
           exact
-          to="/manager/create-employee"
+          to="/manager/employees"
         >
-          Create Employee
+          Employees
         </NavLink>
         <NavLink
           className="nav-menu-item"
