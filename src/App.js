@@ -5,6 +5,7 @@ import { UserContext } from './UserContext';
 import Login from './components/Login';
 import Home from './components/Home';
 import CreateEmployee from './components/manager/CreateEmployee';
+import CreateItem from './components/manager/CreateItem';
 
 function App() {
   const { user } = useContext(UserContext);
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" component={Home} />
       </Switch>
       <CreateEmployee></CreateEmployee>
+      <CreateItem></CreateItem>
     </Router>
   );
 }

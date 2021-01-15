@@ -8,10 +8,11 @@ export default function Create(props) {
   const [description, setDescription] = useState('');
   const [quantity, setQuantity] = useState('');
   const [isActive, setIsActive] = useState(false);
-  const [categories, setCategories] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState('Beer');
 
   useEffect(() => {
-    const URL = `/categtories/`;
+    const URL = `/api/categories/`;
     const promise = axios
       .get(URL)
       .then((response) => {
@@ -44,6 +45,10 @@ export default function Create(props) {
     setIsActive(event.target.value);
   };
 
+  const categoryOnChange = (event) => {
+    setCategory(event.target.value);
+  };
+
   const create = (event) => {
     event.preventDefault();
 
@@ -53,9 +58,10 @@ export default function Create(props) {
       description: description,
       quantity: quantity,
       isActive: isActive,
+      category: category,
     };
     console.log(data);
-    const URL = `/api/menu-items/`;
+    const URL = `/api/menu/`;
     const promise = axios
       .post(URL, data)
       .then((response) => {
@@ -110,8 +116,21 @@ export default function Create(props) {
           name="quantity"
           onChange={quantityOnChange}
         />
+        <h3>Category:</h3>
+        <select
+          className="menu-item-category"
+          onChange={categoryOnChange}
+          name="category"
+        >
+          {categories.map((e, key) => {
+            return (
+              <option key={key} value={e.name}>
+                {e.name}
+              </option>
+            );
+          })}
+        </select>
         <h3>Is active?:</h3>
-
         <select
           className="menu-item-is-active"
           onChange={isActiveOnChange}

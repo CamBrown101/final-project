@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    console.log("menu route");
+  router.get('/', (req, res) => {
+    console.log('menu route');
     db.query(`SELECT * FROM menu_items;`)
       .then((data) => {
         const menu = data.rows;
@@ -14,8 +14,8 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/:id", (req, res) => {
-    console.log("menu item id route");
+  router.get('/:id', (req, res) => {
+    console.log('menu item id route');
     const item = req.params.id;
     db.query(
       `SELECT * FROM menu_items
@@ -30,5 +30,40 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  router.post('/', (req, res) => {
+    const name = req.body.name;
+    const price = req.body.price;
+    const description = req.body.description;
+    const quantity = req.body.quantity;
+    const isActive = req.body.isActive;
+    const category = req.body.category;
+
+    const queryParams = [
+      name,
+      price,
+      description,
+      quantity,
+      isActive,
+      category,
+    ];
+    console.log(queryParams);
+    db.query(
+      `INSERT INTO menu_items (name, price, description, quantity, is_active, category_id)
+              VALUES ($1, $2, $3, $4, $5, $6)
+              RETURNING *;`,
+      queryParams
+    )
+      .then((data) => {
+        const employee = data.rows[0];
+        console.log(employee);
+        return res.status(200).send(employee);
+      })
+      .catch((err) => {
+        console.log('error');
+        return res.status(500).send('error');
+      });
+  });
+
   return router;
 };
