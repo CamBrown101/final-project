@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import Axios from 'axios';
 
 // Create context with an empty object
 const UserContext = createContext({ name: '', auth: false });
@@ -9,9 +10,14 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState({ name: '', auth: false });
 
   // Login updates the user data with a name parameter
-  const login = (name) => {
+  const login = (code) => {
+    const pin = code;
+
+    Axios.get('http://localhost:8080/login', pin).then((res) => {
+      console.log(res);
+    });
     setUser((user) => ({
-      name: name,
+      name: code,
       auth: true,
     }));
   };
