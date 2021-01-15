@@ -38,8 +38,8 @@ module.exports = (db) => {
     db.query(
       `
       SELECT * FROM seats
-      JOIN tables ON order_id = orders.id
-      WHERE orders.id = $1;`,
+      JOIN tables ON table_id = tables.id
+      WHERE tables.id = $1;`,
       [table]
     )
       .then((data) => {
