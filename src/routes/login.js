@@ -18,7 +18,6 @@ module.exports = (db) => {
         if (bcryptCheck) {
           res.status(200).send(data.rows[0]);
         } else {
-          req.session = null;
           res.send(false);
         }
       })
