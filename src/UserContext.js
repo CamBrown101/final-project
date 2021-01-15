@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import Axios from 'axios';
+// import Axios from 'axios';
 
 // Create context with an empty object
 const UserContext = createContext({ name: '', auth: false });
