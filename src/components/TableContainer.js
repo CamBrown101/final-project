@@ -9,6 +9,7 @@ export default function TableContainer(props) {
       employee={table.firstname}
       seats={table.number_of_seats}
       status={table.status}
+      setTable={props.setTable}
     />
   ));
 

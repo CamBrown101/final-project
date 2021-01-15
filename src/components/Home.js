@@ -10,6 +10,7 @@ export default function Home() {
   const { user, logout } = useContext(UserContext);
   const [menu, setMenu] = useState([]);
   const [tables, setTables] = useState([]);
+  const [table, setTable] = useState(null);
 
   useEffect(() => {
     Axios.get("/api/menu").then((res) => {
@@ -29,7 +30,7 @@ export default function Home() {
       <h1>Hello, {user.name}!</h1>
       <button onClick={logout}>Logout</button>
       <div class="home-main">
-        <TableContainer tables={tables} />
+        <TableContainer tables={tables} setTable={setTable} />
         <MenuContainer menu={menu} />
       </div>
     </div>
