@@ -3,11 +3,11 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    console.log("menu route");
-    db.query(`SELECT * FROM menu_items;`)
+    console.log("order route");
+    db.query(`SELECT * FROM orders;`)
       .then((data) => {
-        const menu = data.rows;
-        res.send(menu);
+        const orders = data.rows;
+        res.send(orders);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -15,16 +15,16 @@ module.exports = (db) => {
   });
 
   router.get("/:id", (req, res) => {
-    console.log("menu item id route");
-    const item = req.params.id;
+    console.log("order id route");
+    const order = req.params.id;
     db.query(
-      `SELECT * FROM menu_items
+      `SELECT * FROM orders
               WHERE id = $1;`,
-      [item]
+      [order]
     )
       .then((data) => {
-        const item = data.rows[0];
-        res.send(item);
+        const order = data.rows[0];
+        res.send(order);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
