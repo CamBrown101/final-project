@@ -59,10 +59,8 @@ CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
   employee_id INTEGER REFERENCES employees(id) ON DELETE CASCADE,
   table_id INTEGER REFERENCES tables(id) ON DELETE CASCADE,
-  seat_id INTEGER REFERENCES seats(id) ON DELETE CASCADE,
   payment_type  VARCHAR(255) DEFAULT NULL,
   timestamp TIMESTAMPTZ,
-  order_items_id INTEGER REFERENCES menu_items(id) ON DELETE CASCADE,
   email VARCHAR(255) DEFAULT NULL
 );
 
