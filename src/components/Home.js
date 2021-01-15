@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../UserContext';
 import { Redirect } from 'react-router-dom';
-import MenuContainer from './MenuContainer';
+import MenuContainer from './menu/MenuContainer';
 import BillContainer from './bill/BillContainer';
 import Axios from 'axios';
 
