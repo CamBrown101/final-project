@@ -18,7 +18,9 @@ export default function BillContainer({
   });
 
   const sendBill = () => {
-    Axios.post(`api/orders/${tableInfo.id}/items`, data);
+    Axios.post(`api/orders/${tableInfo.id}/items`, data).then((res) => {
+      console.log(res.data);
+    });
   };
   const clearBill = () => {
     setBill({
