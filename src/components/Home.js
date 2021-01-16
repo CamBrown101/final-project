@@ -11,7 +11,6 @@ import './Home.scss';
 export default function Home(props) {
   const { user, logout } = useContext(UserContext);
   const [menu, setMenu] = useState([]);
-
   const [tables, setTables] = useState([]);
   const [table, setTable] = useState([]);
 

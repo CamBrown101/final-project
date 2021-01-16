@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import { UserContext } from "../UserContext";
-import "./TableItem.scss";
-import Axios from "axios";
+import React, { useContext } from 'react';
+import { UserContext } from '../UserContext';
+import './TableItem.scss';
+import Axios from 'axios';
 export default function TableItem(props) {
   const { user } = useContext(UserContext);
   const getOrders = () => {
@@ -15,6 +15,7 @@ export default function TableItem(props) {
             employee: props.employee,
             seats: props.seats,
             items: newItems,
+            orderId: res.data.id,
           });
         });
       } else {
@@ -36,8 +37,7 @@ export default function TableItem(props) {
       className="table-item"
       onClick={() => {
         getOrders();
-      }}
-    >
+      }}>
       <h3>Employee: {props.employee}</h3>
       <h3>Seats: {props.seats}</h3>
       <br />

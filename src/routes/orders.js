@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    console.log("order route");
+  router.get('/', (req, res) => {
+    console.log('order route');
     db.query(`SELECT * FROM orders;`)
       .then((data) => {
         const orders = data.rows;
@@ -14,13 +14,14 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/", (req, res) => {
-    console.log("order route");
+  router.post('/', (req, res) => {
+    console.log(req);
+    console.log('order route');
     db.query(
       `
               INSERT INTO orders (employee_id, table_id)
               VALUES ($1, $2);`,
-      [req.data.id, req.data.tableId]
+      [req.body.id, req.body.tableId]
     )
       .then((data) => {
         const order = data.rows;
@@ -32,8 +33,8 @@ module.exports = (db) => {
   });
 
   //sends the order object
-  router.get("/:id", (req, res) => {
-    console.log("order id route");
+  router.get('/:id', (req, res) => {
+    console.log('order id route');
     const order = req.params.id;
     db.query(
       `SELECT * FROM orders
@@ -50,8 +51,8 @@ module.exports = (db) => {
   });
 
   //WIP sends items in an order
-  router.get("/:id/items", (req, res) => {
-    console.log("order id items route");
+  router.get('/:id/items', (req, res) => {
+    console.log('order id items route');
     const order = req.params.id;
     db.query(
       `
@@ -72,9 +73,9 @@ module.exports = (db) => {
   // INSERT INTO order_items(order_id, seat_id, item)
   // INSERT INTO orders(employee_id, table_id)
 
-  router.post("/:id/items", (req, res) => {
-    console.log("order id items postroute");
-    console.log("req");
+  router.post('/:id/items', (req, res) => {
+    console.log('order id items postroute');
+    console.log('req');
     const queryString = `
     `;
     console.log(req.body);

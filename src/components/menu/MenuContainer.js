@@ -6,6 +6,7 @@ export default function MenuContainer({ setBill, bill, menu }) {
   const menuItems = menu.map((item) => (
     <MenuItem
       key={item.id}
+      id={item.id}
       name={item.name}
       price={item.price}
       description={item.description}

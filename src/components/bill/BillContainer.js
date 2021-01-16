@@ -22,18 +22,15 @@ export default function BillContainer({ bill, setBill, tableInfo, menu }) {
 
   // INSERT INTO order_items(order_id, seat_id, item)
   // INSERT INTO orders(employee_id, table_id)
-
+  console.log(tableInfo);
   const data = [];
-  itemsToRender.forEach((element) => {
-    data.push(element);
-  });
-
+  // each object orderID itemID = bill.menuItemid and seatID = 1
+  console.log(data);
   const sendBill = () => {
-    Axios.post(`orders/${tableInfo.id}/items`, data);
+    Axios.post(`api/orders/${tableInfo.id}/items`, data);
   };
   const cancelBill = () => {
     // setBill([]);
-    console.log(itemsToRender);
   };
   const billItems = itemsToRender.map((item, index) => (
     <BillItem key={index} name={item.name} price={item.price} />
