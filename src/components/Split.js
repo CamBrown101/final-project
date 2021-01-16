@@ -9,12 +9,6 @@ const reorder = (list, startIndex, endIndex) => {
 
   return result;
 };
-const items = [
-  { id: '1', content: 'item 0' },
-  { id: '2', content: 'item 1' },
-  { id: '3', content: 'item 2' },
-  { id: '4', content: 'item 3' },
-];
 
 /**
  * Moves an item from one list to another list.
@@ -52,8 +46,21 @@ const getListStyle = (isDraggingOver) => ({
   width: 250,
 });
 
-export default function Split() {
-  const [state, setState] = useState([items]);
+export default function Split(props) {
+  // const items = [
+  //   { id: '1', content: 'item 0' },
+  //   { id: '2', content: 'item 1' },
+  //   { id: '3', content: 'item 2' },
+  //   { id: '4', content: 'item 3' },
+  // ];
+
+  const items = props.bill.items;
+  const itemsWithId = items.map((item, index) => ({
+    id: String(index),
+    content: item.name,
+  }));
+  console.log(itemsWithId);
+  const [state, setState] = useState([itemsWithId]);
 
   function onDragEnd(result) {
     const { source, destination } = result;
