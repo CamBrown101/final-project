@@ -58,6 +58,7 @@ export default function Split(props) {
   const itemsWithId = items.map((item, index) => ({
     id: String(index),
     content: item.name,
+    price: item.price,
   }));
   console.log(itemsWithId);
   const [state, setState] = useState([itemsWithId]);
@@ -131,6 +132,8 @@ export default function Split(props) {
                             }}
                           >
                             {item.content}
+                            <br />
+                            {`$ ${item.price}.00`}
                             <button
                               type="button"
                               onClick={() => {
