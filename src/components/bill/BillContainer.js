@@ -1,8 +1,8 @@
-import React from 'react';
-import Axios from 'axios';
-import './BillContainer.scss';
-import BillHeader from './BillHeader';
-import BillItem from './BillItem';
+import React from "react";
+import Axios from "axios";
+import "./BillContainer.scss";
+import BillHeader from "./BillHeader";
+import BillItem from "./BillItem";
 
 export default function BillContainer({
   bill,
@@ -17,7 +17,10 @@ export default function BillContainer({
   });
 
   const sendBill = () => {
-    Axios.post(`api/orders/${tableInfo.id}/items`, data).then((res) => {});
+    return Axios.post(
+      `api/orders/${tableInfo.id}/items`,
+      data
+    ).then((res) => {});
   };
   const clearBill = () => {
     setBill({
@@ -30,10 +33,11 @@ export default function BillContainer({
   };
   const payBill = () => {
     const orderIds = [];
+    unpaidItems = [...unpaidItems, ...bill.items];
     unpaidItems.forEach((element) => {
-      payBill.push(element.order_item_id);
+      orderIds.push(element.order_item_id);
     });
-    Axios.post('api/orders/pay', orderIds);
+    return Axios.post("api/orders/pay", orderIds);
   };
   // pay bill clear table of information - reset table
   // mark order as payed or add an order type
@@ -80,9 +84,9 @@ export default function BillContainer({
           <div
             className="send-button"
             onClick={() => {
-              sendBill();
-              clearBill();
-            }}>
+              sendBill().then(clearBill);
+            }}
+          >
             <p>Send</p>
           </div>
           <button className="cancel-button" onClick={() => clearBill()}>
@@ -91,10 +95,16 @@ export default function BillContainer({
           <button
             className="pay-button"
             onClick={() => {
-              sendBill();
-              payBill();
-              clearBill();
-            }}>
+              console.log(bill.items.length === 0);
+              if (bill.items.length !== 0) {
+                sendBill().then(() => {
+                  payBill().then(clearBill);
+                });
+              } else {
+                payBill().then(clearBill);
+              }
+            }}
+          >
             Pay
           </button>
         </div>
