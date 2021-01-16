@@ -11,16 +11,13 @@ export default function BillContainer({
   tableInfo,
   menu,
 }) {
-  console.log(bill);
   const data = { itemId: [], seatId: 1, orderId: tableInfo.orderId };
   bill.items.forEach((item) => {
     data.itemId.push(item.id);
   });
 
   const sendBill = () => {
-    Axios.post(`api/orders/${tableInfo.id}/items`, data).then((res) => {
-      console.log(res.data);
-    });
+    Axios.post(`api/orders/${tableInfo.id}/items`, data).then((res) => {});
   };
   const clearBill = () => {
     setBill({
@@ -31,13 +28,32 @@ export default function BillContainer({
     });
     setTable([]);
   };
-  const paybill = () => {};
+  const payBill = () => {
+    const orderIds = [];
+    unpaidItems.forEach((element) => {
+      payBill.push(element.order_item_id);
+    });
+    Axios.post('api/orders/pay', orderIds);
+  };
+  // pay bill clear table of information - reset table
+  // mark order as payed or add an order type
+  // mark all items on order_items as payed
+  // clear the bill
 
+  let unpaidItems = [];
   let itemsOnBill = { ...tableInfo.items };
   itemsOnBill = itemsOnBill[0];
-  let itemsToRender = [...bill.items.reverse()];
   if (itemsOnBill) {
-    for (let item of itemsOnBill) {
+    itemsOnBill.forEach((element) => {
+      if (!element.is_payed) {
+        unpaidItems.push(element);
+      }
+    });
+  }
+
+  let itemsToRender = [...bill.items.reverse()];
+  if (unpaidItems) {
+    for (let item of unpaidItems) {
       menu.forEach((element) => {
         if (element.id === item.item) {
           itemsToRender.push(element);
@@ -72,7 +88,13 @@ export default function BillContainer({
           <button className="cancel-button" onClick={() => clearBill()}>
             Cancel
           </button>
-          <button className="pay-button" onClick={() => clearBill()}>
+          <button
+            className="pay-button"
+            onClick={() => {
+              sendBill();
+              payBill();
+              clearBill();
+            }}>
             Pay
           </button>
         </div>

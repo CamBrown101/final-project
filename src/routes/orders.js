@@ -56,7 +56,7 @@ module.exports = (db) => {
     const order = req.params.id;
     db.query(
       `
-      SELECT * FROM order_items
+    SELECT *, order_items.id AS order_item_id FROM order_items
       JOIN orders ON order_id = orders.id
       WHERE orders.id = $1;`,
       [order]
