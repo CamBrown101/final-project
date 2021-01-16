@@ -34,6 +34,7 @@ function App() {
           render={(props) => <Split {...props} bill={bill} setBill={setBill} />}
         />
         <Route path="/manager" exact component={Manager} />
+        <Route path="/timecard" exact component={TimecardEntry} />
         <Route path="/manager/employees" exact component={Employees} />
         <Route path="/manager/create-menu-item" exact component={CreateItem} />
         <Route
@@ -43,7 +44,6 @@ function App() {
         />
         <Route path="/" component={Home} />
       </Switch>
-      <TimecardEntry></TimecardEntry>
       <Nav></Nav>
     </Router>
   );

@@ -36,7 +36,7 @@ module.exports = (db) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const email = req.body.email;
-    const pin = req.body.pin;
+    const pin = parseInt(req.body.pin);
     const is_admin = req.body.isAdmin;
 
     db.query(
