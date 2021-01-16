@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Axios from 'axios';
 import './BillContainer.scss';
 import BillHeader from './BillHeader';
@@ -69,6 +69,28 @@ export default function BillContainer({
       });
     }
   }
+
+  useEffect(() => {
+    let newTotal = 0;
+    let newSubtotal = 0;
+    let newTax = 0;
+
+    itemsToRender.forEach((item) => {
+      console.log(item);
+      newSubtotal += item.price;
+      newTax = newSubtotal * 0.13;
+      newTotal = newSubtotal + newTax;
+      console.log(newSubtotal);
+      console.log(newTax);
+      console.log(newTotal);
+    });
+    setBill({
+      items: [...bill.items],
+      total: newTotal,
+      subtotal: newSubtotal,
+      tax: newTax,
+    });
+  }, []);
 
   const billItems = itemsToRender.map((item, index) => (
     <BillItem key={index} name={item.name} price={item.price} />
