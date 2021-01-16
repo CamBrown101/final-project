@@ -27,6 +27,14 @@ export default function Nav(props) {
           >
             Manager
           </NavLink>
+          <NavLink
+            className="nav-menu-item"
+            id="nav-menu-split"
+            exact
+            to="/split"
+          >
+            Split
+          </NavLink>
         </nav>
       ) : null}
     </nav>
