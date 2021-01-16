@@ -53,5 +53,24 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  router.get("/:id/latest-order", (req, res) => {
+    console.log("table id items route");
+    const table = req.params.id;
+    db.query(
+      `
+      SELECT * FROM orders
+      WHERE table_id = $1;`,
+      [table]
+    )
+      .then((data) => {
+        const latestOrder = data.rows[data.rows.length - 1];
+        res.send(latestOrder);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   return router;
 };
