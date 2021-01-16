@@ -4,11 +4,11 @@ import './BillContainer.scss';
 import BillHeader from './BillHeader';
 import BillItem from './BillItem';
 
-export default function BillContainer({ bill, tableInfo, menu }) {
+export default function BillContainer({ bill, setBill, tableInfo, menu }) {
   let itemsOnBill = { ...tableInfo.items };
   itemsOnBill = itemsOnBill[0];
 
-  const itemsToRender = [...bill.items.reverse()];
+  let itemsToRender = [...bill.items.reverse()];
 
   if (itemsOnBill) {
     for (let item of itemsOnBill) {
@@ -22,18 +22,23 @@ export default function BillContainer({ bill, tableInfo, menu }) {
 
   // INSERT INTO order_items(order_id, seat_id, item)
   // INSERT INTO orders(employee_id, table_id)
-  console.log(bill);
+
   const data = [];
   itemsToRender.forEach((element) => {
     data.push(element);
   });
+
   const sendBill = () => {
     Axios.post(`orders/${tableInfo.id}/items`, data);
   };
-  console.log(itemsToRender);
+  const cancelBill = () => {
+    // setBill([]);
+    console.log(itemsToRender);
+  };
   const billItems = itemsToRender.map((item, index) => (
     <BillItem key={index} name={item.name} price={item.price} />
   ));
+
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
@@ -52,9 +57,9 @@ export default function BillContainer({ bill, tableInfo, menu }) {
             }}>
             <p>Send</p>
           </div>
-          <div className="cancel-button">
-            <p>Cancel</p>
-          </div>
+          <button className="cancel-button" onClick={() => cancelBill()}>
+            Cancel
+          </button>
         </div>
       </div>
     </article>

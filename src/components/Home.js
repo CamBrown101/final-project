@@ -33,7 +33,12 @@ export default function Home(props) {
       <div className="home-main">
         <h1>Hello, {user.name}!</h1>
         <button onClick={logout}>Logout</button>
-        <BillContainer bill={props.bill} tableInfo={table} menu={menu} />
+        <BillContainer
+          bill={props.bill}
+          tableInfo={table}
+          menu={menu}
+          setBill={props.setBill}
+        />
         <MenuContainer menu={menu} setBill={props.setBill} bill={props.bill} />
         <TableContainer tables={tables} setTable={setTable} />
       </div>
