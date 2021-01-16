@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
-import { UserContext } from "../UserContext";
-import "./TableItem.scss";
-import Axios from "axios";
+import React, { useContext } from 'react';
+import { UserContext } from '../UserContext';
+import './TableItem.scss';
+import Axios from 'axios';
+
 export default function TableItem(props) {
   const { user } = useContext(UserContext);
   const getOrders = () => {
     const newItems = [];
     Axios.get(`/api/tables/${props.id}/current-order`).then((res) => {
       const orderId = res.data.id;
-      if (res.data.id) {
-        const orderId = res.data.id;
+      if (orderId) {
         Axios.get(`/api/orders/${res.data.id}/items`).then((res) => {
           newItems.push(res.data);
           props.setTable({
@@ -34,13 +34,24 @@ export default function TableItem(props) {
       }
     });
   };
+
+  const clearBill = () => {
+    props.setBill({
+      items: [],
+      tax: 0,
+      subtotal: 0,
+      total: 0,
+    });
+    props.setTable([]);
+  };
+
   return (
     <div
       className="table-item"
       onClick={() => {
+        clearBill();
         getOrders();
-      }}
-    >
+      }}>
       <h3>Employee: {props.employee}</h3>
       <h3>Seats: {props.seats}</h3>
       <br />

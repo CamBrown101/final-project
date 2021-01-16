@@ -39,7 +39,11 @@ export default function Home(props) {
           setTable={setTable}
         />
         <MenuContainer menu={menu} setBill={props.setBill} bill={props.bill} />
-        <TableContainer tables={tables} setTable={setTable} />
+        <TableContainer
+          tables={tables}
+          setTable={setTable}
+          setBill={props.setBill}
+        />
       </div>
     </div>
   );
