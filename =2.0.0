@@ -1,0 +1,4 @@
+
+> libpq@1.8.9 install /home/michael/lighthouse/final-project/node_modules/libpq
+> node-gyp rebuild
+
