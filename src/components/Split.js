@@ -58,6 +58,7 @@ export default function Split(props) {
   //   newBill = state.map
   // }
   const [state, setState] = useState([itemsWithId]);
+  const { setBill } = props;
   useEffect(() => {
     const newBill = state.flat().map((item, index) => ({
       id: index,
@@ -74,14 +75,15 @@ export default function Split(props) {
 
     const newTotal = total(newBill);
     const newTax = newTotal * (12 / 100);
-    props.setBill({
-      ...props.bill,
+
+    setBill({
       items: newBill,
       tax: newTax,
       subtotal: newTotal,
       total: newTotal + newTax,
     });
-  }, [state]);
+  }, [state, setBill]);
+
   function onDragEnd(result) {
     const { source, destination } = result;
 
