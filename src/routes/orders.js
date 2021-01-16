@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get('/', (req, res) => {
-    console.log('order route');
+  router.get("/", (req, res) => {
+    console.log("order route");
     db.query(`SELECT * FROM orders;`)
       .then((data) => {
         const orders = data.rows;
@@ -14,9 +14,9 @@ module.exports = (db) => {
       });
   });
 
-  router.post('/', (req, res) => {
+  router.post("/", (req, res) => {
     console.log(req);
-    console.log('order route');
+    console.log("order route");
     db.query(
       `
               INSERT INTO orders (employee_id, table_id)
@@ -32,9 +32,30 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/pay", (req, res) => {
+    console.log(req);
+    const items = req.body;
+    let queryString = `
+              UPDATE order_items
+              SET is_payed = true
+              WHERE `;
+    for (let i = 0; i < items.length; i++) {
+      queryString += `id = ${items[i]}`;
+      queryString += i === items.length - 1 ? `;` : ` OR `;
+    }
+    console.log(queryString);
+    db.query(queryString, [])
+      .then((data) => {
+        res.status(200);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   //sends the order object
-  router.get('/:id', (req, res) => {
-    console.log('order id route');
+  router.get("/:id", (req, res) => {
+    console.log("order id route");
     const order = req.params.id;
     db.query(
       `SELECT * FROM orders
@@ -51,12 +72,12 @@ module.exports = (db) => {
   });
 
   //WIP sends items in an order
-  router.get('/:id/items', (req, res) => {
-    console.log('order id items route');
+  router.get("/:id/items", (req, res) => {
+    console.log("order id items route");
     const order = req.params.id;
     db.query(
       `
-      SELECT * FROM order_items
+      SELECT *, order_items.id AS order_item_id FROM order_items
       JOIN orders ON order_id = orders.id
       WHERE orders.id = $1;`,
       [order]
@@ -70,7 +91,7 @@ module.exports = (db) => {
       });
   });
 
-  router.post('/:id/items', (req, res) => {
+  router.post("/:id/items", (req, res) => {
     const items = req.body.itemId;
     const seat = req.body.seatId;
     const order = req.body.orderId;
@@ -80,9 +101,9 @@ module.exports = (db) => {
     for (let i = 0; i < items.length; i++) {
       queryString += ` (${order}, ${seat}, ${items[i]})`;
       if (i !== items.length - 1) {
-        queryString += ',';
+        queryString += ",";
       } else {
-        queryString += 'RETURNING * ;';
+        queryString += "RETURNING * ;";
       }
     }
     console.log(queryString);
