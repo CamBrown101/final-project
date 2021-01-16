@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './Split.scss';
 
@@ -47,22 +47,17 @@ const getListStyle = (isDraggingOver) => ({
 });
 
 export default function Split(props) {
-  // const items = [
-  //   { id: '1', content: 'item 0' },
-  //   { id: '2', content: 'item 1' },
-  //   { id: '3', content: 'item 2' },
-  //   { id: '4', content: 'item 3' },
-  // ];
-
   const items = props.bill.items;
   const itemsWithId = items.map((item, index) => ({
     id: String(index),
     content: item.name,
     price: item.price,
   }));
-  console.log(itemsWithId);
   const [state, setState] = useState([itemsWithId]);
 
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
   function onDragEnd(result) {
     const { source, destination } = result;
 
@@ -88,6 +83,23 @@ export default function Split(props) {
     }
   }
 
+  const getColumnTotal = (column) => {
+    let total = 0;
+    for (const each of column) {
+      total = total + each.price;
+    }
+    return total;
+  };
+
+  const getTax = (total) => {
+    let tax = total * (12 / 100);
+    return tax.toFixed(2);
+  };
+
+  const getSubtotal = (total) => {
+    let subTotal = parseFloat(total) + parseFloat(getTax(total));
+    return subTotal.toFixed(2);
+  };
   return (
     <div className="split-div">
       <button
@@ -151,7 +163,15 @@ export default function Split(props) {
                       )}
                     </Draggable>
                   ))}
+
                   {provided.placeholder}
+                  <h1 className="split-total">
+                    Total: ${getColumnTotal(el)}.00
+                    <br />
+                    Tax: ${getTax(getColumnTotal(el))}
+                    <br />
+                    Subtotal: ${getSubtotal(getColumnTotal(el))}
+                  </h1>
                 </div>
               )}
             </Droppable>

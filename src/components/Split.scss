@@ -1,3 +1,13 @@
 .split-div {
   margin-top: 100px;
+  position: relative;
+  display: block;
+  padding-bottom: 140px;
+}
+
+.split-total {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  text-align: center;
 }
