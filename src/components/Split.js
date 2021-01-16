@@ -103,12 +103,13 @@ export default function Split(props) {
   return (
     <div className="split-div">
       <button
+        className="split-bill-button"
         type="button"
         onClick={() => {
           setState([...state, []]);
         }}
       >
-        Add new split
+        Split Bill
       </button>
 
       <div style={{ display: 'flex' }}>
@@ -165,13 +166,27 @@ export default function Split(props) {
                   ))}
 
                   {provided.placeholder}
-                  <h1 className="split-total">
-                    Total: ${getColumnTotal(el)}.00
-                    <br />
-                    Tax: ${getTax(getColumnTotal(el))}
-                    <br />
-                    Subtotal: ${getSubtotal(getColumnTotal(el))}
-                  </h1>
+                  <div className="totals-div">
+                    <h1 className="split-total">
+                      Total: ${getColumnTotal(el)}.00
+                      <br />
+                      Tax: ${getTax(getColumnTotal(el))}
+                      <br />
+                      Subtotal: ${getSubtotal(getColumnTotal(el))}
+                    </h1>
+                  </div>
+                  <button
+                    className="pay-split-bill-button"
+                    type="button"
+                    onClick={() => {
+                      const newState = [...state];
+                      newState.splice(ind, 1);
+                      setState(newState);
+                      // setState([...state, []]);
+                    }}
+                  >
+                    Print Bill
+                  </button>
                 </div>
               )}
             </Droppable>

@@ -11,3 +11,23 @@
   bottom: 0;
   text-align: center;
 }
+
+.split-bill-button {
+  font-weight: bolder;
+}
+
+.split-bill-button:hover,
+.split-bill-button:active {
+  filter: invert(100%);
+}
+
+.pay-split-bill-button {
+  font-weight: bolder;
+  position: absolute;
+  bottom: 0;
+}
+
+.pay-split-bill-button:hover,
+.pay-split-bill-button:active {
+  filter: invert(100%);
+}
