@@ -26,16 +26,14 @@ module.exports = (db) => {
     )
       .then((data) => {
         if (data.rows[0] !== undefined) {
-          console.log(pin);
           db.query(
             `
             INSERT INTO shifts (employee_id, punch_time, is_in)
             VALUES ($1, CLOCK_TIMESTAMP(), $2);`,
-            [pin, login]
+            [data.rows[0].id, login]
           )
             .then((data) => {
-              console.log("should work");
-              res.status(200).send(data.rows);
+              res.status(200).send("Time punch accepted!");
             })
             .catch((err) => {
               console.log(err);
