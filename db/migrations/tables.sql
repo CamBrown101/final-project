@@ -67,6 +67,8 @@ CREATE TABLE order_items (
   order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
   seat_id  INTEGER REFERENCES seats(id) ON DELETE CASCADE,
   item  INTEGER REFERENCES menu_items(id) ON DELETE CASCADE
+  is_payed  BOOLEAN NOT NULL DEFAULT FALSE,
+  timestamp TIMESTAMPTZ
 );
 
 
