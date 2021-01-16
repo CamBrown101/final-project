@@ -1,21 +1,19 @@
-import './TimecardEntry.scss';
-import React, { useState } from 'react';
-import Axios from 'axios';
+import "./TimecardEntry.scss";
+import React, { useState } from "react";
+import Axios from "axios";
 
 export default function TimecardEntry() {
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState("");
 
   const punchIn = (code) => {
     const data = { pin: code, login: true };
-    Axios.post('http://localhost:8080/api/timecards', data).then((res) => {
-      console.log(res.data);
+    Axios.post("http://localhost:8080/api/timecards", data).then((res) => {
       window.alert(res.data);
     });
   };
   const punchOut = (code) => {
     const data = { pin: code, login: false };
-    Axios.post('http://localhost:8080/api/timecards', data).then((res) => {
-      console.log(res.data);
+    Axios.post("http://localhost:8080/api/timecards", data).then((res) => {
       window.alert(res.data);
     });
   };
@@ -33,21 +31,21 @@ export default function TimecardEntry() {
       <div className="button-container">
         <button
           onClick={() => {
-            addNumber('1');
+            addNumber("1");
           }}
         >
           1
         </button>
         <button
           onClick={() => {
-            addNumber('2');
+            addNumber("2");
           }}
         >
           2
         </button>
         <button
           onClick={() => {
-            addNumber('3');
+            addNumber("3");
           }}
         >
           3
@@ -55,21 +53,21 @@ export default function TimecardEntry() {
         <br />
         <button
           onClick={() => {
-            addNumber('4');
+            addNumber("4");
           }}
         >
           4
         </button>
         <button
           onClick={() => {
-            addNumber('5');
+            addNumber("5");
           }}
         >
           5
         </button>
         <button
           onClick={() => {
-            addNumber('6');
+            addNumber("6");
           }}
         >
           6
@@ -78,21 +76,21 @@ export default function TimecardEntry() {
 
         <button
           onClick={() => {
-            addNumber('7');
+            addNumber("7");
           }}
         >
           7
         </button>
         <button
           onClick={() => {
-            addNumber('8');
+            addNumber("8");
           }}
         >
           8
         </button>
         <button
           onClick={() => {
-            addNumber('9');
+            addNumber("9");
           }}
         >
           9
@@ -102,14 +100,14 @@ export default function TimecardEntry() {
         <button>back</button>
         <button
           onClick={() => {
-            addNumber('0');
+            addNumber("0");
           }}
         >
           0
         </button>
         <button
           onClick={() => {
-            setCode('');
+            setCode("");
           }}
         >
           Clear
