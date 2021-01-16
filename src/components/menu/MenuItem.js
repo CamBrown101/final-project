@@ -1,5 +1,5 @@
-import React from 'react';
-import './MenuItem.scss';
+import React from "react";
+import "./MenuItem.scss";
 
 export default function MenuItem({ name, price, id, setBill, bill }) {
   let newTotal = bill.total;
@@ -16,13 +16,13 @@ export default function MenuItem({ name, price, id, setBill, bill }) {
       onClick={() => {
         changePrice();
         setBill({
-          menuItemid: id,
-          items: [...bill.items, { name, price }],
+          items: [...bill.items, { name, price, id }],
           total: newTotal,
           subtotal: newSubtotal,
           tax: newTax,
         });
-      }}>
+      }}
+    >
       <h3>{name}</h3>
       <h3>${price}</h3>
       <br />

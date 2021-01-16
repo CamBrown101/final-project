@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get('/', (req, res) => {
-    console.log('order route');
+  router.get("/", (req, res) => {
+    console.log("order route");
     db.query(`SELECT * FROM orders;`)
       .then((data) => {
         const orders = data.rows;
@@ -14,9 +14,9 @@ module.exports = (db) => {
       });
   });
 
-  router.post('/', (req, res) => {
+  router.post("/", (req, res) => {
     console.log(req);
-    console.log('order route');
+    console.log("order route");
     db.query(
       `
               INSERT INTO orders (employee_id, table_id)
@@ -33,8 +33,8 @@ module.exports = (db) => {
   });
 
   //sends the order object
-  router.get('/:id', (req, res) => {
-    console.log('order id route');
+  router.get("/:id", (req, res) => {
+    console.log("order id route");
     const order = req.params.id;
     db.query(
       `SELECT * FROM orders
@@ -51,8 +51,8 @@ module.exports = (db) => {
   });
 
   //WIP sends items in an order
-  router.get('/:id/items', (req, res) => {
-    console.log('order id items route');
+  router.get("/:id/items", (req, res) => {
+    console.log("order id items route");
     const order = req.params.id;
     db.query(
       `
@@ -70,18 +70,23 @@ module.exports = (db) => {
       });
   });
 
-  // INSERT INTO order_items(order_id, seat_id, item)
-  // INSERT INTO orders(employee_id, table_id)
+  router.post("/:id/items", (req, res) => {
+    const items = req.body.itemId;
+    const seat = req.body.seatId;
+    const order = req.body.orderId;
 
-  router.post('/:id/items', (req, res) => {
-    console.log('order id items postroute');
-    console.log('req');
-    const queryString = `
-    `;
-    console.log(req.body);
-    const queryParams = req.body;
-
-    db.query(queryString, queryParams)
+    let queryString = `INSERT INTO order_items (order_id, seat_id, item)
+    VALUES `;
+    for (let i = 0; i < items.length; i++) {
+      queryString += ` (${order}, ${seat}, ${items[i]})`;
+      if (i !== items.length - 1) {
+        queryString += ",";
+      } else {
+        queryString += ";";
+      }
+    }
+    console.log(queryString);
+    db.query(queryString)
       .then((data) => {
         const items = data.rows;
         res.send(items);

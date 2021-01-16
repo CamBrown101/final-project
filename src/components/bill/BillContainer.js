@@ -1,8 +1,8 @@
-import React from 'react';
-import Axios from 'axios';
-import './BillContainer.scss';
-import BillHeader from './BillHeader';
-import BillItem from './BillItem';
+import React from "react";
+import Axios from "axios";
+import "./BillContainer.scss";
+import BillHeader from "./BillHeader";
+import BillItem from "./BillItem";
 
 export default function BillContainer({ bill, setBill, tableInfo, menu }) {
   let itemsOnBill = { ...tableInfo.items };
@@ -23,7 +23,10 @@ export default function BillContainer({ bill, setBill, tableInfo, menu }) {
   // INSERT INTO order_items(order_id, seat_id, item)
   // INSERT INTO orders(employee_id, table_id)
   console.log(tableInfo);
-  const data = [];
+  const data = { itemId: [], seatId: 1, orderId: tableInfo.orderId };
+  bill.items.forEach((item) => {
+    data.itemId.push(item.id);
+  });
   // each object orderID itemID = bill.menuItemid and seatID = 1
   console.log(data);
   const sendBill = () => {
@@ -51,7 +54,8 @@ export default function BillContainer({ bill, setBill, tableInfo, menu }) {
             className="send-button"
             onClick={() => {
               sendBill();
-            }}>
+            }}
+          >
             <p>Send</p>
           </div>
           <button className="cancel-button" onClick={() => cancelBill()}>
