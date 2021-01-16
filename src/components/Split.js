@@ -2,13 +2,6 @@ import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './Split.scss';
 
-//
-const getItems = (count, offset = 0) =>
-  Array.from({ length: count }, (v, k) => k).map((k) => ({
-    id: `item-${k + offset}-${new Date().getTime()}`,
-    content: `item ${k + offset}`,
-  }));
-
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -16,6 +9,12 @@ const reorder = (list, startIndex, endIndex) => {
 
   return result;
 };
+const items = [
+  { id: '1', content: 'item 0' },
+  { id: '2', content: 'item 1' },
+  { id: '3', content: 'item 2' },
+  { id: '4', content: 'item 3' },
+];
 
 /**
  * Moves an item from one list to another list.
@@ -54,7 +53,7 @@ const getListStyle = (isDraggingOver) => ({
 });
 
 export default function Split() {
-  const [state, setState] = useState([getItems(10), getItems(5, 10)]);
+  const [state, setState] = useState([items]);
 
   function onDragEnd(result) {
     const { source, destination } = result;
