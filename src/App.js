@@ -1,6 +1,11 @@
 import './App.scss';
 import { useContext, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  Redirect,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { UserContext } from './UserContext';
 import Login from './components/Login';
 import Home from './components/Home';
@@ -27,22 +32,63 @@ function App() {
         <Route path="/login" component={Login} />
         <Route
           path="/menu"
-          render={(props) => <Home {...props} bill={bill} setBill={setBill} />}
+          render={(props) =>
+            user.auth ? (
+              <Home {...props} bill={bill} setBill={setBill} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
         />
         <Route
           path="/split"
-          render={(props) => <Split {...props} bill={bill} setBill={setBill} />}
+          render={(props) =>
+            user.auth ? (
+              <Split {...props} bill={bill} setBill={setBill} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
         />
-        <Route path="/manager" exact component={Manager} />
-        <Route path="/timecard" exact component={TimecardEntry} />
-        <Route path="/manager/employees" exact component={Employees} />
-        <Route path="/manager/create-menu-item" exact component={CreateItem} />
+        <Route
+          path="/manager"
+          exact
+          render={(props) =>
+            user.auth ? <Manager /> : <Redirect to="/login" />
+          }
+        />
+        <Route
+          path="/timecard"
+          exact
+          render={(props) =>
+            user.auth ? <TimecardEntry /> : <Redirect to="/login" />
+          }
+        />
+        <Route
+          path="/manager/employees"
+          exact
+          render={(props) =>
+            user.auth ? <Employees /> : <Redirect to="/login" />
+          }
+        />
+        <Route
+          path="/manager/create-menu-item"
+          exact
+          render={(props) =>
+            user.auth ? <CreateItem /> : <Redirect to="/login" />
+          }
+        />
         <Route
           path="/manager/create-category"
           exact
-          component={CreateCategory}
+          render={(props) =>
+            user.auth ? <CreateCategory /> : <Redirect to="/login" />
+          }
         />
-        <Route path="/" component={Home} />
+        <Route
+          path="/"
+          render={(props) => (user.auth ? <Home /> : <Redirect to="/login" />)}
+        />
       </Switch>
       <Nav></Nav>
     </Router>
