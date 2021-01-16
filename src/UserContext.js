@@ -14,10 +14,14 @@ const UserProvider = ({ children }) => {
     const data = { pin: code };
 
     Axios.post("http://localhost:8080/login", data).then((res) => {
-      setUser((user) => ({
-        name: res.data.firstname,
-        auth: true,
-      }));
+      if (res.data) {
+        setUser((user) => ({
+          name: res.data.firstname,
+          auth: true,
+        }));
+      } else {
+        window.alert("Invalid Login");
+      }
     });
   };
 
