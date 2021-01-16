@@ -16,8 +16,7 @@ export default function MenuItem({ name, price, id, setBill, bill }) {
       onClick={() => {
         changePrice();
         setBill({
-          menuItemid: id,
-          items: [...bill.items, { name, price }],
+          items: [...bill.items, { name, price, id }],
           total: newTotal,
           subtotal: newSubtotal,
           tax: newTax,

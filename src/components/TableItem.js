@@ -7,6 +7,7 @@ export default function TableItem(props) {
   const getOrders = () => {
     const newItems = [];
     Axios.get(`/api/tables/${props.id}/current-order`).then((res) => {
+      const orderId = res.data.id;
       if (res.data.id) {
         Axios.get(`/api/orders/${res.data.id}/items`).then((res) => {
           newItems.push(res.data);
@@ -15,7 +16,7 @@ export default function TableItem(props) {
             employee: props.employee,
             seats: props.seats,
             items: newItems,
-            orderId: res.data.id,
+            orderId: orderId,
           });
         });
       } else {

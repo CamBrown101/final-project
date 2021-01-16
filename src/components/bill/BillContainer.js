@@ -4,12 +4,35 @@ import './BillContainer.scss';
 import BillHeader from './BillHeader';
 import BillItem from './BillItem';
 
-export default function BillContainer({ bill, setBill, tableInfo, menu }) {
+export default function BillContainer({
+  bill,
+  setBill,
+  setTable,
+  tableInfo,
+  menu,
+}) {
+  console.log(bill);
+  const data = { itemId: [], seatId: 1, orderId: tableInfo.orderId };
+  bill.items.forEach((item) => {
+    data.itemId.push(item.id);
+  });
+
+  const sendBill = () => {
+    Axios.post(`api/orders/${tableInfo.id}/items`, data);
+  };
+  const clearBill = () => {
+    setBill({
+      items: [],
+      tax: 0,
+      subtotal: 0,
+      total: 0,
+    });
+    setTable([]);
+  };
+
   let itemsOnBill = { ...tableInfo.items };
   itemsOnBill = itemsOnBill[0];
-
   let itemsToRender = [...bill.items.reverse()];
-
   if (itemsOnBill) {
     for (let item of itemsOnBill) {
       menu.forEach((element) => {
@@ -20,18 +43,6 @@ export default function BillContainer({ bill, setBill, tableInfo, menu }) {
     }
   }
 
-  // INSERT INTO order_items(order_id, seat_id, item)
-  // INSERT INTO orders(employee_id, table_id)
-  console.log(tableInfo);
-  const data = [];
-  // each object orderID itemID = bill.menuItemid and seatID = 1
-  console.log(data);
-  const sendBill = () => {
-    Axios.post(`api/orders/${tableInfo.id}/items`, data);
-  };
-  const cancelBill = () => {
-    // setBill([]);
-  };
   const billItems = itemsToRender.map((item, index) => (
     <BillItem key={index} name={item.name} price={item.price} />
   ));
@@ -51,10 +62,11 @@ export default function BillContainer({ bill, setBill, tableInfo, menu }) {
             className="send-button"
             onClick={() => {
               sendBill();
+              clearBill();
             }}>
             <p>Send</p>
           </div>
-          <button className="cancel-button" onClick={() => cancelBill()}>
+          <button className="cancel-button" onClick={() => clearBill()}>
             Cancel
           </button>
         </div>
