@@ -11,9 +11,14 @@ import './Home.scss';
 export default function Home() {
   const { user, logout } = useContext(UserContext);
   const [menu, setMenu] = useState([]);
-  const [bill, setBill] = useState([]);
+  const [bill, setBill] = useState({
+    items: [],
+    tax: 0,
+    subtotal: 0,
+    total: 0,
+  });
   const [tables, setTables] = useState([]);
-  const [table, setTable] = useState(null);
+  const [table, setTable] = useState([]);
 
   useEffect(() => {
     Axios.get('/api/menu').then((res) => {
@@ -33,7 +38,7 @@ export default function Home() {
       <div className="home-main">
         <h1>Hello, {user.name}!</h1>
         <button onClick={logout}>Logout</button>
-        <BillContainer bill={bill} />
+        <BillContainer bill={bill} tableInfo={table} menu={menu} />
         <MenuContainer menu={menu} setBill={setBill} bill={bill} />
         <TableContainer tables={tables} setTable={setTable} />
       </div>
