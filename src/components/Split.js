@@ -59,7 +59,16 @@ export default function Split(props) {
   // }
   const [state, setState] = useState([itemsWithId]);
   useEffect(() => {
-    // console.log(state);
+    const newBill = state.flat().map((item, index) => ({
+      id: index,
+      name: item.content,
+      price: item.price,
+    }));
+
+    props.setBill({
+      ...props.bill,
+      items: newBill,
+    });
   }, [state]);
   function onDragEnd(result) {
     const { source, destination } = result;
@@ -185,15 +194,6 @@ export default function Split(props) {
                       const newState = [...state];
                       newState.splice(ind, 1);
                       setState(newState);
-                      const newBill = state.flat().map((item, index) => ({
-                        id: index,
-                        name: item.content,
-                        price: item.price,
-                      }));
-                      props.setBill({
-                        ...props.bill,
-                        items: newBill,
-                      });
                     }}
                   >
                     Print Bill
