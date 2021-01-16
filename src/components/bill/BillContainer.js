@@ -1,8 +1,8 @@
-import React from "react";
-import Axios from "axios";
-import "./BillContainer.scss";
-import BillHeader from "./BillHeader";
-import BillItem from "./BillItem";
+import React from 'react';
+import Axios from 'axios';
+import './BillContainer.scss';
+import BillHeader from './BillHeader';
+import BillItem from './BillItem';
 
 export default function BillContainer({
   bill,
@@ -31,13 +31,17 @@ export default function BillContainer({
     });
     setTable([]);
   };
+  console.log(tableInfo);
   const payBill = () => {
+    Axios.post(`/api/orders/${tableInfo.orderId}/pay`, {
+      paymentType: 'credit',
+    });
     const orderIds = [];
     unpaidItems = [...unpaidItems, ...bill.items];
     unpaidItems.forEach((element) => {
       orderIds.push(element.order_item_id);
     });
-    return Axios.post("api/orders/pay", orderIds);
+    return Axios.post('api/orders/pay', orderIds);
   };
   // pay bill clear table of information - reset table
   // mark order as payed or add an order type
@@ -85,8 +89,7 @@ export default function BillContainer({
             className="send-button"
             onClick={() => {
               sendBill().then(clearBill);
-            }}
-          >
+            }}>
             <p>Send</p>
           </div>
           <button className="cancel-button" onClick={() => clearBill()}>
@@ -103,8 +106,7 @@ export default function BillContainer({
               } else {
                 payBill().then(clearBill);
               }
-            }}
-          >
+            }}>
             Pay
           </button>
         </div>
