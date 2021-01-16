@@ -32,6 +32,27 @@ module.exports = (db) => {
       });
   });
 
+  router.post('/pay', (req, res) => {
+    console.log(req);
+    const items = req.body;
+    let queryString = `
+              UPDATE order_items
+              SET is_payed = true
+              WHERE `;
+    for (let i = 0; i < items.length; i++) {
+      queryString += `id = ${items[i]}`;
+      queryString += i === items.length - 1 ? `;` : ` OR `;
+    }
+    console.log(queryString);
+    db.query(queryString, [])
+      .then((data) => {
+        res.status(200);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   //sends the order object
   router.get('/:id', (req, res) => {
     console.log('order id route');
@@ -56,7 +77,7 @@ module.exports = (db) => {
     const order = req.params.id;
     db.query(
       `
-      SELECT * FROM order_items
+      SELECT *, order_items.id AS order_item_id FROM order_items
       JOIN orders ON order_id = orders.id
       WHERE orders.id = $1;`,
       [order]

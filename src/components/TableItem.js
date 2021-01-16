@@ -13,7 +13,7 @@ export default function TableItem(props) {
         Axios.get(`/api/orders/${res.data.id}/items`).then((res) => {
           newItems.push(res.data);
           props.setTable({
-            id: props.id,
+            tableId: props.id,
             employee: props.employee,
             seats: props.seats,
             items: newItems,
