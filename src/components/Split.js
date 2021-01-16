@@ -53,10 +53,13 @@ export default function Split(props) {
     content: item.name,
     price: item.price,
   }));
-  const [state, setState] = useState([itemsWithId]);
 
+  // const setCurrentBillState = () => {
+  //   newBill = state.map
+  // }
+  const [state, setState] = useState([itemsWithId]);
   useEffect(() => {
-    console.log(state);
+    // console.log(state);
   }, [state]);
   function onDragEnd(result) {
     const { source, destination } = result;
@@ -82,7 +85,6 @@ export default function Split(props) {
       setState(newState.filter((group) => group.length));
     }
   }
-
   const getColumnTotal = (column) => {
     let total = 0;
     for (const each of column) {
@@ -100,6 +102,7 @@ export default function Split(props) {
     let subTotal = parseFloat(total) + parseFloat(getTax(total));
     return subTotal.toFixed(2);
   };
+
   return (
     <div className="split-div">
       <button
@@ -182,7 +185,15 @@ export default function Split(props) {
                       const newState = [...state];
                       newState.splice(ind, 1);
                       setState(newState);
-                      // setState([...state, []]);
+                      const newBill = state.flat().map((item, index) => ({
+                        id: index,
+                        name: item.content,
+                        price: item.price,
+                      }));
+                      props.setBill({
+                        ...props.bill,
+                        items: newBill,
+                      });
                     }}
                   >
                     Print Bill
