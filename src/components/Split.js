@@ -2,13 +2,6 @@ import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './Split.scss';
 
-//
-const getItems = (count, offset = 0) =>
-  Array.from({ length: count }, (v, k) => k).map((k) => ({
-    id: `item-${k + offset}-${new Date().getTime()}`,
-    content: `item ${k + offset}`,
-  }));
-
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -53,8 +46,22 @@ const getListStyle = (isDraggingOver) => ({
   width: 250,
 });
 
-export default function Split() {
-  const [state, setState] = useState([getItems(10), getItems(5, 10)]);
+export default function Split(props) {
+  // const items = [
+  //   { id: '1', content: 'item 0' },
+  //   { id: '2', content: 'item 1' },
+  //   { id: '3', content: 'item 2' },
+  //   { id: '4', content: 'item 3' },
+  // ];
+
+  const items = props.bill.items;
+  const itemsWithId = items.map((item, index) => ({
+    id: String(index),
+    content: item.name,
+    price: item.price,
+  }));
+  console.log(itemsWithId);
+  const [state, setState] = useState([itemsWithId]);
 
   function onDragEnd(result) {
     const { source, destination } = result;
@@ -125,6 +132,8 @@ export default function Split() {
                             }}
                           >
                             {item.content}
+                            <br />
+                            {`$ ${item.price}.00`}
                             <button
                               type="button"
                               onClick={() => {

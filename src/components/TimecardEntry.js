@@ -8,20 +8,20 @@ export default function TimecardEntry() {
   const punchIn = (code) => {
     const data = { pin: code, login: true };
     Axios.post("http://localhost:8080/api/timecards", data).then((res) => {
-      console.log(res.data);
       window.alert(res.data);
     });
   };
   const punchOut = (code) => {
     const data = { pin: code, login: false };
     Axios.post("http://localhost:8080/api/timecards", data).then((res) => {
-      console.log(res.data);
       window.alert(res.data);
     });
   };
 
   const addNumber = (num) => {
-    setCode(code + num);
+    if (code.length <= 3) {
+      setCode(code + num);
+    }
   };
 
   return (
@@ -113,10 +113,10 @@ export default function TimecardEntry() {
           Clear
         </button>
         <br />
-        <button class="submit" onClick={() => punchIn(code)}>
+        <button className="submit" onClick={() => punchIn(code)}>
           LOG IN
         </button>
-        <button class="submit" onClick={() => punchOut(code)}>
+        <button className="submit" onClick={() => punchOut(code)}>
           LOG OUT
         </button>
       </div>
