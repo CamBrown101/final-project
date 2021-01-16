@@ -76,13 +76,9 @@ export default function BillContainer({
     let newTax = 0;
 
     itemsToRender.forEach((item) => {
-      console.log(item);
       newSubtotal += item.price;
       newTax = newSubtotal * 0.13;
       newTotal = newSubtotal + newTax;
-      console.log(newSubtotal);
-      console.log(newTax);
-      console.log(newTotal);
     });
     setBill({
       items: [...bill.items],
