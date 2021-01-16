@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import Manager from './components/manager/Manager';
 import Nav from './components/Nav';
+import Split from './components/Split';
 import Employees from './components/manager/Employees.js';
 import CreateItem from './components/manager/CreateItem.js';
 import CreateCategory from './components/manager/CreateCategory.js';
@@ -17,6 +18,7 @@ function App() {
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/menu" component={Home} />
+        <Route path="/split" component={Split} />
         <Route path="/manager" exact component={Manager} />
         <Route path="/manager/employees" exact component={Employees} />
         <Route path="/manager/create-menu-item" exact component={CreateItem} />
