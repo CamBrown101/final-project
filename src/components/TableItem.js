@@ -19,6 +19,29 @@ export default function TableItem(props) {
             items: newItems,
             orderId: orderId,
           });
+          console.log(newItems);
+          // const newBill = newItems.map((item, index) => ({
+          //   id: index,
+          //   name: item.content,
+          //   price: item.price,
+          // }));
+          // const total = (arr) => {
+          //   let total = 0;
+          //   for (const each of arr) {
+          //     total = total + each.price;
+          //   }
+          //   return total;
+          // };
+
+          // const newTotal = total(newBill);
+          // const newTax = newTotal * (12 / 100);
+          // props.setBill({
+          //   ...props.bill,
+          //   items: newBill,
+          //   tax: newTax,
+          //   subtotal: newTotal,
+          //   total: newTotal + newTax,
+          // });
         });
       } else {
         // CREATE ORDER
@@ -51,7 +74,8 @@ export default function TableItem(props) {
       onClick={() => {
         clearBill();
         getOrders();
-      }}>
+      }}
+    >
       <h3>Employee: {props.employee}</h3>
       <h3>Seats: {props.seats}</h3>
       <br />

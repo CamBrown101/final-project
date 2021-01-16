@@ -58,30 +58,32 @@ export default function Split(props) {
   //   newBill = state.map
   // }
   const [state, setState] = useState([itemsWithId]);
-  // useEffect(() => {
-  //   const newBill = state.flat().map((item, index) => ({
-  //     id: index,
-  //     name: item.content,
-  //     price: item.price,
-  //   }));
-  //   const total = (arr) => {
-  //     let total = 0;
-  //     for (const each of arr) {
-  //       total = total + each.price;
-  //     }
-  //     return total;
-  //   };
+  const { setBill } = props;
+  useEffect(() => {
+    const newBill = state.flat().map((item, index) => ({
+      id: index,
+      name: item.content,
+      price: item.price,
+    }));
+    const total = (arr) => {
+      let total = 0;
+      for (const each of arr) {
+        total = total + each.price;
+      }
+      return total;
+    };
 
-  //   const newTotal = total(newBill);
-  //   const newTax = newTotal * (12 / 100);
-  //   props.setBill({
-  //     ...props.bill,
-  //     items: newBill,
-  //     tax: newTax,
-  //     subtotal: newTotal,
-  //     total: newTotal + newTax,
-  //   });
-  // }, [state]);
+    const newTotal = total(newBill);
+    const newTax = newTotal * (12 / 100);
+
+    setBill({
+      items: newBill,
+      tax: newTax,
+      subtotal: newTotal,
+      total: newTotal + newTax,
+    });
+  }, [state, setBill]);
+
   function onDragEnd(result) {
     const { source, destination } = result;
 
