@@ -54,13 +54,13 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/:id/latest-order", (req, res) => {
+  router.get("/:id/current-order", (req, res) => {
     console.log("table id items route");
     const table = req.params.id;
     db.query(
       `
       SELECT * FROM orders
-      WHERE table_id = $1;`,
+      WHERE table_id = $1 AND payment_type IS NULL;`,
       [table]
     )
       .then((data) => {
