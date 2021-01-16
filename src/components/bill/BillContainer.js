@@ -29,6 +29,7 @@ export default function BillContainer({
     });
     setTable([]);
   };
+  const paybill = () => {};
 
   let itemsOnBill = { ...tableInfo.items };
   itemsOnBill = itemsOnBill[0];
@@ -68,6 +69,9 @@ export default function BillContainer({
           </div>
           <button className="cancel-button" onClick={() => clearBill()}>
             Cancel
+          </button>
+          <button className="pay-button" onClick={() => clearBill()}>
+            Pay
           </button>
         </div>
       </div>
