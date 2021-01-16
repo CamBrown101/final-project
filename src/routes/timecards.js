@@ -17,6 +17,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     console.log("post to timecard");
     const pin = req.body.pin;
+    const login = req.body.login;
     db.query(
       `
         SELECT * FROM employees
@@ -29,8 +30,8 @@ module.exports = (db) => {
           db.query(
             `
             INSERT INTO shifts (employee_id, punch_time, is_in)
-            VALUES ($1, CLOCK_TIMESTAMP(), true);`,
-            [pin]
+            VALUES ($1, CLOCK_TIMESTAMP(), $2);`,
+            [pin, login]
           )
             .then((data) => {
               console.log("should work");
