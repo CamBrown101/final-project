@@ -57,9 +57,11 @@ module.exports = (db) => {
 
   router.post('/:id/items', (req, res) => {
     console.log('order id items postroute');
+    console.log('req');
     const queryString = `
     `;
-    const queryParams = req.params;
+    console.log(req.body);
+    const queryParams = req.body;
 
     db.query(queryString, queryParams)
       .then((data) => {
