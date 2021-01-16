@@ -15,7 +15,6 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    console.log(req);
     console.log("order route");
     db.query(
       `
@@ -51,6 +50,30 @@ JOIN menu_items on order_items.item = menu_items.id
       });
   });
 
+  router.post("/pay", (req, res) => {
+    const items = req.body;
+    console.log("\n\n\n\n\n");
+    console.log(req.body);
+    let queryString = `
+              UPDATE order_items
+              SET is_payed = true
+              WHERE `;
+    for (let i = 0; i < items.length; i++) {
+      queryString += `id = ${items[i]}`;
+      queryString += i === items.length - 1 ? ` RETURNING *;` : ` OR `;
+    }
+    console.log(queryString);
+    db.query(queryString, [])
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((err) => {
+        console.log("\n\n\n\n\n");
+        console.log(err);
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   //sends the order object
   router.get("/:id", (req, res) => {
     console.log("order id route");
@@ -75,7 +98,7 @@ JOIN menu_items on order_items.item = menu_items.id
     const order = req.params.id;
     db.query(
       `
-      SELECT * FROM order_items
+      SELECT *, order_items.id AS order_item_id FROM order_items
       JOIN orders ON order_id = orders.id
       WHERE orders.id = $1;`,
       [order]
@@ -101,7 +124,7 @@ JOIN menu_items on order_items.item = menu_items.id
       if (i !== items.length - 1) {
         queryString += ",";
       } else {
-        queryString += ";";
+        queryString += "RETURNING * ;";
       }
     }
     console.log(queryString);
@@ -114,5 +137,24 @@ JOIN menu_items on order_items.item = menu_items.id
         res.status(500).json({ error: err.message });
       });
   });
+
+  router.post("/:id/pay", (req, res) => {
+    const payType = req.body.paymentType;
+    const order = req.params.id;
+    db.query(
+      `
+              UPDATE orders
+              SET payment_type = $1
+              WHERE id = $2`,
+      [payType, order]
+    )
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   return router;
 };
