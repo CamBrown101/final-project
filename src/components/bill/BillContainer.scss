@@ -18,6 +18,26 @@
   .bill-footer {
     margin-top: 10%;
   }
+  .buttons {
+    display: flex;
+    padding-top: 5%;
+  }
+  .send-button {
+    background-color: green;
+    height: 30px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cancel-button {
+    background-color: red;
+    height: 30px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   p {
     margin: 0;
     margin-bottom: 2%;
