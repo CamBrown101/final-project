@@ -22,10 +22,13 @@ export default function BillContainer({ bill, tableInfo, menu }) {
 
   // INSERT INTO order_items(order_id, seat_id, item)
   // INSERT INTO orders(employee_id, table_id)
-
-  const data = {};
+  console.log(bill);
+  const data = [];
+  itemsToRender.forEach((element) => {
+    data.push(element);
+  });
   const sendBill = () => {
-    Axios.post('', data);
+    Axios.post(`orders/${tableInfo.id}/items`, data);
   };
   console.log(itemsToRender);
   const billItems = itemsToRender.map((item, index) => (
@@ -42,7 +45,11 @@ export default function BillContainer({ bill, tableInfo, menu }) {
           <p>Total: ${bill.total.toFixed(2)}</p>
         </div>
         <div className="buttons">
-          <div className="send-button">
+          <div
+            className="send-button"
+            onClick={() => {
+              sendBill();
+            }}>
             <p>Send</p>
           </div>
           <div className="cancel-button">
