@@ -118,5 +118,24 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  router.post("/:id/pay", (req, res) => {
+    const payType = req.body.paymentType;
+    const order = req.params.id;
+    db.query(
+      `
+              UPDATE orders
+              SET payment_type = $1
+              WHERE id = $2`,
+      [payType, order]
+    )
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   return router;
 };
