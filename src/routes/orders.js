@@ -32,6 +32,25 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/production", (req, res) => {
+    db.query(
+      `
+      SELECT * FROM orders
+      JOIN order_items ON order_items.order_id = orders.id
+JOIN menu_items on order_items.item = menu_items.id
+      WHERE orders.payment_type IS NULL;
+              `,
+      [req.body.id, req.body.tableId]
+    )
+      .then((data) => {
+        const order = data.rows;
+        res.send(order);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   //sends the order object
   router.get("/:id", (req, res) => {
     console.log("order id route");
