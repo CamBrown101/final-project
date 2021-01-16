@@ -35,6 +35,14 @@ export default function Nav(props) {
           >
             Split
           </NavLink>
+          <NavLink
+            className="nav-menu-item"
+            id="nav-menu-split"
+            exact
+            to="/timecard"
+          >
+            Clock In
+          </NavLink>
         </nav>
       ) : null}
     </nav>
