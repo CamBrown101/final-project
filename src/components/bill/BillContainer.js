@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ReactDOMServer from "react-dom/server";
 import Axios from "axios";
 import "./BillContainer.scss";
 import BillHeader from "./BillHeader";
@@ -12,6 +11,12 @@ import {
   payBill,
   getBillData,
 } from "./BillHelpers";
+import PayButton from "./PayButton";
+import SendButton from "./SendButton";
+import CancelButton from "./CancelButton";
+import EditButton from "./EditButton";
+import PrintBillButton from "./PrintBillButton";
+import BillTotals from "./BillTotals";
 
 export default function BillContainer({
   bill,
@@ -142,133 +147,34 @@ export default function BillContainer({
   //   Axios.post(`/api/orders/${tableInfo.orderId}/email`, data);
   // };
 
-  const [inputToggle, setInputToggle] = useState("hide");
   const [mod, setMod] = useState("");
-  const [printToggle, setPrintToggle] = useState("hide");
   const [email, setEmail] = useState("");
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
       <ul className="bill-items">{billItems}</ul>
       <div className="bill-footer">
-        <div className="bill-totals">
-          <p>Subtotal: ${bill.subtotal.toFixed(2)}</p>
-          <p>Tax: ${bill.tax.toFixed(2)}</p>
-          <p>Total: ${bill.total.toFixed(2)}</p>
-        </div>
+        <BillTotals bill={bill} />
         <div className="buttons">
-          <div
-            className="send-button button"
-            onClick={() => {
-              sendBill(tableInfo, data).then(() =>
-                clearBill(setBill, setTable)
-              );
-            }}
-          >
-            <p>Send</p>
-          </div>
-          <button
-            className="cancel-button button"
-            onClick={() => {
-              clearBill(setBill, setTable);
-            }}
-          >
-            Cancel
-          </button>
-
-          <button
-            className="pay-button button"
-            onClick={() => {
-              if (bill.items.length !== 0) {
-                sendBill(tableInfo, data).then(() => {
-                  payBill(tableInfo.orderId, unpaidItems, bill.items).then(() =>
-                    clearBill(setBill, setTable)
-                  );
-                });
-              } else {
-                payBill(tableInfo.orderId, unpaidItems, bill.items).then(() =>
-                  clearBill(setBill, setTable)
-                );
-              }
-            }}
-          >
-            Pay
-          </button>
-
-          <div className="edit-section">
-            <button
-              className="edit-button button"
-              onClick={() => {
-                inputToggle === "hide"
-                  ? setInputToggle("show")
-                  : setInputToggle("hide");
-              }}
-            >
-              Edit
-            </button>
-            <input
-              value={mod}
-              className={inputToggle + " edit-input"}
-              onChange={(event) => {
-                setMod(event.target.value);
-              }}
-            ></input>
-            <div className="confirm-cancel-buttons">
-              <button
-                className={inputToggle + " button send-button"}
-                onClick={() => {
-                  if (selected < bill.items.length)
-                    bill.items[bill.items.length - 1 - selected].mods = mod;
-                  setMod("");
-                }}
-              >
-                Confrim
-              </button>
-              <button
-                className={inputToggle + " button cancel-button"}
-                onClick={() => setMod("")}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-
-          <div className="print-section">
-            <button
-              className="print-button button"
-              onClick={() => {
-                inputToggle === "hide"
-                  ? setPrintToggle("show")
-                  : setPrintToggle("hide");
-              }}
-            >
-              Print
-            </button>
-            <input
-              value={email}
-              className={printToggle + " edit-input"}
-              onChange={(event) => {
-                setEmail(event.target.value);
-              }}
-            ></input>
-            <div className="confirm-cancel-buttons">
-              <button
-                className={printToggle + " button send-button"}
-                onClick={() => {
-                  printBill(email, itemsToRender, tableInfo);
-                  setEmail("");
-                }}
-              >
-                Confrim
-              </button>
-              <button
-                className={printToggle + " button cancel-button"}
-                onClick={() => setEmail("")}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
+          <SendButton sendBill={sendBill} clearBill={clearBill} />
+          <CancelButton clearBill={clearBill} />
+          <PayButton
+            payBill={payBill}
+            clearBill={clearBill}
+            sendBill={sendBill}
+            bill={bill}
+          />
+          <EditButton
+            mod={mod}
+            setMod={setMod}
+            bill={bill}
+            selected={selected}
+          />
+          <PrintBillButton
+            email={email}
+            setEmail={setEmail}
+            printBill={printBill}
+          />
         </div>
       </div>
     </article>
