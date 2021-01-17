@@ -12,7 +12,6 @@ export default function BillContainer({
   menu,
 }) {
   const [selected, setSelected] = useState(null);
-
   const data = { itemId: [], seatId: 1, orderId: tableInfo.orderId, mods: [] };
   bill.items.forEach((item) => {
     data.itemId.push(item.id);
@@ -61,6 +60,7 @@ export default function BillContainer({
     for (let item of unpaidItems) {
       menu.forEach((element) => {
         if (element.id === item.item) {
+          element.mods = item.mods;
           itemsToRender.push(element);
         }
       });
@@ -83,7 +83,7 @@ export default function BillContainer({
       tax: newTax,
     });
   }, [tableInfo]);
-
+  console.log(itemsToRender);
   const billItems = itemsToRender.map((item, index) => (
     <BillItem
       key={index}
@@ -92,6 +92,7 @@ export default function BillContainer({
       price={item.price}
       selected={selected}
       setSelected={setSelected}
+      mods={item.mods}
     />
   ));
   const [inputToggle, setInputToggle] = useState("hide");
@@ -127,7 +128,6 @@ export default function BillContainer({
           <button
             className="pay-button button"
             onClick={() => {
-              console.log(bill.items.length === 0);
               if (bill.items.length !== 0) {
                 sendBill().then(() => {
                   payBill().then(clearBill);
@@ -162,7 +162,8 @@ export default function BillContainer({
               <button
                 className={inputToggle + " button send-button"}
                 onClick={() => {
-                  bill.items[unpaidItems.length - 1 + selected].mods = mod;
+                  if (selected < bill.items.length)
+                    bill.items[selected].mods = mod;
                   setMod("");
                 }}
               >

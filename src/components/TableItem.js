@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../UserContext';
-import './TableItem.scss';
-import Axios from 'axios';
+import React, { useContext } from "react";
+import { UserContext } from "../UserContext";
+import "./TableItem.scss";
+import Axios from "axios";
 
 export default function TableItem(props) {
   const { user } = useContext(UserContext);
@@ -19,7 +19,6 @@ export default function TableItem(props) {
             items: newItems,
             orderId: orderId,
           });
-          console.log(newItems);
         });
       } else {
         // CREATE ORDER
@@ -46,7 +45,8 @@ export default function TableItem(props) {
       onClick={() => {
         clearBill();
         getOrders();
-      }}>
+      }}
+    >
       <h3>Employee: {props.employee}</h3>
       <h3>Seats: {props.seats}</h3>
       <br />
