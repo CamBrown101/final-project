@@ -57,13 +57,7 @@ function App() {
             user.auth ? <Manager /> : <Redirect to="/login" />
           }
         />
-        <Route
-          path="/timecard"
-          exact
-          render={(props) =>
-            user.auth ? <TimecardEntry /> : <Redirect to="/login" />
-          }
-        />
+        <Route path="/timecard" component={TimecardEntry} />
         <Route
           path="/manager/employees"
           exact
