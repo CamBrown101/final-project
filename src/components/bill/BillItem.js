@@ -8,8 +8,11 @@ export default function BillItem({ name, price, id, setSelected, selected }) {
   }, [selected]);
   return (
     <li className={billClass} onClick={(id) => setSelected(id)}>
-      <p className="item-name">{name}</p>
-      <p className="item-price">${price.toFixed(2)}</p>
+      <div className="item">
+        <p className="item-name">{name}</p>
+        <p className="item-price">${price.toFixed(2)}</p>
+      </div>
+      {mod ? <p className="mod">MOD</p> : <></>}
     </li>
   );
 }

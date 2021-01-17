@@ -1,11 +1,12 @@
-import "./Login.scss";
-import React, { useContext, useState } from "react";
-import { UserContext } from "../UserContext";
-import { Redirect } from "react-router-dom";
+import './Login.scss';
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../UserContext';
+import { Redirect } from 'react-router-dom';
 
 export default function Login() {
   const { user, login } = useContext(UserContext);
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState('');
 
   if (user.auth) {
     return <Redirect to="/menu" />;
@@ -24,68 +25,59 @@ export default function Login() {
       <div className="button-container">
         <button
           onClick={() => {
-            addNumber("1");
-          }}
-        >
+            addNumber('1');
+          }}>
           1
         </button>
         <button
           onClick={() => {
-            addNumber("2");
-          }}
-        >
+            addNumber('2');
+          }}>
           2
         </button>
         <button
           onClick={() => {
-            addNumber("3");
-          }}
-        >
+            addNumber('3');
+          }}>
           3
         </button>
         <br />
         <button
           onClick={() => {
-            addNumber("4");
-          }}
-        >
+            addNumber('4');
+          }}>
           4
         </button>
         <button
           onClick={() => {
-            addNumber("5");
-          }}
-        >
+            addNumber('5');
+          }}>
           5
         </button>
         <button
           onClick={() => {
-            addNumber("6");
-          }}
-        >
+            addNumber('6');
+          }}>
           6
         </button>
         <br />
 
         <button
           onClick={() => {
-            addNumber("7");
-          }}
-        >
+            addNumber('7');
+          }}>
           7
         </button>
         <button
           onClick={() => {
-            addNumber("8");
-          }}
-        >
+            addNumber('8');
+          }}>
           8
         </button>
         <button
           onClick={() => {
-            addNumber("9");
-          }}
-        >
+            addNumber('9');
+          }}>
           9
         </button>
         <br />
@@ -93,19 +85,20 @@ export default function Login() {
         <button onClick={() => login(code)}>Submit</button>
         <button
           onClick={() => {
-            addNumber("0");
-          }}
-        >
+            addNumber('0');
+          }}>
           0
         </button>
         <button
           onClick={() => {
-            setCode("");
-          }}
-        >
+            setCode('');
+          }}>
           Clear
         </button>
       </div>
+      <Link to={'/timecard'}>
+        <button>Clock In</button>
+      </Link>
     </div>
   );
 }
