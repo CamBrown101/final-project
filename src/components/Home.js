@@ -29,21 +29,31 @@ export default function Home(props) {
   return (
     <div>
       <div className="home-main">
-        <h1>Hello, {user.name}!</h1>
-        <button onClick={logout}>Logout</button>
-        <BillContainer
-          bill={props.bill}
-          tableInfo={table}
-          menu={menu}
-          setBill={props.setBill}
-          setTable={setTable}
-        />
-        <MenuContainer menu={menu} setBill={props.setBill} bill={props.bill} />
-        <TableContainer
-          tables={tables}
-          setTable={setTable}
-          setBill={props.setBill}
-        />
+        <div className="logged-in">
+          <h1>Hello, {user.name}!</h1>
+          <button className="logout-button" onClick={logout}>
+            Logout
+          </button>
+        </div>
+        <div className="container">
+          <BillContainer
+            bill={props.bill}
+            tableInfo={table}
+            menu={menu}
+            setBill={props.setBill}
+            setTable={setTable}
+          />
+          <MenuContainer
+            menu={menu}
+            setBill={props.setBill}
+            bill={props.bill}
+          />
+          <TableContainer
+            tables={tables}
+            setTable={setTable}
+            setBill={props.setBill}
+          />
+        </div>
       </div>
     </div>
   );
