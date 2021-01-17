@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import MenuContainer from './menu/MenuContainer';
 import BillContainer from './bill/BillContainer';
 import TableContainer from './TableContainer';
+import SeatContainer from './seats/SeatContainer';
 import Axios from 'axios';
 
 import './Home.scss';
@@ -26,7 +27,7 @@ export default function Home(props) {
   if (!user.auth) {
     return <Redirect to="/login" />;
   }
-
+  console.log(seat);
   return (
     <div>
       <div className="home-main">
@@ -49,12 +50,15 @@ export default function Home(props) {
             setBill={props.setBill}
             bill={props.bill}
           />
-          <TableContainer
-            tables={tables}
-            setTable={setTable}
-            setBill={props.setBill}
-            table={table}
-          />
+          <div className="table-selectors">
+            <TableContainer
+              tables={tables}
+              setTable={setTable}
+              setBill={props.setBill}
+              table={table}
+            />
+            <SeatContainer setSeat={setSeat} table={table} seat={seat} />
+          </div>
         </div>
       </div>
     </div>

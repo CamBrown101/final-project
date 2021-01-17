@@ -15,6 +15,5 @@ export default function MenuContainer({ setBill, bill, menu }) {
       bill={bill}
     />
   ));
-
   return <div className="item-container">{menuItems}</div>;
 }
