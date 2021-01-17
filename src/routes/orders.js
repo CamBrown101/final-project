@@ -142,6 +142,7 @@ module.exports = (db) => {
     const email = req.body.email;
     const order = req.params.id;
     const mailText = req.body.bill;
+    console.log(email, order, mailText);
     db.query(
       `
               UPDATE orders
@@ -161,7 +162,7 @@ module.exports = (db) => {
         from: "buyfoodsellfood@gmail.com",
         to: email,
         subject: "Your order reciept",
-        text: mailText,
+        html: mailText,
       };
 
       transporter.sendMail(mailOptions, function (error, info) {
