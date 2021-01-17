@@ -65,7 +65,7 @@ export default function BillContainer({
         if (element.id === item.item) {
           const elementCopy = { ...element };
           elementCopy.mods = item.mods;
-          itemsToRender.push(elementCopy);
+          itemsToRender.push(element);
         }
       });
     }
@@ -101,6 +101,8 @@ export default function BillContainer({
   ));
   const [inputToggle, setInputToggle] = useState('hide');
   const [mod, setMod] = useState('');
+  const [printToggle, setPrintToggle] = useState('hide');
+  const [email, setEmail] = useState('');
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
@@ -170,6 +172,38 @@ export default function BillContainer({
               <button
                 className={inputToggle + ' button cancel-button'}
                 onClick={() => setMod('')}>
+                Cancel
+              </button>
+            </div>
+          </div>
+
+          <div className="print-section">
+            <button
+              className="print-button button"
+              onClick={() => {
+                inputToggle === 'hide'
+                  ? setPrintToggle('show')
+                  : setPrintToggle('hide');
+              }}>
+              Print
+            </button>
+            <input
+              value={email}
+              className={printToggle + ' edit-input'}
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}></input>
+            <div className="confirm-cancel-buttons">
+              <button
+                className={printToggle + ' button send-button'}
+                onClick={() => {
+                  setEmail('');
+                }}>
+                Confrim
+              </button>
+              <button
+                className={printToggle + ' button cancel-button'}
+                onClick={() => setEmail('')}>
                 Cancel
               </button>
             </div>
