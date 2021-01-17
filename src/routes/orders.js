@@ -97,15 +97,15 @@ module.exports = (db) => {
     const items = req.body.itemId;
     const seat = req.body.seatId;
     const order = req.body.orderId;
-
-    let queryString = `INSERT INTO order_items (order_id, seat_id, item)
+    const mods = req.body.mods;
+    let queryString = `INSERT INTO order_items (order_id, seat_id, item, mods)
     VALUES `;
     for (let i = 0; i < items.length; i++) {
-      queryString += ` (${order}, ${seat}, ${items[i]})`;
+      queryString += ` (${order}, ${seat}, ${items[i]}, '${mods[i]}')`;
       if (i !== items.length - 1) {
         queryString += ",";
       } else {
-        queryString += "RETURNING * ;";
+        queryString += " RETURNING *;";
       }
     }
     console.log(queryString);
@@ -115,6 +115,7 @@ module.exports = (db) => {
         res.send(items);
       })
       .catch((err) => {
+        console.log(err);
         res.status(500).json({ error: err.message });
       });
   });
