@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Axios from "axios";
-import "./BillContainer.scss";
-import BillHeader from "./BillHeader";
-import BillItem from "./BillItem";
+import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
+import './BillContainer.scss';
+import BillHeader from './BillHeader';
+import BillItem from './BillItem';
 import {
   sendBill,
   formatBillToPrint,
@@ -10,13 +10,13 @@ import {
   clearBill,
   payBill,
   getBillData,
-} from "./BillHelpers";
-import PayButton from "./PayButton";
-import SendButton from "./SendButton";
-import CancelButton from "./CancelButton";
-import EditButton from "./EditButton";
-import PrintBillButton from "./PrintBillButton";
-import BillTotals from "./BillTotals";
+} from './BillHelpers';
+import PayButton from './PayButton';
+import SendButton from './SendButton';
+import CancelButton from './CancelButton';
+import EditButton from './EditButton';
+import PrintBillButton from './PrintBillButton';
+import BillTotals from './BillTotals';
 
 export default function BillContainer({
   bill,
@@ -147,8 +147,8 @@ export default function BillContainer({
   //   Axios.post(`/api/orders/${tableInfo.orderId}/email`, data);
   // };
 
-  const [mod, setMod] = useState("");
-  const [email, setEmail] = useState("");
+  const [mod, setMod] = useState('');
+  const [email, setEmail] = useState('');
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
@@ -156,13 +156,27 @@ export default function BillContainer({
       <div className="bill-footer">
         <BillTotals bill={bill} />
         <div className="buttons">
-          <SendButton sendBill={sendBill} clearBill={clearBill} />
-          <CancelButton clearBill={clearBill} />
+          <SendButton
+            sendBill={sendBill}
+            clearBill={clearBill}
+            tableInfo={tableInfo}
+            data={data}
+          />
+          <CancelButton
+            setBill={setBill}
+            setTable={setTable}
+            clearBill={clearBill}
+          />
           <PayButton
             payBill={payBill}
             clearBill={clearBill}
             sendBill={sendBill}
             bill={bill}
+            tableInfo={tableInfo}
+            data={data}
+            unpaidItems={unpaidItems}
+            setBill={setBill}
+            setTable={setTable}
           />
           <EditButton
             mod={mod}
@@ -174,6 +188,9 @@ export default function BillContainer({
             email={email}
             setEmail={setEmail}
             printBill={printBill}
+            tableInfo={tableInfo}
+            itemsToRender={itemsToRender}
+            bill={bill}
           />
         </div>
       </div>

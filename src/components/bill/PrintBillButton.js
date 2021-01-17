@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 
-export default function PrintBillButton({ email, setEmail, printBill }) {
+export default function PrintBillButton({
+  email,
+  setEmail,
+  printBill,
+  itemsToRender,
+  tableInfo,
+  bill,
+}) {
   const [printToggle, setPrintToggle] = useState('hide');
 
   return (
@@ -24,7 +31,7 @@ export default function PrintBillButton({ email, setEmail, printBill }) {
         <div
           className={printToggle + ' button send-button'}
           onClick={() => {
-            printBill();
+            printBill(email, itemsToRender, tableInfo, bill);
             setEmail('');
             setPrintToggle('hide');
           }}>
