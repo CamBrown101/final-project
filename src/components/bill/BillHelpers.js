@@ -65,4 +65,5 @@ export const getBillData = (orderId, items) => {
     data.mods.push(item.mods ? item.mods : null);
     data.seatId.push(item.seat);
   });
+  return data;
 };

@@ -161,6 +161,8 @@ export default function BillContainer({
             clearBill={clearBill}
             tableInfo={tableInfo}
             data={data}
+            setBill={setBill}
+            setTable={setTable}
           />
           <CancelButton
             setBill={setBill}
