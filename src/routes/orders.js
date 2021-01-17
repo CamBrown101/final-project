@@ -98,10 +98,10 @@ module.exports = (db) => {
     const seat = req.body.seatId;
     const order = req.body.orderId;
     const mods = req.body.mods;
-    let queryString = `INSERT INTO order_items (order_id, seat_id, item, mods)
+    let queryString = `INSERT INTO order_items (order_id, seat_number, item, mods)
     VALUES `;
     for (let i = 0; i < items.length; i++) {
-      queryString += ` (${order}, ${seat}, ${items[i]}, '${mods[i]}')`;
+      queryString += ` (${order}, ${seat[i]}, ${items[i]}, '${mods[i]}')`;
       if (i !== items.length - 1) {
         queryString += ",";
       } else {
@@ -142,7 +142,6 @@ module.exports = (db) => {
     const email = req.body.email;
     const order = req.params.id;
     let mailText = req.body.bill;
-    mailText = mailText.replaceAll("li", "p");
     db.query(
       `
               UPDATE orders

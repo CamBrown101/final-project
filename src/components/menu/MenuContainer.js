@@ -1,8 +1,8 @@
-import React from 'react';
-import MenuItem from './MenuItem';
-import './MenuContainer.scss';
+import React from "react";
+import MenuItem from "./MenuItem";
+import "./MenuContainer.scss";
 
-export default function MenuContainer({ setBill, bill, menu }) {
+export default function MenuContainer({ setBill, bill, menu, seat }) {
   const menuItems = menu.map((item) => (
     <MenuItem
       key={item.id}
@@ -13,6 +13,7 @@ export default function MenuContainer({ setBill, bill, menu }) {
       category_id={item.category_id}
       setBill={setBill}
       bill={bill}
+      seat={seat}
     />
   ));
   return <div className="item-container">{menuItems}</div>;

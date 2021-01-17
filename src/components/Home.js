@@ -14,7 +14,7 @@ export default function Home(props) {
   const [menu, setMenu] = useState([]);
   const [tables, setTables] = useState([]);
   const [table, setTable] = useState({});
-  const [seat, setSeat] = useState({});
+  const [seat, setSeat] = useState(1);
   useEffect(() => {
     Axios.get('/api/menu').then((res) => {
       setMenu(res.data);
@@ -44,11 +44,13 @@ export default function Home(props) {
             menu={menu}
             setBill={props.setBill}
             setTable={setTable}
+            seat={seat}
           />
           <MenuContainer
             menu={menu}
             setBill={props.setBill}
             bill={props.bill}
+            seat={seat}
           />
           <div className="table-selectors">
             <TableContainer
