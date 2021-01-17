@@ -18,7 +18,6 @@ export default function BillContainer({
     data.itemId.push(item.id);
     data.mods.push(item.mods ? item.mods : null);
   });
-
   const sendBill = () => {
     return Axios.post(
       `api/orders/${tableInfo.id}/items`,
@@ -34,7 +33,7 @@ export default function BillContainer({
     });
     setTable([]);
   };
-  console.log(tableInfo);
+
   const payBill = () => {
     Axios.post(`/api/orders/${tableInfo.orderId}/pay`, {
       paymentType: 'credit',
@@ -57,8 +56,8 @@ export default function BillContainer({
       }
     });
   }
-
-  let itemsToRender = [...bill.items.reverse()];
+  console.log(bill);
+  let itemsToRender = [...bill.items];
   if (unpaidItems) {
     for (let item of unpaidItems) {
       menu.forEach((element) => {
@@ -73,10 +72,7 @@ export default function BillContainer({
     let newTotal = 0;
     let newSubtotal = 0;
     let newTax = 0;
-    console.log('hello');
     itemsToRender.forEach((item) => {
-      console.log('this');
-      console.log(item);
       newSubtotal += item.price;
       newTax = newSubtotal * 0.13;
       newTotal = newSubtotal + newTax;
@@ -101,7 +97,6 @@ export default function BillContainer({
   ));
   const [inputToggle, setInputToggle] = useState('hide');
   const [mod, setMod] = useState('');
-  console.log(mod);
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
