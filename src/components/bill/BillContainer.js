@@ -13,9 +13,10 @@ export default function BillContainer({
 }) {
   const [selected, setSelected] = useState(1);
 
-  const data = { itemId: [], seatId: 1, orderId: tableInfo.orderId };
+  const data = { itemId: [], seatId: 1, orderId: tableInfo.orderId, mods: [] };
   bill.items.forEach((item) => {
     data.itemId.push(item.id);
+    data.mods.push(item.mods ? item.mods : null);
   });
 
   const sendBill = () => {
