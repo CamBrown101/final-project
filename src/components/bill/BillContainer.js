@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import ReactDOMServer from "react-dom/server";
-import Axios from "axios";
-import "./BillContainer.scss";
-import BillHeader from "./BillHeader";
-import BillItem from "./BillItem";
+import React, { useEffect, useState } from 'react';
+import ReactDOMServer from 'react-dom/server';
+import Axios from 'axios';
+import './BillContainer.scss';
+import BillHeader from './BillHeader';
+import BillItem from './BillItem';
 
 export default function BillContainer({
   bill,
@@ -39,14 +39,14 @@ export default function BillContainer({
 
   const payBill = () => {
     Axios.post(`/api/orders/${tableInfo.orderId}/pay`, {
-      paymentType: "credit",
+      paymentType: 'credit',
     });
     const orderIds = [];
     unpaidItems = [...unpaidItems, ...bill.items];
     unpaidItems.forEach((element) => {
       orderIds.push(element.order_item_id);
     });
-    return Axios.post("api/orders/pay", orderIds);
+    return Axios.post('api/orders/pay', orderIds);
   };
 
   let unpaidItems = [];
@@ -93,7 +93,7 @@ export default function BillContainer({
     });
   }, [tableInfo]);
 
-  console.log("EIJO", itemsToRender);
+  console.log('EIJO', itemsToRender);
   const billItems = itemsToRender.map((item, index) => (
     <BillItem
       key={index}
@@ -108,7 +108,7 @@ export default function BillContainer({
   ));
 
   const formatBillToPrint = (billToPrint) => {
-    let formattedBill = "";
+    let formattedBill = '';
     billToPrint.forEach(
       (item) =>
         (formattedBill += `<div style="display:flex;"><h3>${item.name}</h3><h3>: ${item.price}</h3></div><br></br>`)
@@ -134,10 +134,10 @@ export default function BillContainer({
     Axios.post(`/api/orders/${tableInfo.orderId}/email`, data);
   };
 
-  const [inputToggle, setInputToggle] = useState("hide");
-  const [mod, setMod] = useState("");
-  const [printToggle, setPrintToggle] = useState("hide");
-  const [email, setEmail] = useState("");
+  const [inputToggle, setInputToggle] = useState('hide');
+  const [mod, setMod] = useState('');
+  const [printToggle, setPrintToggle] = useState('hide');
+  const [email, setEmail] = useState('');
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
@@ -153,16 +153,14 @@ export default function BillContainer({
             className="send-button button"
             onClick={() => {
               sendBill().then(clearBill);
-            }}
-          >
+            }}>
             <p>Send</p>
           </div>
           <button
             className="cancel-button button"
             onClick={() => {
               clearBill();
-            }}
-          >
+            }}>
             Cancel
           </button>
 
@@ -176,8 +174,7 @@ export default function BillContainer({
               } else {
                 payBill().then(clearBill);
               }
-            }}
-          >
+            }}>
             Pay
           </button>
 
@@ -185,35 +182,35 @@ export default function BillContainer({
             <button
               className="edit-button button"
               onClick={() => {
-                inputToggle === "hide"
-                  ? setInputToggle("show")
-                  : setInputToggle("hide");
-              }}
-            >
+                inputToggle === 'hide'
+                  ? setInputToggle('show')
+                  : setInputToggle('hide');
+              }}>
               Edit
             </button>
             <input
               value={mod}
-              className={inputToggle + " edit-input"}
+              className={inputToggle + ' edit-input'}
               onChange={(event) => {
                 setMod(event.target.value);
-              }}
-            ></input>
+              }}></input>
             <div className="confirm-cancel-buttons">
               <button
-                className={inputToggle + " button send-button"}
+                className={inputToggle + ' button send-button'}
                 onClick={() => {
                   if (selected < bill.items.length)
                     bill.items[bill.items.length - 1 - selected].mods = mod;
-                  setMod("");
-                }}
-              >
+                  setMod('');
+                  setInputToggle('hide');
+                }}>
                 Confrim
               </button>
               <button
-                className={inputToggle + " button cancel-button"}
-                onClick={() => setMod("")}
-              >
+                className={inputToggle + ' button cancel-button'}
+                onClick={() => {
+                  setMod('');
+                  setInputToggle('hide');
+                }}>
                 Cancel
               </button>
             </div>
@@ -223,34 +220,34 @@ export default function BillContainer({
             <button
               className="print-button button"
               onClick={() => {
-                inputToggle === "hide"
-                  ? setPrintToggle("show")
-                  : setPrintToggle("hide");
-              }}
-            >
+                printToggle === 'hide'
+                  ? setPrintToggle('show')
+                  : setPrintToggle('hide');
+              }}>
               Print
             </button>
             <input
               value={email}
-              className={printToggle + " edit-input"}
+              className={printToggle + ' edit-input'}
               onChange={(event) => {
                 setEmail(event.target.value);
-              }}
-            ></input>
+              }}></input>
             <div className="confirm-cancel-buttons">
               <button
-                className={printToggle + " button send-button"}
+                className={printToggle + ' button send-button'}
                 onClick={() => {
                   printBill();
-                  setEmail("");
-                }}
-              >
+                  setEmail('');
+                  setPrintToggle('hide');
+                }}>
                 Confrim
               </button>
               <button
-                className={printToggle + " button cancel-button"}
-                onClick={() => setEmail("")}
-              >
+                className={printToggle + ' button cancel-button'}
+                onClick={() => {
+                  setEmail('');
+                  setPrintToggle('hide');
+                }}>
                 Cancel
               </button>
             </div>
