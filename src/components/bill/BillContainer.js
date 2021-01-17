@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import Axios from 'axios';
 import './BillContainer.scss';
 import BillHeader from './BillHeader';
@@ -32,7 +33,7 @@ export default function BillContainer({
     });
     setTable([]);
   };
-  console.log(selected);
+
   const payBill = () => {
     Axios.post(`/api/orders/${tableInfo.orderId}/pay`, {
       paymentType: 'credit',
@@ -87,7 +88,6 @@ export default function BillContainer({
       tax: newTax,
     });
   }, [tableInfo]);
-  console.log(itemsToRender);
   const billItems = itemsToRender.map((item, index) => (
     <BillItem
       key={index}
@@ -99,6 +99,17 @@ export default function BillContainer({
       mods={item.mods}
     />
   ));
+
+  console.log(ReactDOMServer.renderToString(billItems));
+
+  const printBill = () => {
+    const data = {
+      email: email,
+      bill: ReactDOMServer.renderToString(billItems),
+    };
+    Axios.post(`/api/orders/${tableInfo.orderId}/email`, data);
+  };
+
   const [inputToggle, setInputToggle] = useState('hide');
   const [mod, setMod] = useState('');
   const [printToggle, setPrintToggle] = useState('hide');
