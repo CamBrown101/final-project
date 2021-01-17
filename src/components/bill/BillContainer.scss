@@ -36,6 +36,14 @@
     align-items: center;
     justify-content: center;
   }
+  .edit-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .confirm-cancel-buttons {
+    display: flex;
+  }
   .send-button {
     background-color: green;
   }

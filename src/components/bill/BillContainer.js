@@ -99,7 +99,6 @@ export default function BillContainer({
       setSelected={setSelected}
     />
   ));
-  useEffect(() => {}, [selected]);
   const [inputToggle, setInputToggle] = useState('hide');
   const [mod, setMod] = useState('');
   console.log(mod);
@@ -118,7 +117,6 @@ export default function BillContainer({
             className="send-button button"
             onClick={() => {
               sendBill().then(clearBill);
-              setMod('');
             }}>
             <p>Send</p>
           </div>
@@ -126,7 +124,6 @@ export default function BillContainer({
             className="cancel-button button"
             onClick={() => {
               clearBill();
-              setMod('');
             }}>
             Cancel
           </button>
@@ -162,6 +159,18 @@ export default function BillContainer({
               onChange={(event) => {
                 setMod(event.target.value);
               }}></input>
+            <div className="confirm-cancel-buttons">
+              <button
+                className={inputToggle + ' button send-button'}
+                onClick={() => setMod('')}>
+                Confrim
+              </button>
+              <button
+                className={inputToggle + ' button cancel-button'}
+                onClick={() => setMod('')}>
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       </div>
