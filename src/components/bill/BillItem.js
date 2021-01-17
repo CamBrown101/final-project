@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './BillItem.scss';
 export default function BillItem({
   name,
@@ -8,7 +8,7 @@ export default function BillItem({
   selected,
   mods,
 }) {
-  const mod = mods === 'null';
+  const modBoolean = mods === 'null';
   return (
     <li
       className={selected === id ? 'bill-item selected' : 'bill-item'}
@@ -17,7 +17,7 @@ export default function BillItem({
         <p className="item-name">{name}</p>
         <p className="item-price">${price.toFixed(2)}</p>
       </div>
-      {!mod ? <p className="mod">{mods}</p> : <></>}
+      {!modBoolean ? <p className="mod">{mods}</p> : <></>}
     </li>
   );
 }

@@ -32,7 +32,7 @@ export default function BillContainer({
     });
     setTable([]);
   };
-
+  console.log(selected);
   const payBill = () => {
     Axios.post(`/api/orders/${tableInfo.orderId}/pay`, {
       paymentType: 'credit',
@@ -55,6 +55,8 @@ export default function BillContainer({
       }
     });
   }
+
+  //Changes Item Id's into Item objects
   const billCopy = [...bill.items];
   let itemsToRender = [...billCopy.reverse()];
   if (unpaidItems) {
@@ -84,6 +86,7 @@ export default function BillContainer({
       tax: newTax,
     });
   }, [tableInfo]);
+  console.log(itemsToRender);
   const billItems = itemsToRender.map((item, index) => (
     <BillItem
       key={index}
@@ -158,7 +161,7 @@ export default function BillContainer({
                 className={inputToggle + ' button send-button'}
                 onClick={() => {
                   if (selected < bill.items.length)
-                    bill.items[selected].mods = mod;
+                    bill.items[bill.items.length - 1 - selected].mods = mod;
                   setMod('');
                 }}>
                 Confrim
