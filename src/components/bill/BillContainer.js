@@ -56,7 +56,6 @@ export default function BillContainer({
       }
     });
   }
-  console.log(bill);
   let itemsToRender = [...bill.items];
   if (unpaidItems) {
     for (let item of unpaidItems) {
