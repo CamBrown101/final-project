@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import axios from 'axios';
-import './CreateCategory.scss';
-import ManagerNav from './ManagerNav';
+import { useState } from "react";
+import axios from "axios";
+import "./CreateCategory.scss";
+import ManagerNav from "./ManagerNav";
 
 export default function CreateCategory(props) {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [isFood, setIsFood] = useState(false);
 
   const nameOnChange = (event) => {
@@ -22,13 +22,10 @@ export default function CreateCategory(props) {
       name: name,
       isFood: isFood,
     };
-    console.log(data);
     const URL = `/api/categories/`;
     const promise = axios
       .post(URL, data)
-      .then((response) => {
-        console.log(response.data);
-      })
+      .then((response) => {})
       .catch();
     return promise;
   };

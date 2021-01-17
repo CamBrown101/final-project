@@ -1,5 +1,5 @@
-import React from 'react';
-import './BillItem.scss';
+import React from "react";
+import "./BillItem.scss";
 export default function BillItem({
   name,
   price,
@@ -7,13 +7,16 @@ export default function BillItem({
   setSelected,
   selected,
   mods,
+  seat,
 }) {
-  const modBoolean = mods === 'null';
+  const modBoolean = mods === "null";
   return (
     <li
-      className={selected === id ? 'bill-item selected' : 'bill-item'}
-      onClick={() => setSelected(id)}>
+      className={selected === id ? "bill-item selected" : "bill-item"}
+      onClick={() => setSelected(id)}
+    >
       <div className="item">
+        <p>{seat}</p>
         <p className="item-name">{name}</p>
         <p className="item-price">${price.toFixed(2)}</p>
       </div>
