@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Axios from "axios";
-import "./BillContainer.scss";
-import BillHeader from "./BillHeader";
-import BillItem from "./BillItem";
+import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
+import './BillContainer.scss';
+import BillHeader from './BillHeader';
+import BillItem from './BillItem';
 
 export default function BillContainer({
   bill,
@@ -36,19 +36,15 @@ export default function BillContainer({
   console.log(tableInfo);
   const payBill = () => {
     Axios.post(`/api/orders/${tableInfo.orderId}/pay`, {
-      paymentType: "credit",
+      paymentType: 'credit',
     });
     const orderIds = [];
     unpaidItems = [...unpaidItems, ...bill.items];
     unpaidItems.forEach((element) => {
       orderIds.push(element.order_item_id);
     });
-    return Axios.post("api/orders/pay", orderIds);
+    return Axios.post('api/orders/pay', orderIds);
   };
-  // pay bill clear table of information - reset table
-  // mark order as payed or add an order type
-  // mark all items on order_items as payed
-  // clear the bill
 
   let unpaidItems = [];
   let itemsOnBill = { ...tableInfo.items };
@@ -76,9 +72,9 @@ export default function BillContainer({
     let newTotal = 0;
     let newSubtotal = 0;
     let newTax = 0;
-    console.log("hello");
+    console.log('hello');
     itemsToRender.forEach((item) => {
-      console.log("this");
+      console.log('this');
       console.log(item);
       newSubtotal += item.price;
       newTax = newSubtotal * 0.13;
@@ -103,6 +99,9 @@ export default function BillContainer({
     />
   ));
   useEffect(() => {}, [selected]);
+  const [inputToggle, setInputToggle] = useState('hide');
+  const [mod, setMod] = useState('');
+  console.log(mod);
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
@@ -115,18 +114,24 @@ export default function BillContainer({
         </div>
         <div className="buttons">
           <div
-            className="send-button"
+            className="send-button button"
             onClick={() => {
               sendBill().then(clearBill);
-            }}
-          >
+              setMod('');
+            }}>
             <p>Send</p>
           </div>
-          <button className="cancel-button" onClick={() => clearBill()}>
+          <button
+            className="cancel-button button"
+            onClick={() => {
+              clearBill();
+              setMod('');
+            }}>
             Cancel
           </button>
+
           <button
-            className="pay-button"
+            className="pay-button button"
             onClick={() => {
               console.log(bill.items.length === 0);
               if (bill.items.length !== 0) {
@@ -136,10 +141,27 @@ export default function BillContainer({
               } else {
                 payBill().then(clearBill);
               }
-            }}
-          >
+            }}>
             Pay
           </button>
+
+          <div className="edit-section">
+            <button
+              className="edit-button button"
+              onClick={() => {
+                inputToggle === 'hide'
+                  ? setInputToggle('show')
+                  : setInputToggle('hide');
+              }}>
+              Edit
+            </button>
+            <input
+              value={mod}
+              className={inputToggle + ' edit-input'}
+              onChange={(event) => {
+                setMod(event.target.value);
+              }}></input>
+          </div>
         </div>
       </div>
     </article>

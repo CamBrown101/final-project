@@ -29,21 +29,33 @@
     display: flex;
     padding-top: 5%;
   }
-  .send-button {
-    background-color: green;
+  .button {
     height: 30px;
     width: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
+  .send-button {
+    background-color: green;
+  }
+  .edit-button {
+    background-color: yellow;
+  }
+  .edit-input {
+    border: thin solid black;
+  }
   .cancel-button {
     background-color: red;
-    height: 30px;
-    width: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  }
+  .pay-button {
+    background-color: whitesmoke;
+  }
+  .show {
+    display: block;
+  }
+  .hide {
+    display: none;
   }
   p {
     margin: 0;
