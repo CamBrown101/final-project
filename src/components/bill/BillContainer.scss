@@ -9,9 +9,16 @@
 
   .bill-item {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
   }
-
+  .item {
+    display: flex;
+    justify-content: space-between;
+  }
+  .mod {
+    align-self: flex-start;
+  }
   .bill-totals {
     text-align: right;
   }
