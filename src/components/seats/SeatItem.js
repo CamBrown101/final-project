@@ -5,7 +5,7 @@ export default function SeatItem({ setSeat, seat, seatNumber }) {
   let selectedClass = seat === seatNumber + 1 ? 'selected' : '';
   return (
     <div
-      className={'seat-item' + selectedClass}
+      className={'seat-item ' + selectedClass}
       onClick={() => {
         setSeat(seatNumber + 1);
       }}>
