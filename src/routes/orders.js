@@ -138,5 +138,44 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/:id/email", (req, res) => {
+    const email = req.body.email;
+    const order = req.params.id;
+    db.query(
+      `
+              UPDATE orders
+              SET email = $1
+              WHERE id = $2`,
+      [email, order]
+    ).then((data) => {
+      const nodemailer = require("nodemailer");
+
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "buyfoodsellfood@gmail.com",
+          pass: "BuyFoodSellFood2!",
+        },
+      });
+
+      const mailOptions = {
+        from: "buyfoodsellfood@gmail.com",
+        to: email,
+        subject: "Your order reciept",
+        text: "That was easy!",
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          res.status(500).send(error);
+        } else {
+          console.log("Email sent: " + info.response);
+          res.send("email sent!");
+        }
+      });
+    });
+  });
+
   return router;
 };
