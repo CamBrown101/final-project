@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const nodemailer = require("nodemailer");
 module.exports = (db) => {
   router.get("/", (req, res) => {
     console.log("order route");
@@ -141,6 +141,7 @@ module.exports = (db) => {
   router.post("/:id/email", (req, res) => {
     const email = req.body.email;
     const order = req.params.id;
+    const mailText = req.body.bill;
     db.query(
       `
               UPDATE orders
@@ -148,8 +149,6 @@ module.exports = (db) => {
               WHERE id = $2`,
       [email, order]
     ).then((data) => {
-      const nodemailer = require("nodemailer");
-
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -162,11 +161,12 @@ module.exports = (db) => {
         from: "buyfoodsellfood@gmail.com",
         to: email,
         subject: "Your order reciept",
-        text: "That was easy!",
+        text: mailText,
       };
 
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
+          console.log("fuck");
           console.log(error);
           res.status(500).send(error);
         } else {
