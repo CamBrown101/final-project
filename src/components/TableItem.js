@@ -34,14 +34,15 @@ export default function TableItem(props) {
       }
     });
   };
-
+  let className =
+    props.table.tableId === props.id ? "table-item selected" : "table-item";
   const clearBill = () => {
     props.setTable([]);
   };
 
   return (
     <div
-      className="table-item"
+      className={className}
       onClick={() => {
         clearBill();
         getOrders();
