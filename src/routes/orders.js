@@ -141,8 +141,8 @@ module.exports = (db) => {
   router.post("/:id/email", (req, res) => {
     const email = req.body.email;
     const order = req.params.id;
-    const mailText = req.body.bill;
-    console.log(email, order, mailText);
+    let mailText = req.body.bill;
+    mailText = mailText.replaceAll("li", "p");
     db.query(
       `
               UPDATE orders
@@ -167,7 +167,6 @@ module.exports = (db) => {
 
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
-          console.log("fuck");
           console.log(error);
           res.status(500).send(error);
         } else {

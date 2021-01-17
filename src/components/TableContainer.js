@@ -1,19 +1,20 @@
-import React from 'react';
-import TableItem from './TableItem';
-import './TableContainer.scss';
+import React from "react";
+import TableItem from "./TableItem";
+import "./TableContainer.scss";
 
-export default function TableContainer({ setTable, setBill, tables }) {
-  const menuItems = tables.map((table) => (
+export default function TableContainer({ setTable, setBill, tables, table }) {
+  const tableItems = tables.map((tableInfo) => (
     <TableItem
-      key={table.id}
-      id={table.id}
-      employee={table.firstname}
-      seats={table.number_of_seats}
-      status={table.status}
+      key={tableInfo.id}
+      id={tableInfo.id}
+      employee={tableInfo.firstname}
+      seats={tableInfo.number_of_seats}
+      status={tableInfo.status}
       setTable={setTable}
       setBill={setBill}
+      table={table}
     />
   ));
 
-  return <div className="table-container">{menuItems}</div>;
+  return <div className="table-container">{tableItems}</div>;
 }
