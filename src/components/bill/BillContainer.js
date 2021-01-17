@@ -4,6 +4,14 @@ import Axios from "axios";
 import "./BillContainer.scss";
 import BillHeader from "./BillHeader";
 import BillItem from "./BillItem";
+import {
+  sendBill,
+  formatBillToPrint,
+  printBill,
+  clearBill,
+  payBill,
+  getBillData,
+} from "./BillHelpers";
 
 export default function BillContainer({
   bill,
@@ -14,40 +22,41 @@ export default function BillContainer({
   seat,
 }) {
   const [selected, setSelected] = useState(null);
-  console.log(tableInfo);
-  const data = { itemId: [], seatId: [], orderId: tableInfo.orderId, mods: [] };
-  bill.items.forEach((item) => {
-    data.itemId.push(item.id);
-    data.mods.push(item.mods ? item.mods : null);
-    data.seatId.push(item.seat);
-  });
-  const sendBill = () => {
-    return Axios.post(
-      `api/orders/${tableInfo.orderId}/items`,
-      data
-    ).then((res) => {});
-  };
-  const clearBill = () => {
-    setBill({
-      items: [],
-      tax: 0,
-      subtotal: 0,
-      total: 0,
-    });
-    setTable([]);
-  };
+  // const getBillData = () => {
+  //   const data = {
+  //     itemId: [],
+  //     seatId: [],
+  //     orderId: tableInfo.orderId,
+  //     mods: [],
+  //   };
+  //   bill.items.forEach((item) => {
+  //     data.itemId.push(item.id);
+  //     data.mods.push(item.mods ? item.mods : null);
+  //     data.seatId.push(item.seat);
+  //   });
+  // };
+  const data = getBillData(tableInfo.orderId, bill.items);
+  // const clearBill = () => {
+  //   setBill({
+  //     items: [],
+  //     tax: 0,
+  //     subtotal: 0,
+  //     total: 0,
+  //   });
+  //   setTable([]);
+  // };
 
-  const payBill = () => {
-    Axios.post(`/api/orders/${tableInfo.orderId}/pay`, {
-      paymentType: "credit",
-    });
-    const orderIds = [];
-    unpaidItems = [...unpaidItems, ...bill.items];
-    unpaidItems.forEach((element) => {
-      orderIds.push(element.order_item_id);
-    });
-    return Axios.post("api/orders/pay", orderIds);
-  };
+  // const payBill = () => {
+  //   Axios.post(`/api/orders/${tableInfo.orderId}/pay`, {
+  //     paymentType: "credit",
+  //   });
+  //   const orderIds = [];
+  //   unpaidItems = [...unpaidItems, ...bill.items];
+  //   unpaidItems.forEach((element) => {
+  //     orderIds.push(element.order_item_id);
+  //   });
+  //   return Axios.post("api/orders/pay", orderIds);
+  // };
 
   let unpaidItems = [];
   let itemsOnBill = { ...tableInfo.items };
@@ -93,7 +102,6 @@ export default function BillContainer({
     });
   }, [tableInfo]);
 
-  console.log("EIJO", itemsToRender);
   const billItems = itemsToRender.map((item, index) => (
     <BillItem
       key={index}
@@ -107,32 +115,32 @@ export default function BillContainer({
     />
   ));
 
-  const formatBillToPrint = (billToPrint) => {
-    let formattedBill = "";
-    billToPrint.forEach(
-      (item) =>
-        (formattedBill += `<div style="display:flex;"><h3>${item.name}</h3><h3>: ${item.price}</h3></div><br></br>`)
-    );
-    formattedBill += `<div style="display:flex;"> <p>Subtotal: ${bill.subtotal.toFixed(
-      2
-    )}</p></div><br></br>`;
-    formattedBill += `<div style="display:flex;"> <p>Tax: ${bill.tax.toFixed(
-      2
-    )}</p></div><br></br>`;
-    formattedBill += `<div style="display:flex;"> <p>Total: ${bill.total.toFixed(
-      2
-    )}</p></div><br></br>`;
+  // const formatBillToPrint = (billToPrint) => {
+  //   let formattedBill = "";
+  //   billToPrint.forEach(
+  //     (item) =>
+  //       (formattedBill += `<div style="display:flex;"><h3>${item.name}</h3><h3>: ${item.price}</h3></div><br></br>`)
+  //   );
+  //   formattedBill += `<div style="display:flex;"> <p>Subtotal: ${bill.subtotal.toFixed(
+  //     2
+  //   )}</p></div><br></br>`;
+  //   formattedBill += `<div style="display:flex;"> <p>Tax: ${bill.tax.toFixed(
+  //     2
+  //   )}</p></div><br></br>`;
+  //   formattedBill += `<div style="display:flex;"> <p>Total: ${bill.total.toFixed(
+  //     2
+  //   )}</p></div><br></br>`;
 
-    return formattedBill;
-  };
+  //   return formattedBill;
+  // };
 
-  const printBill = () => {
-    const data = {
-      email: email,
-      bill: formatBillToPrint(itemsToRender),
-    };
-    Axios.post(`/api/orders/${tableInfo.orderId}/email`, data);
-  };
+  // const printBill = () => {
+  //   const data = {
+  //     email: email,
+  //     bill: formatBillToPrint(itemsToRender),
+  //   };
+  //   Axios.post(`/api/orders/${tableInfo.orderId}/email`, data);
+  // };
 
   const [inputToggle, setInputToggle] = useState("hide");
   const [mod, setMod] = useState("");
@@ -152,7 +160,9 @@ export default function BillContainer({
           <div
             className="send-button button"
             onClick={() => {
-              sendBill().then(clearBill);
+              sendBill(tableInfo, data).then(() =>
+                clearBill(setBill, setTable)
+              );
             }}
           >
             <p>Send</p>
@@ -160,7 +170,7 @@ export default function BillContainer({
           <button
             className="cancel-button button"
             onClick={() => {
-              clearBill();
+              clearBill(setBill, setTable);
             }}
           >
             Cancel
@@ -170,11 +180,15 @@ export default function BillContainer({
             className="pay-button button"
             onClick={() => {
               if (bill.items.length !== 0) {
-                sendBill().then(() => {
-                  payBill().then(clearBill);
+                sendBill(tableInfo, data).then(() => {
+                  payBill(tableInfo.orderId, unpaidItems, bill.items).then(() =>
+                    clearBill(setBill, setTable)
+                  );
                 });
               } else {
-                payBill().then(clearBill);
+                payBill(tableInfo.orderId, unpaidItems, bill.items).then(() =>
+                  clearBill(setBill, setTable)
+                );
               }
             }}
           >
@@ -241,7 +255,7 @@ export default function BillContainer({
               <button
                 className={printToggle + " button send-button"}
                 onClick={() => {
-                  printBill();
+                  printBill(email, itemsToRender, tableInfo);
                   setEmail("");
                 }}
               >
