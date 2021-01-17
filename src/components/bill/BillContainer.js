@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
-import './BillContainer.scss';
-import BillHeader from './BillHeader';
-import BillItem from './BillItem';
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
+import "./BillContainer.scss";
+import BillHeader from "./BillHeader";
+import BillItem from "./BillItem";
 
 export default function BillContainer({
   bill,
@@ -11,7 +11,7 @@ export default function BillContainer({
   tableInfo,
   menu,
 }) {
-  const [selected, setSelected] = useState(1);
+  const [selected, setSelected] = useState(null);
 
   const data = { itemId: [], seatId: 1, orderId: tableInfo.orderId, mods: [] };
   bill.items.forEach((item) => {
@@ -37,14 +37,14 @@ export default function BillContainer({
   console.log(tableInfo);
   const payBill = () => {
     Axios.post(`/api/orders/${tableInfo.orderId}/pay`, {
-      paymentType: 'credit',
+      paymentType: "credit",
     });
     const orderIds = [];
     unpaidItems = [...unpaidItems, ...bill.items];
     unpaidItems.forEach((element) => {
       orderIds.push(element.order_item_id);
     });
-    return Axios.post('api/orders/pay', orderIds);
+    return Axios.post("api/orders/pay", orderIds);
   };
 
   let unpaidItems = [];
@@ -58,7 +58,7 @@ export default function BillContainer({
     });
   }
 
-  let itemsToRender = [...bill.items.reverse()];
+  let itemsToRender = [...bill.items];
   if (unpaidItems) {
     for (let item of unpaidItems) {
       menu.forEach((element) => {
@@ -73,9 +73,9 @@ export default function BillContainer({
     let newTotal = 0;
     let newSubtotal = 0;
     let newTax = 0;
-    console.log('hello');
+    console.log("hello");
     itemsToRender.forEach((item) => {
-      console.log('this');
+      console.log("this");
       console.log(item);
       newSubtotal += item.price;
       newTax = newSubtotal * 0.13;
@@ -99,9 +99,8 @@ export default function BillContainer({
       setSelected={setSelected}
     />
   ));
-  useEffect(() => {}, [selected]);
-  const [inputToggle, setInputToggle] = useState('hide');
-  const [mod, setMod] = useState('');
+  const [inputToggle, setInputToggle] = useState("hide");
+  const [mod, setMod] = useState("");
   console.log(mod);
   return (
     <article className="bill-container">
@@ -118,16 +117,18 @@ export default function BillContainer({
             className="send-button button"
             onClick={() => {
               sendBill().then(clearBill);
-              setMod('');
-            }}>
+              setMod("");
+            }}
+          >
             <p>Send</p>
           </div>
           <button
             className="cancel-button button"
             onClick={() => {
               clearBill();
-              setMod('');
-            }}>
+              setMod("");
+            }}
+          >
             Cancel
           </button>
 
@@ -142,7 +143,8 @@ export default function BillContainer({
               } else {
                 payBill().then(clearBill);
               }
-            }}>
+            }}
+          >
             Pay
           </button>
 
@@ -150,18 +152,26 @@ export default function BillContainer({
             <button
               className="edit-button button"
               onClick={() => {
-                inputToggle === 'hide'
-                  ? setInputToggle('show')
-                  : setInputToggle('hide');
-              }}>
+                inputToggle === "hide"
+                  ? setInputToggle("show")
+                  : setInputToggle("hide");
+              }}
+            >
               Edit
             </button>
             <input
               value={mod}
-              className={inputToggle + ' edit-input'}
+              className={inputToggle + " edit-input"}
               onChange={(event) => {
                 setMod(event.target.value);
-              }}></input>
+              }}
+            ></input>
+            <button
+              onClick={() => {
+                console.log("ayy", bill.items[selected]);
+                bill.items[unpaidItems.length - 1 + selected].mods = mod;
+              }}
+            />
           </div>
         </div>
       </div>
