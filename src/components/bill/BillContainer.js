@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import Axios from 'axios';
-import './BillContainer.scss';
-import BillHeader from './BillHeader';
-import BillItem from './BillItem';
+import React, { useEffect } from "react";
+import Axios from "axios";
+import "./BillContainer.scss";
+import BillHeader from "./BillHeader";
+import BillItem from "./BillItem";
 
 export default function BillContainer({
   bill,
@@ -34,14 +34,14 @@ export default function BillContainer({
   console.log(tableInfo);
   const payBill = () => {
     Axios.post(`/api/orders/${tableInfo.orderId}/pay`, {
-      paymentType: 'credit',
+      paymentType: "credit",
     });
     const orderIds = [];
     unpaidItems = [...unpaidItems, ...bill.items];
     unpaidItems.forEach((element) => {
       orderIds.push(element.order_item_id);
     });
-    return Axios.post('api/orders/pay', orderIds);
+    return Axios.post("api/orders/pay", orderIds);
   };
   // pay bill clear table of information - reset table
   // mark order as payed or add an order type
@@ -74,8 +74,10 @@ export default function BillContainer({
     let newTotal = 0;
     let newSubtotal = 0;
     let newTax = 0;
-
+    console.log("hello");
     itemsToRender.forEach((item) => {
+      console.log("this");
+      console.log(item);
       newSubtotal += item.price;
       newTax = newSubtotal * 0.13;
       newTotal = newSubtotal + newTax;
@@ -86,7 +88,7 @@ export default function BillContainer({
       subtotal: newSubtotal,
       tax: newTax,
     });
-  }, []);
+  }, [tableInfo]);
 
   const billItems = itemsToRender.map((item, index) => (
     <BillItem key={index} name={item.name} price={item.price} />
@@ -107,7 +109,8 @@ export default function BillContainer({
             className="send-button"
             onClick={() => {
               sendBill().then(clearBill);
-            }}>
+            }}
+          >
             <p>Send</p>
           </div>
           <button className="cancel-button" onClick={() => clearBill()}>
@@ -124,7 +127,8 @@ export default function BillContainer({
               } else {
                 payBill().then(clearBill);
               }
-            }}>
+            }}
+          >
             Pay
           </button>
         </div>
