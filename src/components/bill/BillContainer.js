@@ -102,7 +102,7 @@ export default function BillContainer({
       setSelected={setSelected}
     />
   ));
-
+  useEffect(() => {}, [selected]);
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
