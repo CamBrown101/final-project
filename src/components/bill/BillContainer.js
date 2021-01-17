@@ -63,8 +63,9 @@ export default function BillContainer({
     for (let item of unpaidItems) {
       menu.forEach((element) => {
         if (element.id === item.item) {
-          element.mods = item.mods;
-          itemsToRender.push(element);
+          const elementCopy = { ...element };
+          elementCopy.mods = item.mods;
+          itemsToRender.push(elementCopy);
         }
       });
     }
