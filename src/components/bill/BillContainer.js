@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import "./BillContainer.scss";
 import BillHeader from "./BillHeader";
@@ -11,6 +11,8 @@ export default function BillContainer({
   tableInfo,
   menu,
 }) {
+  const [selected, setSelected] = useState(1);
+
   const data = { itemId: [], seatId: 1, orderId: tableInfo.orderId };
   bill.items.forEach((item) => {
     data.itemId.push(item.id);
@@ -91,7 +93,14 @@ export default function BillContainer({
   }, [tableInfo]);
 
   const billItems = itemsToRender.map((item, index) => (
-    <BillItem key={index} name={item.name} price={item.price} />
+    <BillItem
+      key={index}
+      id={index}
+      name={item.name}
+      price={item.price}
+      selected={selected}
+      setSelected={setSelected}
+    />
   ));
 
   return (

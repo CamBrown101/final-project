@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import './BillItem.scss';
+import React, { useEffect, useState } from "react";
+import "./BillItem.scss";
 
-export default function BillItem({ name, price }) {
-  const [selected, setSelected] = useState(false);
+export default function BillItem({ name, price, id, setSelected, selected }) {
+  let billClass = "";
+  useEffect(() => {
+    billClass = `bill-item ${selected === id ? "selected" : ""}`;
+  }, [selected]);
   return (
-    <li
-      className={`bill-item ${selected ? 'selected' : ''}`}
-      onClick={selected ? () => setSelected(false) : () => setSelected(true)}>
+    <li className={billClass} onClick={(id) => setSelected(id)}>
       <p className="item-name">{name}</p>
       <p className="item-price">${price.toFixed(2)}</p>
     </li>
