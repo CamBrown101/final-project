@@ -55,7 +55,8 @@ export default function BillContainer({
       }
     });
   }
-  let itemsToRender = [...bill.items];
+  const billCopy = [...bill.items];
+  let itemsToRender = [...billCopy.reverse()];
   if (unpaidItems) {
     for (let item of unpaidItems) {
       menu.forEach((element) => {
