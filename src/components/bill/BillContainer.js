@@ -27,41 +27,8 @@ export default function BillContainer({
   seat,
 }) {
   const [selected, setSelected] = useState(null);
-  // const getBillData = () => {
-  //   const data = {
-  //     itemId: [],
-  //     seatId: [],
-  //     orderId: tableInfo.orderId,
-  //     mods: [],
-  //   };
-  //   bill.items.forEach((item) => {
-  //     data.itemId.push(item.id);
-  //     data.mods.push(item.mods ? item.mods : null);
-  //     data.seatId.push(item.seat);
-  //   });
-  // };
-  const data = getBillData(tableInfo.orderId, bill.items);
-  // const clearBill = () => {
-  //   setBill({
-  //     items: [],
-  //     tax: 0,
-  //     subtotal: 0,
-  //     total: 0,
-  //   });
-  //   setTable([]);
-  // };
 
-  // const payBill = () => {
-  //   Axios.post(`/api/orders/${tableInfo.orderId}/pay`, {
-  //     paymentType: "credit",
-  //   });
-  //   const orderIds = [];
-  //   unpaidItems = [...unpaidItems, ...bill.items];
-  //   unpaidItems.forEach((element) => {
-  //     orderIds.push(element.order_item_id);
-  //   });
-  //   return Axios.post("api/orders/pay", orderIds);
-  // };
+  const data = getBillData(tableInfo.orderId, bill.items);
 
   let unpaidItems = [];
   let itemsOnBill = { ...tableInfo.items };
@@ -119,33 +86,6 @@ export default function BillContainer({
       seat={item.seat}
     />
   ));
-
-  // const formatBillToPrint = (billToPrint) => {
-  //   let formattedBill = "";
-  //   billToPrint.forEach(
-  //     (item) =>
-  //       (formattedBill += `<div style="display:flex;"><h3>${item.name}</h3><h3>: ${item.price}</h3></div><br></br>`)
-  //   );
-  //   formattedBill += `<div style="display:flex;"> <p>Subtotal: ${bill.subtotal.toFixed(
-  //     2
-  //   )}</p></div><br></br>`;
-  //   formattedBill += `<div style="display:flex;"> <p>Tax: ${bill.tax.toFixed(
-  //     2
-  //   )}</p></div><br></br>`;
-  //   formattedBill += `<div style="display:flex;"> <p>Total: ${bill.total.toFixed(
-  //     2
-  //   )}</p></div><br></br>`;
-
-  //   return formattedBill;
-  // };
-
-  // const printBill = () => {
-  //   const data = {
-  //     email: email,
-  //     bill: formatBillToPrint(itemsToRender),
-  //   };
-  //   Axios.post(`/api/orders/${tableInfo.orderId}/email`, data);
-  // };
 
   const [mod, setMod] = useState('');
   const [email, setEmail] = useState('');
