@@ -1,7 +1,7 @@
 import React from "react";
-import "./MenuItem.scss";
+import "./ProductionOrder.scss";
 
-export default function MenuItem(props) {
+export default function ProductionOrder(props) {
   return (
     <div>
       <h3>{}</h3>
