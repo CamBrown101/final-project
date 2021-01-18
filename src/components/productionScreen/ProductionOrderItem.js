@@ -17,7 +17,8 @@ export default function ProductionOrderItem({
   return (
     <li
       className={cssClass}
-      onClick={() => {
+      onClick={(event) => {
+        event.stopPropagation();
         setSelectedItems([...selectedItems, id]);
         if (selectedItems.find((ele) => ele === id)) {
           cssClass = '';

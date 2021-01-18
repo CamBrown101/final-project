@@ -40,7 +40,7 @@ export default function Home(props) {
             to={{
               pathname: '/food-production',
               state: { ...menu },
-              something: table,
+              something: setTable,
             }}>
             <button className="logout-button">Food Production</button>
           </Link>
