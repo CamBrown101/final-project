@@ -9,13 +9,26 @@ export default function ProductionOrder({
   id,
 }) {
   const [selectedItems, setSelectedItems] = useState([]);
-  // const orders = props.items.map((item) => {
-  //   return <ProductionOrderItem />
-  // })
   let cssClass = '';
   if (selectedOrders.find((ele) => ele === id)) {
     cssClass = 'order-selected';
   }
+  const orders = props.items.map((item) => {
+    return (
+      <ProductionOrderItem
+        id={item.id}
+        name={item.name}
+        mods={item.mods}
+        selectedItems={selectedItems}
+        setSelectedItems={setSelectedItems}
+      />
+    );
+  });
+
+  // const orders = props.items.map((item) => {
+  //   return <ProductionOrderItem />
+  // })
+
   return (
     <div
       className={'prod-order ' + cssClass}
@@ -31,29 +44,8 @@ export default function ProductionOrder({
           );
         }
       }}>
-      <h3> ORDER NUMBER</h3>
-      orders
-      <br />
-      <ProductionOrderItem
-        id="1"
-        selectedItems={selectedItems}
-        setSelectedItems={setSelectedItems}
-      />
-      <ProductionOrderItem
-        id="2"
-        selectedItems={selectedItems}
-        setSelectedItems={setSelectedItems}
-      />
-      <ProductionOrderItem
-        id="3"
-        selectedItems={selectedItems}
-        setSelectedItems={setSelectedItems}
-      />
-      <ProductionOrderItem
-        id="4"
-        selectedItems={selectedItems}
-        setSelectedItems={setSelectedItems}
-      />
+      <h3> ORDER NUMBER: {props.items[0].order_id}</h3>
+      {orders}
     </div>
   );
 }
