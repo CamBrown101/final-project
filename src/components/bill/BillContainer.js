@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import './BillContainer.scss';
 import BillHeader from './BillHeader';
 import BillItem from './BillItem';
+import {
+  sendBill,
+  formatBillToPrint,
+  printBill,
+  clearBill,
+  payBill,
+  getBillData,
+} from './BillHelpers';
+import PayButton from './PayButton';
+import SendButton from './SendButton';
+import CancelButton from './CancelButton';
+import EditButton from './EditButton';
+import PrintBillButton from './PrintBillButton';
+import BillTotals from './BillTotals';
 
 export default function BillContainer({
   bill,
@@ -10,44 +24,11 @@ export default function BillContainer({
   setTable,
   tableInfo,
   menu,
+  seat,
 }) {
-  const data = { itemId: [], seatId: 1, orderId: tableInfo.orderId };
-  bill.items.forEach((item) => {
-    data.itemId.push(item.id);
-  });
+  const [selected, setSelected] = useState(null);
 
-  const sendBill = () => {
-    return Axios.post(
-      `api/orders/${tableInfo.id}/items`,
-      data
-    ).then((res) => {});
-  };
-  const clearBill = () => {
-    setBill({
-      items: [],
-      tax: 0,
-      subtotal: 0,
-      total: 0,
-    });
-    setTable([]);
-  };
-  console.log(tableInfo);
-  const payBill = () => {
-    Axios.post(`/api/orders/${tableInfo.orderId}/pay`, {
-      paymentType: 'credit',
-    });
-    const orderIds = [];
-    unpaidItems = [...unpaidItems, ...bill.items];
-    unpaidItems.forEach((element) => {
-      orderIds.push(element.order_item_id);
-    });
-    return Axios.post('api/orders/pay', orderIds);
-  };
-  // pay bill clear table of information - reset table
-  // mark order as payed or add an order type
-  // mark all items on order_items as payed
-  // clear the bill
-
+  const data = getBillData(tableInfo.orderId, bill.items);
   let unpaidItems = [];
   let itemsOnBill = { ...tableInfo.items };
   itemsOnBill = itemsOnBill[0];
@@ -59,56 +40,101 @@ export default function BillContainer({
     });
   }
 
-  let itemsToRender = [...bill.items.reverse()];
+  //Changes Item Id's into Item objects
+  const billCopy = [...bill.items];
+  let itemsToRender = [...billCopy.reverse()];
   if (unpaidItems) {
     for (let item of unpaidItems) {
       menu.forEach((element) => {
         if (element.id === item.item) {
-          itemsToRender.push(element);
+          const elementCopy = { ...element };
+          elementCopy.mods = item.mods;
+          elementCopy.seat = item.seat_number;
+          itemsToRender.push(elementCopy);
         }
       });
     }
   }
 
+  useEffect(() => {
+    let newTotal = 0;
+    let newSubtotal = 0;
+    let newTax = 0;
+    itemsToRender.forEach((item) => {
+      newSubtotal += item.price;
+      newTax = newSubtotal * 0.13;
+      newTotal = newSubtotal + newTax;
+    });
+    setBill({
+      items: [...bill.items],
+      total: newTotal,
+      subtotal: newSubtotal,
+      tax: newTax,
+    });
+  }, [tableInfo]);
+
   const billItems = itemsToRender.map((item, index) => (
-    <BillItem key={index} name={item.name} price={item.price} />
+    <BillItem
+      key={index}
+      id={index}
+      name={item.name}
+      price={item.price}
+      selected={selected}
+      setSelected={setSelected}
+      mods={item.mods}
+      seat={item.seat}
+    />
   ));
 
+  const [mod, setMod] = useState('');
+  const [email, setEmail] = useState('');
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
       <ul className="bill-items">{billItems}</ul>
       <div className="bill-footer">
-        <div className="bill-totals">
-          <p>Subtotal: ${bill.subtotal.toFixed(2)}</p>
-          <p>Tax: ${bill.tax.toFixed(2)}</p>
-          <p>Total: ${bill.total.toFixed(2)}</p>
-        </div>
+        <BillTotals bill={bill} />
         <div className="buttons">
-          <div
-            className="send-button"
-            onClick={() => {
-              sendBill().then(clearBill);
-            }}>
-            <p>Send</p>
-          </div>
-          <button className="cancel-button" onClick={() => clearBill()}>
-            Cancel
-          </button>
-          <button
-            className="pay-button"
-            onClick={() => {
-              console.log(bill.items.length === 0);
-              if (bill.items.length !== 0) {
-                sendBill().then(() => {
-                  payBill().then(clearBill);
-                });
-              } else {
-                payBill().then(clearBill);
-              }
-            }}>
-            Pay
-          </button>
+          <SendButton
+            sendBill={sendBill}
+            clearBill={clearBill}
+            tableInfo={tableInfo}
+            data={data}
+            setBill={setBill}
+            setTable={setTable}
+          />
+          <CancelButton
+            setBill={setBill}
+            setTable={setTable}
+            clearBill={clearBill}
+          />
+          <PayButton
+            payBill={payBill}
+            clearBill={clearBill}
+            sendBill={sendBill}
+            bill={bill}
+            tableInfo={tableInfo}
+            data={data}
+            unpaidItems={unpaidItems}
+            setBill={setBill}
+            setTable={setTable}
+          />
+          <EditButton
+            data={data}
+            mod={mod}
+            setMod={setMod}
+            bill={bill}
+            selected={selected}
+          />
+          <PrintBillButton
+            email={email}
+            setEmail={setEmail}
+            printBill={printBill}
+            tableInfo={tableInfo}
+            itemsToRender={itemsToRender}
+            bill={bill}
+            data={data}
+          />
         </div>
       </div>
     </article>

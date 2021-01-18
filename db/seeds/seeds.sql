@@ -66,8 +66,8 @@ VALUES(1, 1),
 INSERT INTO orders (employee_id, table_id)
 VALUES (1, 1);
 
-INSERT INTO order_items (order_id, seat_id, item)
+INSERT INTO order_items (order_id, seat_number, item)
 VALUES (1, 1, 1),
 (1, 1, 2),
-(1, 1, 3),
-(1, 1, 4);
+(1, 2, 3),
+(1, 3, 4);

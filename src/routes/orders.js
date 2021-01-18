@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const nodemailer = require("nodemailer");
 module.exports = (db) => {
   router.get("/", (req, res) => {
     console.log("order route");
@@ -116,15 +116,15 @@ JOIN menu_items on order_items.item = menu_items.id
     const items = req.body.itemId;
     const seat = req.body.seatId;
     const order = req.body.orderId;
-
-    let queryString = `INSERT INTO order_items (order_id, seat_id, item)
+    const mods = req.body.mods;
+    let queryString = `INSERT INTO order_items (order_id, seat_number, item, mods)
     VALUES `;
     for (let i = 0; i < items.length; i++) {
-      queryString += ` (${order}, ${seat}, ${items[i]})`;
+      queryString += ` (${order}, ${seat[i]}, ${items[i]}, '${mods[i]}')`;
       if (i !== items.length - 1) {
         queryString += ",";
       } else {
-        queryString += "RETURNING * ;";
+        queryString += " RETURNING *;";
       }
     }
     console.log(queryString);
@@ -134,6 +134,7 @@ JOIN menu_items on order_items.item = menu_items.id
         res.send(items);
       })
       .catch((err) => {
+        console.log(err);
         res.status(500).json({ error: err.message });
       });
   });
@@ -154,6 +155,44 @@ JOIN menu_items on order_items.item = menu_items.id
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
+  });
+
+  router.post("/:id/email", (req, res) => {
+    const email = req.body.email;
+    const order = req.params.id;
+    let mailText = req.body.bill;
+    db.query(
+      `
+              UPDATE orders
+              SET email = $1
+              WHERE id = $2`,
+      [email, order]
+    ).then((data) => {
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "buyfoodsellfood@gmail.com",
+          pass: "BuyFoodSellFood2!",
+        },
+      });
+
+      const mailOptions = {
+        from: "buyfoodsellfood@gmail.com",
+        to: email,
+        subject: "Your order reciept",
+        html: mailText,
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          res.status(500).send(error);
+        } else {
+          console.log("Email sent: " + info.response);
+          res.send("email sent!");
+        }
+      });
+    });
   });
 
   return router;

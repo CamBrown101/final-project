@@ -3,15 +3,25 @@
 .bill-container {
   height: 70%;
   width: 40%;
-  margin: 5%;
+  margin: 5% 0 5% 5%;
   padding: 5%;
   background-color: $project-white;
 
   .bill-item {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
   }
-
+  .item {
+    display: flex;
+    justify-content: space-between;
+  }
+  .mod {
+    align-self: flex-start;
+    margin-left: 5%;
+    margin-top: 0;
+    font-size: small;
+  }
   .bill-totals {
     text-align: right;
   }
@@ -22,21 +32,47 @@
     display: flex;
     padding-top: 5%;
   }
-  .send-button {
-    background-color: green;
+  .button {
     height: 30px;
     width: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
+  .edit-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .confirm-cancel-buttons {
+    display: flex;
+  }
+  .send-button {
+    background-color: green;
+  }
+  .print-button {
+    background-color: blue;
+  }
+  .edit-button {
+    background-color: yellow;
+  }
+  .edit-input {
+    border: thin solid black;
+  }
   .cancel-button {
     background-color: red;
-    height: 30px;
-    width: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  }
+  .pay-button {
+    background-color: purple;
+  }
+  .show {
+    display: block;
+  }
+  .hide {
+    display: none;
+  }
+  .opacity {
+    opacity: 0.65;
   }
   p {
     margin: 0;

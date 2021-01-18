@@ -1,4 +1,19 @@
 .home-main {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  .logout-button {
+    width: 100px;
+    height: 100px;
+  }
+  .container {
+    display: flex;
+  }
+  .logged-in {
+    margin-top: 60px;
+    display: flex;
+  }
+}
+.table-selectors {
+  width: 30vw;
+  display: flex;
 }

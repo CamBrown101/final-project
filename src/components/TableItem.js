@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../UserContext';
-import './TableItem.scss';
-import Axios from 'axios';
+import React, { useContext } from "react";
+import { UserContext } from "../UserContext";
+import "./TableItem.scss";
+import Axios from "axios";
 
 export default function TableItem(props) {
   const { user } = useContext(UserContext);
@@ -19,29 +19,6 @@ export default function TableItem(props) {
             items: newItems,
             orderId: orderId,
           });
-          console.log(newItems);
-          // const newBill = newItems.map((item, index) => ({
-          //   id: index,
-          //   name: item.content,
-          //   price: item.price,
-          // }));
-          // const total = (arr) => {
-          //   let total = 0;
-          //   for (const each of arr) {
-          //     total = total + each.price;
-          //   }
-          //   return total;
-          // };
-
-          // const newTotal = total(newBill);
-          // const newTax = newTotal * (12 / 100);
-          // props.setBill({
-          //   ...props.bill,
-          //   items: newBill,
-          //   tax: newTax,
-          //   subtotal: newTotal,
-          //   total: newTotal + newTax,
-          // });
         });
       } else {
         // CREATE ORDER
@@ -57,23 +34,26 @@ export default function TableItem(props) {
       }
     });
   };
-
+  let className =
+    props.table.tableId === props.id ? "table-item selected" : "table-item";
   const clearBill = () => {
-    props.setBill({
-      items: [],
-      tax: 0,
-      subtotal: 0,
-      total: 0,
-    });
     props.setTable([]);
+  };
+
+  const makeSelection = (id) => {
+    if (id === props.table.tableId) {
+      clearBill();
+    } else {
+      clearBill();
+      getOrders();
+    }
   };
 
   return (
     <div
-      className="table-item"
+      className={className}
       onClick={() => {
-        clearBill();
-        getOrders();
+        makeSelection(props.id);
       }}
     >
       <h3>Employee: {props.employee}</h3>
