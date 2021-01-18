@@ -6,13 +6,13 @@ import ProductionOrder from "./ProductionOrder";
 import Axios from "axios";
 
 export default function ProductionContainer(props) {
-  Axios.get(`/api/orders/production`).then((orders) => {
-    console.log(orders);
+  const orderElements = props.location.state.orders.map((order) => {
+    return <ProductionOrder items={order} />;
   });
   return (
-    <div className="prod-container">
-      <h1>Production SCreen</h1>
-      <ProductionOrder items={props.items} />
+    <div className="prod-screen">
+      <h1>Production Screen</h1>
+      <div className="prod-container">{orderElements}</div>
     </div>
   );
 }

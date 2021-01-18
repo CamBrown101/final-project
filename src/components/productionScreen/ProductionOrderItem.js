@@ -6,9 +6,9 @@ export default function ProductionOrderItem({ name, mods }) {
   return (
     <li>
       <div className="prod-item">
-        <p className="prod-item-name">name</p>
+        <p className="prod-item-name">{name}</p>
       </div>
-      {!modBoolean ? <p className="mod">mods</p> : <></>}
+      {!modBoolean ? <p className="mod">{mods}</p> : <></>}
     </li>
   );
 }

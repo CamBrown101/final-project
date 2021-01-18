@@ -1,26 +1,38 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../UserContext';
-import { Redirect, Link } from 'react-router-dom';
-import MenuContainer from './menu/MenuContainer';
-import BillContainer from './bill/BillContainer';
-import TableContainer from './TableContainer';
-import SeatContainer from './seats/SeatContainer';
-import Axios from 'axios';
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../UserContext";
+import { Redirect, Link } from "react-router-dom";
+import MenuContainer from "./menu/MenuContainer";
+import BillContainer from "./bill/BillContainer";
+import TableContainer from "./TableContainer";
+import SeatContainer from "./seats/SeatContainer";
+import Axios from "axios";
 
-import './Home.scss';
+import "./Home.scss";
 
 export default function Home(props) {
   const { user, logout } = useContext(UserContext);
   const [menu, setMenu] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [tables, setTables] = useState([]);
   const [table, setTable] = useState({});
   const [seat, setSeat] = useState(1);
   useEffect(() => {
-    Axios.get('/api/menu').then((res) => {
+    Axios.get("/api/menu").then((res) => {
       setMenu(res.data);
     });
-    Axios.get('/api/tables').then((res) => {
+    Axios.get("/api/tables").then((res) => {
       setTables(res.data);
+    });
+    Axios.get(`/api/orders/production`).then((res) => {
+      const orderItems = res.data;
+      const orders = [];
+      orderItems.forEach((item) => {
+        orders[item.order_id] = orders[item.order_id]
+          ? [...orders[item.order_id], item]
+          : [item];
+      });
+      console.log(orders);
+      setOrders(orders);
     });
   }, []);
 
@@ -38,10 +50,11 @@ export default function Home(props) {
           </button>
           <Link
             to={{
-              pathname: '/food-production',
-              state: { ...menu },
+              pathname: "/food-production",
+              state: { orders: orders },
               something: table,
-            }}>
+            }}
+          >
             <button className="logout-button">Food Production</button>
           </Link>
         </div>
