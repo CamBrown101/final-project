@@ -11,7 +11,6 @@ export default function PrintBillButton({
 }) {
   const [printToggle, setPrintToggle] = useState('hide');
   let cssClass = 'print-button button';
-  console.log(itemsToRender.length > 0);
   if (!itemsToRender.length) {
     cssClass += ' opacity';
   }

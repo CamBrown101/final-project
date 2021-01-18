@@ -27,7 +27,7 @@ export default function Home(props) {
   if (!user.auth) {
     return <Redirect to="/login" />;
   }
-  console.log(seat);
+  console.log(menu);
   return (
     <div>
       <div className="home-main">
@@ -36,7 +36,7 @@ export default function Home(props) {
           <button className="logout-button" onClick={logout}>
             Logout
           </button>
-          <Link to="/food-production">
+          <Link to={{ pathname: '/food-production', state: { ...menu } }}>
             <button className="logout-button">Food Production</button>
           </Link>
         </div>
