@@ -12,9 +12,13 @@ export default function PayButton({
   setBill,
   setTable,
 }) {
+  let cssClass = 'pay-button button';
+  if (!data.orderId) {
+    cssClass += ' opacity';
+  }
   return (
     <div
-      className="pay-button button"
+      className={cssClass}
       onClick={() => {
         if (bill.items.length !== 0) {
           sendBill(tableInfo, data).then(() => {
