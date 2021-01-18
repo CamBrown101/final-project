@@ -8,7 +8,6 @@ export default function SendButton({
   setTable,
   setBill,
 }) {
-  console.log(data);
   let cssClass = 'send-button button';
   if (!data.itemId.length || !data.orderId) {
     cssClass += ' opacity';
