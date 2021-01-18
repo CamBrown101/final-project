@@ -8,7 +8,7 @@ export default function ProductionOrder(props) {
   //   return <ProductionOrderItem />
   // })
   return (
-    <div class="prod-order">
+    <div className="prod-order">
       <h3> ORDER NUMBER</h3>
       orders
       <br />
