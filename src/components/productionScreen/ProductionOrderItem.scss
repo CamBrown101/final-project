@@ -1,0 +1,11 @@
+.prod-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.mod {
+  align-self: flex-start;
+  margin-left: 5%;
+  margin-top: 0;
+  font-size: small;
+}
