@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../UserContext';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import MenuContainer from './menu/MenuContainer';
 import BillContainer from './bill/BillContainer';
 import TableContainer from './TableContainer';
@@ -36,6 +36,9 @@ export default function Home(props) {
           <button className="logout-button" onClick={logout}>
             Logout
           </button>
+          <Link to="/food-production">
+            <button className="logout-button">Food Production</button>
+          </Link>
         </div>
         <div className="container">
           <BillContainer
