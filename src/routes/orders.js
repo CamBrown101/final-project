@@ -31,6 +31,25 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/production", (req, res) => {
+    db.query(
+      `
+      SELECT * FROM orders
+      JOIN order_items ON order_items.order_id = orders.id
+JOIN menu_items on order_items.item = menu_items.id
+      WHERE orders.payment_type IS NULL;
+              `,
+      [req.body.id, req.body.tableId]
+    )
+      .then((data) => {
+        const order = data.rows;
+        res.send(order);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   router.post("/pay", (req, res) => {
     const items = req.body;
     console.log("\n\n\n\n\n");
