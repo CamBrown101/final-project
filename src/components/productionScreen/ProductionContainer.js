@@ -19,10 +19,9 @@ export default function ProductionContainer(props) {
 
   return (
     <div className="prod-container">
-      <h1>Production SCreen</h1>
-      <div className="prod-order-container">
-        <div className="prod-container">{orderElements}</div>
-      </div>
+      <h1>Production Screen</h1>
+
+      <div className="prod-order-container">{orderElements}</div>
     </div>
   );
 }
