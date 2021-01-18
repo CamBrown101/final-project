@@ -1,4 +1,4 @@
-@import "../../base";
+@import '../../base';
 
 .prod-container {
   height: 100%;
@@ -6,6 +6,11 @@
   margin-top: 5%;
   margin-left: 5%;
   margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+  .prod-order-container {
+    display: flex;
+  }
   .buttons {
     display: flex;
     padding-top: 5%;
