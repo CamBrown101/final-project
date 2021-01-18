@@ -13,7 +13,13 @@ export default function BillItem({
   return (
     <li
       className={selected === id ? "bill-item selected" : "bill-item"}
-      onClick={() => setSelected(id)}
+      onClick={() => {
+        if (selected === id) {
+          setSelected(null);
+        } else {
+          setSelected(id);
+        }
+      }}
     >
       <div className="item">
         <p>{seat}</p>
