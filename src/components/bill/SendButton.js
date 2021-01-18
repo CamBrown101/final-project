@@ -8,11 +8,17 @@ export default function SendButton({
   setTable,
   setBill,
 }) {
+  let cssClass = 'send-button button';
+  if (!data.itemId.length) {
+    cssClass += ' opacity';
+  }
   return (
     <div
-      className="send-button button"
+      className={cssClass}
       onClick={() => {
-        sendBill(tableInfo, data).then(() => clearBill(setBill, setTable));
+        if (data.itemId.length) {
+          sendBill(tableInfo, data).then(() => clearBill(setBill, setTable));
+        }
       }}>
       <p>Send</p>
     </div>

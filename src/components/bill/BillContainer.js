@@ -29,7 +29,6 @@ export default function BillContainer({
   const [selected, setSelected] = useState(null);
 
   const data = getBillData(tableInfo.orderId, bill.items);
-
   let unpaidItems = [];
   let itemsOnBill = { ...tableInfo.items };
   itemsOnBill = itemsOnBill[0];
