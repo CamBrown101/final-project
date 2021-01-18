@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    console.log("order route");
+  router.get('/', (req, res) => {
+    console.log('order route');
     db.query(`SELECT * FROM orders;`)
       .then((data) => {
         const orders = data.rows;
@@ -14,8 +14,8 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/", (req, res) => {
-    console.log("order route");
+  router.post('/', (req, res) => {
+    console.log('order route');
     db.query(
       `
               INSERT INTO orders (employee_id, table_id)
@@ -31,28 +31,28 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/production", (req, res) => {
+  router.get('/production', (req, res) => {
+    console.log('Get Production Screen');
     db.query(
       `
       SELECT * FROM orders
       JOIN order_items ON order_items.order_id = orders.id
-JOIN menu_items on order_items.item = menu_items.id
-      WHERE orders.payment_type IS NULL;
-              `,
-      [req.body.id, req.body.tableId]
+      JOIN menu_items on order_items.item = menu_items.id
+      WHERE orders_items.is_done IS False;
+              `
     )
       .then((data) => {
-        const order = data.rows;
-        res.send(order);
+        const orders = data.rows;
+        res.send(orders);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
 
-  router.post("/pay", (req, res) => {
+  router.post('/pay', (req, res) => {
     const items = req.body;
-    console.log("\n\n\n\n\n");
+    console.log('\n\n\n\n\n');
     console.log(req.body);
     let queryString = `
               UPDATE order_items
@@ -68,15 +68,15 @@ JOIN menu_items on order_items.item = menu_items.id
         res.status(200).send(data);
       })
       .catch((err) => {
-        console.log("\n\n\n\n\n");
+        console.log('\n\n\n\n\n');
         console.log(err);
         res.status(500).json({ error: err.message });
       });
   });
 
   //sends the order object
-  router.get("/:id", (req, res) => {
-    console.log("order id route");
+  router.get('/:id', (req, res) => {
+    console.log('order id route');
     const order = req.params.id;
     db.query(
       `SELECT * FROM orders
@@ -93,8 +93,8 @@ JOIN menu_items on order_items.item = menu_items.id
   });
 
   //WIP sends items in an order
-  router.get("/:id/items", (req, res) => {
-    console.log("order id items route");
+  router.get('/:id/items', (req, res) => {
+    console.log('order id items route');
     const order = req.params.id;
     db.query(
       `
@@ -112,7 +112,7 @@ JOIN menu_items on order_items.item = menu_items.id
       });
   });
 
-  router.post("/:id/items", (req, res) => {
+  router.post('/:id/items', (req, res) => {
     const items = req.body.itemId;
     const seat = req.body.seatId;
     const order = req.body.orderId;
@@ -122,9 +122,9 @@ JOIN menu_items on order_items.item = menu_items.id
     for (let i = 0; i < items.length; i++) {
       queryString += ` (${order}, ${seat[i]}, ${items[i]}, '${mods[i]}')`;
       if (i !== items.length - 1) {
-        queryString += ",";
+        queryString += ',';
       } else {
-        queryString += " RETURNING *;";
+        queryString += ' RETURNING *;';
       }
     }
     console.log(queryString);
@@ -139,7 +139,7 @@ JOIN menu_items on order_items.item = menu_items.id
       });
   });
 
-  router.post("/:id/pay", (req, res) => {
+  router.post('/:id/pay', (req, res) => {
     const payType = req.body.paymentType;
     const order = req.params.id;
     db.query(
@@ -157,7 +157,7 @@ JOIN menu_items on order_items.item = menu_items.id
       });
   });
 
-  router.post("/:id/email", (req, res) => {
+  router.post('/:id/email', (req, res) => {
     const email = req.body.email;
     const order = req.params.id;
     let mailText = req.body.bill;
@@ -169,17 +169,17 @@ JOIN menu_items on order_items.item = menu_items.id
       [email, order]
     ).then((data) => {
       const transporter = nodemailer.createTransport({
-        service: "gmail",
+        service: 'gmail',
         auth: {
-          user: "buyfoodsellfood@gmail.com",
-          pass: "BuyFoodSellFood2!",
+          user: 'buyfoodsellfood@gmail.com',
+          pass: 'BuyFoodSellFood2!',
         },
       });
 
       const mailOptions = {
-        from: "buyfoodsellfood@gmail.com",
+        from: 'buyfoodsellfood@gmail.com',
         to: email,
-        subject: "Your order reciept",
+        subject: 'Your order reciept',
         html: mailText,
       };
 
@@ -188,8 +188,8 @@ JOIN menu_items on order_items.item = menu_items.id
           console.log(error);
           res.status(500).send(error);
         } else {
-          console.log("Email sent: " + info.response);
-          res.send("email sent!");
+          console.log('Email sent: ' + info.response);
+          res.send('email sent!');
         }
       });
     });
