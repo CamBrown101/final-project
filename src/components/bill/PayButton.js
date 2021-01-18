@@ -20,16 +20,18 @@ export default function PayButton({
     <div
       className={cssClass}
       onClick={() => {
-        if (bill.items.length !== 0) {
-          sendBill(tableInfo, data).then(() => {
+        if (data.orderId) {
+          if (bill.items.length !== 0) {
+            sendBill(tableInfo, data).then(() => {
+              payBill(tableInfo.orderId, unpaidItems, bill.items).then(() =>
+                clearBill(setBill, setTable)
+              );
+            });
+          } else {
             payBill(tableInfo.orderId, unpaidItems, bill.items).then(() =>
               clearBill(setBill, setTable)
             );
-          });
-        } else {
-          payBill(tableInfo.orderId, unpaidItems, bill.items).then(() =>
-            clearBill(setBill, setTable)
-          );
+          }
         }
       }}>
       Pay
