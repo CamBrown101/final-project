@@ -4,6 +4,7 @@ import "./ProductionOrder";
 import ProductionOrder from "./ProductionOrder";
 
 export default function ProductionContainer(props) {
+  console.log(props.location);
   return (
     <div class="prod-container">
       <h1>Production SCreen</h1>
