@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 
-export default function EditButton({ mod, setMod, bill, selected }) {
+export default function EditButton({ mod, setMod, bill, selected, data }) {
   const [inputToggle, setInputToggle] = useState('hide');
-
+  let cssClass = 'edit-button button';
+  console.log(selected);
+  console.log(data.itemId.length);
+  if (!data.itemId.length || selected === null) {
+    cssClass += ' opacity';
+  }
   return (
     <div className="edit-section">
       <div
-        className="edit-button button"
+        className={cssClass}
         onClick={() => {
-          inputToggle === 'hide'
-            ? setInputToggle('show')
-            : setInputToggle('hide');
+          if (!data.itemId.length || selected === null) {
+            setInputToggle('hide');
+          } else {
+            inputToggle === 'hide'
+              ? setInputToggle('show')
+              : setInputToggle('hide');
+          }
         }}>
         Edit
       </div>

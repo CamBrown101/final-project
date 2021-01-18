@@ -120,6 +120,7 @@ export default function BillContainer({
             setTable={setTable}
           />
           <EditButton
+            data={data}
             mod={mod}
             setMod={setMod}
             bill={bill}
