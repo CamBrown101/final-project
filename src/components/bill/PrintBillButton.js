@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function PrintBillButton({
   email,
@@ -7,17 +7,29 @@ export default function PrintBillButton({
   itemsToRender,
   tableInfo,
   bill,
+  data,
 }) {
   const [printToggle, setPrintToggle] = useState('hide');
-
+  let cssClass = 'print-button button';
+  console.log(itemsToRender.length > 0);
+  if (!itemsToRender.length) {
+    cssClass += ' opacity';
+  }
+  useEffect(() => {
+    setPrintToggle('hide');
+  }, [itemsToRender]);
   return (
     <div className="print-section">
       <div
-        className="print-button button"
+        className={cssClass}
         onClick={() => {
-          printToggle === 'hide'
-            ? setPrintToggle('show')
-            : setPrintToggle('hide');
+          if (!itemsToRender.length) {
+            setPrintToggle('hide');
+          } else {
+            printToggle === 'hide'
+              ? setPrintToggle('show')
+              : setPrintToggle('hide');
+          }
         }}>
         Print
       </div>

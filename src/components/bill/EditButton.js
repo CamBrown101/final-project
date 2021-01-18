@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 export default function EditButton({ mod, setMod, bill, selected, data }) {
   const [inputToggle, setInputToggle] = useState('hide');
   let cssClass = 'edit-button button';
-  console.log(selected);
-  console.log(data.itemId.length);
   if (!data.itemId.length || selected === null) {
     cssClass += ' opacity';
   }

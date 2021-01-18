@@ -133,6 +133,7 @@ export default function BillContainer({
             tableInfo={tableInfo}
             itemsToRender={itemsToRender}
             bill={bill}
+            data={data}
           />
         </div>
       </div>
