@@ -36,7 +36,12 @@ export default function Home(props) {
           <button className="logout-button" onClick={logout}>
             Logout
           </button>
-          <Link to={{ pathname: '/food-production', state: { ...menu } }}>
+          <Link
+            to={{
+              pathname: '/food-production',
+              state: { ...menu },
+              something: table,
+            }}>
             <button className="logout-button">Food Production</button>
           </Link>
         </div>

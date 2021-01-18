@@ -3,7 +3,7 @@ import './ProductionContainer.scss';
 import { Link } from 'react-router-dom';
 
 export default function ProductionContainer(props) {
-  console.log(props);
+  console.log(props.location);
   return (
     <div>
       <h1>Production SCreen</h1>
