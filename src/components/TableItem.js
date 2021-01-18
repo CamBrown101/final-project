@@ -40,12 +40,20 @@ export default function TableItem(props) {
     props.setTable([]);
   };
 
+  const makeSelection = (id) => {
+    if (id === props.table.tableId) {
+      clearBill();
+    } else {
+      clearBill();
+      getOrders();
+    }
+  };
+
   return (
     <div
       className={className}
       onClick={() => {
-        clearBill();
-        getOrders();
+        makeSelection(props.id);
       }}
     >
       <h3>Employee: {props.employee}</h3>
