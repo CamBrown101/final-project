@@ -1,10 +1,34 @@
-import React from "react";
-import "./ProductionOrderItem.scss";
+import React from 'react';
+import './ProductionOrderItem.scss';
 
-export default function ProductionOrderItem({ name, mods }) {
-  const modBoolean = mods === "null";
+export default function ProductionOrderItem({
+  name,
+  mods,
+  id,
+  selectedItems,
+  setSelectedItems,
+}) {
+  const modBoolean = mods === 'null';
+  console.log(selectedItems);
+  let cssClass = '';
+  if (selectedItems.find((ele) => ele === id)) {
+    cssClass = 'item-selected';
+  }
   return (
-    <li>
+    <li
+      className={cssClass}
+      onClick={() => {
+        setSelectedItems([...selectedItems, id]);
+        if (selectedItems.find((ele) => ele === id)) {
+          cssClass = '';
+          setSelectedItems(
+            [...selectedItems].splice(
+              [...selectedItems].find((ele) => ele === id),
+              1
+            )
+          );
+        }
+      }}>
       <div className="prod-item">
         <p className="prod-item-name">{name}</p>
       </div>

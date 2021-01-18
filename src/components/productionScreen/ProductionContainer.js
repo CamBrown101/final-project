@@ -1,9 +1,7 @@
-import axios from "axios";
 import React from "react";
 import "./ProductionContainer.scss";
 import "./ProductionOrder";
 import ProductionOrder from "./ProductionOrder";
-import Axios from "axios";
 
 export default function ProductionContainer(props) {
   const orderElements = props.location.state.orders.map((order) => {

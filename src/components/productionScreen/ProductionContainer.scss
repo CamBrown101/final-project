@@ -10,6 +10,9 @@
   margin-right: 5%;
   display: flex;
   flex-direction: row;
+  .prod-order-container {
+    display: flex;
+  }
   .buttons {
     display: flex;
     padding-top: 5%;
