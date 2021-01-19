@@ -35,10 +35,12 @@ module.exports = (db) => {
     console.log("Get Production Screen");
     db.query(
       `
-      SELECT * FROM orders
-      JOIN order_items ON order_items.order_id = orders.id
+      SELECT order_items.id, order_items.order_id, menu_items.name, categories.is_food, categories.name AS category
+      FROM order_items
       JOIN menu_items on order_items.item = menu_items.id
-      WHERE order_items.is_made IS False;
+      JOIN categories on menu_items.category_id = categories.id
+      WHERE order_items.is_made IS False
+      AND categories.is_food = true;
               `
     )
       .then((data) => {
