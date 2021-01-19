@@ -32,14 +32,19 @@ module.exports = (db) => {
   });
 
   router.get("/production", (req, res) => {
+    //const isFood = req.body.isFood;
+    const isFood = false;
     console.log("Get Production Screen");
     db.query(
       `
-      SELECT * FROM orders
-      JOIN order_items ON order_items.order_id = orders.id
+      SELECT DISTINCT order_items.*, menu_items.name
+      FROM order_items
       JOIN menu_items on order_items.item = menu_items.id
-      WHERE order_items.is_made IS False;
-              `
+      JOIN categories on menu_items.category_id = category_id
+      WHERE order_items.is_made IS False
+      AND categories.is_food = $1;
+              `,
+      [isFood]
     )
       .then((data) => {
         const orders = data.rows;
