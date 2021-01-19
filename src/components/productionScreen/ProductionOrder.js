@@ -11,10 +11,9 @@ export default function ProductionOrder({
 }) {
   const [selectedItems, setSelectedItems] = useState([]);
   let cssClass = "";
-  if (selectedOrders.find((ele) => ele === id) !== undefined) {
+  if (selectedOrders.find((ele) => ele === id)) {
     cssClass = "order-selected";
   }
-
   const orders = items.map((item, index) => {
     return (
       <ProductionOrderItem
@@ -37,7 +36,7 @@ export default function ProductionOrder({
       className={"prod-order " + cssClass}
       onClick={() => {
         setSelectedOrders([...selectedOrders, id]);
-        if (selectedOrders.find((ele) => ele === id) !== undefined) {
+        if (selectedOrders.find((ele) => ele === id)) {
           cssClass = "";
           setSelectedOrders(
             [...selectedOrders].splice(
