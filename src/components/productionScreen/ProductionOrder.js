@@ -28,7 +28,8 @@ export default function ProductionOrder({
     );
   });
   const completeOrder = () => {
-    Axios.post(`/api/orders/${items[0].order_id}/make`);
+    const data = { isFood: true };
+    Axios.post(`/api/orders/${items[0].order_id}/make`, data);
   };
 
   return (

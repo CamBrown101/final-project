@@ -27,7 +27,6 @@ export default function Home(props) {
   if (!user.auth) {
     return <Redirect to="/login" />;
   }
-  console.log(menu);
   return (
     <div>
       <div className="home-main">
