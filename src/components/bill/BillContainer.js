@@ -34,6 +34,10 @@ export default function BillContainer({
 
   const itemsToRender = getItemsToRender(bill.items, unpaidItems, menu);
   useEffect(() => {
+    setSelected(null);
+  }, [tableInfo]);
+
+  useEffect(() => {
     let newTotal = 0;
     let newSubtotal = 0;
     let newTax = 0;
@@ -48,7 +52,12 @@ export default function BillContainer({
       subtotal: newSubtotal,
       tax: newTax,
     });
-  }, [tableInfo]);
+    // eslint-disable-next-line
+  }, [tableInfo, seat]);
+
+  useEffect(() => {
+    if (itemsToRender[selected]) itemsToRender[selected].seat = seat;
+  }, [seat]);
 
   const billItems = itemsToRender.map((item, index) => (
     <BillItem

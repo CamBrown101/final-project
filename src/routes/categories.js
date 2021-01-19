@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get('/', (req, res) => {
+  router.get("/", (req, res) => {
     db.query(`SELECT * FROM categories;`, [])
       .then((data) => {
         res.send(data.rows);
@@ -12,11 +12,10 @@ module.exports = (db) => {
       });
   });
 
-  router.post('/', (req, res) => {
+  router.post("/", (req, res) => {
     const name = req.body.name;
     const is_food = req.body.isFood;
     const queryParams = [name, is_food];
-    console.log(queryParams);
     db.query(
       `INSERT INTO categories (name, is_food)
     VALUES ($1, $2)

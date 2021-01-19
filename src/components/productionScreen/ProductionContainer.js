@@ -10,7 +10,6 @@ export default function ProductionContainer(props) {
   const data = { is_food: props.location.is_food };
 
   useEffect(() => {
-    console.log(data);
     Axios.get(`/api/orders/production`, { params: data }).then((res) => {
       const orderItems = res.data;
       const orders = [];
@@ -22,6 +21,7 @@ export default function ProductionContainer(props) {
       setOrders(orders);
     });
     // }, []);
+    //eslint-disable-next-line
   }, [orders]);
   let orderElements = [];
   if (orders) {
