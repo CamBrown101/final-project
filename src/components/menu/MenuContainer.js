@@ -13,8 +13,15 @@ export default function MenuContainer({
   setCategory,
   categories,
 }) {
+  const [menuSearch, setMenuSearch] = useState('');
+
   const menuItems = menu
     .filter((item) => item.category_id === category || category === 0)
+    .filter(
+      (item) =>
+        item.name.toLowerCase().includes(menuSearch) ||
+        item.category.toLowerCase().includes(menuSearch)
+    )
     .map((item) => (
       <MenuItem
         key={item.id}
@@ -40,7 +47,6 @@ export default function MenuContainer({
   categoryItems.unshift(
     <CategoryItem key={0} id={0} name={'All'} setCategory={setCategory} />
   );
-  const [menuSearch, setMenuSearch] = useState('');
   return (
     <div className="menu-item-container">
       <div>
