@@ -1,9 +1,9 @@
-@import "../../base";
+@import '../../base';
 
 .menu-item-container {
   display: flex;
   justify-content: flex-start;
-  margin-right: 1%;
+  margin: 0 1% 0 1%;
   width: 930px;
 }
 .category-tab {
@@ -21,12 +21,24 @@
     margin: 10px 0 0 30px;
   }
 }
+.menu-item-container-inside {
+  display: flex;
+  flex-direction: column;
+  background-color: $project-white;
+  max-height: 695px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 .category-selectors {
   justify-self: end;
+  padding: 0;
+  margin: 0;
 }
 .item-container {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
-  width: 60;
+  align-items: center;
+  justify-content: space-evenly;
+  border: thin solid black;
 }
