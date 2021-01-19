@@ -49,7 +49,7 @@ export default function MenuContainer({
   );
   return (
     <div className="menu-item-container">
-      <div>
+      <div className="menu-item-container-inside">
         <SearchBar menuSearch={menuSearch} setMenuSearch={setMenuSearch} />
         <div className="item-container">{menuItems}</div>
       </div>
