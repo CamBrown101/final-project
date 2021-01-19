@@ -9,7 +9,6 @@ export default function ProductionOrderItem({
   setSelectedItems,
 }) {
   const modBoolean = mods === "null";
-  console.log(selectedItems);
   let cssClass = "";
   if (selectedItems.find((ele) => ele === id) !== undefined) {
     cssClass = "item-selected";
@@ -19,16 +18,14 @@ export default function ProductionOrderItem({
       className={cssClass}
       onClick={(event) => {
         event.stopPropagation();
-        setSelectedItems([...selectedItems, id]);
         if (selectedItems.find((ele) => ele === id) !== undefined) {
           cssClass = "";
-          setSelectedItems(
-            [...selectedItems].splice(
-              [...selectedItems].find((ele) => ele === id),
-              1
-            )
-          );
-        }
+          const rem = selectedItems.findIndex((ele) => ele === id);
+          const newArr = [...selectedItems];
+          console.log(rem, newArr);
+          newArr.splice(rem, 1);
+          setSelectedItems(newArr);
+        } else setSelectedItems([...selectedItems, id]);
       }}
     >
       <div className="prod-item">
