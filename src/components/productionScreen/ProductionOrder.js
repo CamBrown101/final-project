@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './ProductionOrder.scss';
 import './ProductionOrderItem';
 import ProductionOrderItem from './ProductionOrderItem';
+import Axios from 'axios';
 
 export default function ProductionOrder({
   setSelectedOrders,
@@ -26,10 +27,9 @@ export default function ProductionOrder({
       />
     );
   });
-
-  // const orders = props.items.map((item) => {
-  //   return <ProductionOrderItem />
-  // })
+  const completeOrder = () => {
+    Axios.post(`/api/orders/${items[0].order_id}/make`);
+  };
 
   return (
     <div className="order-container">
@@ -50,7 +50,12 @@ export default function ProductionOrder({
         <h3> ORDER NUMBER: {items[0].order_id}</h3>
         {orders}
         <div className="mark-complete">
-          <p>Mark Complete</p>
+          <p
+            onClick={() => {
+              completeOrder();
+            }}>
+            Mark Complete
+          </p>
         </div>
       </div>
     </div>
