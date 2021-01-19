@@ -19,8 +19,10 @@ export default function ProductionContainer(props) {
       });
       setOrders(orders);
     });
-  }, []);
-  // }, [orders]);
+    //Turn off live update uncommit below code
+    // }, []);
+  }, [orders]);
+  //Turn off auto update comment out above code ^^
   let orderElements = [];
   if (orders) {
     orderElements = orders.map((order, index) => {

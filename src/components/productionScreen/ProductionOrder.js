@@ -48,8 +48,10 @@ export default function ProductionOrder({
             );
           }
         }}>
-        <h3> ORDER NUMBER: {items[0].order_id}</h3>
-        {orders}
+        <div>
+          <h3> ORDER NUMBER: {items[0].order_id}</h3>
+          <ul className="scroll-y">{orders}</ul>
+        </div>
         <div className="mark-complete">
           <p
             onClick={() => {
