@@ -32,16 +32,18 @@ module.exports = (db) => {
   });
 
   router.get("/production", (req, res) => {
+    const isFood = req.query.is_food;
     console.log("Get Production Screen");
     db.query(
       `
-      SELECT order_items.id, order_items.order_id, menu_items.name, categories.is_food, categories.name AS category
+      SELECT order_items.*, menu_items.name
       FROM order_items
       JOIN menu_items on order_items.item = menu_items.id
       JOIN categories on menu_items.category_id = categories.id
       WHERE order_items.is_made IS False
-      AND categories.is_food = true;
-              `
+      AND categories.is_food = $1;
+              `,
+      [isFood]
     )
       .then((data) => {
         const orders = data.rows;
