@@ -1,5 +1,5 @@
-import React from "react";
-import "./MenuItem.scss";
+import React from 'react';
+import './MenuItem.scss';
 
 export default function MenuItem({ name, price, id, setBill, bill, seat }) {
   let newTotal = bill.total;
@@ -21,11 +21,9 @@ export default function MenuItem({ name, price, id, setBill, bill, seat }) {
           subtotal: newSubtotal,
           tax: newTax,
         });
-      }}
-    >
-      <h3>{name}</h3>
-      <h3>${price}</h3>
-      <br />
+      }}>
+      <h3 className="item-name">{name}</h3>
+      <h3 className="price">${price}</h3>
     </div>
   );
 }
