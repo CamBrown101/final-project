@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
 import './BillContainer.scss';
 import BillHeader from './BillHeader';
 import BillItem from './BillItem';
 import {
   sendBill,
-  formatBillToPrint,
+  // formatBillToPrint,
   printBill,
   clearBill,
   payBill,

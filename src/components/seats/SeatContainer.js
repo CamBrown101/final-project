@@ -1,6 +1,6 @@
-import React from "react";
-import "./SeatContainer.scss";
-import SeatItem from "./SeatItem";
+import React from 'react';
+import './SeatContainer.scss';
+import SeatItem from './SeatItem';
 
 export default function SeatContainer({ setSeat, table, seat }) {
   const seatsToRender = [];

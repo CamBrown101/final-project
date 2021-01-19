@@ -16,7 +16,6 @@ import CreateItem from './components/manager/CreateItem.js';
 import CreateCategory from './components/manager/CreateCategory.js';
 import TimecardEntry from './components/TimecardEntry';
 import Split from './components/Split';
-import ProductionScreen from './components/productionScreen/ProductionContainer';
 import ProductionContainer from './components/productionScreen/ProductionContainer';
 
 function App() {
@@ -81,6 +80,7 @@ function App() {
           }
         />
         <Route path="/food-production" component={ProductionContainer} />
+        <Route path="/drink-production" component={ProductionContainer} />
         <Route
           path="/"
           render={(props) => (user.auth ? <Home /> : <Redirect to="/login" />)}

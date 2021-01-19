@@ -7,8 +7,9 @@ import ProductionOrder from './ProductionOrder';
 export default function ProductionContainer(props) {
   const [orders, setOrders] = useState([]);
   const [selectedOrders, setSelectedOrders] = useState([]);
+  const data = { is_food: props.location.is_food };
   useEffect(() => {
-    Axios.get(`/api/orders/production`).then((res) => {
+    Axios.get(`/api/orders/production`, data).then((res) => {
       const orderItems = res.data;
       const orders = [];
       orderItems.forEach((item) => {
@@ -18,6 +19,7 @@ export default function ProductionContainer(props) {
       });
       setOrders(orders);
     });
+    // }, []);
   }, [orders]);
   let orderElements = [];
   if (orders) {
@@ -33,10 +35,16 @@ export default function ProductionContainer(props) {
       );
     });
   }
+  let title;
+  if (props.location.is_food) {
+    title = 'Food';
+  } else {
+    title = 'Drink';
+  }
 
   return (
     <div className="prod-container">
-      <h1>Production Screen</h1>
+      <h1>{`${title} Production Screen`}</h1>
 
       <div className="prod-order-container">{orderElements}</div>
     </div>
