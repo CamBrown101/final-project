@@ -1,9 +1,10 @@
-@import '../../base';
+@import "../../base";
 
 .menu-item-container {
   display: flex;
   justify-content: flex-start;
   margin-right: 1%;
+  width: 930px;
 }
 .category-tab {
   display: flex;
@@ -20,9 +21,12 @@
     margin: 10px 0 0 30px;
   }
 }
+.category-selectors {
+  justify-self: end;
+}
 .item-container {
-  height: 100vh;
   display: flex;
   flex-wrap: wrap;
   margin: 0;
+  width: 60;
 }
