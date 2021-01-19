@@ -12,7 +12,6 @@ import './Home.scss';
 export default function Home(props) {
   const { user, logout } = useContext(UserContext);
   const [menu, setMenu] = useState([]);
-  const [orders, setOrders] = useState([]);
   const [tables, setTables] = useState([]);
   const [table, setTable] = useState({});
   const [seat, setSeat] = useState(1);
@@ -22,17 +21,6 @@ export default function Home(props) {
     });
     Axios.get('/api/tables').then((res) => {
       setTables(res.data);
-    });
-    Axios.get(`/api/orders/production`).then((res) => {
-      const orderItems = res.data;
-      const orders = [];
-      orderItems.forEach((item) => {
-        orders[item.order_id] = orders[item.order_id]
-          ? [...orders[item.order_id], item]
-          : [item];
-      });
-      console.log(orders);
-      setOrders(orders);
     });
   }, []);
 
@@ -51,7 +39,7 @@ export default function Home(props) {
           <Link
             to={{
               pathname: '/food-production',
-              state: { orders: orders },
+              // state: { orders: orders },
               something: table,
             }}>
             <button className="logout-button">Food Production</button>
