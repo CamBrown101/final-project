@@ -196,5 +196,22 @@ module.exports = (db) => {
     });
   });
 
+  router.post("/:id/make", (req, res) => {
+    const order = req.params.id;
+    db.query(
+      `
+              UPDATE order_items
+              SET is_made = TRUE
+              WHERE order_id = $1`,
+      [order]
+    )
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   return router;
 };
