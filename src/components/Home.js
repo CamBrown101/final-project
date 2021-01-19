@@ -71,6 +71,7 @@ export default function Home(props) {
               setTable={setTable}
               setBill={props.setBill}
               table={table}
+              bill={props.bill}
             />
             <SeatContainer setSeat={setSeat} table={table} seat={seat} />
           </div>

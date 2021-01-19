@@ -3,9 +3,23 @@
 .table-item {
   background-color: $project-white;
   border: black solid 1px;
-  width: 100%;
-  height: 50px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .selected {
   background-color: lightgrey;
+}
+.seats {
+  margin: 0;
+}
+.employee {
+  margin: 0;
+}
+.table-number {
+  margin: 0;
+  font-size: 3em;
 }

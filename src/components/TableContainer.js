@@ -1,8 +1,14 @@
-import React from "react";
-import TableItem from "./TableItem";
-import "./TableContainer.scss";
+import React from 'react';
+import TableItem from './TableItem';
+import './TableContainer.scss';
 
-export default function TableContainer({ setTable, setBill, tables, table }) {
+export default function TableContainer({
+  bill,
+  setTable,
+  setBill,
+  tables,
+  table,
+}) {
   const tableItems = tables.map((tableInfo) => (
     <TableItem
       key={tableInfo.id}
@@ -13,6 +19,7 @@ export default function TableContainer({ setTable, setBill, tables, table }) {
       setTable={setTable}
       setBill={setBill}
       table={table}
+      bill={bill}
     />
   ));
 
