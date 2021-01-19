@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MenuItem from './MenuItem';
 import './MenuContainer.scss';
+import SearchBar from './SearchBar';
 
 export default function MenuContainer({ setBill, bill, menu, seat, category }) {
   const menuItems = menu
@@ -18,10 +19,13 @@ export default function MenuContainer({ setBill, bill, menu, seat, category }) {
         seat={seat}
       />
     ));
-
+  const [menuSearch, setMenuSearch] = useState('');
   return (
     <div className="menu-item-container">
-      <div className="item-container">{menuItems}</div>
+      <div>
+        <SearchBar menuSearch={menuSearch} setMenuSearch={setMenuSearch} />
+        <div className="item-container">{menuItems}</div>
+      </div>
       <div className="category-selectors">
         <div className="category-tab">
           <p className="category-selector">category 1</p>
