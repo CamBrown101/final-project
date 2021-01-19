@@ -1,6 +1,6 @@
-import React from "react";
-import MenuItem from "./MenuItem";
-import "./MenuContainer.scss";
+import React from 'react';
+import MenuItem from './MenuItem';
+import './MenuContainer.scss';
 
 export default function MenuContainer({ setBill, bill, menu, seat, category }) {
   const menuItems = menu
@@ -18,5 +18,27 @@ export default function MenuContainer({ setBill, bill, menu, seat, category }) {
         seat={seat}
       />
     ));
-  return <div className="item-container">{menuItems}</div>;
+
+  return (
+    <div className="menu-item-container">
+      <div className="item-container">{menuItems}</div>
+      <div className="category-selectors">
+        <div className="category-tab">
+          <p className="category-selector">category 1</p>
+        </div>
+        <div className="category-tab">
+          <p className="category-selector">category 1</p>
+        </div>
+        <div className="category-tab">
+          <p className="category-selector">category 1</p>
+        </div>
+        <div className="category-tab">
+          <p className="category-selector">category 1</p>
+        </div>
+        <div className="category-tab">
+          <p className="category-selector">category 1</p>
+        </div>
+      </div>
+    </div>
+  );
 }
