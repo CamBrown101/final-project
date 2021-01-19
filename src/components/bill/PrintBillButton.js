@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 export default function PrintBillButton({
   email,
@@ -9,51 +9,56 @@ export default function PrintBillButton({
   bill,
   data,
 }) {
-  const [printToggle, setPrintToggle] = useState('hide');
-  let cssClass = 'print-button button';
+  const [printToggle, setPrintToggle] = useState("hide");
+  let cssClass = "print-button button";
   if (!itemsToRender.length) {
-    cssClass += ' opacity';
+    cssClass += " opacity";
   }
-  useEffect(() => {
-    setPrintToggle('hide');
-  }, [itemsToRender]);
+  // useEffect(() => {
+  //   console.log("a");
+  //   setPrintToggle("hide");
+  // }, [itemsToRender]);
   return (
     <div className="print-section">
       <div
         className={cssClass}
         onClick={() => {
           if (!itemsToRender.length) {
-            setPrintToggle('hide');
+            setPrintToggle("hide");
           } else {
-            printToggle === 'hide'
-              ? setPrintToggle('show')
-              : setPrintToggle('hide');
+            printToggle === "hide"
+              ? setPrintToggle("show")
+              : setPrintToggle("hide");
           }
-        }}>
+        }}
+      >
         Print
       </div>
       <input
         value={email}
-        className={printToggle + ' edit-input'}
+        className={printToggle + " edit-input"}
         onChange={(event) => {
           setEmail(event.target.value);
-        }}></input>
+        }}
+      ></input>
       <div className="confirm-cancel-buttons">
         <div
-          className={printToggle + ' button send-button'}
+          className={printToggle + " button send-button"}
           onClick={() => {
             printBill(email, itemsToRender, tableInfo, bill);
-            setEmail('');
-            setPrintToggle('hide');
-          }}>
+            setEmail("");
+            setPrintToggle("hide");
+          }}
+        >
           Confrim
         </div>
         <div
-          className={printToggle + ' button cancel-button'}
+          className={printToggle + " button cancel-button"}
           onClick={() => {
-            setEmail('');
-            setPrintToggle('hide');
-          }}>
+            setEmail("");
+            setPrintToggle("hide");
+          }}
+        >
           Cancel
         </div>
       </div>
