@@ -11,6 +11,7 @@ import {
   getBillData,
   getUnpaidItems,
   getItemsToRender,
+  updateBill,
 } from "./BillHelpers";
 import PayButton from "./PayButton";
 import SendButton from "./SendButton";
@@ -30,7 +31,6 @@ export default function BillContainer({
   const [selected, setSelected] = useState(null);
   const data = getBillData(tableInfo.orderId, bill.items);
   const unpaidItems = getUnpaidItems(tableInfo.items);
-  //Changes Item Id's into Item objects
 
   const itemsToRender = getItemsToRender(bill.items, unpaidItems, menu);
   useEffect(() => {
@@ -41,6 +41,7 @@ export default function BillContainer({
     let newTotal = 0;
     let newSubtotal = 0;
     let newTax = 0;
+    console.log(itemsToRender);
     itemsToRender.forEach((item) => {
       newSubtotal += item.price;
       newTax = newSubtotal * 0.13;
@@ -56,7 +57,11 @@ export default function BillContainer({
   }, [tableInfo, seat]);
 
   useEffect(() => {
-    if (itemsToRender[selected]) itemsToRender[selected].seat = seat;
+    if (itemsToRender[selected]) {
+      const upData = { seat: seat, item: itemsToRender[selected].orderItemId };
+      updateBill(tableInfo, upData);
+      itemsToRender[selected].seat = seat;
+    }
   }, [seat]);
 
   const billItems = itemsToRender.map((item, index) => (

@@ -4,6 +4,10 @@ export const sendBill = (tableInfo, data) => {
   return Axios.post(`api/orders/${tableInfo.orderId}/items`, data);
 };
 
+export const updateBill = (tableInfo, data) => {
+  return Axios.post(`api/orders/${tableInfo.orderId}/seat-update`, data);
+};
+
 export const formatBillToPrint = (billToPrint, bill) => {
   let formattedBill = "";
   billToPrint.forEach(
@@ -92,6 +96,7 @@ export const getItemsToRender = (itemsOnBill, unpaidItems, menu) => {
           const elementCopy = { ...element };
           elementCopy.mods = item.mods;
           elementCopy.seat = item.seat_number;
+          elementCopy.orderItemId = item.order_item_id;
           itemsToRender.push(elementCopy);
         }
       });
