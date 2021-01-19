@@ -4,6 +4,8 @@
   background-color: $project-white;
   width: 25%;
   height: 70px;
+  min-width: 85px;
+  max-width: 120px;
 }
 .menu-item-inside {
   border: black solid 1px;
