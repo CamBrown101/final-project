@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import './ProductionOrder.scss';
-import './ProductionOrderItem';
-import ProductionOrderItem from './ProductionOrderItem';
+import React, { useState } from "react";
+import "./ProductionOrder.scss";
+import "./ProductionOrderItem";
+import ProductionOrderItem from "./ProductionOrderItem";
 
 export default function ProductionOrder({
   setSelectedOrders,
@@ -10,14 +10,16 @@ export default function ProductionOrder({
   items,
 }) {
   const [selectedItems, setSelectedItems] = useState([]);
-  let cssClass = '';
-  if (selectedOrders.find((ele) => ele === id)) {
-    cssClass = 'order-selected';
+  let cssClass = "";
+  if (selectedOrders.find((ele) => ele === id) !== undefined) {
+    cssClass = "order-selected";
   }
-  const orders = items.map((item) => {
+
+  const orders = items.map((item, index) => {
     return (
       <ProductionOrderItem
-        id={item.id}
+        key={index}
+        id={index}
         name={item.name}
         mods={item.mods}
         selectedItems={selectedItems}
@@ -32,11 +34,11 @@ export default function ProductionOrder({
 
   return (
     <div
-      className={'prod-order ' + cssClass}
+      className={"prod-order " + cssClass}
       onClick={() => {
         setSelectedOrders([...selectedOrders, id]);
-        if (selectedOrders.find((ele) => ele === id)) {
-          cssClass = '';
+        if (selectedOrders.find((ele) => ele === id) !== undefined) {
+          cssClass = "";
           setSelectedOrders(
             [...selectedOrders].splice(
               [...selectedOrders].find((ele) => ele === id),
@@ -44,7 +46,8 @@ export default function ProductionOrder({
             )
           );
         }
-      }}>
+      }}
+    >
       <h3> ORDER NUMBER: {items[0].order_id}</h3>
       {orders}
     </div>

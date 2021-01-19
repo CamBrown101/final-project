@@ -1,5 +1,5 @@
-import React from 'react';
-import './ProductionOrderItem.scss';
+import React from "react";
+import "./ProductionOrderItem.scss";
 
 export default function ProductionOrderItem({
   name,
@@ -8,11 +8,11 @@ export default function ProductionOrderItem({
   selectedItems,
   setSelectedItems,
 }) {
-  const modBoolean = mods === 'null';
+  const modBoolean = mods === "null";
   console.log(selectedItems);
-  let cssClass = '';
-  if (selectedItems.find((ele) => ele === id)) {
-    cssClass = 'item-selected';
+  let cssClass = "";
+  if (selectedItems.find((ele) => ele === id) !== undefined) {
+    cssClass = "item-selected";
   }
   return (
     <li
@@ -20,8 +20,8 @@ export default function ProductionOrderItem({
       onClick={(event) => {
         event.stopPropagation();
         setSelectedItems([...selectedItems, id]);
-        if (selectedItems.find((ele) => ele === id)) {
-          cssClass = '';
+        if (selectedItems.find((ele) => ele === id) !== undefined) {
+          cssClass = "";
           setSelectedItems(
             [...selectedItems].splice(
               [...selectedItems].find((ele) => ele === id),
@@ -29,7 +29,8 @@ export default function ProductionOrderItem({
             )
           );
         }
-      }}>
+      }}
+    >
       <div className="prod-item">
         <p className="prod-item-name">{name}</p>
       </div>
