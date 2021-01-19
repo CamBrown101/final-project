@@ -38,10 +38,16 @@ export default function Home(props) {
           <Link
             to={{
               pathname: '/food-production',
-              // state: { orders: orders },
-              something: table,
+              is_food: true,
             }}>
             <button className="logout-button">Food Production</button>
+          </Link>
+          <Link
+            to={{
+              pathname: '/drink-production',
+              is_food: false,
+            }}>
+            <button className="logout-button">Drink Production</button>
           </Link>
         </div>
         <div className="container">

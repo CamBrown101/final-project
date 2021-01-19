@@ -80,6 +80,7 @@ function App() {
           }
         />
         <Route path="/food-production" component={ProductionContainer} />
+        <Route path="/drink-production" component={ProductionContainer} />
         <Route
           path="/"
           render={(props) => (user.auth ? <Home /> : <Redirect to="/login" />)}
