@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import './BillContainer.scss';
-import BillHeader from './BillHeader';
-import BillItem from './BillItem';
+import React, { useEffect, useState } from "react";
+import "./BillContainer.scss";
+import BillHeader from "./BillHeader";
+import BillItem from "./BillItem";
 import {
   sendBill,
   // formatBillToPrint,
@@ -9,13 +9,15 @@ import {
   clearBill,
   payBill,
   getBillData,
-} from './BillHelpers';
-import PayButton from './PayButton';
-import SendButton from './SendButton';
-import CancelButton from './CancelButton';
-import EditButton from './EditButton';
-import PrintBillButton from './PrintBillButton';
-import BillTotals from './BillTotals';
+  getUnpaidItems,
+  getItemsToRender,
+} from "./BillHelpers";
+import PayButton from "./PayButton";
+import SendButton from "./SendButton";
+import CancelButton from "./CancelButton";
+import EditButton from "./EditButton";
+import PrintBillButton from "./PrintBillButton";
+import BillTotals from "./BillTotals";
 
 export default function BillContainer({
   bill,
@@ -26,35 +28,11 @@ export default function BillContainer({
   seat,
 }) {
   const [selected, setSelected] = useState(null);
-
   const data = getBillData(tableInfo.orderId, bill.items);
-  let unpaidItems = [];
-  let itemsOnBill = { ...tableInfo.items };
-  itemsOnBill = itemsOnBill[0];
-  if (itemsOnBill) {
-    itemsOnBill.forEach((element) => {
-      if (!element.is_payed) {
-        unpaidItems.push(element);
-      }
-    });
-  }
-
+  const unpaidItems = getUnpaidItems(tableInfo.items);
   //Changes Item Id's into Item objects
-  const billCopy = [...bill.items];
-  let itemsToRender = [...billCopy.reverse()];
-  if (unpaidItems) {
-    for (let item of unpaidItems) {
-      menu.forEach((element) => {
-        if (element.id === item.item) {
-          const elementCopy = { ...element };
-          elementCopy.mods = item.mods;
-          elementCopy.seat = item.seat_number;
-          itemsToRender.push(elementCopy);
-        }
-      });
-    }
-  }
 
+  const itemsToRender = getItemsToRender(bill.items, unpaidItems, menu);
   useEffect(() => {
     let newTotal = 0;
     let newSubtotal = 0;
@@ -85,8 +63,8 @@ export default function BillContainer({
     />
   ));
 
-  const [mod, setMod] = useState('');
-  const [email, setEmail] = useState('');
+  const [mod, setMod] = useState("");
+  const [email, setEmail] = useState("");
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
