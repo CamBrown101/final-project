@@ -1,21 +1,39 @@
-import axios from 'axios';
-import React, { useState } from 'react';
+import Axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import './ProductionContainer.scss';
 import './ProductionOrder';
 import ProductionOrder from './ProductionOrder';
 
 export default function ProductionContainer(props) {
+  const [orders, setOrders] = useState([]);
   const [selectedOrders, setSelectedOrders] = useState([]);
-  const orderElements = props.location.state.orders.map((order, index) => {
-    return (
-      <ProductionOrder
-        items={order}
-        id={index}
-        selectedOrders={selectedOrders}
-        setSelectedOrders={setSelectedOrders}
-      />
-    );
-  });
+
+  useEffect(() => {
+    Axios.get(`/api/orders/production`).then((res) => {
+      const orderItems = res.data;
+      const orders = [];
+      orderItems.forEach((item) => {
+        orders[item.order_id] = orders[item.order_id]
+          ? [...orders[item.order_id], item]
+          : [item];
+      });
+      setOrders(orders);
+    });
+  }, [orders]);
+  let orderElements = [];
+  if (orders) {
+    orderElements = orders.map((order, index) => {
+      return (
+        <ProductionOrder
+          key={index}
+          id={index}
+          items={order}
+          selectedOrders={selectedOrders}
+          setSelectedOrders={setSelectedOrders}
+        />
+      );
+    });
+  }
 
   return (
     <div className="prod-container">
