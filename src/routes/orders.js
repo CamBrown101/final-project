@@ -217,5 +217,23 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/:id/seat-update", (req, res) => {
+    const order = req.params.id;
+    const itemToUpdate = req.body.item;
+    const seat = req.body.seat;
+    db.query(
+      `
+              UPDATE order_items
+              SET seat_number = $3
+              WHERE order_id = $1 AND id = $2`,
+      [order, itemToUpdate, seat]
+    )
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
   return router;
 };

@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../UserContext';
-import './TableItem.scss';
-import Axios from 'axios';
+import React, { useContext } from "react";
+import { UserContext } from "../UserContext";
+import "./TableItem.scss";
+import Axios from "axios";
 
 export default function TableItem(props) {
   const { user } = useContext(UserContext);
@@ -35,7 +35,7 @@ export default function TableItem(props) {
     });
   };
   let className =
-    props.table.tableId === props.id ? 'table-item selected' : 'table-item';
+    props.table.tableId === props.id ? "table-item selected" : "table-item";
   const clearBill = () => {
     props.setTable([]);
   };
@@ -53,7 +53,8 @@ export default function TableItem(props) {
       className={className}
       onClick={() => {
         makeSelection(props.id);
-      }}>
+      }}
+    >
       <h3 className="table-number">{props.id}</h3>
       <h3 className="employee">Employee: {props.employee}</h3>
       <h3 className="seats">{props.seats} Seats</h3>

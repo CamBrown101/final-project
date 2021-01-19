@@ -22,7 +22,6 @@ export default function ProductionOrderItem({
           cssClass = "";
           const rem = selectedItems.findIndex((ele) => ele === id);
           const newArr = [...selectedItems];
-          console.log(rem, newArr);
           newArr.splice(rem, 1);
           setSelectedItems(newArr);
         } else setSelectedItems([...selectedItems, id]);
