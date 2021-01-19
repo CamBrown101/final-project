@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../UserContext';
-import { Redirect, Link } from 'react-router-dom';
-import MenuContainer from './menu/MenuContainer';
-import BillContainer from './bill/BillContainer';
-import TableContainer from './TableContainer';
-import SeatContainer from './seats/SeatContainer';
-import Axios from 'axios';
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../UserContext";
+import { Redirect, Link } from "react-router-dom";
+import MenuContainer from "./menu/MenuContainer";
+import BillContainer from "./bill/BillContainer";
+import TableContainer from "./TableContainer";
+import SeatContainer from "./seats/SeatContainer";
+import Axios from "axios";
 
-import './Home.scss';
+import "./Home.scss";
 
 export default function Home(props) {
   const { user, logout } = useContext(UserContext);
@@ -15,11 +15,12 @@ export default function Home(props) {
   const [tables, setTables] = useState([]);
   const [table, setTable] = useState({});
   const [seat, setSeat] = useState(1);
+  const [category, setCategory] = useState(4);
   useEffect(() => {
-    Axios.get('/api/menu').then((res) => {
+    Axios.get("/api/menu").then((res) => {
       setMenu(res.data);
     });
-    Axios.get('/api/tables').then((res) => {
+    Axios.get("/api/tables").then((res) => {
       setTables(res.data);
     });
   }, []);
@@ -37,16 +38,18 @@ export default function Home(props) {
           </button>
           <Link
             to={{
-              pathname: '/food-production',
+              pathname: "/food-production",
               is_food: true,
-            }}>
+            }}
+          >
             <button className="logout-button">Food Production</button>
           </Link>
           <Link
             to={{
-              pathname: '/drink-production',
+              pathname: "/drink-production",
               is_food: false,
-            }}>
+            }}
+          >
             <button className="logout-button">Drink Production</button>
           </Link>
         </div>
@@ -64,6 +67,7 @@ export default function Home(props) {
             setBill={props.setBill}
             bill={props.bill}
             seat={seat}
+            category={category}
           />
           <div className="table-selectors">
             <TableContainer
