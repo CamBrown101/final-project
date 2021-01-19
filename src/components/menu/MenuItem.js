@@ -22,8 +22,10 @@ export default function MenuItem({ name, price, id, setBill, bill, seat }) {
           tax: newTax,
         });
       }}>
-      <h3 className="item-name">{name}</h3>
-      <h3 className="price">${price}</h3>
+      <div className="menu-item-inside">
+        <h3 className="item-name">{name}</h3>
+        <h3 className="price">${price}</h3>
+      </div>
     </div>
   );
 }

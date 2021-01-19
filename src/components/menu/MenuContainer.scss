@@ -1,7 +1,26 @@
 @import '../../base';
 
+.menu-item-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 1%;
+}
+.category-tab {
+  display: flex;
+  background-color: white;
+  width: 50px;
+  height: 100px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: thin solid black;
+  .category-selector {
+    transform-origin: 0 0;
+    transform: rotate(90deg);
+    position: absolute;
+    margin: 10px 0 0 30px;
+  }
+}
 .item-container {
-  width: 60%;
   height: 100vh;
   display: flex;
   flex-wrap: wrap;
