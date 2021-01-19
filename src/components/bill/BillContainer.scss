@@ -1,4 +1,4 @@
-@import "../../base";
+@import '../../base';
 
 .bill-container {
   height: 70%;
@@ -104,4 +104,8 @@
   overflow: auto;
   z-index: 1;
   background-color: $project-white;
+}
+.inputs-container {
+  display: flex;
+  flex-direction: column;
 }
