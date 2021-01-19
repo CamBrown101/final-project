@@ -14,10 +14,6 @@ export default function PrintBillButton({
   if (!itemsToRender.length) {
     cssClass += " opacity";
   }
-  // useEffect(() => {
-  //   console.log("a");
-  //   setPrintToggle("hide");
-  // }, [itemsToRender]);
   return (
     <div className="print-section">
       <div
