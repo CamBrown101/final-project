@@ -1,9 +1,27 @@
 .prod-order {
   background-color: white;
-  width: 15em;
+  width: 150px;
   padding: 1em;
   margin-left: 2em;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
 }
 .order-selected {
   border: thick solid greenyellow;
+}
+.mark-complete {
+  height: 50px;
+  justify-self: flex-end;
+  background-color: greenyellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
 }

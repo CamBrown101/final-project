@@ -7,7 +7,7 @@ import ProductionOrder from './ProductionOrder';
 export default function ProductionContainer(props) {
   const [orders, setOrders] = useState([]);
   const [selectedOrders, setSelectedOrders] = useState([]);
-
+  console.log(orders);
   useEffect(() => {
     Axios.get(`/api/orders/production`).then((res) => {
       const orderItems = res.data;
