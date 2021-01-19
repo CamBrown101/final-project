@@ -15,7 +15,7 @@ export default function Home(props) {
   const [tables, setTables] = useState([]);
   const [table, setTable] = useState({});
   const [seat, setSeat] = useState(1);
-  const [category, setCategory] = useState(4);
+  const [category, setCategory] = useState(0);
   useEffect(() => {
     Axios.get("/api/menu").then((res) => {
       setMenu(res.data);
