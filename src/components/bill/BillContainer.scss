@@ -12,6 +12,10 @@
     flex-direction: column;
     justify-content: space-between;
   }
+  .bill-items {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
   .item {
     display: flex;
     justify-content: space-between;
