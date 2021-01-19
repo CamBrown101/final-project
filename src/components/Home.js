@@ -16,12 +16,16 @@ export default function Home(props) {
   const [table, setTable] = useState({});
   const [seat, setSeat] = useState(1);
   const [category, setCategory] = useState(0);
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     Axios.get("/api/menu").then((res) => {
       setMenu(res.data);
     });
     Axios.get("/api/tables").then((res) => {
       setTables(res.data);
+    });
+    Axios.get("/api/categories").then((res) => {
+      setCategories(res.data);
     });
   }, []);
 
@@ -69,6 +73,7 @@ export default function Home(props) {
             seat={seat}
             category={category}
             setCategory={setCategory}
+            categories={categories}
           />
           <div className="table-selectors">
             <TableContainer
