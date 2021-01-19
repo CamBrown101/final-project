@@ -1,10 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get('/', (req, res) => {
-    console.log('menu route');
-    db.query(`SELECT * FROM menu_items;`)
+  router.get("/", (req, res) => {
+    console.log("menu route");
+    db.query(
+      `
+              SELECT menu_items.*, categories.name AS category
+              FROM menu_items
+              JOIN categories ON menu_items.category_id = categories.id;`
+    )
       .then((data) => {
         const menu = data.rows;
         res.send(menu);
@@ -14,8 +19,8 @@ module.exports = (db) => {
       });
   });
 
-  router.get('/:id', (req, res) => {
-    console.log('menu item id route');
+  router.get("/:id", (req, res) => {
+    console.log("menu item id route");
     const item = req.params.id;
     db.query(
       `SELECT * FROM menu_items
@@ -31,7 +36,7 @@ module.exports = (db) => {
       });
   });
 
-  router.post('/', (req, res) => {
+  router.post("/", (req, res) => {
     const name = req.body.name;
     const price = req.body.price;
     const description = req.body.description;
@@ -67,8 +72,8 @@ module.exports = (db) => {
           return res.status(200).send(employee);
         })
         .catch((err) => {
-          console.log('error');
-          return res.status(500).send('error');
+          console.log("error");
+          return res.status(500).send("error");
         });
     });
   });
