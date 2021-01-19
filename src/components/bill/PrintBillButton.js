@@ -30,32 +30,34 @@ export default function PrintBillButton({
       >
         Print
       </div>
-      <input
-        value={email}
-        className={printToggle + " edit-input"}
-        onChange={(event) => {
-          setEmail(event.target.value);
-        }}
-      ></input>
-      <div className="confirm-cancel-buttons">
-        <div
-          className={printToggle + " button send-button"}
-          onClick={() => {
-            printBill(email, itemsToRender, tableInfo, bill);
-            setEmail("");
-            setPrintToggle("hide");
+      <div className={printToggle + " print-dropdown"}>
+        <input
+          value={email}
+          className={"edit-input"}
+          onChange={(event) => {
+            setEmail(event.target.value);
           }}
-        >
-          Confrim
-        </div>
-        <div
-          className={printToggle + " button cancel-button"}
-          onClick={() => {
-            setEmail("");
-            setPrintToggle("hide");
-          }}
-        >
-          Cancel
+        ></input>
+        <div className="confirm-cancel-buttons">
+          <div
+            className={"button send-button"}
+            onClick={() => {
+              printBill(email, itemsToRender, tableInfo, bill);
+              setEmail("");
+              setPrintToggle("hide");
+            }}
+          >
+            Confrim
+          </div>
+          <div
+            className={"button cancel-button"}
+            onClick={() => {
+              setEmail("");
+              setPrintToggle("hide");
+            }}
+          >
+            Cancel
+          </div>
         </div>
       </div>
     </div>

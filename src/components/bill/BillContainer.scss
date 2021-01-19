@@ -96,4 +96,12 @@
   z-index: 1;
   margin-top: 30px;
   margin-right: -159px;
+  background-color: $project-white;
+}
+.print-dropdown {
+  position: absolute;
+  min-width: 230px;
+  overflow: auto;
+  z-index: 1;
+  background-color: $project-white;
 }
