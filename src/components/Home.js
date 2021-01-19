@@ -68,6 +68,7 @@ export default function Home(props) {
             bill={props.bill}
             seat={seat}
             category={category}
+            setCategory={setCategory}
           />
           <div className="table-selectors">
             <TableContainer
