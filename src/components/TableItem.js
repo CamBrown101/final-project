@@ -48,7 +48,6 @@ export default function TableItem(props) {
       getOrders();
     }
   };
-  console.log(props);
   return (
     <div
       className={className}
