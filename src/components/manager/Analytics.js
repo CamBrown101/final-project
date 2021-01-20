@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Analytic.scss';
 import { CanvasJSChart } from 'canvasjs-react-charts';
 import Canvas from 'canvas';
@@ -6,6 +6,7 @@ import Canvas from 'canvas';
 export default function Analytics() {
   const options2 = {
     animationEnabled: true,
+    animationDuration: 10000,
     exportEnabled: true,
     theme: 'dark2', //"light1", "dark1", "dark2"
     title: {
@@ -40,6 +41,7 @@ export default function Analytics() {
   };
   const options1 = {
     animationEnabled: true,
+    animationDuration: 2000,
     exportEnabled: true,
     theme: 'dark2', //"light1", "dark1", "dark2"
     title: {
@@ -56,13 +58,13 @@ export default function Analytics() {
         indexLabelPlacement: 'outside',
         dataPoints: [
           { x: 10, y: 71 },
-          { x: 20, y: 55 },
-          { x: 30, y: 50 },
-          { x: 40, y: 65 },
+          { x: 20, y: 23 },
+          { x: 30, y: 45 },
+          { x: 40, y: 13 },
           { x: 50, y: 71 },
-          { x: 60, y: 68 },
+          { x: 60, y: 43 },
           { x: 70, y: 38 },
-          { x: 80, y: 92, indexLabel: 'Highest' },
+          { x: 80, y: 93, indexLabel: 'Highest' },
           { x: 90, y: 54 },
           { x: 100, y: 60 },
           { x: 110, y: 21 },
@@ -73,11 +75,18 @@ export default function Analytics() {
     ],
   };
 
+  const [option, setOption] = useState({ ...options1 });
+  const [key, setKey] = useState(1);
   return (
     <div className="analytic-container">
       <h1>Analytics</h1>
-      <CanvasJSChart options={options1} />
-      <CanvasJSChart options={options2} />
+      <CanvasJSChart options={option} key={key} />
+      <button
+        className="options-button"
+        onClick={() => {
+          setOption({ ...options2 });
+          setKey(2);
+        }}></button>
     </div>
   );
 }
