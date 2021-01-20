@@ -10,6 +10,7 @@ export default function PrintBillInput({ emails, setEmails, index }) {
 
   return (
     <input
+      type="email"
       value={email}
       placeholder={
         index ? `Seat ${index} Email Address` : 'Total Bill For Table'

@@ -9,7 +9,12 @@ export default function PrintBillButton({
 }) {
   const [emails, setEmails] = useState(['']);
   const billsBySeat = [
-    { subtotal: bill.subtotal, tax: bill.tax, total: bill.total },
+    {
+      items: [...itemsToRender],
+      subtotal: bill.subtotal,
+      tax: bill.tax,
+      total: bill.total,
+    },
   ];
   const totalBillsBySeat = () => {
     //creates empty objects per seat on table
@@ -75,7 +80,7 @@ export default function PrintBillButton({
           <div
             className={'button send-button'}
             onClick={() => {
-              printBill(emails, itemsToRender, tableInfo, billsBySeat);
+              printBill(emails, billsBySeat, tableInfo);
               setEmails([]);
               setPrintToggle('hide');
             }}>
