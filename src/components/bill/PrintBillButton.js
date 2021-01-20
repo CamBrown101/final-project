@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { totalBillsBySeat } from "./BillHelpers";
 import PrintBillInput from "./PrintBillInput";
 
 export default function PrintBillButton({
@@ -9,44 +10,44 @@ export default function PrintBillButton({
 }) {
   const [emails, setEmails] = useState([""]);
 
-  const totalBillsBySeat = () => {
-    const billsBySeat = [
-      {
-        items: [...itemsToRender],
-        subtotal: bill.subtotal,
-        tax: bill.tax,
-        total: bill.total,
-      },
-    ];
-    //creates empty objects per seat on table
-    for (let i = 1; i <= tableInfo.seats; i++) {
-      billsBySeat.push({ items: [], subtotal: 0, tax: 0, total: 0 });
-    }
-    //adds totals to billsBySeat array where index = seatnumber 0 being bill total
-    itemsToRender.forEach((element) => {
-      let seatNumber = element.seat;
-      if (billsBySeat[seatNumber]) {
-        billsBySeat[seatNumber].items.push(element);
-        billsBySeat[seatNumber].subtotal += element.price;
-        billsBySeat[seatNumber].tax += element.price * 0.13;
-        billsBySeat[seatNumber].total += element.price * 1.13;
-      }
-    });
+  // const totalBillsBySeat = (itemsToRender, bill, tableInfo) => {
+  //   const billsBySeat = [
+  //     {
+  //       items: [...itemsToRender],
+  //       subtotal: bill.subtotal,
+  //       tax: bill.tax,
+  //       total: bill.total,
+  //     },
+  //   ];
+  //   //creates empty objects per seat on table
+  //   for (let i = 1; i <= tableInfo.seats; i++) {
+  //     billsBySeat.push({ items: [], subtotal: 0, tax: 0, total: 0 });
+  //   }
+  //   //adds totals to billsBySeat array where index = seatnumber 0 being bill total
+  //   itemsToRender.forEach((element) => {
+  //     let seatNumber = element.seat;
+  //     if (billsBySeat[seatNumber]) {
+  //       billsBySeat[seatNumber].items.push(element);
+  //       billsBySeat[seatNumber].subtotal += element.price;
+  //       billsBySeat[seatNumber].tax += element.price * 0.13;
+  //       billsBySeat[seatNumber].total += element.price * 1.13;
+  //     }
+  //   });
 
-    //This is a test function to compare bill totals equal overall total
-    // const checkTotal = () => {
-    //   let itemTotal = 0;
-    //   for (let i = 1; i < billsBySeat.length; i++) {
-    //     itemTotal += billsBySeat[i].total;
-    //   }
+  //   //This is a test function to compare bill totals equal overall total
+  //   // const checkTotal = () => {
+  //   //   let itemTotal = 0;
+  //   //   for (let i = 1; i < billsBySeat.length; i++) {
+  //   //     itemTotal += billsBySeat[i].total;
+  //   //   }
 
-    //   return itemTotal.toFixed(2) === billsBySeat[0].total.toFixed(2);
-    // };
-    // console.log(checkTotal());
-    return billsBySeat;
-  };
+  //   //   return itemTotal.toFixed(2) === billsBySeat[0].total.toFixed(2);
+  //   // };
+  //   // console.log(checkTotal());
+  //   return billsBySeat;
+  // };
 
-  const billsBySeat = totalBillsBySeat();
+  const billsBySeat = totalBillsBySeat(itemsToRender, bill, tableInfo);
 
   const [printToggle, setPrintToggle] = useState("hide");
   let cssClass = "print-button button";

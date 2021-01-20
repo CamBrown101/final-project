@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import Axios from "axios";
 
 export const sendBill = (tableInfo, data) => {
   return Axios.post(`api/orders/${tableInfo.orderId}/items`, data);
@@ -9,7 +9,7 @@ export const updateBill = (tableInfo, data) => {
 };
 
 export const formatBillToPrint = (billToPrint) => {
-  let formattedBill = '';
+  let formattedBill = "";
   console.log(billToPrint);
   if (billToPrint && billToPrint.items && billToPrint.total) {
     billToPrint.items.forEach((item) => {
@@ -57,14 +57,14 @@ export const clearBill = (setBill, setTable) => {
 
 export const payBill = (orderId, unpaidItems, stateItems) => {
   Axios.post(`/api/orders/${orderId}/pay`, {
-    paymentType: 'credit',
+    paymentType: "credit",
   });
   const orderIds = [];
   unpaidItems = [...unpaidItems, ...stateItems];
   unpaidItems.forEach((element) => {
     orderIds.push(element.order_item_id);
   });
-  return Axios.post('api/orders/pay', orderIds);
+  return Axios.post("api/orders/pay", orderIds);
 };
 
 export const getBillData = (orderId, items) => {
@@ -113,4 +113,41 @@ export const getItemsToRender = (itemsOnBill, unpaidItems, menu) => {
     }
   }
   return itemsToRender;
+};
+
+export const totalBillsBySeat = (itemsToRender, bill, tableInfo) => {
+  const billsBySeat = [
+    {
+      items: [...itemsToRender],
+      subtotal: bill.subtotal,
+      tax: bill.tax,
+      total: bill.total,
+    },
+  ];
+  //creates empty objects per seat on table
+  for (let i = 1; i <= tableInfo.seats; i++) {
+    billsBySeat.push({ items: [], subtotal: 0, tax: 0, total: 0 });
+  }
+  //adds totals to billsBySeat array where index = seatnumber 0 being bill total
+  itemsToRender.forEach((element) => {
+    let seatNumber = element.seat;
+    if (billsBySeat[seatNumber]) {
+      billsBySeat[seatNumber].items.push(element);
+      billsBySeat[seatNumber].subtotal += element.price;
+      billsBySeat[seatNumber].tax += element.price * 0.13;
+      billsBySeat[seatNumber].total += element.price * 1.13;
+    }
+  });
+
+  //This is a test function to compare bill totals equal overall total
+  // const checkTotal = () => {
+  //   let itemTotal = 0;
+  //   for (let i = 1; i < billsBySeat.length; i++) {
+  //     itemTotal += billsBySeat[i].total;
+  //   }
+
+  //   return itemTotal.toFixed(2) === billsBySeat[0].total.toFixed(2);
+  // };
+  // console.log(checkTotal());
+  return billsBySeat;
 };
