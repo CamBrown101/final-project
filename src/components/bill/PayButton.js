@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './BillContainer.scss';
-import PayBillBySeatButton from './PayBillBySeatButton';
+import PayBySeatButton from './PayBySeatButton';
 
 export default function PayButton({
   clearBill,
@@ -19,10 +19,10 @@ export default function PayButton({
   }
   const [payToggle, setPayToggle] = useState('hide');
 
-  const inputsToRender = [];
+  const buttonsToRender = [];
   for (let i = 0; i <= tableInfo.seats; i++) {
-    inputsToRender.push(
-      <PayBillBySeatButton
+    buttonsToRender.push(
+      <PayBySeatButton
         payBill={payBill}
         sendBill={sendBill}
         clearBill={clearBill}
@@ -40,7 +40,7 @@ export default function PayButton({
         }}>
         Pay
       </div>
-      <div className={payToggle + ' pay-dropdown'}>{inputsToRender}</div>
+      <div className={payToggle + ' pay-dropdown'}>{buttonsToRender}</div>
     </div>
   );
 }
