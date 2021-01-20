@@ -14,6 +14,7 @@ export default function PayBySeatButton({
 }) {
   return (
     <div
+      className="pay-by-seat-button"
       onClick={() => {
         if (data.orderId) {
           if (bill.items.length !== 0) {
@@ -32,7 +33,9 @@ export default function PayBySeatButton({
           }
         }
       }}>
-      <div>{seat ? `Pay for seat ${seat}` : 'Pay total bill for table'}</div>
+      <p className="pay-button-text">
+        {seat ? `Pay for seat ${seat}` : 'Pay total bill for table'}
+      </p>
     </div>
   );
 }

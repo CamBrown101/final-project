@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import "./BillContainer.scss";
-import BillHeader from "./BillHeader";
-import BillItem from "./BillItem";
+import React, { useEffect, useState } from 'react';
+import './BillContainer.scss';
+import BillHeader from './BillHeader';
+import BillItem from './BillItem';
 import {
   sendBill,
   // formatBillToPrint,
@@ -12,13 +12,13 @@ import {
   getUnpaidItems,
   getItemsToRender,
   updateBill,
-} from "./BillHelpers";
-import PayButton from "./PayButton";
-import SendButton from "./SendButton";
-import CancelButton from "./CancelButton";
-import EditButton from "./EditButton";
-import PrintBillButton from "./PrintBillButton";
-import BillTotals from "./BillTotals";
+} from './BillHelpers';
+import PayButton from './PayButton';
+import SendButton from './SendButton';
+import CancelButton from './CancelButton';
+import EditButton from './EditButton';
+import PrintBillButton from './PrintBillButton';
+import BillTotals from './BillTotals';
 
 export default function BillContainer({
   bill,
@@ -40,7 +40,7 @@ export default function BillContainer({
     let newTotal = 0;
     let newSubtotal = 0;
     let newTax = 0;
-    console.log("CHANGE");
+    console.log('CHANGE');
     itemsToRender.forEach((item) => {
       newSubtotal += item.price;
       newTax = newSubtotal * 0.13;
@@ -80,11 +80,13 @@ export default function BillContainer({
     />
   ));
 
-  const [mod, setMod] = useState("");
+  const [mod, setMod] = useState('');
   return (
     <article className="bill-container">
-      <BillHeader table={tableInfo} />
-      <ul className="bill-items">{billItems}</ul>
+      <div>
+        <BillHeader table={tableInfo} />
+        <ul className="bill-items">{billItems}</ul>
+      </div>
       <div className="bill-footer">
         <BillTotals bill={bill} />
         <div className="buttons">
@@ -96,11 +98,7 @@ export default function BillContainer({
             setBill={setBill}
             setTable={setTable}
           />
-          <CancelButton
-            setBill={setBill}
-            setTable={setTable}
-            clearBill={clearBill}
-          />
+
           <PayButton
             payBill={payBill}
             clearBill={clearBill}
@@ -126,6 +124,11 @@ export default function BillContainer({
             itemsToRender={itemsToRender}
             bill={bill}
             data={data}
+          />
+          <CancelButton
+            setBill={setBill}
+            setTable={setTable}
+            clearBill={clearBill}
           />
         </div>
       </div>

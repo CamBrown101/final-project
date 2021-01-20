@@ -1,11 +1,13 @@
 @import '../../base';
 
 .bill-container {
-  height: 70%;
-  width: 40%;
-  margin: 5% 0 5% 5%;
-  padding: 5%;
+  padding: 2%;
+  margin-left: 2%;
   background-color: $project-white;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .bill-item {
     display: flex;
@@ -13,12 +15,13 @@
     justify-content: space-between;
   }
   .bill-items {
-    max-height: 300px;
+    max-height: 475px;
     overflow-y: scroll;
   }
   .item {
     display: flex;
     justify-content: space-between;
+    font-size: 2em;
   }
   .mod {
     align-self: flex-start;
@@ -28,6 +31,7 @@
   }
   .bill-totals {
     text-align: right;
+    font-size: 1.5em;
   }
   .bill-footer {
     margin-top: 10%;
@@ -35,13 +39,17 @@
   .buttons {
     display: flex;
     padding-top: 5%;
+    flex-wrap: wrap;
+    max-width: 450px;
+    justify-content: space-evenly;
   }
   .button {
-    height: 30px;
-    width: 70px;
+    height: 60px;
+    min-width: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 5px;
   }
   .edit-section {
     display: flex;
@@ -62,6 +70,8 @@
   }
   .edit-input {
     border: thin solid black;
+    height: 1.5em;
+    font-size: 1.5em;
   }
   .cancel-button {
     background-color: red;
@@ -77,16 +87,6 @@
   }
   .opacity {
     opacity: 0.25;
-  }
-  p {
-    margin: 0;
-    margin-bottom: 2%;
-    padding: 0;
-    text-align: right;
-  }
-  ul {
-    margin: 0;
-    padding: 0;
   }
 }
 .dropdown {
@@ -109,9 +109,30 @@
   position: absolute;
   overflow: auto;
   z-index: 1;
+  background-color: darkgray;
+}
+.pay-by-seat-button {
+  border: thin solid black;
+  font-size: 1.5em;
   background-color: $project-white;
+}
+.pay-by-seat-button:hover {
+  background-color: greenyellow;
+}
+.pay-button-text {
+  padding: 5px;
+  text-align: left;
 }
 .inputs-container {
   display: flex;
   flex-direction: column;
+}
+p {
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+ul {
+  margin: 0;
+  padding: 0;
 }
