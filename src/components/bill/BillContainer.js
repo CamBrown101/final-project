@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import "./BillContainer.scss";
-import BillHeader from "./BillHeader";
-import BillItem from "./BillItem";
+import React, { useEffect, useState } from 'react';
+import './BillContainer.scss';
+import BillHeader from './BillHeader';
+import BillItem from './BillItem';
 import {
   sendBill,
   // formatBillToPrint,
@@ -12,13 +12,13 @@ import {
   getUnpaidItems,
   getItemsToRender,
   updateBill,
-} from "./BillHelpers";
-import PayButton from "./PayButton";
-import SendButton from "./SendButton";
-import CancelButton from "./CancelButton";
-import EditButton from "./EditButton";
-import PrintBillButton from "./PrintBillButton";
-import BillTotals from "./BillTotals";
+} from './BillHelpers';
+import PayButton from './PayButton';
+import SendButton from './SendButton';
+import CancelButton from './CancelButton';
+import EditButton from './EditButton';
+import PrintBillButton from './PrintBillButton';
+import BillTotals from './BillTotals';
 
 export default function BillContainer({
   bill,
@@ -77,8 +77,7 @@ export default function BillContainer({
     />
   ));
 
-  const [mod, setMod] = useState("");
-  const [email, setEmail] = useState("");
+  const [mod, setMod] = useState('');
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
@@ -118,8 +117,6 @@ export default function BillContainer({
             selected={selected}
           />
           <PrintBillButton
-            email={email}
-            setEmail={setEmail}
             printBill={printBill}
             tableInfo={tableInfo}
             itemsToRender={itemsToRender}

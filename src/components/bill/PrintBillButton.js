@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import PrintBillInput from './PrintBillInput';
 
 export default function PrintBillButton({
-  email,
-  setEmail,
   printBill,
   itemsToRender,
   tableInfo,
   bill,
-  data,
 }) {
-  const [emails, setEmails] = useState([]);
+  const [emails, setEmails] = useState(['']);
   const billsBySeat = [
     { subtotal: bill.subtotal, tax: bill.tax, total: bill.total },
   ];
@@ -53,7 +50,7 @@ export default function PrintBillButton({
   const inputsToRender = [];
   for (let i = 0; i <= tableInfo.seats; i++) {
     inputsToRender.push(
-      <PrintBillInput email={emails} setEmail={setEmails} index={i} key={i} />
+      <PrintBillInput emails={emails} setEmails={setEmails} index={i} key={i} />
     );
   }
 

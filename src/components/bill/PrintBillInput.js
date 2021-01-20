@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function PrintBillInput({ email, setEmail, index }) {
+export default function PrintBillInput({ emails, setEmails, index }) {
+  const [email, setEmail] = useState('');
+  useEffect(() => {
+    const emailsClone = [...emails];
+    emailsClone[index] = email;
+    setEmails([...emailsClone]);
+  }, [email]);
+
   return (
     <input
       value={email}
