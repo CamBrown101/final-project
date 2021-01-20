@@ -64,6 +64,7 @@ export default function BillContainer({
         unpaidItems[selected - bill.items.length].seat_number = seat;
       itemsToRender[selected].seat = seat;
     }
+    // eslint-disable-next-line
   }, [seat, itemsToRender]);
 
   const billItems = itemsToRender.map((item, index) => (
