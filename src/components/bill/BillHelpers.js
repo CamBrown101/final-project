@@ -1,4 +1,4 @@
-import Axios from "axios";
+import Axios from 'axios';
 
 export const sendBill = (tableInfo, data) => {
   return Axios.post(`api/orders/${tableInfo.orderId}/items`, data);
@@ -9,11 +9,9 @@ export const updateBill = (tableInfo, data) => {
 };
 
 export const formatBillToPrint = (billToPrint) => {
-  let formattedBill = "";
-  console.log(billToPrint);
+  let formattedBill = '';
   if (billToPrint && billToPrint.items && billToPrint.total) {
     billToPrint.items.forEach((item) => {
-      console.log(item);
       formattedBill += `<div style="display:flex;"><h3>${item.name}</h3><h3>: ${item.price}</h3></div><br></br>`;
     });
     formattedBill += `<div style="display:flex;"> <p>Subtotal: ${billToPrint.subtotal.toFixed(
@@ -25,13 +23,11 @@ export const formatBillToPrint = (billToPrint) => {
     formattedBill += `<div style="display:flex;"> <p>Total: ${billToPrint.total.toFixed(
       2
     )}</p></div><br></br>`;
-    console.log(formattedBill);
     return formattedBill;
   }
 };
 
 export const printBill = (emails, billsBySeat, table) => {
-  console.log(billsBySeat);
   // console.log(formatBillToPrint(billsBySeat));
 
   emails.forEach((ele, index) => {
@@ -55,16 +51,17 @@ export const clearBill = (setBill, setTable) => {
   setTable([]);
 };
 
-export const payBill = (orderId, unpaidItems, stateItems) => {
+export const payBill = (orderId, unpaidItems, stateItems, seatNumber) => {
   Axios.post(`/api/orders/${orderId}/pay`, {
-    paymentType: "credit",
+    paymentType: 'credit',
   });
   const orderIds = [];
   unpaidItems = [...unpaidItems, ...stateItems];
   unpaidItems.forEach((element) => {
     orderIds.push(element.order_item_id);
   });
-  return Axios.post("api/orders/pay", orderIds);
+  const data = { orderIds, seatNumber };
+  return Axios.post('api/orders/pay', data);
 };
 
 export const getBillData = (orderId, items) => {
