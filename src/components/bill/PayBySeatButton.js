@@ -1,35 +1,32 @@
 import React from 'react';
 
 export default function PayBySeatButton({
-  seat,
   payBill,
   sendBill,
   clearBill,
-  bill,
+  seat,
+  items,
+  orderId,
+  data,
   tableInfo,
   setBill,
   setTable,
-  unpaidItems,
-  data,
+  bill,
 }) {
   return (
     <div
       className="pay-by-seat-button"
       onClick={() => {
-        if (data.orderId) {
+        if (orderId) {
           if (bill.items.length !== 0) {
-            sendBill(tableInfo, data).then(() => {
-              payBill(
-                tableInfo.orderId,
-                unpaidItems,
-                bill.items,
-                seat
-              ).then(() => clearBill(setBill, setTable));
+            sendBill(tableInfo, data).then((res) => {
+              console.log(res);
+              payBill(orderId, [...items, ...res.data]).then(() =>
+                clearBill(setBill, setTable)
+              );
             });
           } else {
-            payBill(tableInfo.orderId, unpaidItems, bill.items, seat).then(() =>
-              clearBill(setBill, setTable)
-            );
+            payBill(orderId, items).then(() => clearBill(setBill, setTable));
           }
         }
       }}>

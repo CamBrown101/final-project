@@ -58,7 +58,7 @@ module.exports = (db) => {
   router.post("/pay", (req, res) => {
     const items = req.body;
     console.log("\n\n\n\n\n");
-    console.log(req.body);
+    console.log("Body:", req.body);
     let queryString = `
               UPDATE order_items
               SET is_payed = true
@@ -147,18 +147,13 @@ module.exports = (db) => {
   router.post("/:id/pay", (req, res) => {
     const payType = req.body.paymentType;
     const order = req.params.id;
-    const seat = req.body.seat;
-    let queryString = `
+    db.query(
+      `
               UPDATE orders
               SET payment_type = $1
-              WHERE id = $2`;
-    const queryParams = [payType, order];
-    if (seat > 0) {
-      queryString += ` AND seat_number = $3`;
-      queryParams.push(seat);
-    }
-    queryString += ";";
-    db.query(queryString, queryParams)
+              WHERE id = $2`,
+      [payType, order]
+    )
       .then((data) => {
         res.status(200).send(data);
       })
