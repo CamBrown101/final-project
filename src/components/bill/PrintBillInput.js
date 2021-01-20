@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function PrintBillInput({ email, setEmail, index }) {
+export default function PrintBillInput({ emails, setEmails, index }) {
+  const [email, setEmail] = useState('');
+  useEffect(() => {
+    const emailsClone = [...emails];
+    emailsClone[index] = email;
+    setEmails([...emailsClone]);
+  }, [email]);
+
   return (
     <input
+      type="email"
       value={email}
       placeholder={
         index ? `Seat ${index} Email Address` : 'Total Bill For Table'

@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import PrintBillInput from './PrintBillInput';
 
 export default function PrintBillButton({
-  email,
-  setEmail,
   printBill,
   itemsToRender,
   tableInfo,
   bill,
-  data,
 }) {
-  const [emails, setEmails] = useState([]);
+  const [emails, setEmails] = useState(['']);
   const billsBySeat = [
-    { subtotal: bill.subtotal, tax: bill.tax, total: bill.total },
+    {
+      items: [...itemsToRender],
+      subtotal: bill.subtotal,
+      tax: bill.tax,
+      total: bill.total,
+    },
   ];
   const totalBillsBySeat = () => {
     //creates empty objects per seat on table
@@ -53,7 +55,7 @@ export default function PrintBillButton({
   const inputsToRender = [];
   for (let i = 0; i <= tableInfo.seats; i++) {
     inputsToRender.push(
-      <PrintBillInput email={emails} setEmail={setEmails} index={i} key={i} />
+      <PrintBillInput emails={emails} setEmails={setEmails} index={i} key={i} />
     );
   }
 
@@ -78,7 +80,7 @@ export default function PrintBillButton({
           <div
             className={'button send-button'}
             onClick={() => {
-              printBill(emails, itemsToRender, tableInfo, billsBySeat);
+              printBill(emails, billsBySeat, tableInfo);
               setEmails([]);
               setPrintToggle('hide');
             }}>
