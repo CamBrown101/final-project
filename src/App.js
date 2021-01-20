@@ -17,6 +17,7 @@ import CreateCategory from './components/manager/CreateCategory.js';
 import TimecardEntry from './components/TimecardEntry';
 import Split from './components/Split';
 import ProductionContainer from './components/productionScreen/ProductionContainer';
+import Analytics from './components/manager/Analytics';
 
 function App() {
   const { user } = useContext(UserContext);
@@ -79,6 +80,7 @@ function App() {
             user.auth ? <CreateCategory /> : <Redirect to="/login" />
           }
         />
+        <Route path="/manager/analytics" component={Analytics} />
         <Route path="/food-production" component={ProductionContainer} />
         <Route path="/drink-production" component={ProductionContainer} />
         <Route
