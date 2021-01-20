@@ -31,7 +31,6 @@ export default function BillContainer({
   const [selected, setSelected] = useState(null);
   const data = getBillData(tableInfo.orderId, bill.items);
   const unpaidItems = getUnpaidItems(tableInfo.items);
-
   const itemsToRender = getItemsToRender(bill.items, unpaidItems, menu);
   useEffect(() => {
     setSelected(null);
@@ -60,12 +59,12 @@ export default function BillContainer({
     if (itemsToRender[selected]) {
       const upData = { seat: seat, item: itemsToRender[selected].orderItemId };
       updateBill(tableInfo, upData);
+
+      if (selected >= bill.items.length)
+        unpaidItems[selected - bill.items.length].seat_number = seat;
       itemsToRender[selected].seat = seat;
-      console.log(tableInfo);
-      setBill({ ...bill, items: [...itemsToRender] });
-      console.log(tableInfo);
     }
-  }, [seat]);
+  }, [seat, itemsToRender]);
 
   const billItems = itemsToRender.map((item, index) => (
     <BillItem
