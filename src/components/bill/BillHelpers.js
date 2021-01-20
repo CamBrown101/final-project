@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import Axios from "axios";
 
 export const sendBill = (tableInfo, data) => {
   return Axios.post(`api/orders/${tableInfo.orderId}/items`, data);
@@ -9,7 +9,7 @@ export const updateBill = (tableInfo, data) => {
 };
 
 export const formatBillToPrint = (billToPrint) => {
-  let formattedBill = '';
+  let formattedBill = "";
   if (billToPrint && billToPrint.items && billToPrint.total) {
     billToPrint.items.forEach((item) => {
       formattedBill += `<div style="display:flex;"><h3>${item.name}</h3><h3>: ${item.price}</h3></div><br></br>`;
@@ -51,17 +51,15 @@ export const clearBill = (setBill, setTable) => {
   setTable([]);
 };
 
-export const payBill = (orderId, unpaidItems, stateItems, seatNumber) => {
+export const payBill = (orderId, unpaidItems) => {
   Axios.post(`/api/orders/${orderId}/pay`, {
-    paymentType: 'credit',
+    paymentType: "credit",
   });
   const orderIds = [];
-  unpaidItems = [...unpaidItems, ...stateItems];
   unpaidItems.forEach((element) => {
     orderIds.push(element.order_item_id);
   });
-  const data = { orderIds, seatNumber };
-  return Axios.post('api/orders/pay', data);
+  return Axios.post("api/orders/pay", orderIds);
 };
 
 export const getBillData = (orderId, items) => {
