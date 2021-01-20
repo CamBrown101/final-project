@@ -37,7 +37,7 @@ app.use("/api/orders", orderRoutes(db));
 app.use("/api/tables", tableRoutes(db));
 app.use("/api/categories", categoryRoutes(db));
 app.use("/api/timecards", timecardRoutes(db));
-app.use("api/analytics", analyticRoutes(db));
+app.use("/api/analytics", analyticRoutes(db));
 
 app.get("/", (req, res) => {
   console.log(req.session);

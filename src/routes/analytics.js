@@ -5,7 +5,17 @@ module.exports = (db) => {
   //gets all shifts
   router.get("/labour", (req, res) => {
     console.log("shifts route");
-    db.query(`SELECT * FROM shifts;`)
+    db.query(
+      `SELECT *
+      from (SELECT 
+            is_in,
+            punch_time,
+            employee_id,
+            punch_time as clockInTime,
+            LEAD(punch_time) OVER (PARTITION BY employee_id order By id) as clockOutTime
+      FROM shifts) AS foo
+      where is_in = true;`
+    )
       .then((data) => {
         const shifts = data.rows;
         res.send(shifts);
