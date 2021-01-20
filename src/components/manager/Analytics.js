@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import './Analytic.scss';
 import { CanvasJSChart } from 'canvasjs-react-charts';
-import Canvas from 'canvas';
+import Axios from 'axios';
 
 export default function Analytics() {
-  const options2 = {
+  const getSalesbyDay = (days) => {
+    const data = days;
+    Axios.get('/api/analytics/sales', { params: { days: data } }).then(
+      (res) => {
+        console.log(res.data);
+      }
+    );
+  };
+  const Sales7Days = {
     animationEnabled: true,
-    animationDuration: 10000,
+    animationDuration: 2000,
     exportEnabled: true,
     theme: 'dark2', //"light1", "dark1", "dark2"
     title: {
-      text: 'Item Sales',
+      text: 'Item Sales By Day For The Last Week',
     },
     axisY: {
       includeZero: true,
@@ -84,9 +92,20 @@ export default function Analytics() {
       <button
         className="options-button"
         onClick={() => {
-          setOption({ ...options2 });
+          setOption({ ...Sales7Days });
           setKey(2);
-        }}></button>
+          getSalesbyDay(7);
+        }}>
+        Sales last 7 days
+      </button>
+      <button
+        className="options-button"
+        onClick={() => {
+          setOption({ ...options1 });
+          setKey(1);
+        }}>
+        Sales last 7 days
+      </button>
     </div>
   );
 }

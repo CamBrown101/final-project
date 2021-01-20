@@ -27,12 +27,13 @@ module.exports = (db) => {
 
   router.get("/sales", (req, res) => {
     console.log("shifts route");
-    db.query(
-      `
+    const days = req.query.days;
+    const queryString = `
       SELECT price, timestamp from order_items
       JOIN menu_items ON order_items.item= menu_items.id
-      WHERE timestamp > now() - interval '1 week';`
-    )
+      WHERE timestamp > now() - interval '${days} day'
+      ;`;
+    db.query(queryString)
       .then((data) => {
         const shifts = data.rows;
         res.send(shifts);

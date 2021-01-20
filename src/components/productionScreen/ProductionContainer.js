@@ -1,8 +1,8 @@
-import Axios from "axios";
-import React, { useState, useEffect } from "react";
-import "./ProductionContainer.scss";
-import "./ProductionOrder";
-import ProductionOrder from "./ProductionOrder";
+import Axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import './ProductionContainer.scss';
+import './ProductionOrder';
+import ProductionOrder from './ProductionOrder';
 
 export default function ProductionContainer(props) {
   const [orders, setOrders] = useState([]);
@@ -39,9 +39,9 @@ export default function ProductionContainer(props) {
   }
   let title;
   if (props.location.is_food) {
-    title = "Food";
+    title = 'Food';
   } else {
-    title = "Drink";
+    title = 'Drink';
   }
 
   return (
