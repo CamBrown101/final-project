@@ -105,6 +105,12 @@
   z-index: 1;
   background-color: $project-white;
 }
+.pay-dropdown {
+  position: absolute;
+  overflow: auto;
+  z-index: 1;
+  background-color: $project-white;
+}
 .inputs-container {
   display: flex;
   flex-direction: column;
