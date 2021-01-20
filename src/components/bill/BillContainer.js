@@ -111,6 +111,7 @@ export default function BillContainer({
             unpaidItems={unpaidItems}
             setBill={setBill}
             setTable={setTable}
+            itemsToRender={itemsToRender}
           />
           <EditButton
             data={data}

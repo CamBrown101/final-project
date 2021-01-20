@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import './BillContainer.scss';
-import PayBySeatButton from './PayBySeatButton';
-
+import React, { useState } from "react";
+import "./BillContainer.scss";
+import PayBySeatButton from "./PayBySeatButton";
+import { totalBillsBySeat } from "./BillHelpers";
 export default function PayButton({
   clearBill,
   sendBill,
@@ -12,35 +12,39 @@ export default function PayButton({
   unpaidItems,
   setBill,
   setTable,
+  itemsToRender,
 }) {
-  let cssClass = 'pay-button button';
+  let cssClass = "pay-button button";
   if (!data.orderId) {
-    cssClass += ' opacity';
+    cssClass += " opacity";
   }
-  const [payToggle, setPayToggle] = useState('hide');
-
+  const [payToggle, setPayToggle] = useState("hide");
+  const billsBySeat = totalBillsBySeat(itemsToRender, bill, tableInfo);
   const buttonsToRender = [];
   for (let i = 0; i <= tableInfo.seats; i++) {
-    buttonsToRender.push(
-      <PayBySeatButton
-        payBill={payBill}
-        sendBill={sendBill}
-        clearBill={clearBill}
-        seat={i}
-        key={i}
-      />
-    );
+    if (billsBySeat[i].total !== 0) {
+      buttonsToRender.push(
+        <PayBySeatButton
+          payBill={payBill}
+          sendBill={sendBill}
+          clearBill={clearBill}
+          seat={i}
+          key={i}
+        />
+      );
+    }
   }
   return (
     <div className="pay-section">
       <div
         className={cssClass}
         onClick={() => {
-          payToggle === 'hide' ? setPayToggle('show') : setPayToggle('hide');
-        }}>
+          payToggle === "hide" ? setPayToggle("show") : setPayToggle("hide");
+        }}
+      >
         Pay
       </div>
-      <div className={payToggle + ' pay-dropdown'}>{buttonsToRender}</div>
+      <div className={payToggle + " pay-dropdown"}>{buttonsToRender}</div>
     </div>
   );
 }
