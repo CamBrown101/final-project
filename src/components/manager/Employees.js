@@ -1,6 +1,6 @@
 import './Employees.scss';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import Axios from 'axios';
 import Employee from './Employee';
 import ManagerNav from './ManagerNav';
 import CreateEmployee from './CreateEmployee';
@@ -9,19 +9,16 @@ export default function Employees(props) {
 
   useEffect(() => {
     const URL = `/api/employees/`;
-    const promise = axios
-      .get(URL)
-      .then((response) => {
-        setEmployees(response.data);
+    const promise = Axios.get(URL)
+      .then((res) => {
+        setEmployees(res.data);
       })
-      .catch(function (error) {
+      .catch((err) => {
         console.log('Error fetching employees');
       });
+  }, []);
 
-    return promise;
-  }, [employees]);
-
-  const mapemployee = employees.map((employee) => {
+  const mapEmployee = employees.map((employee) => {
     return (
       <Employee
         key={employee.id}
@@ -36,7 +33,8 @@ export default function Employees(props) {
     );
   });
   return (
-    <>
+    <div className="create-employee-container">
+      <CreateEmployee setEmployees={setEmployees}></CreateEmployee>
       <ManagerNav></ManagerNav>
       <div className="employees-titles">
         <h3 className="employees-h3 employees-titles-id">ID</h3>
@@ -49,8 +47,7 @@ export default function Employees(props) {
           Start Date:
         </h3>
       </div>
-      {mapemployee}
-      <CreateEmployee setEmployees={setEmployees}></CreateEmployee>
-    </>
+      {mapEmployee}
+    </div>
   );
 }
