@@ -3,4 +3,8 @@
 .table-container {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 850px;
+  min-width: 210px;
+  overflow-y: hidden;
 }
