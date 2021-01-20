@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import Axios from 'axios';
 import './CreateItem.scss';
 import ManagerNav from './ManagerNav';
 
@@ -16,16 +16,13 @@ export default function CreateItem(props) {
   //place it in the select box
   useEffect(() => {
     const URL = `/api/categories/`;
-    const promise = axios
-      .get(URL)
+    Axios.get(URL)
       .then((response) => {
         setCategories(response.data);
       })
       .catch(function (error) {
         console.log('Error fetching categories');
       });
-
-    return promise;
   }, []);
 
   const nameOnChange = (event) => {
@@ -63,12 +60,9 @@ export default function CreateItem(props) {
       isActive: isActive,
       category: category,
     };
-    console.log(data);
     const URL = `/api/menu/`;
-    const promise = axios
-      .post(URL, data)
+    return Axios.post(URL, data)
       .then((response) => {
-        console.log(response.data);
         // if (response.data === 'exists') {
         //   props.setError('Email already used');
         // }
@@ -78,7 +72,6 @@ export default function CreateItem(props) {
         }
       })
       .catch();
-    return promise;
   };
 
   return (
@@ -125,8 +118,7 @@ export default function CreateItem(props) {
           <select
             className="menu-item-category"
             onChange={categoryOnChange}
-            name="category"
-          >
+            name="category">
             {categories.map((e, key) => {
               return (
                 <option key={key} value={e.name}>
@@ -139,16 +131,14 @@ export default function CreateItem(props) {
           <select
             className="menu-item-is-active"
             onChange={isActiveOnChange}
-            name="is-active"
-          >
+            name="is-active">
             <option value="false">False</option>
             <option value="true">True</option>
           </select>
           <button
             onClick={create}
             type="submit"
-            className="create-menu-item-button"
-          >
+            className="create-menu-item-button">
             Create menu-item
           </button>
         </form>
