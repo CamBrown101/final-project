@@ -41,7 +41,7 @@ export default function BillContainer({
     let newTotal = 0;
     let newSubtotal = 0;
     let newTax = 0;
-    console.log(itemsToRender);
+    console.log("CHANGE");
     itemsToRender.forEach((item) => {
       newSubtotal += item.price;
       newTax = newSubtotal * 0.13;
@@ -61,6 +61,9 @@ export default function BillContainer({
       const upData = { seat: seat, item: itemsToRender[selected].orderItemId };
       updateBill(tableInfo, upData);
       itemsToRender[selected].seat = seat;
+      console.log(tableInfo);
+      setBill({ ...bill, items: [...itemsToRender] });
+      console.log(tableInfo);
     }
   }, [seat]);
 
@@ -78,7 +81,6 @@ export default function BillContainer({
   ));
 
   const [mod, setMod] = useState("");
-  const [email, setEmail] = useState("");
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
@@ -118,8 +120,6 @@ export default function BillContainer({
             selected={selected}
           />
           <PrintBillButton
-            email={email}
-            setEmail={setEmail}
             printBill={printBill}
             tableInfo={tableInfo}
             itemsToRender={itemsToRender}
