@@ -1,4 +1,4 @@
-import Axios from "axios";
+import Axios from 'axios';
 
 export const sendBill = (tableInfo, data) => {
   return Axios.post(`api/orders/${tableInfo.orderId}/items`, data);
@@ -9,30 +9,25 @@ export const updateBill = (tableInfo, data) => {
 };
 
 export const formatBillToPrint = (billToPrint) => {
-  let formattedBill = "";
-
+  let formattedBill =
+    '<head><style>h3{margin-bottom:0;}.item{margin:0;font-size:1.25em;}p{margin:0;font-size:1.5em}.total{font-size:2em;}.footer{margin-top:5%;}</style></head><div style="border:thin solid black; padding:3%; width:220px">';
   if (billToPrint && billToPrint.items && billToPrint.total) {
     billToPrint.items.forEach((item) => {
       formattedBill += `
-      <div>
-        <h3>${item.name}</h3>
-        <h3>: ${item.price}</h3>
-      </div>
+    <div class="item" style="display:flex;">
+      <h3>${item.name}</h3>
+      <h3>: ${item.price}</h3>
+    </div>
       `;
     });
   }
   formattedBill += `
-    <div>
-      <p>Subtotal: ${billToPrint.subtotal.toFixed(2)}</p>
+    <div class="footer" style="text-align: right;">      
+      <p>Subtotal: $${billToPrint.subtotal.toFixed(2)}</p>
+      <p>Tax: $${billToPrint.tax.toFixed(2)}</p>
+      <p class="total">Total: $${billToPrint.total.toFixed(2)}</p>
     </div>
-    <div>
-      <p>Tax: ${billToPrint.tax.toFixed(2)}</p>
-    </div>
-    <div>
-      <p>Total: ${billToPrint.total.toFixed(2)}</p>
-    </div>
-  </body>
-  </html>
+  </div>
   `;
   return formattedBill;
 };
@@ -64,7 +59,7 @@ export const clearBill = (setBill, setTable) => {
 export const payBill = (orderId, unpaidItems) => {
   if (orderId !== null) {
     Axios.post(`/api/orders/${orderId}/pay`, {
-      paymentType: "credit",
+      paymentType: 'credit',
     });
   }
 
@@ -72,7 +67,7 @@ export const payBill = (orderId, unpaidItems) => {
   unpaidItems.forEach((element) => {
     orderIds.push(element.orderItemId ? element.orderItemId : element.id);
   });
-  return Axios.post("api/orders/pay", orderIds);
+  return Axios.post('api/orders/pay', orderIds);
 };
 
 export const getBillData = (orderId, items) => {
