@@ -30,9 +30,12 @@ module.exports = (db) => {
     console.log("sales route");
     const days = req.query.days;
     const queryString = `
-      SELECT price, timestamp from order_items
-      JOIN menu_items ON order_items.item= menu_items.id
-      WHERE timestamp > now() - interval '${days} day'
+    SELECT menu_items.name, categories.is_food, count(menu_items.name)
+    FROM menu_items
+    Join order_items ON menu_items.id = order_items.item
+    JOIN categories ON categories.id = menu_items.category_id
+    WHERE timestamp > now() - interval '${days} day'
+    Group BY menu_items.name, categories.is_food
       ;`;
     db.query(queryString)
       .then((data) => {

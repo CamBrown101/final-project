@@ -57,6 +57,16 @@ export default function Analytics() {
       }
     );
   };
+
+  const getItemSalesByDay = (days) => {
+    const data = days;
+    Axios.get("/api/analytics/sales", { params: { days: data } }).then(
+      (res) => {
+        console.log(res.data);
+      }
+    );
+  };
+
   const Sales7Days = {
     animationEnabled: true,
     animationDuration: 2000,
@@ -137,7 +147,6 @@ export default function Analytics() {
       <button
         className="options-button"
         onClick={() => {
-          setOption({ ...Sales7Days });
           setKey(2);
           getSalesbyDay(8);
         }}
@@ -147,12 +156,20 @@ export default function Analytics() {
       <button
         className="options-button"
         onClick={() => {
-          setOption({ ...options1 });
           setKey(1);
           getLabourByDay(8);
         }}
       >
         Labour last 7 days
+      </button>
+      <button
+        className="options-button"
+        onClick={() => {
+          setKey(1);
+          getItemSalesByDay(7);
+        }}
+      >
+        Item Sales last 7 days
       </button>
     </div>
   );
