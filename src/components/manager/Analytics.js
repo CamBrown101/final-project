@@ -15,7 +15,9 @@ export default function Analytics() {
           });
           return { label: date, y: parseInt(item.sum) };
         });
+        console.log(temp);
         options1.data[0].dataPoints = [...temp];
+        options1.title.text = "Gross Sales";
         setOption(options1);
       }
     );
@@ -50,16 +52,27 @@ export default function Analytics() {
           };
         });
         options1.data[0].dataPoints = [...temp];
+        options1.title.text = "Labour Cost Last Week";
         setOption(options1);
       }
     );
   };
 
-  const getItemSalesByDay = (days) => {
+  const getItemSalesByDay = (days, top) => {
     const data = days;
     Axios.get("/api/analytics/sales", {
       params: { days: data },
-    }).then((res) => {});
+    }).then((res) => {
+      const dataEnd = top ? 10 : res.data.length;
+      const temp = res.data.slice(dataEnd - 10, dataEnd).map((item) => {
+        return { label: item.name, y: parseInt(item.sold) };
+      });
+      console.log(temp);
+      options1.data[0].dataPoints = [...temp];
+      options1.title.text = (top ? "Top " : "Bottom ") + "Ten Items Last Week";
+      console.log(options1);
+      setOption(options1);
+    });
   };
 
   const Sales7Days = {
@@ -142,8 +155,8 @@ export default function Analytics() {
       <button
         className="options-button"
         onClick={() => {
-          setKey(2);
           getSalesbyDay(8);
+          setKey(2);
         }}
       >
         Sales last 7 days
@@ -151,8 +164,8 @@ export default function Analytics() {
       <button
         className="options-button"
         onClick={() => {
-          setKey(1);
           getLabourByDay(8);
+          setKey(1);
         }}
       >
         Labour last 7 days
@@ -160,11 +173,20 @@ export default function Analytics() {
       <button
         className="options-button"
         onClick={() => {
-          setKey(1);
-          getItemSalesByDay(7);
+          getItemSalesByDay(7, true);
+          setKey(3);
         }}
       >
-        Item Sales last 7 days
+        Top Item Sales last 7 days
+      </button>
+      <button
+        className="options-button"
+        onClick={() => {
+          getItemSalesByDay(7, false);
+          setKey(3);
+        }}
+      >
+        Bottom Item Sales last 7 days
       </button>
     </div>
   );
