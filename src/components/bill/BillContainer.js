@@ -4,7 +4,6 @@ import BillHeader from './BillHeader';
 import BillItem from './BillItem';
 import {
   sendBill,
-  // formatBillToPrint,
   printBill,
   clearBill,
   payBill,
