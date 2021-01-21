@@ -165,7 +165,7 @@ module.exports = (db) => {
   router.post('/:id/delete', (req, res) => {
     const orderItemId = req.body.order_item_id;
     const queryString = `DELETE FROM order_items
-WHERE id = $1;`;
+    WHERE id = $1;`;
     console.log(queryString);
     db.query(queryString, orderItemId[orderItemId])
       .then((data) => {
