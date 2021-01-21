@@ -12,7 +12,11 @@ export default function Analytics() {
 
         const temp = res.data.map((item, i) => {
           console.log(item);
-          return { label: item.timestamp.slice(0, 10), y: parseInt(item.sum) };
+          const date = new Date(item.timestamp).toLocaleDateString(undefined, {
+            month: "short",
+            day: "numeric",
+          });
+          return { label: date, y: parseInt(item.sum) };
         });
         options1.data[0].dataPoints = [...temp];
         setOption(options1);
