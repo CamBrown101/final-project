@@ -64,9 +64,22 @@ export default function Analytics() {
     );
   };
   let labour;
+  let netSales;
   getLabourByDay(8).then((res) => {
     labour = res;
+    netSales = JSON.parse(JSON.stringify(options1));
+    const temp = grossSales.data[0].dataPoints.map((day) => {
+      for (const lday of labour.data[0].dataPoints) {
+        if (day.label === lday.label) {
+          const temp = { label: day.label, y: day.y - lday.y };
+          return temp;
+        } else return day;
+      }
+    });
+    netSales.data[0].dataPoints = temp;
+    netSales.title.text = "Net Sales Last Week";
   });
+
   const getItemSalesByDay = (days, top) => {
     const data = days;
     return Axios.get("/api/analytics/sales", {
@@ -95,6 +108,7 @@ export default function Analytics() {
   const options1 = {
     animationEnabled: true,
     animationDuration: 2000,
+    height: 800,
     exportEnabled: true,
     theme: "dark2", //"light1", "dark1", "dark2"
     title: {
@@ -109,21 +123,6 @@ export default function Analytics() {
         //indexLabel: "{y}", //Shows y value on all Data Points
         indexLabelFontColor: "#5A5757",
         indexLabelPlacement: "outside",
-        dataPoints: [
-          { x: 10, y: 71 },
-          { x: 20, y: 23 },
-          { x: 30, y: 45 },
-          { x: 40, y: 13 },
-          { x: 50, y: 71 },
-          { x: 60, y: 43 },
-          { x: 70, y: 38 },
-          { x: 80, y: 93, indexLabel: "Highest" },
-          { x: 90, y: 54 },
-          { x: 100, y: 60 },
-          { x: 110, y: 21 },
-          { x: 120, y: 49 },
-          { x: 130, y: 36 },
-        ],
       },
     ],
   };
@@ -134,43 +133,56 @@ export default function Analytics() {
   return (
     <div className="analytic-container">
       <h1>Analytics</h1>
-      <CanvasJSChart options={option} key={key} />
-      <button
-        className="options-button"
-        onClick={() => {
-          setOption(grossSales);
-          setKey(2);
-        }}
-      >
-        Sales last 7 days
-      </button>
-      <button
-        className="options-button"
-        onClick={() => {
-          setOption(labour);
-          setKey(1);
-        }}
-      >
-        Labour last 7 days
-      </button>
-      <button
-        className="options-button"
-        onClick={() => {
-          setOption(topSales);
-          setKey(3);
-        }}
-      >
-        Top Item Sales last 7 days
-      </button>
-      <button
-        className="options-button"
-        onClick={() => {
-          setOption(bottomSales);
-          setKey(4);
-        }}
-      >
-        Bottom Item Sales last 7 days
-      </button>
+      <div className="analytic-buttons">
+        <button
+          className="options-button"
+          onClick={() => {
+            setOption(grossSales);
+            setKey(2);
+          }}
+        >
+          Sales last 7 days
+        </button>
+        <button
+          className="options-button"
+          onClick={() => {
+            setOption(labour);
+            setKey(1);
+          }}
+        >
+          Labour last 7 days
+        </button>
+        <button
+          className="options-button"
+          onClick={() => {
+            setOption(topSales);
+            setKey(3);
+          }}
+        >
+          Top Item Sales last 7 days
+        </button>
+        <button
+          className="options-button"
+          onClick={() => {
+            setOption(bottomSales);
+            setKey(4);
+          }}
+        >
+          Bottom Item Sales last 7 days
+        </button>
+        <button
+          className="options-button"
+          onClick={() => {
+            setOption(netSales);
+            setKey(5);
+          }}
+        >
+          Bottom Item Sales last 7 days
+        </button>
+      </div>
+      <div className="chart-container">
+        <CanvasJSChart options={option} key={key} />
+      </div>
     </div>
   );
 }

@@ -1,7 +1,26 @@
 .analytic-container {
   margin-top: 70px;
 }
+
 .options-button {
-  width: 300px;
-  height: 300px;
+  display: flex;
+  background-color: rgb(63, 58, 58);
+  color: white;
+  font-size: 1em;
+  width: 200px;
+  height: 50px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: thin solid black;
+  justify-content: center;
+  align-content: center;
+}
+
+.chart-container {
+  height: 800px;
+}
+
+.analytic-buttons {
+  display: flex;
+  flex-direction: row;
 }
