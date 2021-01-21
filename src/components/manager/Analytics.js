@@ -23,6 +23,40 @@ export default function Analytics() {
       }
     );
   };
+
+  const getLabourByDay = (days) => {
+    const data = days;
+    Axios.get("/api/analytics/labour", { params: { days: data } }).then(
+      (res) => {
+        const costPerShift = res.data.map((shift) => {
+          const start = new Date(shift.punch_time).getTime() / 1000;
+          const end = new Date(shift.clockouttime).getTime() / 1000;
+          let hours = Math.abs(end - start) / 60 / 60;
+          if (shift.clockouttime === null) hours = 0;
+          return {
+            date: new Date(shift.punch_time).toLocaleDateString(undefined, {
+              month: "short",
+              day: "numeric",
+            }),
+            cost: hours * shift.wage,
+          };
+        });
+        const costPerDay = {};
+        costPerShift.forEach((shift) => {
+          if (!costPerDay[shift.date]) costPerDay[shift.date] = shift.cost;
+          else costPerDay[shift.date] += shift.cost;
+        });
+        const temp = Object.keys(costPerDay).map((key) => {
+          return {
+            label: key,
+            y: costPerDay[key],
+          };
+        });
+        options1.data[0].dataPoints = [...temp];
+        setOption(options1);
+      }
+    );
+  };
   const Sales7Days = {
     animationEnabled: true,
     animationDuration: 2000,
@@ -115,9 +149,10 @@ export default function Analytics() {
         onClick={() => {
           setOption({ ...options1 });
           setKey(1);
+          getLabourByDay(8);
         }}
       >
-        Placeholder
+        Labour last 7 days
       </button>
     </div>
   );
