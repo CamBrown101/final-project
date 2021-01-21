@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function EditButton({ mod, setMod, bill, selected, data }) {
+export default function EditButton({
+  mod,
+  setMod,
+  bill,
+  selected,
+  data,
+  tableInfo,
+}) {
   const [inputToggle, setInputToggle] = useState('hide');
   let cssClass = 'edit-button button';
   if (!data.itemId.length || selected === null) {
     cssClass += ' opacity';
   }
+  useEffect(() => {
+    setInputToggle('hide');
+  }, [tableInfo]);
   return (
     <div className="edit-section">
       <div

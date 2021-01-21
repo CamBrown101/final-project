@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { totalBillsBySeat } from "./BillHelpers";
-import PrintBillInput from "./PrintBillInput";
+import React, { useState, useEffect } from 'react';
+import { totalBillsBySeat } from './BillHelpers';
+import PrintBillInput from './PrintBillInput';
 
 export default function PrintBillButton({
   printBill,
@@ -8,51 +8,16 @@ export default function PrintBillButton({
   tableInfo,
   bill,
 }) {
-  const [emails, setEmails] = useState([""]);
-
-  // const totalBillsBySeat = (itemsToRender, bill, tableInfo) => {
-  //   const billsBySeat = [
-  //     {
-  //       items: [...itemsToRender],
-  //       subtotal: bill.subtotal,
-  //       tax: bill.tax,
-  //       total: bill.total,
-  //     },
-  //   ];
-  //   //creates empty objects per seat on table
-  //   for (let i = 1; i <= tableInfo.seats; i++) {
-  //     billsBySeat.push({ items: [], subtotal: 0, tax: 0, total: 0 });
-  //   }
-  //   //adds totals to billsBySeat array where index = seatnumber 0 being bill total
-  //   itemsToRender.forEach((element) => {
-  //     let seatNumber = element.seat;
-  //     if (billsBySeat[seatNumber]) {
-  //       billsBySeat[seatNumber].items.push(element);
-  //       billsBySeat[seatNumber].subtotal += element.price;
-  //       billsBySeat[seatNumber].tax += element.price * 0.13;
-  //       billsBySeat[seatNumber].total += element.price * 1.13;
-  //     }
-  //   });
-
-  //   //This is a test function to compare bill totals equal overall total
-  //   // const checkTotal = () => {
-  //   //   let itemTotal = 0;
-  //   //   for (let i = 1; i < billsBySeat.length; i++) {
-  //   //     itemTotal += billsBySeat[i].total;
-  //   //   }
-
-  //   //   return itemTotal.toFixed(2) === billsBySeat[0].total.toFixed(2);
-  //   // };
-  //   // console.log(checkTotal());
-  //   return billsBySeat;
-  // };
-
+  const [emails, setEmails] = useState(['']);
+  const [printToggle, setPrintToggle] = useState('hide');
   const billsBySeat = totalBillsBySeat(itemsToRender, bill, tableInfo);
+  useEffect(() => {
+    setPrintToggle('hide');
+  }, [tableInfo]);
 
-  const [printToggle, setPrintToggle] = useState("hide");
-  let cssClass = "print-button button";
+  let cssClass = 'print-button button';
   if (!itemsToRender.length) {
-    cssClass += " opacity";
+    cssClass += ' opacity';
   }
 
   const inputsToRender = [];
@@ -68,36 +33,33 @@ export default function PrintBillButton({
         className={cssClass}
         onClick={() => {
           if (!itemsToRender.length) {
-            setPrintToggle("hide");
+            setPrintToggle('hide');
           } else {
-            printToggle === "hide"
-              ? setPrintToggle("show")
-              : setPrintToggle("hide");
+            printToggle === 'hide'
+              ? setPrintToggle('show')
+              : setPrintToggle('hide');
           }
-        }}
-      >
+        }}>
         Print
       </div>
-      <div className={printToggle + " print-dropdown"}>
+      <div className={printToggle + ' print-dropdown'}>
         <div className="inputs-container">{inputsToRender}</div>
         <div className="confirm-cancel-buttons">
           <div
-            className={"button send-button"}
+            className={'button send-button'}
             onClick={() => {
               printBill(emails, billsBySeat, tableInfo);
               setEmails([]);
-              setPrintToggle("hide");
-            }}
-          >
+              setPrintToggle('hide');
+            }}>
             Confrim
           </div>
           <div
-            className={"button cancel-button"}
+            className={'button cancel-button'}
             onClick={() => {
               setEmails([]);
-              setPrintToggle("hide");
-            }}
-          >
+              setPrintToggle('hide');
+            }}>
             Cancel
           </div>
         </div>

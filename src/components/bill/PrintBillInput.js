@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function PrintBillInput({ emails, setEmails, index }) {
-  console.log(emails);
   const [email, setEmail] = useState(emails[index]);
-  console.log(email);
   useEffect(() => {
     setEmails((emails) => {
       const emailsClone = [...emails];
@@ -17,6 +15,7 @@ export default function PrintBillInput({ emails, setEmails, index }) {
       setEmail(emails[index]);
     }
   }, [emails, index]);
+
   return (
     <input
       type="email"

@@ -69,7 +69,6 @@ export default function BillContainer({
   }, [seat, itemsToRender]);
   const [mod, setMod] = useState('');
   const [billItem, setBillItem] = useState(true);
-  console.log(itemsToRender);
   const billItems = itemsToRender.map((item, index) => (
     <BillItem
       key={index}
@@ -116,6 +115,7 @@ export default function BillContainer({
             setBill={setBill}
             setTable={setTable}
             itemsToRender={itemsToRender}
+            tableInfo={tableInfo}
           />
           <EditButton
             data={data}
@@ -123,6 +123,7 @@ export default function BillContainer({
             setMod={setMod}
             bill={bill}
             selected={selected}
+            tableInfo={tableInfo}
           />
           <PrintBillButton
             printBill={printBill}
