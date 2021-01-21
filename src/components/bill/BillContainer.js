@@ -86,6 +86,7 @@ export default function BillContainer({
       unpaidItems={unpaidItems}
       setBillItem={setBillItem}
       billItem={billItem}
+      bill={bill}
     />
   ));
   return (

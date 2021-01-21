@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './BillItem.scss';
 import Axios from 'axios';
 export default function BillItem({
@@ -13,13 +13,19 @@ export default function BillItem({
   unpaidItems,
   billItem,
   setBillItem,
+  bill,
 }) {
   const deleteItem = () => {
     const orderItemId = unpaidItems[id].order_item_id;
     Axios.post(`api/orders/${orderItemId}/delete`);
     setBillItem(!billItem);
   };
-
+  console.log(id);
+  let renderButton = false;
+  if (isAdmin && id + 1 > bill.items.length) {
+    renderButton = true;
+  }
+  const [deleted, setDeleted] = useState(false);
   const modBoolean = mods === 'null';
   return (
     <li
@@ -32,11 +38,12 @@ export default function BillItem({
         }
       }}>
       <div className="item">
-        {isAdmin ? (
+        {renderButton ? (
           <button
             onClick={() => {
               {
                 deleteItem();
+                setDeleted(true);
               }
             }}>
             X
@@ -44,9 +51,11 @@ export default function BillItem({
         ) : (
           <></>
         )}
-        <p>{seat}</p>
-        <p className="item-name">{name}</p>
-        <p className="item-price">${price.toFixed(2)}</p>
+        <p className={deleted ? 'deleted' : ''}>{seat}</p>
+        <p className={deleted ? 'deleted item-name' : 'item-name'}>{name}</p>
+        <p className={deleted ? 'deleted item-price' : 'item-price'}>
+          ${price.toFixed(2)}
+        </p>
       </div>
       {!modBoolean ? <p className="mod">{mods}</p> : <></>}
     </li>
