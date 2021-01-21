@@ -26,7 +26,7 @@ module.exports = (db) => {
   });
 
   router.get("/sales", (req, res) => {
-    console.log("shifts route");
+    console.log("sales route");
     const days = req.query.days;
     const queryString = `
       SELECT price, timestamp from order_items
@@ -44,13 +44,15 @@ module.exports = (db) => {
   });
 
   router.get("/gross-sales", (req, res) => {
-    console.log("shifts route");
-    db.query(
-      `
-      SELECT sum(price) from order_items
+    console.log("gross sales route");
+    const days = req.query.days;
+    const queryString = `
+      SELECT sum(price), CAST(timestamp AS DATE) from order_items
       JOIN menu_items ON order_items.item= menu_items.id
-      WHERE timestamp > now() - interval '1 week';`
-    )
+      WHERE timestamp > now() - interval '${days} day'
+      GROUP BY CAST(timestamp AS DATE)
+      ORDER BY timestamp;`;
+    db.query(queryString)
       .then((data) => {
         const shifts = data.rows;
         res.send(shifts);
