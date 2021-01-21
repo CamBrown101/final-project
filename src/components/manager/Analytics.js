@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import './Analytic.scss';
-import { CanvasJSChart } from 'canvasjs-react-charts';
-import Axios from 'axios';
+import React, { useState, useEffect } from "react";
+import "./Analytic.scss";
+import { CanvasJSChart } from "canvasjs-react-charts";
+import Axios from "axios";
 
 export default function Analytics() {
   const getSalesbyDay = (days) => {
     const data = days;
-    Axios.get('/api/analytics/sales', { params: { days: data } }).then(
+    Axios.get("/api/analytics/gross-sales", { params: { days: data } }).then(
       (res) => {
         console.log(res.data);
+
+        const temp = res.data.map((item, i) => {
+          console.log(item);
+          return { label: item.timestamp.slice(0, 10), y: parseInt(item.sum) };
+        });
+        options1.data[0].dataPoints = [...temp];
+        setOption(options1);
       }
     );
   };
@@ -16,19 +23,19 @@ export default function Analytics() {
     animationEnabled: true,
     animationDuration: 2000,
     exportEnabled: true,
-    theme: 'dark2', //"light1", "dark1", "dark2"
+    theme: "dark2", //"light1", "dark1", "dark2"
     title: {
-      text: 'Item Sales By Day For The Last Week',
+      text: "Item Sales By Day For The Last Week",
     },
     axisY: {
       includeZero: true,
     },
     data: [
       {
-        type: 'pie', //change type to bar, line, area, pie, etc
+        type: "column", //change type to bar, line, area, pie, etc
         //indexLabel: "{y}", //Shows y value on all Data Points
-        indexLabelFontColor: '#5A5757',
-        indexLabelPlacement: 'outside',
+        indexLabelFontColor: "#5A5757",
+        indexLabelPlacement: "outside",
         dataPoints: [
           { x: 10, y: 71 },
           { x: 20, y: 55 },
@@ -37,7 +44,7 @@ export default function Analytics() {
           { x: 50, y: 71 },
           { x: 60, y: 68 },
           { x: 70, y: 38 },
-          { x: 80, y: 92, indexLabel: 'Highest' },
+          { x: 80, y: 92, indexLabel: "Highest" },
           { x: 90, y: 54 },
           { x: 100, y: 60 },
           { x: 110, y: 21 },
@@ -51,19 +58,19 @@ export default function Analytics() {
     animationEnabled: true,
     animationDuration: 2000,
     exportEnabled: true,
-    theme: 'dark2', //"light1", "dark1", "dark2"
+    theme: "dark2", //"light1", "dark1", "dark2"
     title: {
-      text: 'Item Sales',
+      text: "Item Sales",
     },
     axisY: {
       includeZero: true,
     },
     data: [
       {
-        type: 'column', //change type to bar, line, area, pie, etc
+        type: "column", //change type to bar, line, area, pie, etc
         //indexLabel: "{y}", //Shows y value on all Data Points
-        indexLabelFontColor: '#5A5757',
-        indexLabelPlacement: 'outside',
+        indexLabelFontColor: "#5A5757",
+        indexLabelPlacement: "outside",
         dataPoints: [
           { x: 10, y: 71 },
           { x: 20, y: 23 },
@@ -72,7 +79,7 @@ export default function Analytics() {
           { x: 50, y: 71 },
           { x: 60, y: 43 },
           { x: 70, y: 38 },
-          { x: 80, y: 93, indexLabel: 'Highest' },
+          { x: 80, y: 93, indexLabel: "Highest" },
           { x: 90, y: 54 },
           { x: 100, y: 60 },
           { x: 110, y: 21 },
@@ -94,8 +101,9 @@ export default function Analytics() {
         onClick={() => {
           setOption({ ...Sales7Days });
           setKey(2);
-          getSalesbyDay(7);
-        }}>
+          getSalesbyDay(8);
+        }}
+      >
         Sales last 7 days
       </button>
       <button
@@ -103,8 +111,9 @@ export default function Analytics() {
         onClick={() => {
           setOption({ ...options1 });
           setKey(1);
-        }}>
-        Sales last 7 days
+        }}
+      >
+        Placeholder
       </button>
     </div>
   );
