@@ -7,6 +7,16 @@ DROP TABLE IF EXISTS menu_items CASCADE;
 DROP TABLE IF EXISTS orders CASCADE;
 DROP TABLE IF EXISTS order_items CASCADE;
 
+
+CREATE OR REPLACE FUNCTION random_between(low INT ,high INT) 
+   RETURNS INT AS
+$$
+BEGIN
+   RETURN floor(random()* (high-low + 1) + low);
+END;
+$$ language 'plpgsql' STRICT;
+
+
 CREATE TABLE employees (
   id SERIAL PRIMARY KEY NOT NULL,
   firstName VARCHAR(255) NOT NULL,
