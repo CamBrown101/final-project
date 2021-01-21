@@ -1,27 +1,28 @@
-import React, { createContext, useState } from "react";
-import Axios from "axios";
+import React, { createContext, useState } from 'react';
+import Axios from 'axios';
 
 // Create context with an empty object
-const UserContext = createContext({ name: "", id: 0, auth: false });
+const UserContext = createContext({ name: '', id: 0, auth: false });
 
 // Provide Context add things here to make them global
 const UserProvider = ({ children }) => {
   // User is the name of the "data" that gets stored in context
-  const [user, setUser] = useState({ name: "", id: 0, auth: false });
+  const [user, setUser] = useState({ name: '', id: 0, auth: false });
 
   // Login updates the user data with a name parameter
   const login = (code) => {
     const data = { pin: code };
 
-    Axios.post("http://localhost:8080/login", data).then((res) => {
+    Axios.post('http://localhost:8080/login', data).then((res) => {
       if (res.data) {
         setUser((user) => ({
-          name: res.data.firstname,
+          name: `${res.data.firstname} ${res.data.lastname}`,
           auth: true,
           id: res.data.id,
+          isAdmin: res.data.is_admin,
         }));
       } else {
-        window.alert("Invalid Login");
+        window.alert('Invalid Login');
       }
     });
   };
@@ -29,7 +30,7 @@ const UserProvider = ({ children }) => {
   // Logout updates the user data to empty
   const logout = () => {
     setUser((user) => ({
-      name: "",
+      name: '',
       auth: false,
     }));
   };
