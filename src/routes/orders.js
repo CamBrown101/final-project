@@ -163,17 +163,14 @@ module.exports = (db) => {
   });
 
   router.post('/:id/delete', (req, res) => {
-    const orderItemId = req.body.order_item_id;
+    console.log(req.params.id);
+    const orderItemId = req.params.id;
     const queryString = `DELETE FROM order_items
     WHERE id = $1;`;
     console.log(queryString);
-    db.query(queryString, orderItemId[orderItemId])
-      .then((data) => {
-        res.status(200).send(data);
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
+    db.query(queryString, [orderItemId]).catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
   });
 
   router.post('/:id/email', (req, res) => {
