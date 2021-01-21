@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './BillContainer.scss';
 import BillHeader from './BillHeader';
 import BillItem from './BillItem';
@@ -18,6 +18,7 @@ import CancelButton from './CancelButton';
 import EditButton from './EditButton';
 import PrintBillButton from './PrintBillButton';
 import BillTotals from './BillTotals';
+import { UserContext } from '../../UserContext';
 
 export default function BillContainer({
   bill,
@@ -31,6 +32,8 @@ export default function BillContainer({
   const data = getBillData(tableInfo.orderId, bill.items);
   const unpaidItems = getUnpaidItems(tableInfo.items);
   const itemsToRender = getItemsToRender(bill.items, unpaidItems, menu);
+  const { user } = useContext(UserContext);
+
   useEffect(() => {
     setSelected(null);
   }, [tableInfo]);
@@ -65,6 +68,9 @@ export default function BillContainer({
     }
     // eslint-disable-next-line
   }, [seat, itemsToRender]);
+  const [mod, setMod] = useState('');
+  const [billItem, setBillItem] = useState(true);
+  console.log(billItem);
 
   const billItems = itemsToRender.map((item, index) => (
     <BillItem
@@ -76,10 +82,12 @@ export default function BillContainer({
       setSelected={setSelected}
       mods={item.mods}
       seat={item.seat}
+      isAdmin={user.isAdmin}
+      unpaidItems={unpaidItems}
+      setBillItem={setBillItem}
+      billItem={billItem}
     />
   ));
-
-  const [mod, setMod] = useState('');
   return (
     <article className="bill-container">
       <div>

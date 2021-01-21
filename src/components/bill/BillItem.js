@@ -1,5 +1,6 @@
 import React from 'react';
 import './BillItem.scss';
+import Axios from 'axios';
 export default function BillItem({
   name,
   price,
@@ -8,7 +9,17 @@ export default function BillItem({
   selected,
   mods,
   seat,
+  isAdmin,
+  unpaidItems,
+  billItem,
+  setBillItem,
 }) {
+  const deleteItem = () => {
+    const orderItemId = unpaidItems[id].order_item_id;
+    Axios.post(`api/orders/${orderItemId}/delete`);
+    setBillItem(!billItem);
+  };
+
   const modBoolean = mods === 'null';
   return (
     <li
@@ -21,6 +32,18 @@ export default function BillItem({
         }
       }}>
       <div className="item">
+        {isAdmin ? (
+          <button
+            onClick={() => {
+              {
+                deleteItem();
+              }
+            }}>
+            X
+          </button>
+        ) : (
+          <></>
+        )}
         <p>{seat}</p>
         <p className="item-name">{name}</p>
         <p className="item-price">${price.toFixed(2)}</p>
