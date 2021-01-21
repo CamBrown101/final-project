@@ -6,14 +6,15 @@ module.exports = (db) => {
   router.get("/labour", (req, res) => {
     console.log("shifts route");
     db.query(
-      `SELECT *
+      `SELECT foo.*, employees.wage
       from (SELECT 
-            is_in,
-            punch_time,
-            employee_id,
-            punch_time as clockInTime,
-            LEAD(punch_time) OVER (PARTITION BY employee_id order By id) as clockOutTime
-      FROM shifts) AS foo
+          is_in,
+          punch_time,
+          employee_id,
+          punch_time as clockInTime,
+          LEAD(punch_time) OVER (PARTITION BY employee_id order By id) as clockOutTime
+       FROM shifts) AS foo
+      JOIN employees ON employee_id = employees.id
       where is_in = true;`
     )
       .then((data) => {
@@ -61,5 +62,6 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
   return router;
 };
