@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    console.log("order route");
+  router.get('/', (req, res) => {
+    console.log('order route');
     db.query(`SELECT * FROM orders;`)
       .then((data) => {
         const orders = data.rows;
@@ -14,8 +14,8 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/", (req, res) => {
-    console.log("order route");
+  router.post('/', (req, res) => {
+    console.log('order route');
     db.query(
       `
               INSERT INTO orders (employee_id, table_id)
@@ -31,9 +31,9 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/production", (req, res) => {
+  router.get('/production', (req, res) => {
     const isFood = req.query.is_food;
-    console.log("Get Production Screen");
+    console.log('Get Production Screen');
     db.query(
       `
       SELECT order_items.*, menu_items.name
@@ -55,10 +55,10 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/pay", (req, res) => {
+  router.post('/pay', (req, res) => {
     const items = req.body;
-    console.log("\n\n\n\n\n");
-    console.log("Body:", req.body);
+    console.log('\n\n\n\n\n');
+    console.log('Body:', req.body);
     let queryString = `
               UPDATE order_items
               SET is_payed = true
@@ -73,15 +73,15 @@ module.exports = (db) => {
         res.status(200).send(data);
       })
       .catch((err) => {
-        console.log("\n\n\n\n\n");
+        console.log('\n\n\n\n\n');
         console.log(err);
         res.status(500).json({ error: err.message });
       });
   });
 
   //sends the order object
-  router.get("/:id", (req, res) => {
-    console.log("order id route");
+  router.get('/:id', (req, res) => {
+    console.log('order id route');
     const order = req.params.id;
     db.query(
       `SELECT * FROM orders
@@ -98,8 +98,8 @@ module.exports = (db) => {
   });
 
   //WIP sends items in an order
-  router.get("/:id/items", (req, res) => {
-    console.log("order id items route");
+  router.get('/:id/items', (req, res) => {
+    console.log('order id items route');
     const order = req.params.id;
     db.query(
       `
@@ -117,7 +117,7 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/:id/items", (req, res) => {
+  router.post('/:id/items', (req, res) => {
     const items = req.body.itemId;
     const seat = req.body.seatId;
     const order = req.body.orderId;
@@ -127,9 +127,9 @@ module.exports = (db) => {
     for (let i = 0; i < items.length; i++) {
       queryString += ` (${order}, ${seat[i]}, ${items[i]}, '${mods[i]}')`;
       if (i !== items.length - 1) {
-        queryString += ",";
+        queryString += ',';
       } else {
-        queryString += " RETURNING *;";
+        queryString += ' RETURNING *;';
       }
     }
     console.log(queryString);
@@ -144,7 +144,7 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/:id/pay", (req, res) => {
+  router.post('/:id/pay', (req, res) => {
     const payType = req.body.paymentType;
     const order = req.params.id;
     db.query(
@@ -162,7 +162,21 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/:id/email", (req, res) => {
+  router.post('/:id/delete', (req, res) => {
+    const orderItemId = req.body.order_item_id;
+    const queryString = `DELETE FROM order_items
+WHERE id = $1;`;
+    console.log(queryString);
+    db.query(queryString, orderItemId[orderItemId])
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.post('/:id/email', (req, res) => {
     const email = req.body.email;
     const order = req.params.id;
     let mailText = req.body.bill;
@@ -174,17 +188,17 @@ module.exports = (db) => {
       [email, order]
     ).then((data) => {
       const transporter = nodemailer.createTransport({
-        service: "gmail",
+        service: 'gmail',
         auth: {
-          user: "buyfoodsellfood@gmail.com",
-          pass: "BuyFoodSellFood2!",
+          user: 'buyfoodsellfood@gmail.com',
+          pass: 'BuyFoodSellFood2!',
         },
       });
 
       const mailOptions = {
-        from: "buyfoodsellfood@gmail.com",
+        from: 'buyfoodsellfood@gmail.com',
         to: email,
-        subject: "Your order reciept",
+        subject: 'Your order reciept',
         html: mailText,
       };
 
@@ -193,14 +207,14 @@ module.exports = (db) => {
           console.log(error);
           res.status(500).send(error);
         } else {
-          console.log("Email sent: " + info.response);
-          res.send("email sent!");
+          console.log('Email sent: ' + info.response);
+          res.send('email sent!');
         }
       });
     });
   });
 
-  router.post("/:id/make", (req, res) => {
+  router.post('/:id/make', (req, res) => {
     const order = req.params.id;
     db.query(
       `
@@ -217,7 +231,7 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/:id/seat-update", (req, res) => {
+  router.post('/:id/seat-update', (req, res) => {
     const order = req.params.id;
     const itemToUpdate = req.body.item;
     const seat = req.body.seat;
