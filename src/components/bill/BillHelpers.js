@@ -62,12 +62,14 @@ export const clearBill = (setBill, setTable) => {
 };
 
 export const payBill = (orderId, unpaidItems) => {
-  Axios.post(`/api/orders/${orderId}/pay`, {
-    paymentType: "credit",
-  });
+  if (orderId !== null) {
+    Axios.post(`/api/orders/${orderId}/pay`, {
+      paymentType: "credit",
+    });
+  }
+
   const orderIds = [];
   unpaidItems.forEach((element) => {
-    console.log("EE", element);
     orderIds.push(element.orderItemId ? element.orderItemId : element.id);
   });
   return Axios.post("api/orders/pay", orderIds);

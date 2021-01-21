@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
-import './BillContainer.scss';
-import BillHeader from './BillHeader';
-import BillItem from './BillItem';
+import React, { useEffect, useState, useContext } from "react";
+import "./BillContainer.scss";
+import BillHeader from "./BillHeader";
+import BillItem from "./BillItem";
 import {
   sendBill,
   printBill,
@@ -11,14 +11,14 @@ import {
   getUnpaidItems,
   getItemsToRender,
   updateBill,
-} from './BillHelpers';
-import PayButton from './PayButton';
-import SendButton from './SendButton';
-import CancelButton from './CancelButton';
-import EditButton from './EditButton';
-import PrintBillButton from './PrintBillButton';
-import BillTotals from './BillTotals';
-import { UserContext } from '../../UserContext';
+} from "./BillHelpers";
+import PayButton from "./PayButton";
+import SendButton from "./SendButton";
+import CancelButton from "./CancelButton";
+import EditButton from "./EditButton";
+import PrintBillButton from "./PrintBillButton";
+import BillTotals from "./BillTotals";
+import { UserContext } from "../../UserContext";
 
 export default function BillContainer({
   bill,
@@ -42,7 +42,6 @@ export default function BillContainer({
     let newTotal = 0;
     let newSubtotal = 0;
     let newTax = 0;
-    console.log('CHANGE');
     itemsToRender.forEach((item) => {
       newSubtotal += item.price;
       newTax = newSubtotal * 0.13;
@@ -68,9 +67,8 @@ export default function BillContainer({
     }
     // eslint-disable-next-line
   }, [seat, itemsToRender]);
-  const [mod, setMod] = useState('');
+  const [mod, setMod] = useState("");
   const [billItem, setBillItem] = useState(true);
-  console.log(billItem);
 
   const billItems = itemsToRender.map((item, index) => (
     <BillItem

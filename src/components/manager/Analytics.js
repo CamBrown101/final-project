@@ -8,10 +8,7 @@ export default function Analytics() {
     const data = days;
     Axios.get("/api/analytics/gross-sales", { params: { days: data } }).then(
       (res) => {
-        console.log(res.data);
-
         const temp = res.data.map((item, i) => {
-          console.log(item);
           const date = new Date(item.timestamp).toLocaleDateString(undefined, {
             month: "short",
             day: "numeric",
@@ -60,11 +57,9 @@ export default function Analytics() {
 
   const getItemSalesByDay = (days) => {
     const data = days;
-    Axios.get("/api/analytics/sales", { params: { days: data } }).then(
-      (res) => {
-        console.log(res.data);
-      }
-    );
+    Axios.get("/api/analytics/sales", {
+      params: { days: data },
+    }).then((res) => {});
   };
 
   const Sales7Days = {
