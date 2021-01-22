@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import "./DragAndDrop.scss";
-import DragItem from "./DragItem";
+import React, { useState, useEffect } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import './DragAndDrop.scss';
+import DragItem from './DragItem';
 
 export default function DragAndDrop({ itemsToRender, tableInfo }) {
   const [itemsOnBill, setItemsOnBill] = useState([...itemsToRender]);
+  const [columns, setColumns] = useState([]);
 
   const initialColumnState = [];
 
@@ -18,9 +19,9 @@ export default function DragAndDrop({ itemsToRender, tableInfo }) {
     });
   }
 
-  const [columns, setColumns] = useState(initialColumnState);
   useEffect(() => {
     setItemsOnBill([...itemsToRender]);
+    setColumns([...initialColumnState]);
   }, [itemsToRender]);
   console.log(itemsOnBill);
 
@@ -52,6 +53,7 @@ export default function DragAndDrop({ itemsToRender, tableInfo }) {
     //   itemsToRender[selected].seat = seat;
     // }
   };
+  console.log(columns);
   const draggableItemsToRender = itemsOnBill.map((item, index) => {
     return (
       <div className="draggable-container">
@@ -60,8 +62,7 @@ export default function DragAndDrop({ itemsToRender, tableInfo }) {
             <li
               ref={provided.innerRef}
               {...provided.draggableProps}
-              {...provided.dragHandleProps}
-            >
+              {...provided.dragHandleProps}>
               <div className="drag-item">
                 <p>{`${item.seat} ${item.name} ${item.price} ${item.orderItemId} ${item.seat}`}</p>
               </div>
@@ -71,20 +72,28 @@ export default function DragAndDrop({ itemsToRender, tableInfo }) {
       </div>
     );
   });
+  console.log(columns);
+  const droppableAreas = columns.map((item, index) => {
+    return (
+      <Droppable droppableId={`seat-1`} key={index}>
+        {(provided) => (
+          <div className="droppable-container">
+            <h1>{`Seat ${index}`}</h1>
+            <ul {...provided.droppableProps} ref={provided.innerRef}>
+              {draggableItemsToRender}
+              {provided.placeholder}
+            </ul>
+          </div>
+        )}
+      </Droppable>
+    );
+  });
 
+  console.log(droppableAreas);
   return (
     <div className="dragAndDropContainer">
       <DragDropContext onDragEnd={handleOnDragEnd}>
-        <div className="droppable-container">
-          <Droppable droppableId={`seat-1`}>
-            {(provided) => (
-              <ul {...provided.droppableProps} ref={provided.innerRef}>
-                {draggableItemsToRender}
-                {provided.placeholder}
-              </ul>
-            )}
-          </Droppable>
-        </div>
+        <div className="droppable-container">{droppableAreas}</div>
       </DragDropContext>
     </div>
   );
