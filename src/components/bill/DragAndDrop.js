@@ -9,7 +9,7 @@ export default function DragAndDrop({ itemsToRender, tableInfo }) {
 
   const initialColumnState = [];
 
-  for (let i = 1; i < tableInfo.seats; i++) {
+  for (let i = 0; i < tableInfo.seats; i++) {
     initialColumnState.push({ id: i, title: `Seat ${i}`, items: [] });
     itemsOnBill.forEach((item) => {
       if (item.seat === i) {
@@ -54,33 +54,36 @@ export default function DragAndDrop({ itemsToRender, tableInfo }) {
     // }
   };
   console.log(columns);
-  const draggableItemsToRender = itemsOnBill.map((item, index) => {
-    return (
-      <div className="draggable-container">
-        <Draggable key={index} draggableId={index.toString()} index={index}>
-          {(provided) => (
-            <li
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              {...provided.dragHandleProps}>
-              <div className="drag-item">
-                <p>{`${item.seat} ${item.name} ${item.price} ${item.orderItemId} ${item.seat}`}</p>
-              </div>
-            </li>
-          )}
-        </Draggable>
-      </div>
-    );
-  });
+
   console.log(columns);
   const droppableAreas = columns.map((item, index) => {
     return (
       <Droppable droppableId={`seat-1`} key={index}>
         {(provided) => (
           <div className="droppable-container">
-            <h1>{`Seat ${index}`}</h1>
+            <h1>{`Seat ${index + 1}`}</h1>
             <ul {...provided.droppableProps} ref={provided.innerRef}>
-              {draggableItemsToRender}
+              {item.items.map((item, index) => {
+                return (
+                  <div className="draggable-container">
+                    <Draggable
+                      key={index}
+                      draggableId={index.toString()}
+                      index={index}>
+                      {(provided) => (
+                        <li
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}>
+                          <div className="drag-item">
+                            <p>{`${item.seat} ${item.name} ${item.price} ${item.orderItemId} ${item.seat}`}</p>
+                          </div>
+                        </li>
+                      )}
+                    </Draggable>
+                  </div>
+                );
+              })}
               {provided.placeholder}
             </ul>
           </div>
