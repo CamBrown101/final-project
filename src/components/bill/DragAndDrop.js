@@ -5,10 +5,26 @@ import DragItem from './DragItem';
 
 export default function DragAndDrop({ itemsToRender, tableInfo }) {
   const [itemsOnBill, setItemsOnBill] = useState([]);
+
+  const initialColumnState = [];
+
+  for (let i = 1; i < tableInfo.seats; i++) {
+    initialColumnState.push({ id: i, title: `Seat ${i}`, items: [] });
+    itemsOnBill.forEach((item) => {
+      if (item.seat === i) {
+        console.log(initialColumnState);
+        initialColumnState[i - 1].items.push(item);
+      }
+    });
+  }
+
+  const [columns, setColumns] = useState(initialColumnState);
   useEffect(() => {
     setItemsOnBill([...itemsToRender]);
   }, [itemsToRender]);
+  console.log(itemsOnBill);
 
+  console.log(columns);
   const handleOnDragEnd = (result) => {
     const { destination, source, draggableId } = result;
     if (!result.destination) return;
