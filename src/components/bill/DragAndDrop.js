@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import './DragAndDrop.scss';
-import DragItem from './DragItem';
+import React, { useState, useEffect } from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import "./DragAndDrop.scss";
+import DragItem from "./DragItem";
 
 export default function DragAndDrop({ itemsToRender, tableInfo }) {
-  const [itemsOnBill, setItemsOnBill] = useState([]);
+  const [itemsOnBill, setItemsOnBill] = useState([...itemsToRender]);
 
   const initialColumnState = [];
 
@@ -60,7 +60,8 @@ export default function DragAndDrop({ itemsToRender, tableInfo }) {
             <li
               ref={provided.innerRef}
               {...provided.draggableProps}
-              {...provided.dragHandleProps}>
+              {...provided.dragHandleProps}
+            >
               <div className="drag-item">
                 <p>{`${item.seat} ${item.name} ${item.price} ${item.orderItemId} ${item.seat}`}</p>
               </div>
