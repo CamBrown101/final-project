@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import './DragAndDrop.scss';
-import DragItem from './DragItem';
+import React, { useState, useEffect } from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import "./DragAndDrop.scss";
+import DragItem from "./DragItem";
 
 export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
   console.log(itemsToRender);
@@ -19,7 +19,7 @@ export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
     });
   }
   useEffect(() => {
-    console.log('!!');
+    console.log("!!");
     setItemsOnBill([...itemsToRender]);
     setColumns([...initialColumnState]);
   }, [bill, tableInfo]);
@@ -59,27 +59,34 @@ export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
           <div className="droppable-container">
             <h1>{`Seat ${index + 1}`}</h1>
             <ul {...provided.droppableProps} ref={provided.innerRef}>
-              {itemsOnBill.map((item) => {
-                return (
-                  <div className="draggable-container">
-                    <Draggable
-                      key={index}
-                      draggableId={index.toString()}
-                      index={index}>
-                      {(provided) => (
-                        <li
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}>
-                          <div className="drag-item">
-                            <p>{`${item.seat} ${item.name} ${item.price} ${item.orderItemId} ${item.seat}`}</p>
-                          </div>
-                        </li>
-                      )}
-                    </Draggable>
-                  </div>
-                );
-              })}
+              {itemsOnBill
+                .filter((item) => {
+                  console.log(item);
+                  return item.seat === index + 1;
+                })
+                .map((item) => {
+                  return (
+                    <div className="draggable-container">
+                      <Draggable
+                        key={index}
+                        draggableId={index.toString()}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <li
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <div className="drag-item">
+                              <p>{`${item.seat} ${item.name} ${item.price} ${item.orderItemId} ${item.seat}`}</p>
+                            </div>
+                          </li>
+                        )}
+                      </Draggable>
+                    </div>
+                  );
+                })}
               {provided.placeholder}
             </ul>
           </div>
