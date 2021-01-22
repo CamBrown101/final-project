@@ -27,6 +27,7 @@ const tableRoutes = require("./src/routes/tables");
 const categoryRoutes = require("./src/routes/categories");
 const timecardRoutes = require("./src/routes/timecards");
 const analyticRoutes = require("./src/routes/analytics");
+const paymentRoutes = require("./src/routes/payments");
 
 app.use(cors());
 //use routes
@@ -38,6 +39,7 @@ app.use("/api/tables", tableRoutes(db));
 app.use("/api/categories", categoryRoutes(db));
 app.use("/api/timecards", timecardRoutes(db));
 app.use("/api/analytics", analyticRoutes(db));
+app.use("/api/payments", paymentRoutes(db));
 
 app.get("/", (req, res) => {
   console.log(req.session);
