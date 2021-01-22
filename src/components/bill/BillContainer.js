@@ -147,7 +147,7 @@ export default function BillContainer({
         </div>
       </div>
       <Elements stripe={stripePromise}>
-        <CheckoutForm />
+        <CheckoutForm cost={bill.total} />
       </Elements>
     </article>
   );

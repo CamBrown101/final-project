@@ -9,7 +9,7 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/secret", async (req, res) => {
     const intent = await stripe.paymentIntents.create({
-      amount: 1099,
+      amount: req.query.bill,
       currency: "cad",
     });
     res.json({ client_secret: intent.client_secret });
