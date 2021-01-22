@@ -19,6 +19,7 @@ import EditButton from './EditButton';
 import PrintBillButton from './PrintBillButton';
 import BillTotals from './BillTotals';
 import { UserContext } from '../../UserContext';
+import DragAndDrop from './DragAndDrop';
 
 export default function BillContainer({
   bill,
@@ -61,6 +62,7 @@ export default function BillContainer({
       const upData = { seat: seat, item: itemsToRender[selected].orderItemId };
       updateBill(tableInfo, upData);
 
+      // if selected is in the items that aren't sent
       if (selected >= bill.items.length)
         unpaidItems[selected - bill.items.length].seat_number = seat;
       itemsToRender[selected].seat = seat;
@@ -88,6 +90,11 @@ export default function BillContainer({
   ));
   return (
     <article className="bill-container">
+      <DragAndDrop
+        itemsToRender={itemsToRender}
+        tableInfo={tableInfo}
+        updateBill={updateBill}
+      />
       <div>
         <BillHeader table={tableInfo} />
         <ul className="bill-items">{billItems}</ul>
