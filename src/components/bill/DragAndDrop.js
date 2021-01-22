@@ -3,7 +3,8 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './DragAndDrop.scss';
 import DragItem from './DragItem';
 
-export default function DragAndDrop({ itemsToRender, tableInfo }) {
+export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
+  console.log(itemsToRender);
   const [itemsOnBill, setItemsOnBill] = useState([...itemsToRender]);
   const [columns, setColumns] = useState([]);
 
@@ -13,19 +14,16 @@ export default function DragAndDrop({ itemsToRender, tableInfo }) {
     initialColumnState.push({ id: i, title: `Seat ${i}`, items: [] });
     itemsOnBill.forEach((item) => {
       if (item.seat === i) {
-        console.log(initialColumnState);
         initialColumnState[i - 1].items.push(item);
       }
     });
   }
-
   useEffect(() => {
+    console.log('!!');
     setItemsOnBill([...itemsToRender]);
     setColumns([...initialColumnState]);
-  }, [itemsToRender]);
-  console.log(itemsOnBill);
+  }, [bill, tableInfo]);
 
-  console.log(columns);
   const handleOnDragEnd = (result) => {
     const { destination, source, draggableId } = result;
     if (!result.destination) return;
@@ -53,17 +51,15 @@ export default function DragAndDrop({ itemsToRender, tableInfo }) {
     //   itemsToRender[selected].seat = seat;
     // }
   };
-  console.log(columns);
 
-  console.log(columns);
   const droppableAreas = columns.map((item, index) => {
     return (
-      <Droppable droppableId={`seat-1`} key={index}>
+      <Droppable droppableId={`seat-1`} key={`${item.id + index}`}>
         {(provided) => (
           <div className="droppable-container">
             <h1>{`Seat ${index + 1}`}</h1>
             <ul {...provided.droppableProps} ref={provided.innerRef}>
-              {item.items.map((item, index) => {
+              {itemsOnBill.map((item) => {
                 return (
                   <div className="draggable-container">
                     <Draggable
@@ -92,7 +88,6 @@ export default function DragAndDrop({ itemsToRender, tableInfo }) {
     );
   });
 
-  console.log(droppableAreas);
   return (
     <div className="dragAndDropContainer">
       <DragDropContext onDragEnd={handleOnDragEnd}>

@@ -94,6 +94,9 @@ export default function BillContainer({
         itemsToRender={itemsToRender}
         tableInfo={tableInfo}
         updateBill={updateBill}
+        bill={bill}
+        setBill={setBill}
+        menu={menu}
       />
       <div>
         <BillHeader table={tableInfo} />
@@ -122,7 +125,6 @@ export default function BillContainer({
             setBill={setBill}
             setTable={setTable}
             itemsToRender={itemsToRender}
-            tableInfo={tableInfo}
           />
           <EditButton
             data={data}
