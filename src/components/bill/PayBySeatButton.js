@@ -12,6 +12,7 @@ export default function PayBySeatButton({
   setBill,
   setTable,
   bill,
+  cost,
 }) {
   return (
     <div

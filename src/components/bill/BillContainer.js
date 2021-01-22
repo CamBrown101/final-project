@@ -11,6 +11,7 @@ import {
   getUnpaidItems,
   getItemsToRender,
   updateBill,
+  formatBillToPrint,
 } from "./BillHelpers";
 import PayButton from "./PayButton";
 import SendButton from "./SendButton";
@@ -22,6 +23,7 @@ import { CheckoutForm } from "./CheckoutForm";
 import { UserContext } from "../../UserContext";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import PayPopUp from "./PayPopUp";
 
 const stripePromise = loadStripe(
   "pk_test_51I6MNvAlHHdCVPD0W6Rl7yFgLKHjawpkDlLJ7l2uBoOrvHX3lJAvY7dqBFrq26TzkBIO5QVXnwTE9HpXz5EdAQvq00Rg8M65td"
@@ -76,6 +78,7 @@ export default function BillContainer({
   }, [seat, itemsToRender]);
   const [mod, setMod] = useState("");
   const [billItem, setBillItem] = useState(true);
+  const [stripeToggle, setStripeToggle] = useState(true);
   const billItems = itemsToRender.map((item, index) => (
     <BillItem
       key={index}
@@ -93,6 +96,10 @@ export default function BillContainer({
       bill={bill}
     />
   ));
+  const togglePop = () => {
+    setStripeToggle(!stripeToggle);
+  };
+
   return (
     <article className="bill-container">
       <div>
@@ -146,9 +153,12 @@ export default function BillContainer({
           />
         </div>
       </div>
-      <Elements stripe={stripePromise}>
-        <CheckoutForm cost={bill.total} />
-      </Elements>
+
+      {stripeToggle ? (
+        <Elements stripe={stripePromise}>
+          <CheckoutForm cost={bill.total} />
+        </Elements>
+      ) : null}
     </article>
   );
 }
