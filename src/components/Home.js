@@ -35,26 +35,6 @@ export default function Home(props) {
   return (
     <div>
       <div className="home-main">
-        <div className="logged-in">
-          <h1>Hello, {user.name}!</h1>
-          <button className="logout-button" onClick={logout}>
-            Logout
-          </button>
-          <Link
-            to={{
-              pathname: '/food-production',
-              is_food: true,
-            }}>
-            <button className="logout-button">Food Production</button>
-          </Link>
-          <Link
-            to={{
-              pathname: '/drink-production',
-              is_food: false,
-            }}>
-            <button className="logout-button">Drink Production</button>
-          </Link>
-        </div>
         <div className="container">
           <BillContainer
             bill={props.bill}

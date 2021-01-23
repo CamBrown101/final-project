@@ -12,7 +12,7 @@ export default function EditSeatButton({
     setEditSeat(false);
   }, [tableInfo]);
 
-  if (!data.orderId || !tableInfo.items) {
+  if (!data.orderId) {
     cssClass += ' opacity';
   }
 

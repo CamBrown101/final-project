@@ -6,6 +6,7 @@
   width: 100%;
   min-width: 100%;
   background-color: $dark;
+
   #nav-menu {
     display: flex;
     background-color: $dark;
@@ -16,6 +17,7 @@
     font-weight: bolder;
 
     .nav-menu-item {
+      height: 100px;
       margin: auto;
       padding-top: 14px;
       height: 42px;
