@@ -9,10 +9,10 @@
   top: 0;
   width: 100%;
   min-width: 100%;
-  background-color: $base-main-color;
+  background-color: $base-dark;
   #manager-nav-menu {
     display: flex;
-    background-color: $base-main-color;
+    background-color: $base-dark;
     width: 100%;
     max-width: 300px;
     height: 56px;
@@ -25,7 +25,7 @@
       height: 42px;
       padding-left: 0.5em;
       padding-right: 0.5em;
-      color: $base-light;
+      color: $base-white;
       white-space: nowrap;
     }
 
@@ -36,6 +36,6 @@
 }
 
 .active {
-  color: $base-light;
-  background-color: $base-main-color;
+  color: $base-white;
+  background-color: $base-dark-accent;
 }
