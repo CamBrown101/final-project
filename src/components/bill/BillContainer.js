@@ -97,24 +97,23 @@ export default function BillContainer({
 
   return (
     <article className="bill-container">
-      <BillHeader table={tableInfo} />
-
-      {editSeatToggle ? (
-        <DragAndDrop
-          tableInfo={tableInfo}
-          bill={bill}
-          itemsToRender={itemsToRender}
-          tableInfo={tableInfo}
-          updateBill={updateBill}
-          bill={bill}
-          setBill={setBill}
-          menu={menu}
-        />
-      ) : (
-        <div>
+      <div>
+        <BillHeader table={tableInfo} />
+        {editSeatToggle ? (
+          <DragAndDrop
+            tableInfo={tableInfo}
+            bill={bill}
+            itemsToRender={itemsToRender}
+            tableInfo={tableInfo}
+            updateBill={updateBill}
+            bill={bill}
+            setBill={setBill}
+            menu={menu}
+          />
+        ) : (
           <ul className="bill-items">{billItems}</ul>
-        </div>
-      )}
+        )}
+      </div>
       <div className="bill-footer">
         <BillTotals bill={bill} />
         <div className="buttons">
