@@ -3,8 +3,18 @@ import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 
 import CardSection from "./CardSection";
 import axios from "axios";
-
-export function CheckoutForm({ cost }) {
+import { sendBill, payBill, clearBill } from "./BillHelpers";
+export function CheckoutForm({
+  cost,
+  bill,
+  tableInfo,
+  data,
+  orderId,
+  items,
+  seat,
+  setBill,
+  setTable,
+}) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -29,6 +39,21 @@ export function CheckoutForm({ cost }) {
             } else {
               if (result.paymentIntent.status === "succeeded") {
                 window.alert("Payment Accepted");
+                if (bill.items.length !== 0) {
+                  sendBill(tableInfo, data).then((res) => {
+                    console.log(res.data);
+                    payBill(orderId, [
+                      ...items,
+                      ...res.data.filter((item) => {
+                        return item.seat_number === seat;
+                      }),
+                    ]).then(() => clearBill(setBill, setTable));
+                  });
+                } else {
+                  payBill(orderId, items).then(() =>
+                    clearBill(setBill, setTable)
+                  );
+                }
               }
             }
           });
