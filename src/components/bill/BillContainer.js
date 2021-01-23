@@ -92,6 +92,8 @@ export default function BillContainer({
   ));
   return (
     <article className="bill-container">
+      <BillHeader table={tableInfo} />
+
       {editSeatToggle ? (
         <DragAndDrop
           tableInfo={tableInfo}
@@ -105,7 +107,6 @@ export default function BillContainer({
         />
       ) : (
         <div>
-          <BillHeader table={tableInfo} />
           <ul className="bill-items">{billItems}</ul>
         </div>
       )}
