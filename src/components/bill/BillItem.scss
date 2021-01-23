@@ -1,5 +1,7 @@
-@import "../../base";
-
+@import '../../base';
+.item {
+  color: $base-white;
+}
 .selected {
   background-color: $base-light-accent;
 }

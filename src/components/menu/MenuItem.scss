@@ -1,4 +1,4 @@
-@import "../../base";
+@import '../../base';
 
 .menu-item {
   background-color: $base-light;
@@ -11,7 +11,7 @@
   max-width: 120px;
 }
 .menu-item-inside {
-  border: $base-light solid 1px;
+  border: $base-dark-accent solid 1px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -20,7 +20,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: $base-dark;
+  background-color: $base-white;
   color: $base-light;
 }
 .item-name {
