@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import "./DragAndDrop.scss";
-import { updateBill } from "./BillHelpers";
-import DragItem from "./DragItem";
+import React, { useState, useEffect } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import './DragAndDrop.scss';
+import { updateBill } from './BillHelpers';
+import DragItem from './DragItem';
 
 export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
   const [itemsOnBill, setItemsOnBill] = useState([...itemsToRender]);
@@ -28,9 +28,7 @@ export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
     if (!result.destination) return;
     const items = [...itemsOnBill];
     const [reorderedItem] = items.splice(result.source.index, 1);
-    console.log(destination.droppableId);
     reorderedItem.seat = parseInt(destination.droppableId) + 1;
-    console.log(reorderedItem);
     items.splice(result.destination.index, 0, reorderedItem);
     setItemsOnBill(items);
 
@@ -45,43 +43,36 @@ export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
       item: reorderedItem.orderItemId,
     };
     updateBill(tableInfo, upData);
-
-    //   // if selected is in the items that aren't sent
-    //   if (selected >= bill.items.length)
-    //     unpaidItems[selected - bill.items.length].seat_number = seat;
-    //   itemsToRender[selected].seat = seat;
-    // }
+    setColumns([...initialColumnState]);
+    console.log(columns[parseInt(destination.droppableId)]);
   };
-
   const droppableAreas = columns.map((item, index) => {
     return (
       <Droppable
         droppableId={`${index}`}
         key={`${item.id + index}`}
-        seatNumber={index + 1}
-      >
+        seatNumber={index + 1}>
         {(provided) => (
           <div className="droppable-container">
             <h1>{`Seat ${index + 1}`}</h1>
             <ul {...provided.droppableProps} ref={provided.innerRef}>
-              {itemsOnBill
-                .filter((item) => {
-                  return item.seat === index + 1;
-                })
-                .map((item, innerId) => {
+              {itemsOnBill.map((item, innerId) => {
+                if (item.seat === index + 1)
                   return (
                     <div className="draggable-container">
                       <Draggable
                         key={innerId}
-                        draggableId={innerId.toString() + index.toString()}
-                        index={innerId}
-                      >
+                        draggableId={
+                          index.toString() +
+                          item.name.toString() +
+                          innerId.toString()
+                        }
+                        index={innerId}>
                         {(provided) => (
                           <li
                             ref={provided.innerRef}
                             {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                          >
+                            {...provided.dragHandleProps}>
                             <div className="drag-item">
                               <p>{`${item.seat} ${item.name} ${item.price} ${item.orderItemId} ${item.seat}`}</p>
                             </div>
@@ -90,7 +81,8 @@ export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
                       </Draggable>
                     </div>
                   );
-                })}
+              })}
+              {/* {provided.placeholder} */}
               {provided.placeholder}
             </ul>
           </div>
