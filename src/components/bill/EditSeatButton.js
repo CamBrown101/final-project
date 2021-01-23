@@ -5,16 +5,16 @@ export default function EditSeatButton({
   setEditSeat,
   editSeatToggle,
   tableInfo,
+  bill,
 }) {
   let cssClass = 'edit-seat-button button';
-
-  if (!data.orderId) {
-    cssClass += ' opacity';
-  }
-
   useEffect(() => {
     setEditSeat(false);
   }, [tableInfo]);
+
+  if (!data.orderId || !tableInfo.items) {
+    cssClass += ' opacity';
+  }
 
   return (
     <div className="editSeat-section">
