@@ -1,15 +1,20 @@
-$base-color: #e9c46a;
-$border-dark: rgba($base-color, 0.88);
-$project-white: #ffffff;
-$dark: black;
-$base-light: #a7e9af;
-$base-lighter: #eef9bf;
-$base-highlight: #fdd;
+$base-dark: #2c2636;
+$base-light: #ede8d7;
+$base-light-accent: #ea7552;
+$base-dark-accent: #4ba99a;
+$base-main-color: #736e65;
 
+$base-cancel: #f44336;
+
+$base-color: #2c2636;
+$project-white: #fbfbf9;
+$base-lighter: #babdbc;
+$base-highlight: #fdd;
+$border-dark: rgba($base-color, 0.88);
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -17,7 +22,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -29,5 +34,5 @@ textarea {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  color: $dark;
+  color: $base-dark-accent;
 }

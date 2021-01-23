@@ -1,3 +1,5 @@
+@import "../../base";
+
 .order-container {
   display: flex;
   flex-direction: column;
@@ -5,7 +7,7 @@
   align-items: center;
 
   .prod-order {
-    background-color: white;
+    background-color: $base-light;
     width: 150px;
     padding: 1em;
     margin-left: 2em;
@@ -16,11 +18,11 @@
     justify-content: space-between;
   }
   .order-selected {
-    border: thick solid greenyellow;
+    border: thick solid $base-light-accent;
   }
   .mark-complete {
     height: 50px;
-    background-color: greenyellow;
+    background-color: $base-light-accent;
     display: flex;
     align-items: center;
     justify-content: center;

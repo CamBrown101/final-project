@@ -1,6 +1,6 @@
-@import '../../base';
+@import "../../base";
 .seat-item {
-  background-color: $project-white;
+  background-color: $base-light;
   border: black solid 1px;
   padding: 2%;
   width: 35px;
@@ -14,5 +14,5 @@
 }
 
 .selected {
-  background-color: lightgrey;
+  background-color: $base-dark-accent;
 }

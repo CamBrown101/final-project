@@ -1,8 +1,8 @@
-@import '../../base';
+@import "../../base";
 
 .new-category {
-  color: $dark;
-  background-color: white;
+  color: $base-dark;
+  background-color: $base-light;
   width: 300px;
   height: 300px;
   margin-left: auto;
@@ -23,7 +23,7 @@
     .category-is-food {
       border: 0;
       border-bottom: solid;
-      border-color: $dark;
+      border-color: $base-dark;
       display: block;
       width: 90%;
       margin-bottom: 0.5em;
@@ -35,7 +35,7 @@
     .category-name {
       border: 0;
       border-bottom: solid;
-      border-color: $dark;
+      border-color: $base-dark;
       display: block;
       width: 90%;
       margin-bottom: 0.5em;
@@ -50,15 +50,15 @@
 .create-category-button {
   display: block;
   background-color: $border-dark;
-  color: $dark;
+  color: $base-light;
   width: 100%;
   border: none;
   border-radius: 4px;
   padding: 0.4em;
 }
 .create-category-button:hover {
-  color: $dark;
-  background-color: $base-lighter;
+  color: $base-dark;
+  background-color: $base-light-accent;
 }
 textarea:focus,
 input:focus {

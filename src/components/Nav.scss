@@ -1,14 +1,14 @@
-@import '../base';
+@import "../base";
 
 #nav-bar {
   position: fixed;
   top: 0;
   width: 100%;
   min-width: 100%;
-  background-color: $dark;
+  background-color: $base-main-color;
   #nav-menu {
     display: flex;
-    background-color: $dark;
+    background-color: $base-main-color;
     width: 100%;
     max-width: 300px;
     height: 56px;
@@ -21,18 +21,17 @@
       height: 42px;
       padding-left: 0.5em;
       padding-right: 0.5em;
-      color: $base-lighter;
+      color: $base-light;
       white-space: nowrap;
     }
 
     .nav-menu-item:hover {
-      color: $dark;
-      background-color: $border-dark;
+      background-color: $base-dark-accent;
     }
   }
 }
 
 .active {
-  color: $dark;
-  background-color: $project-white;
+  color: $base-light;
+  background-color: $base-main-color;
 }

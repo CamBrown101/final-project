@@ -1,9 +1,9 @@
-@import '../../base';
+@import "../../base";
 
 .bill-container {
   padding: 2%;
   margin-left: 2%;
-  background-color: $project-white;
+  background-color: $base-light;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -77,7 +77,7 @@
     background-color: coral;
   }
   .cancel-button {
-    background-color: red;
+    background-color: $base-cancel;
   }
   .pay-button {
     background-color: purple;
@@ -99,28 +99,28 @@
   z-index: 1;
   margin-top: 30px;
   margin-right: -159px;
-  background-color: $project-white;
+  background-color: $base-light;
 }
 .print-dropdown {
   position: absolute;
   min-width: 230px;
   overflow: auto;
   z-index: 1;
-  background-color: $project-white;
+  background-color: $base-light;
 }
 .pay-dropdown {
   position: absolute;
   overflow: auto;
   z-index: 1;
-  background-color: darkgray;
+  background-color: $base-light;
 }
 .pay-by-seat-button {
   border: thin solid black;
   font-size: 1.5em;
-  background-color: $project-white;
+  background-color: $base-light;
 }
 .pay-by-seat-button:hover {
-  background-color: greenyellow;
+  background-color: $base-light-accent;
 }
 .pay-button-text {
   padding: 5px;

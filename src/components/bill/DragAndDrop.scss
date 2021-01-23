@@ -1,16 +1,18 @@
+@import "../../base";
 .dragAndDropContainer {
   width: 100%;
   height: 100%;
+  color: $base-light;
 }
 .drag-item {
   height: 30px;
   border: thin solid black;
 }
 .draggable-container {
-  background-color: pink;
+  background-color: $base-dark-accent;
 }
 .droppable-container {
-  background-color: blue;
+  background-color: $base-dark;
   margin: 2%;
 }
 .seat-heading {

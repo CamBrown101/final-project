@@ -1,8 +1,8 @@
-@import '../../base';
+@import "../../base";
 
 .selected {
-  background-color: lightgrey;
+  background-color: $base-light-accent;
 }
 .deleted {
-  color: red;
+  color: $base-cancel;
 }

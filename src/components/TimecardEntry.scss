@@ -5,7 +5,7 @@
     height: 80px;
     width: 450px;
     font-size: 80px;
-    background-color: $project-white;
+    background-color: $base-light;
     margin-bottom: 0;
     margin-top: 0;
     padding-bottom: 2%;
@@ -27,5 +27,7 @@
     font-size: 40px;
     border-radius: 0;
     padding: 0;
+    color: $base-dark;
+    background-color: $base-light;
   }
 }

@@ -1,5 +1,6 @@
+@import "../../base";
 .modal {
-  background-color: white;
+  background-color: $base-light;
   width: 100%;
   height: 100%;
   position: fixed;
@@ -13,6 +14,6 @@
     height: 250px;
     width: 250px;
     font-size: 200px;
-    background-color: blueviolet;
+    background-color: $base-cancel;
   }
 }

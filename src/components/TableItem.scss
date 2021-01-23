@@ -1,7 +1,7 @@
-@import '../base';
+@import "../base";
 
 .table-item {
-  background-color: $project-white;
+  background-color: $base-light;
   border: black solid 1px;
   width: 100px;
   height: 100px;
@@ -11,7 +11,7 @@
   align-items: center;
 }
 .selected {
-  background-color: lightgrey;
+  background-color: $base-light-accent;
 }
 .seats {
   margin: 0;
