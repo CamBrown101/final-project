@@ -18,7 +18,7 @@ import TimecardEntry from './components/TimecardEntry';
 import Split from './components/Split';
 import ProductionContainer from './components/productionScreen/ProductionContainer';
 import Analytics from './components/manager/Analytics';
-
+import Tables from './components/Tables/TablesScreen';
 function App() {
   const { user } = useContext(UserContext);
   const [bill, setBill] = useState({
@@ -30,6 +30,8 @@ function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/tables" component={Tables} />
+
         <Route path="/login" component={Login} />
         <Route
           path="/menu"

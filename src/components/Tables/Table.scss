@@ -1,0 +1,13 @@
+.table {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  cursor: move;
+  color: white;
+  background-color: blue;
+  max-width: 215px;
+  border-radius: 50%;
+  padding: 1em;
+  margin: auto;
+  user-select: none;
+}

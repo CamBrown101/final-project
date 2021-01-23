@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    console.log("table route");
+  router.get('/', (req, res) => {
+    console.log('table route');
     db.query(
       `SELECT tables.*, employees.firstName FROM tables
       JOIN employees On employee_id = employees.id;`
@@ -17,8 +17,18 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/:id", (req, res) => {
-    console.log("table id route");
+  router.get('/open', (req, res) => {
+    db.query('SELECT * FROM tables WHERE status = false;', [])
+      .then((data) => {
+        const tables = data.rows;
+        res.send(tables);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+  router.get('/:id', (req, res) => {
+    console.log('table id route');
     const table = req.params.id;
     db.query(
       `SELECT * FROM tables
@@ -35,8 +45,8 @@ module.exports = (db) => {
   });
 
   //seats for a table
-  router.get("/:id/seats", (req, res) => {
-    console.log("table id items route");
+  router.get('/:id/seats', (req, res) => {
+    console.log('table id items route');
     const table = req.params.id;
     db.query(
       `
@@ -54,8 +64,8 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/:id/current-order", (req, res) => {
-    console.log("table id items route");
+  router.get('/:id/current-order', (req, res) => {
+    console.log('table id items route');
     const table = req.params.id;
     db.query(
       `

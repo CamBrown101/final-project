@@ -21,6 +21,7 @@
     "react": "^16.14.0",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.14.0",
+    "react-draggable": "^4.4.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "sass": "^1.32.4",
