@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
-import './BillContainer.scss';
-import BillHeader from './BillHeader';
-import BillItem from './BillItem';
+import React, { useEffect, useState, useContext } from "react";
+import "./BillContainer.scss";
+import BillHeader from "./BillHeader";
+import BillItem from "./BillItem";
 import {
   sendBill,
   printBill,
@@ -12,22 +12,15 @@ import {
   getItemsToRender,
   updateBill,
   formatBillToPrint,
-} from './BillHelpers';
-import PayButton from './PayButton';
-import SendButton from './SendButton';
-import CancelButton from './CancelButton';
-import EditButton from './EditButton';
-import PrintBillButton from './PrintBillButton';
-import BillTotals from './BillTotals';
-import { CheckoutForm } from './CheckoutForm';
-import { UserContext } from '../../UserContext';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import PayPopUp from './PayPopUp';
-
-const stripePromise = loadStripe(
-  'pk_test_51I6MNvAlHHdCVPD0W6Rl7yFgLKHjawpkDlLJ7l2uBoOrvHX3lJAvY7dqBFrq26TzkBIO5QVXnwTE9HpXz5EdAQvq00Rg8M65td'
-);
+} from "./BillHelpers";
+import PayButton from "./PayButton";
+import SendButton from "./SendButton";
+import CancelButton from "./CancelButton";
+import EditButton from "./EditButton";
+import PrintBillButton from "./PrintBillButton";
+import BillTotals from "./BillTotals";
+import { UserContext } from "../../UserContext";
+import DragAndDrop from "./DragAndDrop";
 
 export default function BillContainer({
   bill,
@@ -70,13 +63,14 @@ export default function BillContainer({
       const upData = { seat: seat, item: itemsToRender[selected].orderItemId };
       updateBill(tableInfo, upData);
 
+      // if selected is in the items that aren't sent
       if (selected >= bill.items.length)
         unpaidItems[selected - bill.items.length].seat_number = seat;
       itemsToRender[selected].seat = seat;
     }
     // eslint-disable-next-line
   }, [seat, itemsToRender]);
-  const [mod, setMod] = useState('');
+  const [mod, setMod] = useState("");
   const [billItem, setBillItem] = useState(true);
   const [stripeToggle, setStripeToggle] = useState(true);
   const billItems = itemsToRender.map((item, index) => (
@@ -102,6 +96,14 @@ export default function BillContainer({
 
   return (
     <article className="bill-container">
+      <DragAndDrop
+        itemsToRender={itemsToRender}
+        tableInfo={tableInfo}
+        updateBill={updateBill}
+        bill={bill}
+        setBill={setBill}
+        menu={menu}
+      />
       <div>
         <BillHeader table={tableInfo} />
         <ul className="bill-items">{billItems}</ul>
@@ -129,7 +131,6 @@ export default function BillContainer({
             setBill={setBill}
             setTable={setTable}
             itemsToRender={itemsToRender}
-            tableInfo={tableInfo}
           />
           <EditButton
             data={data}

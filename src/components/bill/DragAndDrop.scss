@@ -1,0 +1,18 @@
+.dragAndDropContainer {
+  width: 100%;
+  height: 100%;
+}
+.drag-item {
+  height: 30px;
+  border: thin solid black;
+}
+.draggable-container {
+  background-color: pink;
+}
+.droppable-container {
+  background-color: blue;
+  margin: 2%;
+}
+.seat-heading {
+  font-size: 1.5em;
+}
