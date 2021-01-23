@@ -7,7 +7,6 @@ export default function Table(props) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const trackPos = (data) => {
-    console.log(props.tables.layout);
     setPosition({ x: data.x, y: data.y });
     const id = props.id;
     //Remove current layout info from layout array
@@ -28,7 +27,6 @@ export default function Table(props) {
       x_pos: data_info.x,
       y_pos: data_info.y,
     };
-    console.log(data);
     const URL = `/api/layout/`;
     const promise = axios
       .put(URL, data)
@@ -54,13 +52,11 @@ export default function Table(props) {
     const promise = axios
       .delete(URL, { data: data })
       .then((response) => {
-        console.log(response);
         const id = props.id;
         //Remove current layout info from layout array
         const tables = props.tables.layout.filter(function (obj) {
           return obj.id !== id;
         });
-        console.log(tables);
 
         //push new layout information into array
         props.setTables({
@@ -76,6 +72,7 @@ export default function Table(props) {
   };
   return (
     <Draggable
+      grid={[props.tables.grid, props.tables.grid]}
       cancel="strong"
       bounds="parent"
       onStart={props.edit}

@@ -47,7 +47,35 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+  router.delete('/reset', (req, res) => {
+    db.query(
+      `DELETE FROM layout
+      WHERE true
+      RETURNING *;
+      `,
+      []
+    )
+      .then((data) => {
+        res.send(data.rows[0]);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
 
+  //resets psql auto increment id counter
+  router.delete('/counter', (req, res) => {
+    db.query(
+      `SELECT SETVAL((SELECT pg_get_serial_sequence('layout', 'id')), 1, false);`,
+      []
+    )
+      .then((data) => {
+        res.send(data.rows[0]);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
   router.post('/', (req, res) => {
     db.query(
       `INSERT INTO layout (x_pos, y_pos)

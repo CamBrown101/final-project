@@ -8,11 +8,11 @@ export default function Tables(props) {
     edit: false,
     layout: [],
     open: [],
+    grid: 1,
   });
   useEffect(() => {
     Promise.all([axios.get('/api/layout'), axios.get('/api/tables/open')])
       .then((all) => {
-        console.log(all);
         setTables({
           ...tables,
           layout: all[0].data,
@@ -22,9 +22,7 @@ export default function Tables(props) {
       .catch();
   }, []);
 
-  useEffect(() => {
-    console.log(tables);
-  }, [tables.layout]);
+  useEffect(() => {}, [tables.layout]);
 
   const edit = () => {
     return true;
