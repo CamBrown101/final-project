@@ -21,13 +21,17 @@ export default function PayPopUp({
   setHidden,
 }) {
   return (
-    <div className={`modal ${hidden ? 'hidden' : ''}`}>
+    <div className={hidden ? 'hidden modal' : 'modal'}>
       <div className="modal_content">
-        <button onClick={() => setHidden(true)} className="close">
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+
+            setHidden(true);
+          }}
+          className="close">
           X
         </button>
-        <p>I'm A Pop Up!!!</p>
-        <span className="close">&times; </span>
         <Elements stripe={stripePromise}>
           <CheckoutForm
             cost={bill.total}
