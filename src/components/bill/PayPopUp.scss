@@ -1,0 +1,13 @@
+.modal {
+  background-color: white;
+  width: 100vh;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  opacity: 0.2;
+  .visible {
+    display: none;
+  }
+}
