@@ -73,6 +73,7 @@ export default function BillContainer({
   const [editSeatToggle, setEditSeat] = useState(true);
   const [mod, setMod] = useState('');
   const [billItem, setBillItem] = useState(true);
+  const [stripeToggle, setStripeToggle] = useState(true);
   const billItems = itemsToRender.map((item, index) => (
     <BillItem
       key={index}
@@ -90,6 +91,10 @@ export default function BillContainer({
       bill={bill}
     />
   ));
+  const togglePop = () => {
+    setStripeToggle(!stripeToggle);
+  };
+
   return (
     <article className="bill-container">
       <BillHeader table={tableInfo} />
@@ -162,6 +167,22 @@ export default function BillContainer({
           />
         </div>
       </div>
+
+      {/* {stripeToggle ? (
+        // <Elements stripe={stripePromise}>
+        //   <CheckoutForm
+        //     cost={bill.total}
+        //     bill={bill}
+        //     tableInfo={tableInfo}
+        //     data={data}
+        //     orderId={tableInfo.orderId}
+        //     items={itemsToRender}
+        //     seat={seat}
+        //     setBill={setBill}
+        //     setTable={setTable}
+        //   />
+        // </Elements>
+      ) : null} */}
     </article>
   );
 }

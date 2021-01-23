@@ -34,6 +34,7 @@ export default function PayButton({
           seat={i}
           key={i}
           items={billsBySeat[i].items}
+          cost={billsBySeat[i].total}
           orderId={i !== 0 ? null : tableInfo.orderId}
           data={data}
           tableInfo={tableInfo}
