@@ -1,5 +1,5 @@
-import React from 'react';
-import PayPopUp from './PayPopUp';
+import React from "react";
+import PayPopUp from "./PayPopUp";
 
 export default function PayBySeatButton({
   payBill,
@@ -16,25 +16,9 @@ export default function PayBySeatButton({
   cost,
 }) {
   return (
-    <div
-      className="pay-by-seat-button"
-      onClick={() => {
-        if (bill.items.length !== 0) {
-          sendBill(tableInfo, data).then((res) => {
-            console.log(res.data);
-            payBill(orderId, [
-              ...items,
-              ...res.data.filter((item) => {
-                return item.seat_number === seat;
-              }),
-            ]).then(() => clearBill(setBill, setTable));
-          });
-        } else {
-          payBill(orderId, items).then(() => clearBill(setBill, setTable));
-        }
-      }}>
+    <div className="pay-by-seat-button" onClick={() => {}}>
       <p className="pay-button-text">
-        {seat ? `Pay for seat ${seat}` : 'Pay total bill for table'}
+        {seat ? `Pay for seat ${seat}` : "Pay total bill for table"}
       </p>
       <PayPopUp />
     </div>

@@ -19,15 +19,7 @@ import CancelButton from "./CancelButton";
 import EditButton from "./EditButton";
 import PrintBillButton from "./PrintBillButton";
 import BillTotals from "./BillTotals";
-import { CheckoutForm } from "./CheckoutForm";
 import { UserContext } from "../../UserContext";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import PayPopUp from "./PayPopUp";
-
-const stripePromise = loadStripe(
-  "pk_test_51I6MNvAlHHdCVPD0W6Rl7yFgLKHjawpkDlLJ7l2uBoOrvHX3lJAvY7dqBFrq26TzkBIO5QVXnwTE9HpXz5EdAQvq00Rg8M65td"
-);
 
 export default function BillContainer({
   bill,
@@ -154,21 +146,21 @@ export default function BillContainer({
         </div>
       </div>
 
-      {stripeToggle ? (
-        <Elements stripe={stripePromise}>
-          <CheckoutForm
-            cost={bill.total}
-            bill={bill}
-            tableInfo={tableInfo}
-            data={data}
-            orderId={tableInfo.orderId}
-            items={itemsToRender}
-            seat={seat}
-            setBill={setBill}
-            setTable={setTable}
-          />
-        </Elements>
-      ) : null}
+      {/* {stripeToggle ? (
+        // <Elements stripe={stripePromise}>
+        //   <CheckoutForm
+        //     cost={bill.total}
+        //     bill={bill}
+        //     tableInfo={tableInfo}
+        //     data={data}
+        //     orderId={tableInfo.orderId}
+        //     items={itemsToRender}
+        //     seat={seat}
+        //     setBill={setBill}
+        //     setTable={setTable}
+        //   />
+        // </Elements>
+      ) : null} */}
     </article>
   );
 }
