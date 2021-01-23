@@ -10,7 +10,6 @@ export default function Tables(props) {
     open: [],
   });
   useEffect(() => {
-    console.log(tables);
     Promise.all([axios.get('/api/layout'), axios.get('/api/tables/open')])
       .then((all) => {
         console.log(all);
@@ -39,6 +38,8 @@ export default function Tables(props) {
       <Table
         key={table.id}
         id={table.id}
+        tables={tables}
+        setTables={setTables}
         edit={tables.edit ? edit : lock}
         x_pos={table.x_pos}
         y_pos={table.y_pos}

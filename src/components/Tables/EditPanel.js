@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import tables from '../../routes/tables';
 import './EditPanel.scss';
-
+import axios from 'axios';
 export default function EditPanel(props) {
   const [edit, setEdit] = useState({
     button: 'Edit',
@@ -29,6 +28,7 @@ export default function EditPanel(props) {
       });
     }
   };
+
   return (
     <div className="edit-panel">
       <button onClick={editClick} className="edit-layout-button">
