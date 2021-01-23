@@ -25,7 +25,6 @@ export default function Analytics() {
   let grossSales;
   getSalesbyDay(8).then((res) => {
     grossSales = res;
-    console.log("c", grossSales);
   });
 
   const getLabourByDay = (days) => {
@@ -85,6 +84,7 @@ export default function Analytics() {
     return Axios.get("/api/analytics/sales", {
       params: { days: data },
     }).then((res) => {
+      console.log(res.data);
       const dataEnd = top ? 10 : res.data.length;
       const temp = res.data.slice(dataEnd - 10, dataEnd).map((item) => {
         return { label: item.name, y: parseInt(item.sold) };
@@ -96,13 +96,42 @@ export default function Analytics() {
     });
   };
 
+  const getCategorySalesByDay = (days, food) => {
+    const data = days;
+    return Axios.get("/api/analytics/sales", {
+      params: { days: data },
+    }).then((res) => {
+      const temp = res.data
+        .filter((item) => item.is_food === food)
+        .slice(0, 10)
+        .map((item) => {
+          return { label: item.name, y: parseInt(item.sold) };
+        });
+      const sales = JSON.parse(JSON.stringify(options1));
+      sales.data[0].dataPoints = [...temp];
+      sales.title.text = "Top Ten Items Last Week";
+      return sales;
+    });
+  };
+
   let topSales;
   getItemSalesByDay(8, true).then((res) => {
     topSales = res;
   });
+
   let bottomSales;
   getItemSalesByDay(8, false).then((res) => {
     bottomSales = res;
+  });
+
+  let topFood;
+  getCategorySalesByDay(8, true).then((res) => {
+    topFood = res;
+  });
+
+  let topDrink;
+  getCategorySalesByDay(8, false).then((res) => {
+    topDrink = res;
   });
 
   const options1 = {
@@ -177,7 +206,25 @@ export default function Analytics() {
             setKey(5);
           }}
         >
-          Bottom Item Sales last 7 days
+          Net Sales
+        </button>
+        <button
+          className="options-button"
+          onClick={() => {
+            setOption(topFood);
+            setKey(6);
+          }}
+        >
+          Top Food Items
+        </button>
+        <button
+          className="options-button"
+          onClick={() => {
+            setOption(topDrink);
+            setKey(7);
+          }}
+        >
+          Top Drink Items
         </button>
       </div>
       <div className="chart-container">

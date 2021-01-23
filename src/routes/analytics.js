@@ -30,12 +30,12 @@ module.exports = (db) => {
     console.log("sales route");
     const days = req.query.days;
     const queryString = `
-    SELECT menu_items.name, count(menu_items.name) AS sold
+    SELECT menu_items.name, count(menu_items.name) AS sold, categories.is_food
     FROM menu_items
     Join order_items ON menu_items.id = order_items.item
     JOIN categories ON categories.id = menu_items.category_id
     WHERE timestamp > now() - interval '${days} day'
-    Group BY menu_items.name
+    Group BY menu_items.name, categories.is_food
     ORDER BY sold DESC
       ;`;
     db.query(queryString)
@@ -44,6 +44,7 @@ module.exports = (db) => {
         res.send(shifts);
       })
       .catch((err) => {
+        console.log(err);
         res.status(500).json({ error: err.message });
       });
   });
