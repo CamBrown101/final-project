@@ -154,21 +154,21 @@ export default function BillContainer({
         </div>
       </div>
 
-      {stripeToggle ? (
-        <Elements stripe={stripePromise}>
-          <CheckoutForm
-            cost={bill.total}
-            bill={bill}
-            tableInfo={tableInfo}
-            data={data}
-            orderId={tableInfo.orderId}
-            items={itemsToRender}
-            seat={seat}
-            setBill={setBill}
-            setTable={setTable}
-          />
-        </Elements>
-      ) : null}
+      {/* {stripeToggle ? (
+        // <Elements stripe={stripePromise}>
+        //   <CheckoutForm
+        //     cost={bill.total}
+        //     bill={bill}
+        //     tableInfo={tableInfo}
+        //     data={data}
+        //     orderId={tableInfo.orderId}
+        //     items={itemsToRender}
+        //     seat={seat}
+        //     setBill={setBill}
+        //     setTable={setTable}
+        //   />
+        // </Elements>
+      ) : null} */}
     </article>
   );
 }
