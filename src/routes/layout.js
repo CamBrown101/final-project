@@ -12,7 +12,7 @@ module.exports = (db) => {
       });
   });
 
-  router.post('/', (req, res) => {
+  router.put('/', (req, res) => {
     const id = req.body.id;
     const x_pos = req.body.x_pos;
     const y_pos = req.body.y_pos;
@@ -36,11 +36,26 @@ module.exports = (db) => {
     const id = req.body.id;
     db.query(
       `DELETE FROM layout
-      WHERE id = ${id};`,
+      WHERE id = ${id}
+      RETURNING *;`,
       []
     )
       .then((data) => {
-        res.send('Deleted');
+        res.send(data.rows[0]);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.post('/', (req, res) => {
+    db.query(
+      `INSERT INTO layout (x_pos, y_pos)
+      VALUES (0, 0);`,
+      []
+    )
+      .then((data) => {
+        res.send('New table added');
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

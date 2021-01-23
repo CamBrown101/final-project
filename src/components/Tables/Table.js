@@ -31,7 +31,7 @@ export default function Table(props) {
     console.log(data);
     const URL = `/api/layout/`;
     const promise = axios
-      .post(URL, data)
+      .put(URL, data)
       .then((response) => {
         props.setTables({
           ...props.tables,
