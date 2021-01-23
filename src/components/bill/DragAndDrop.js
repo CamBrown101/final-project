@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './DragAndDrop.scss';
 import { updateBill } from './BillHelpers';
-import DragItem from './DragItem';
 
 export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
   const [itemsOnBill, setItemsOnBill] = useState([...itemsToRender]);
@@ -82,7 +81,6 @@ export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
                     </div>
                   );
               })}
-              {/* {provided.placeholder} */}
               {provided.placeholder}
             </ul>
           </div>

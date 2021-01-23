@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function PayBySeatButton({
   payBill,
@@ -19,7 +19,6 @@ export default function PayBySeatButton({
       onClick={() => {
         if (bill.items.length !== 0) {
           sendBill(tableInfo, data).then((res) => {
-            console.log(res.data);
             payBill(orderId, [
               ...items,
               ...res.data.filter((item) => {
@@ -30,10 +29,9 @@ export default function PayBySeatButton({
         } else {
           payBill(orderId, items).then(() => clearBill(setBill, setTable));
         }
-      }}
-    >
+      }}>
       <p className="pay-button-text">
-        {seat ? `Pay for seat ${seat}` : "Pay total bill for table"}
+        {seat ? `Pay for seat ${seat}` : 'Pay total bill for table'}
       </p>
     </div>
   );

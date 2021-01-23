@@ -15,7 +15,8 @@ export default function PayButton({
   itemsToRender,
 }) {
   let cssClass = 'pay-button button';
-  if (!data.orderId) {
+  console.log(bill);
+  if (!tableInfo.items || bill.total < 1) {
     cssClass += ' opacity';
   }
   const [payToggle, setPayToggle] = useState('hide');
