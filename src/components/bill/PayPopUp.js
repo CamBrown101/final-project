@@ -1,11 +1,25 @@
 import React from 'react';
 import './PayPopUp.scss';
 
-export default function PayPopUp() {
+export default function PayPopUp({
+  cost,
+  bill,
+  tableInfo,
+  data,
+  orderId,
+  items,
+  seat,
+  setBill,
+  setTable,
+  hidden,
+  setHidden,
+}) {
   return (
-    <div className="modal">
+    <div className={`modal ${hidden ? 'hidden' : ''}`}>
       <div className="modal_content">
-        <span className="close">&times; </span>
+        <button onClick={() => setHidden(true)} className="close">
+          X
+        </button>
         <p>I'm A Pop Up!!!</p>
       </div>
     </div>

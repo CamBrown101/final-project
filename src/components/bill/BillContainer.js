@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
-import "./BillContainer.scss";
-import BillHeader from "./BillHeader";
-import BillItem from "./BillItem";
+import React, { useEffect, useState, useContext } from 'react';
+import './BillContainer.scss';
+import BillHeader from './BillHeader';
+import BillItem from './BillItem';
 import {
   sendBill,
   printBill,
@@ -12,21 +12,21 @@ import {
   getItemsToRender,
   updateBill,
   formatBillToPrint,
-} from "./BillHelpers";
-import PayButton from "./PayButton";
-import SendButton from "./SendButton";
-import CancelButton from "./CancelButton";
-import EditButton from "./EditButton";
-import PrintBillButton from "./PrintBillButton";
-import BillTotals from "./BillTotals";
-import { CheckoutForm } from "./CheckoutForm";
-import { UserContext } from "../../UserContext";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import PayPopUp from "./PayPopUp";
+} from './BillHelpers';
+import PayButton from './PayButton';
+import SendButton from './SendButton';
+import CancelButton from './CancelButton';
+import EditButton from './EditButton';
+import PrintBillButton from './PrintBillButton';
+import BillTotals from './BillTotals';
+import { CheckoutForm } from './CheckoutForm';
+import { UserContext } from '../../UserContext';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import PayPopUp from './PayPopUp';
 
 const stripePromise = loadStripe(
-  "pk_test_51I6MNvAlHHdCVPD0W6Rl7yFgLKHjawpkDlLJ7l2uBoOrvHX3lJAvY7dqBFrq26TzkBIO5QVXnwTE9HpXz5EdAQvq00Rg8M65td"
+  'pk_test_51I6MNvAlHHdCVPD0W6Rl7yFgLKHjawpkDlLJ7l2uBoOrvHX3lJAvY7dqBFrq26TzkBIO5QVXnwTE9HpXz5EdAQvq00Rg8M65td'
 );
 
 export default function BillContainer({
@@ -76,7 +76,7 @@ export default function BillContainer({
     }
     // eslint-disable-next-line
   }, [seat, itemsToRender]);
-  const [mod, setMod] = useState("");
+  const [mod, setMod] = useState('');
   const [billItem, setBillItem] = useState(true);
   const [stripeToggle, setStripeToggle] = useState(true);
   const billItems = itemsToRender.map((item, index) => (
