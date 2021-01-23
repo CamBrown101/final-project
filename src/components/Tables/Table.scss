@@ -11,3 +11,54 @@
   margin: auto;
   user-select: none;
 }
+
+.delete-table-layout {
+  background: #fed32c;
+
+  display: inline-block;
+}
+
+.delete-table-layout {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+
+  background-color: darkred;
+  animation: jiggle 0.2s infinite;
+  -webkit-animation: jiggle 0.2s infinite;
+  -moz-animation-duration: 0.2s;
+  -moz-animation-name: jiggle;
+  -moz-animation-iteration-count: infinite;
+  -webkit-transform: rotate(-1deg);
+  -moz-transform: rotate(-1deg);
+}
+
+.layout-position-data {
+  white-space: nowrap;
+}
+@keyframes jiggle {
+  0% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(6deg);
+  }
+}
+
+@-webkit-keyframes jiggle {
+  0% {
+    -webkit-transform: rotate(-6deg);
+  }
+  50% {
+    -webkit-transform: rotate(6deg);
+  }
+}
+
+@-moz-keyframes jiggle {
+  0% {
+    -moz-transform: rotate(-6deg);
+  }
+  50% {
+    -moz-transform: rotate(6deg);
+  }
+}

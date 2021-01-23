@@ -5,7 +5,6 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
     db.query('SELECT * FROM layout;', [])
       .then((data) => {
-        console.log(data.rows);
         res.send(data.rows);
       })
       .catch((err) => {
@@ -26,8 +25,22 @@ module.exports = (db) => {
       []
     )
       .then((data) => {
-        console.log(data.rows);
         res.send(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.delete('/', (req, res) => {
+    const id = req.body.id;
+    db.query(
+      `DELETE FROM layout
+      WHERE id = ${id};`,
+      []
+    )
+      .then((data) => {
+        res.send('Deleted');
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

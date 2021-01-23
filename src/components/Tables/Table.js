@@ -33,6 +33,9 @@ export default function Table(props) {
     const promise = axios
       .post(URL, data)
       .then((response) => {
+        props.setTables({
+          ...props.tables,
+        });
         console.log('Layout Updated');
       })
       .catch(function (error) {
@@ -42,8 +45,38 @@ export default function Table(props) {
     return promise;
   };
 
+  const deleteTable = () => {
+    const data = {
+      id: props.id,
+    };
+
+    const URL = `/api/layout/`;
+    const promise = axios
+      .delete(URL, { data: data })
+      .then((response) => {
+        console.log(response);
+        const id = props.id;
+        //Remove current layout info from layout array
+        const tables = props.tables.layout.filter(function (obj) {
+          return obj.id !== id;
+        });
+        console.log(tables);
+
+        //push new layout information into array
+        props.setTables({
+          ...props.tables,
+          layout: tables,
+        });
+      })
+      .catch(function (error) {
+        console.log('Delete layout failed');
+      });
+
+    return promise;
+  };
   return (
     <Draggable
+      cancel="strong"
       bounds="parent"
       onStart={props.edit}
       defaultPosition={{ x: props.x_pos, y: props.y_pos }}
@@ -51,7 +84,12 @@ export default function Table(props) {
       onStop={(e, data) => update(data)}
     >
       <div className="table">
-        <div>
+        {props.tables.edit ? (
+          <strong onClick={deleteTable} className="delete-table-layout">
+            X
+          </strong>
+        ) : null}
+        <div className="layout-position-data">
           x: {position.x.toFixed(0)}, y: {position.y.toFixed(0)}
         </div>
         <h1>{props.id}</h1>

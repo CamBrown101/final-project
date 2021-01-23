@@ -24,7 +24,7 @@ export default function Tables(props) {
 
   useEffect(() => {
     console.log(tables);
-  }, [tables]);
+  }, [tables.layout]);
 
   const edit = () => {
     return true;
@@ -33,26 +33,26 @@ export default function Tables(props) {
   const lock = () => {
     return false;
   };
-  const mapTables = tables.layout.map((table) => {
-    return (
-      <Table
-        key={table.id}
-        id={table.id}
-        tables={tables}
-        setTables={setTables}
-        edit={tables.edit ? edit : lock}
-        x_pos={table.x_pos}
-        y_pos={table.y_pos}
-      />
-    );
-  });
+
   return (
     <>
       <section
         style={{ backgroundColor: tables.edit ? 'red' : 'yellow' }}
         className="tables-container"
       >
-        {mapTables}
+        {tables.layout.map((table) => {
+          return (
+            <Table
+              key={table.id}
+              id={table.id}
+              tables={tables}
+              setTables={setTables}
+              edit={tables.edit ? edit : lock}
+              x_pos={table.x_pos}
+              y_pos={table.y_pos}
+            />
+          );
+        })}
       </section>
       <EditPanel tables={tables} setTables={setTables}></EditPanel>
     </>
