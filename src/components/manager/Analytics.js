@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from "react";
-import "./Analytic.scss";
-import { CanvasJSChart } from "canvasjs-react-charts";
-import Axios from "axios";
+import React, { useState, useEffect } from 'react';
+import './Analytic.scss';
+import { CanvasJSChart } from 'canvasjs-react-charts';
+import Axios from 'axios';
+import ManagerNav from './ManagerNav';
 
 export default function Analytics() {
   const getSalesbyDay = (days) => {
     const data = days;
-    return Axios.get("/api/analytics/gross-sales", {
+    return Axios.get('/api/analytics/gross-sales', {
       params: { days: data },
     }).then((res) => {
       const temp = res.data.map((item, i) => {
         const date = new Date(item.timestamp).toLocaleDateString(undefined, {
-          month: "short",
-          day: "numeric",
+          month: 'short',
+          day: 'numeric',
         });
         return { label: date, y: parseInt(item.sum) };
       });
       const grossSales = JSON.parse(JSON.stringify(options1));
       grossSales.data[0].dataPoints = [...temp];
-      grossSales.title.text = "Gross Sales";
+      grossSales.title.text = 'Gross Sales';
       return grossSales;
     });
   };
@@ -29,7 +30,7 @@ export default function Analytics() {
 
   const getLabourByDay = (days) => {
     const data = days;
-    return Axios.get("/api/analytics/labour", { params: { days: data } }).then(
+    return Axios.get('/api/analytics/labour', { params: { days: data } }).then(
       (res) => {
         const costPerShift = res.data.map((shift) => {
           const start = new Date(shift.punch_time).getTime() / 1000;
@@ -38,8 +39,8 @@ export default function Analytics() {
           if (shift.clockouttime === null) hours = 0;
           return {
             date: new Date(shift.punch_time).toLocaleDateString(undefined, {
-              month: "short",
-              day: "numeric",
+              month: 'short',
+              day: 'numeric',
             }),
             cost: hours * shift.wage,
           };
@@ -57,7 +58,7 @@ export default function Analytics() {
         });
         const labour = JSON.parse(JSON.stringify(options1));
         labour.data[0].dataPoints = [...temp];
-        labour.title.text = "Labour Cost Last Week";
+        labour.title.text = 'Labour Cost Last Week';
         return labour;
       }
     );
@@ -76,12 +77,12 @@ export default function Analytics() {
       }
     });
     netSales.data[0].dataPoints = temp;
-    netSales.title.text = "Net Sales Last Week";
+    netSales.title.text = 'Net Sales Last Week';
   });
 
   const getItemSalesByDay = (days, top) => {
     const data = days;
-    return Axios.get("/api/analytics/sales", {
+    return Axios.get('/api/analytics/sales', {
       params: { days: data },
     }).then((res) => {
       console.log(res.data);
@@ -91,14 +92,14 @@ export default function Analytics() {
       });
       const sales = JSON.parse(JSON.stringify(options1));
       sales.data[0].dataPoints = [...temp];
-      sales.title.text = (top ? "Top " : "Bottom ") + "Ten Items Last Week";
+      sales.title.text = (top ? 'Top ' : 'Bottom ') + 'Ten Items Last Week';
       return sales;
     });
   };
 
   const getCategorySalesByDay = (days, food) => {
     const data = days;
-    return Axios.get("/api/analytics/sales", {
+    return Axios.get('/api/analytics/sales', {
       params: { days: data },
     }).then((res) => {
       const temp = res.data
@@ -109,7 +110,7 @@ export default function Analytics() {
         });
       const sales = JSON.parse(JSON.stringify(options1));
       sales.data[0].dataPoints = [...temp];
-      sales.title.text = "Top Ten Items Last Week";
+      sales.title.text = 'Top Ten Items Last Week';
       return sales;
     });
   };
@@ -139,19 +140,19 @@ export default function Analytics() {
     animationDuration: 2000,
     height: 800,
     exportEnabled: true,
-    theme: "dark2", //"light1", "dark1", "dark2"
+    theme: 'dark2', //"light1", "dark1", "dark2"
     title: {
-      text: "Item Sales",
+      text: 'Item Sales',
     },
     axisY: {
       includeZero: true,
     },
     data: [
       {
-        type: "column", //change type to bar, line, area, pie, etc
+        type: 'column', //change type to bar, line, area, pie, etc
         //indexLabel: "{y}", //Shows y value on all Data Points
-        indexLabelFontColor: "#5A5757",
-        indexLabelPlacement: "outside",
+        indexLabelFontColor: '#5A5757',
+        indexLabelPlacement: 'outside',
       },
     ],
   };
@@ -161,15 +162,13 @@ export default function Analytics() {
 
   return (
     <div className="analytic-container">
-      <h1>Analytics</h1>
       <div className="analytic-buttons">
         <button
           className="options-button"
           onClick={() => {
             setOption(grossSales);
             setKey(2);
-          }}
-        >
+          }}>
           Sales last 7 days
         </button>
         <button
@@ -177,8 +176,7 @@ export default function Analytics() {
           onClick={() => {
             setOption(labour);
             setKey(1);
-          }}
-        >
+          }}>
           Labour last 7 days
         </button>
         <button
@@ -186,8 +184,7 @@ export default function Analytics() {
           onClick={() => {
             setOption(topSales);
             setKey(3);
-          }}
-        >
+          }}>
           Top Item Sales last 7 days
         </button>
         <button
@@ -195,8 +192,7 @@ export default function Analytics() {
           onClick={() => {
             setOption(bottomSales);
             setKey(4);
-          }}
-        >
+          }}>
           Bottom Item Sales last 7 days
         </button>
         <button
@@ -204,8 +200,7 @@ export default function Analytics() {
           onClick={() => {
             setOption(netSales);
             setKey(5);
-          }}
-        >
+          }}>
           Net Sales
         </button>
         <button
@@ -213,8 +208,7 @@ export default function Analytics() {
           onClick={() => {
             setOption(topFood);
             setKey(6);
-          }}
-        >
+          }}>
           Top Food Items
         </button>
         <button
@@ -222,14 +216,14 @@ export default function Analytics() {
           onClick={() => {
             setOption(topDrink);
             setKey(7);
-          }}
-        >
+          }}>
           Top Drink Items
         </button>
       </div>
       <div className="chart-container">
         <CanvasJSChart options={option} key={key} />
       </div>
+      <ManagerNav />
     </div>
   );
 }
