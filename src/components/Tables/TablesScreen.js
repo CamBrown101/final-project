@@ -22,6 +22,7 @@ export default function Tables(props) {
   const [selectValue, setSelectValue] = useState({
     employee: 'DEFAULT',
     seats: 'DEFAULT',
+    name: '',
   });
 
   useEffect(() => {

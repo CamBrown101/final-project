@@ -28,21 +28,26 @@ export default function TableInfo(props) {
   };
 
   const employeeChange = (event) => {
-    const employee = event.target.value;
+    const employee = parseInt(event.target.value);
     const data = {
       id: props.tableInfo.table,
-      employee_id: parseInt(employee),
+      employee_id: employee,
     };
 
+    let employeeFind = props.tables.employees.data.find(
+      (obj) => obj.id === props.tableInfo.tableObj.employee_id
+    );
+    let name = `${employeeFind.firstname} ${employeeFind.lastname}`;
     props.setSelectValue({
       ...props.selectValue,
       employee: event.target.value,
+      name: name,
     });
+
     const URL = `/api/layout/employee`;
     const promise = axios
       .put(URL, data)
       .then((response) => {
-        console.log(response);
         console.log('Table Employee Updated');
       })
       .catch(function (error) {
@@ -65,7 +70,7 @@ export default function TableInfo(props) {
         >
           {' '}
           <option value="DEFAULT" disabled>
-            {props.tableInfo.employeeName}
+            {props.selectValue.name}
           </option>
           {props.tables.employees.data
             ? props.tables.employees.data.map((e, key) => {

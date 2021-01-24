@@ -73,36 +73,30 @@ export default function Table(props) {
   };
 
   const table = () => {
-    Promise.all([
-      axios.get('/api/layout'),
-      axios.get('/api/tables/open'),
-      axios.get('/api/employees'),
-    ])
+    Promise.all([axios.get('/api/layout'), axios.get('/api/tables/open')])
       .then((all) => {
         let table = all[0].data.find((obj) => obj.id == props.id);
-        let employee = all[2].data.find(
-          (obj) => obj.id === props.tableInfo.tableObj.employee_id
+        let employeeFind = props.tables.employees.data.find(
+          (obj) => obj.id === table.employee_id
         );
-        console.log(employee);
-        let name = `${employee.firstname} ${employee.lastname}`;
+        let name = `${employeeFind.firstname} ${employeeFind.lastname}`;
         console.log(name);
         props.setTables({
           ...props.tables,
           layout: all[0].data,
           open: all[1].data,
-          employees: all[2],
         });
 
         props.setTableInfo({
           ...props.tableInfo,
           table: props.id,
           tableObj: table,
-          employeeName: name,
         });
         props.setSelectValue({
           ...props.setSelectValue,
           employee: 'DEFAULT',
           seats: 'DEFAULT',
+          name: name,
         });
       })
       .catch();
