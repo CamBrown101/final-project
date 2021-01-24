@@ -22,7 +22,6 @@ export default function Nav(props) {
             <NavLink
               className="nav-menu-item"
               id="nav-menu-manager"
-              exact
               to="/manager">
               Manager
             </NavLink>

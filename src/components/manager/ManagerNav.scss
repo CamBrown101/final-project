@@ -1,41 +1,41 @@
 @import '../../base';
 
 #manager-nav-bar {
-  margin-top: 80px;
-}
-
-#manager-nav-bar {
   position: fixed;
   top: 0;
   width: 100%;
+  margin-top: 80px;
   min-width: 100%;
-  background-color: $base-dark;
+  background-color: $base-dark-accent;
+  .selectedLink {
+    background-color: $base-dark !important;
+  }
   #manager-nav-menu {
     display: flex;
-    background-color: $base-dark;
     width: 100%;
     max-width: 300px;
     height: 56px;
     font-size: 20px;
     font-weight: bolder;
-
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .nav-menu-item {
-      margin: auto;
-      padding-top: 14px;
-      height: 42px;
-      padding-left: 0.5em;
-      padding-right: 0.5em;
+      height: 90%;
+      margin: 1%;
       color: $base-white;
       white-space: nowrap;
+      padding: 1px 10px;
+      background-color: $base-dark-accent;
+    }
+    .nav-menu-item:link {
+      text-decoration: none;
     }
 
     .nav-menu-item:hover {
-      background-color: $base-dark-accent;
+      background-color: $base-dark;
     }
-  }
-
-  .active {
-    color: $base-white;
-    background-color: $base-dark-accent;
   }
 }
