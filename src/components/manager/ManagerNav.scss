@@ -12,6 +12,7 @@
   }
   #manager-nav-menu {
     display: flex;
+    align-items: center;
     width: 100%;
     max-width: 300px;
     height: 56px;
@@ -23,8 +24,7 @@
       align-items: center;
     }
     .nav-menu-item {
-      height: 90%;
-      margin: 1%;
+      height: 100%;
       color: $base-white;
       white-space: nowrap;
       padding: 1px 10px;
