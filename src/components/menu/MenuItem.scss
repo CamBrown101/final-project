@@ -1,4 +1,4 @@
-@import "../../base";
+@import '../../base';
 
 .menu-item {
   background-color: $base-dark;
@@ -10,6 +10,12 @@
   min-width: 120px;
   max-width: 120px;
   margin-bottom: 1em;
+}
+.menu-item-inside:hover {
+  border: 0.5px solid $base-white;
+}
+.menu-item-inside:focus {
+  border: 0.5px solid $base-white;
 }
 .menu-item-inside {
   border: black solid 1px;
