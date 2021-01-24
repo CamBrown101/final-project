@@ -2,27 +2,43 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './TablesScreen.scss';
 import Table from './Table';
-import EditPanel from './EditPanel';
+
+import Side from './Side';
 export default function Tables(props) {
   const [tables, setTables] = useState({
     edit: false,
     layout: [],
     open: [],
+    employees: [],
     grid: 1,
+    seats: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }],
   });
+
+  const [tableInfo, setTableInfo] = useState({
+    table: 0,
+    tableObj: {},
+  });
+
   useEffect(() => {
-    Promise.all([axios.get('/api/layout'), axios.get('/api/tables/open')])
+    Promise.all([
+      axios.get('/api/layout'),
+      axios.get('/api/tables/open'),
+      axios.get('/api/employees'),
+    ])
       .then((all) => {
         setTables({
           ...tables,
           layout: all[0].data,
           open: all[1].data,
+          employees: all[2],
         });
       })
       .catch();
   }, []);
 
-  useEffect(() => {}, [tables.layout]);
+  useEffect(() => {
+    console.log(tables);
+  }, [tables]);
 
   const edit = () => {
     return true;
@@ -33,7 +49,7 @@ export default function Tables(props) {
   };
 
   return (
-    <>
+    <div className="layout-screen">
       <section
         style={{ backgroundColor: tables.edit ? 'red' : 'yellow' }}
         className="tables-container"
@@ -45,6 +61,8 @@ export default function Tables(props) {
               id={table.id}
               tables={tables}
               setTables={setTables}
+              tableInfo={tableInfo}
+              setTableInfo={setTableInfo}
               edit={tables.edit ? edit : lock}
               x_pos={table.x_pos}
               y_pos={table.y_pos}
@@ -52,7 +70,14 @@ export default function Tables(props) {
           );
         })}
       </section>
-      <EditPanel tables={tables} setTables={setTables}></EditPanel>
-    </>
+      <section className="side-container">
+        <Side
+          tables={tables}
+          setTables={setTables}
+          tableInfo={tableInfo}
+          setTableInfo={setTableInfo}
+        ></Side>
+      </section>
+    </div>
   );
 }

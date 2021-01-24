@@ -5,6 +5,17 @@ export default function EditPanel(props) {
   const [edit, setEdit] = useState({
     button: 'Edit',
   });
+  const [seats, setSeats] = useState({
+    numberOfSeats: 1,
+  });
+
+  const seatsChange = (event) => {
+    const seatsNum = parseInt(event.target.value);
+    setSeats({
+      ...seats,
+      numberOfSeats: seatsNum,
+    });
+  };
 
   const editClick = () => {
     if (edit.button === 'Edit') {
@@ -29,10 +40,15 @@ export default function EditPanel(props) {
     }
   };
 
-  const addTable = () => {
+  const addTable = (event) => {
+    event.preventDefault();
     const URL = `/api/layout/`;
+    const data = {
+      number_of_seats: seats.numberOfSeats,
+    };
+    console.log(data);
     const promise = axios
-      .post(URL)
+      .post(URL, data)
       .then((response) => {
         //get updated list of tables and update state
         const promise = axios
@@ -69,7 +85,7 @@ export default function EditPanel(props) {
           ...props.tables,
           layout: tables,
         });
-        //reset psql id counter
+        //reset psql id
         const promise = axios
           .delete('/api/layout/counter')
           .then((response) => {
@@ -100,9 +116,19 @@ export default function EditPanel(props) {
         {edit.button}
       </button>
       {props.tables.edit ? (
-        <button onClick={addTable} className="edit-layout-button">
-          Add Table
-        </button>
+        <form>
+          <button onClick={addTable} className="edit-layout-button">
+            Add Table
+          </button>
+          <select required onChange={seatsChange} name="seats" id="seats">
+            <option value="1">Seats: 1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="5">6</option>
+          </select>
+        </form>
       ) : null}
       {props.tables.edit ? (
         <select onChange={grid} name="grid" id="grid">

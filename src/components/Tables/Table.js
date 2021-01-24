@@ -2,6 +2,7 @@ import Draggable from 'react-draggable';
 import axios from 'axios';
 import './Table.scss';
 import { useState } from 'react';
+import Employee from '../manager/Employee';
 
 export default function Table(props) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -70,6 +71,29 @@ export default function Table(props) {
 
     return promise;
   };
+
+  const findTable = () => {
+    console.log(props.tables.layout);
+    return props.tables.layout.find((obj) => obj.id == props.id);
+  };
+
+  const findEmployeeName = () => {
+    return props.tables.employees.data.find((obj) => obj.id == props.id);
+  };
+  const table = () => {
+    let table = findTable();
+    let employee = findEmployeeName();
+    console.log(props.tableInfo.tableObj);
+    let name = `${employee.firstname} ${employee.lastname}`;
+    props.setTableInfo({
+      ...props.tableInfo,
+      table: props.id,
+      tableObj: table,
+      employeeName: name,
+    });
+
+    // props.tables.employees.data;
+  };
   return (
     <Draggable
       grid={[props.tables.grid, props.tables.grid]}
@@ -80,15 +104,15 @@ export default function Table(props) {
       onDrag={(e, data) => trackPos(data)}
       onStop={(e, data) => update(data)}
     >
-      <div className="table">
+      <div className="table" onClick={table}>
         {props.tables.edit ? (
           <strong onClick={deleteTable} className="delete-table-layout">
             X
           </strong>
         ) : null}
-        <div className="layout-position-data">
+        {/* <div className="layout-position-data">
           x: {position.x.toFixed(0)}, y: {position.y.toFixed(0)}
-        </div>
+        </div> */}
         <h1>{props.id}</h1>
       </div>
     </Draggable>
