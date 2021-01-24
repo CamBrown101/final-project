@@ -8,11 +8,11 @@ export default function EditSeatButton({
   bill,
 }) {
   let cssClass = "edit-seat-button button";
-  useEffect(() => {
-    setEditSeat(false);
+  // useEffect(() => {
+  //   setEditSeat(false);
 
-    //eslint-disable-next-line
-  }, [tableInfo]);
+  //   //eslint-disable-next-line
+  // }, [tableInfo]);
 
   if (!data.orderId) {
     cssClass += " opacity";

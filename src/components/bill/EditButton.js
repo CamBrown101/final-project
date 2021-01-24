@@ -13,9 +13,9 @@ export default function EditButton({
   if (!data.itemId.length || selected === null) {
     cssClass += " opacity";
   }
-  // useEffect(() => {
-  //   setInputToggle('hide');
-  // }, [tableInfo]);
+  useEffect(() => {
+    setInputToggle("hide");
+  }, [tableInfo]);
   return (
     <div className="edit-section">
       <div
