@@ -1,11 +1,13 @@
-@import "../../base";
+@import '../../base';
 
 .order-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  .order-container::-webkit-scrollbar {
+    display: none;
+  }
   .prod-order {
     background-color: $base-dark;
     width: 150px;
@@ -31,4 +33,7 @@
 .scroll-y {
   overflow-y: scroll;
   max-height: 200px;
+}
+.scroll-y::-webkit-scrollbar {
+  display: none;
 }
