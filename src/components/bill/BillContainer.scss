@@ -8,6 +8,7 @@
   flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
+  max-height: 738px;
 
   .bill-item {
     display: flex;
@@ -15,7 +16,7 @@
     justify-content: space-between;
   }
   .bill-items {
-    max-height: 475px;
+    max-height: 320px;
     overflow-y: scroll;
     background-color: $base-dark;
     -ms-overflow-style: none;

@@ -5,6 +5,7 @@
   justify-content: flex-start;
   margin: 0 1% 0 1%;
   width: 930px;
+  max-height: 816px;
 }
 .category-tab {
   display: flex;
@@ -25,14 +26,16 @@
   display: flex;
   flex-direction: column;
   background-color: $base-dark;
+}
+.item-container::-webkit-scrollbar {
+  display: none;
+}
+.item-container {
   flex-grow: 1;
   overflow-y: scroll;
   overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-.menu-item-container-inside::-webkit-scrollbar {
-  display: none;
 }
 
 .category-selectors {
