@@ -1,4 +1,4 @@
-@import "../base";
+@import '../base';
 
 .table-item {
   background-color: $base-dark;
@@ -9,6 +9,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.table-item:hover {
+  border: 0.5px solid $base-white;
+}
+.table-item:focus {
+  border: 0.5px solid $base-white;
 }
 .selected {
   background-color: $base-dark-accent;
