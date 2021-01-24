@@ -33,56 +33,34 @@ export default function Home(props) {
     return <Redirect to="/login" />;
   }
   return (
-    <div>
-      <div className="home-main">
-        <div className="logged-in">
-          <h1>Hello, {user.name}!</h1>
-          <button className="logout-button" onClick={logout}>
-            Logout
-          </button>
-          <Link
-            to={{
-              pathname: '/food-production',
-              is_food: true,
-            }}>
-            <button className="logout-button">Food Production</button>
-          </Link>
-          <Link
-            to={{
-              pathname: '/drink-production',
-              is_food: false,
-            }}>
-            <button className="logout-button">Drink Production</button>
-          </Link>
-        </div>
-        <div className="container">
-          <BillContainer
-            bill={props.bill}
-            tableInfo={table}
-            menu={menu}
-            setBill={props.setBill}
+    <div className="home-main">
+      <div className="container">
+        <BillContainer
+          bill={props.bill}
+          tableInfo={table}
+          menu={menu}
+          setBill={props.setBill}
+          setTable={setTable}
+          seat={seat}
+        />
+        <MenuContainer
+          menu={menu}
+          setBill={props.setBill}
+          bill={props.bill}
+          seat={seat}
+          category={category}
+          setCategory={setCategory}
+          categories={categories}
+        />
+        <div className="table-selectors">
+          <TableContainer
+            tables={tables}
             setTable={setTable}
-            seat={seat}
-          />
-          <MenuContainer
-            menu={menu}
             setBill={props.setBill}
+            table={table}
             bill={props.bill}
-            seat={seat}
-            category={category}
-            setCategory={setCategory}
-            categories={categories}
           />
-          <div className="table-selectors">
-            <TableContainer
-              tables={tables}
-              setTable={setTable}
-              setBill={props.setBill}
-              table={table}
-              bill={props.bill}
-            />
-            <SeatContainer setSeat={setSeat} table={table} seat={seat} />
-          </div>
+          <SeatContainer setSeat={setSeat} table={table} seat={seat} />
         </div>
       </div>
     </div>
