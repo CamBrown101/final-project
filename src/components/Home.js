@@ -33,36 +33,34 @@ export default function Home(props) {
     return <Redirect to="/login" />;
   }
   return (
-    <div>
-      <div className="home-main">
-        <div className="container">
-          <BillContainer
-            bill={props.bill}
-            tableInfo={table}
-            menu={menu}
-            setBill={props.setBill}
+    <div className="home-main">
+      <div className="container">
+        <BillContainer
+          bill={props.bill}
+          tableInfo={table}
+          menu={menu}
+          setBill={props.setBill}
+          setTable={setTable}
+          seat={seat}
+        />
+        <MenuContainer
+          menu={menu}
+          setBill={props.setBill}
+          bill={props.bill}
+          seat={seat}
+          category={category}
+          setCategory={setCategory}
+          categories={categories}
+        />
+        <div className="table-selectors">
+          <TableContainer
+            tables={tables}
             setTable={setTable}
-            seat={seat}
-          />
-          <MenuContainer
-            menu={menu}
             setBill={props.setBill}
+            table={table}
             bill={props.bill}
-            seat={seat}
-            category={category}
-            setCategory={setCategory}
-            categories={categories}
           />
-          <div className="table-selectors">
-            <TableContainer
-              tables={tables}
-              setTable={setTable}
-              setBill={props.setBill}
-              table={table}
-              bill={props.bill}
-            />
-            <SeatContainer setSeat={setSeat} table={table} seat={seat} />
-          </div>
+          <SeatContainer setSeat={setSeat} table={table} seat={seat} />
         </div>
       </div>
     </div>
