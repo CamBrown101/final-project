@@ -18,7 +18,13 @@
     max-height: 475px;
     overflow-y: scroll;
     background-color: $base-dark;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+  .bill-items::-webkit-scrollbar {
+    display: none;
+  }
+
   .item {
     display: flex;
     justify-content: space-between;
