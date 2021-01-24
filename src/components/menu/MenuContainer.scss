@@ -28,7 +28,13 @@
   max-height: 820px;
   overflow-y: scroll;
   overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
+.menu-item-container-inside::-webkit-scrollbar {
+  display: none;
+}
+
 .category-selectors {
   justify-self: end;
   padding: 0;
