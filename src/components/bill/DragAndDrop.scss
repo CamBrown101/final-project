@@ -2,14 +2,14 @@
 .dragAndDropContainer {
   width: 100%;
   height: 100%;
-  color: $base-light;
+  color: $base-white;
 }
 .drag-item {
   height: 30px;
   border: thin solid black;
 }
 .draggable-container {
-  background-color: $base-dark-accent;
+  background-color: $base-light;
 }
 .droppable-container {
   background-color: $base-dark;

@@ -1,9 +1,9 @@
-@import '../../base';
+@import "../../base";
 
 .bill-container {
   padding: 2%;
   margin-left: 2%;
-  background-color: $base-light;
+  background-color: $base-dark;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@
   .bill-items {
     max-height: 475px;
     overflow-y: scroll;
-    background-color: $base-light;
+    background-color: $base-dark;
   }
   .item {
     display: flex;
