@@ -44,7 +44,8 @@ export default function Table(props) {
     return promise;
   };
 
-  const deleteTable = () => {
+  const deleteTable = (event) => {
+    event.stopPropagation();
     const data = {
       id: props.id,
     };
@@ -75,12 +76,11 @@ export default function Table(props) {
   const table = () => {
     Promise.all([axios.get('/api/layout'), axios.get('/api/tables/open')])
       .then((all) => {
-        let table = all[0].data.find((obj) => obj.id == props.id);
+        let table = all[0].data.find((obj) => obj.id === props.id);
         let employeeFind = props.tables.employees.data.find(
           (obj) => obj.id === table.employee_id
         );
         let name = `${employeeFind.firstname} ${employeeFind.lastname}`;
-        console.log(name);
         props.setTables({
           ...props.tables,
           layout: all[0].data,

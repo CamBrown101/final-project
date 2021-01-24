@@ -42,9 +42,7 @@ export default function Tables(props) {
       .catch();
   }, []);
 
-  useEffect(() => {
-    console.log(tables);
-  }, [tables]);
+  useEffect(() => {}, [tables]);
 
   const edit = () => {
     return true;
