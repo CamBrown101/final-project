@@ -1,15 +1,15 @@
-@import '../base';
+@import "../base";
 
 #nav-bar {
   position: fixed;
   top: 0;
   width: 100%;
   min-width: 100%;
-  background-color: $base-dark-accent;
+  background-color: $base-dark;
 
   #nav-menu {
     display: flex;
-    background-color: $base-dark-accent;
+    background-color: $base-dark;
     height: 80px;
     font-size: 20px;
     font-weight: bolder;
@@ -20,9 +20,9 @@
     .nav-menu-item {
       height: 90%;
       margin: 1%;
-      color: $base-lighter;
+      color: $base-white;
       white-space: nowrap;
-      background-color: $border-dark;
+      background-color: $base-dark;
       padding: 15px 10px;
     }
 
@@ -38,7 +38,7 @@
     }
   }
   .logged-in {
-    color: $base-lighter;
+    color: $base-white;
     margin-right: 1%;
     width: 300px;
     text-align: right;
