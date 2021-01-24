@@ -103,6 +103,7 @@ export default function BillContainer({
             updateBill={updateBill}
             setBill={setBill}
             menu={menu}
+            setTable={setTable}
           />
         ) : (
           <ul className="bill-items">{billItems}</ul>

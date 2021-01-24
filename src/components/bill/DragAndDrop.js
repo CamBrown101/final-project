@@ -2,8 +2,14 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./DragAndDrop.scss";
 import { updateBill } from "./BillHelpers";
+import Axios from "axios";
 
-export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
+export default function DragAndDrop({
+  itemsToRender,
+  tableInfo,
+  bill,
+  setTable,
+}) {
   const [itemsOnBill, setItemsOnBill] = useState([...itemsToRender]);
   const [columns, setColumns] = useState([]);
 
@@ -44,6 +50,15 @@ export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
     };
     updateBill(tableInfo, upData);
     console.log(columns[parseInt(destination.droppableId)]);
+
+    const newItems = [];
+    Axios.get(`/api/orders/${tableInfo.orderId}/items`).then((res) => {
+      newItems.push(res.data);
+      setTable({
+        ...tableInfo,
+        items: newItems,
+      });
+    });
   };
   const droppableAreas = columns.map((item, index) => {
     return (
