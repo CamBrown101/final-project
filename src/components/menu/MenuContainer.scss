@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: column;
   background-color: $base-dark;
-  max-height: 820px;
+  flex-grow: 1;
   overflow-y: scroll;
   overflow-x: hidden;
   -ms-overflow-style: none;
