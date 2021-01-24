@@ -72,27 +72,40 @@ export default function Table(props) {
     return promise;
   };
 
-  const findTable = () => {
-    console.log(props.tables.layout);
-    return props.tables.layout.find((obj) => obj.id == props.id);
-  };
-
-  const findEmployeeName = () => {
-    return props.tables.employees.data.find((obj) => obj.id == props.id);
-  };
   const table = () => {
-    let table = findTable();
-    let employee = findEmployeeName();
-    console.log(props.tableInfo.tableObj);
-    let name = `${employee.firstname} ${employee.lastname}`;
-    props.setTableInfo({
-      ...props.tableInfo,
-      table: props.id,
-      tableObj: table,
-      employeeName: name,
-    });
+    Promise.all([
+      axios.get('/api/layout'),
+      axios.get('/api/tables/open'),
+      axios.get('/api/employees'),
+    ])
+      .then((all) => {
+        let table = all[0].data.find((obj) => obj.id == props.id);
+        let employee = all[2].data.find(
+          (obj) => obj.id === props.tableInfo.tableObj.employee_id
+        );
+        console.log(employee);
+        let name = `${employee.firstname} ${employee.lastname}`;
+        console.log(name);
+        props.setTables({
+          ...props.tables,
+          layout: all[0].data,
+          open: all[1].data,
+          employees: all[2],
+        });
 
-    // props.tables.employees.data;
+        props.setTableInfo({
+          ...props.tableInfo,
+          table: props.id,
+          tableObj: table,
+          employeeName: name,
+        });
+        props.setSelectValue({
+          ...props.setSelectValue,
+          employee: 'DEFAULT',
+          seats: 'DEFAULT',
+        });
+      })
+      .catch();
   };
   return (
     <Draggable

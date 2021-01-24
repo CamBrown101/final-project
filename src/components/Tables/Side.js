@@ -11,6 +11,8 @@ export default function Side(props) {
           setTables={props.setTables}
           tableInfo={props.tableInfo}
           setTableInfo={props.setTableInfo}
+          selectValue={props.selectValue}
+          setSelectValue={props.setSelectValue}
         ></TableInfo>
       ) : null}
     </div>

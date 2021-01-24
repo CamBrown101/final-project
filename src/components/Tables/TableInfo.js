@@ -4,11 +4,16 @@ import './TableInfo.scss';
 
 export default function TableInfo(props) {
   const seatsChange = (event) => {
+    props.setSelectValue({
+      ...props.selectValue,
+      seats: event.target.value,
+    });
     const number_of_seats = parseInt(event.target.value);
     const data = {
       id: props.tableInfo.table,
       number_of_seats: number_of_seats,
     };
+
     const URL = `/api/layout/seats`;
     const promise = axios
       .put(URL, data)
@@ -26,12 +31,18 @@ export default function TableInfo(props) {
     const employee = event.target.value;
     const data = {
       id: props.tableInfo.table,
-      employee_id: employee,
+      employee_id: parseInt(employee),
     };
+
+    props.setSelectValue({
+      ...props.selectValue,
+      employee: event.target.value,
+    });
     const URL = `/api/layout/employee`;
     const promise = axios
       .put(URL, data)
       .then((response) => {
+        console.log(response);
         console.log('Table Employee Updated');
       })
       .catch(function (error) {
@@ -50,7 +61,7 @@ export default function TableInfo(props) {
           className="select-item-employee"
           onChange={employeeChange}
           name="employee"
-          defaultValue={'DEFAULT'}
+          value={props.selectValue.employee}
         >
           {' '}
           <option value="DEFAULT" disabled>
@@ -71,7 +82,7 @@ export default function TableInfo(props) {
           onChange={seatsChange}
           name="seats"
           id="seats"
-          defaultValue={'DEFAULT'}
+          value={props.selectValue.seats}
         >
           {' '}
           <option value="DEFAULT" disabled>

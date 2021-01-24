@@ -19,6 +19,11 @@ export default function Tables(props) {
     tableObj: {},
   });
 
+  const [selectValue, setSelectValue] = useState({
+    employee: 'DEFAULT',
+    seats: 'DEFAULT',
+  });
+
   useEffect(() => {
     Promise.all([
       axios.get('/api/layout'),
@@ -63,6 +68,8 @@ export default function Tables(props) {
               setTables={setTables}
               tableInfo={tableInfo}
               setTableInfo={setTableInfo}
+              selectValue={selectValue}
+              setSelectValue={setSelectValue}
               edit={tables.edit ? edit : lock}
               x_pos={table.x_pos}
               y_pos={table.y_pos}
@@ -76,6 +83,8 @@ export default function Tables(props) {
           setTables={setTables}
           tableInfo={tableInfo}
           setTableInfo={setTableInfo}
+          selectValue={selectValue}
+          setSelectValue={setSelectValue}
         ></Side>
       </section>
     </div>

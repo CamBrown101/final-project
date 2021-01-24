@@ -63,6 +63,7 @@ module.exports = (db) => {
       [id, employee_id]
     )
       .then((data) => {
+        console.log(data.rows);
         res.send(data.rows);
       })
       .catch((err) => {
