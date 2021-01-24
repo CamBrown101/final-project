@@ -40,6 +40,7 @@ export default function BillItem({
       <div className="item">
         {renderButton ? (
           <button
+            className="item-delete"
             onClick={() => {
               deleteItem();
               setDeleted(true);

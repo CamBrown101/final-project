@@ -1,4 +1,4 @@
-@import '../../base';
+@import "../../base";
 .item {
   color: $base-white;
 }
@@ -7,4 +7,10 @@
 }
 .deleted {
   color: $base-cancel;
+}
+
+.item-delete {
+  color: $base-cancel;
+  background-color: $base-dark;
+  border: none;
 }
