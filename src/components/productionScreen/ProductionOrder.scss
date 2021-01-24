@@ -18,11 +18,11 @@
     justify-content: space-between;
   }
   .order-selected {
-    border: thick solid $base-light-accent;
+    border: thick solid $base-dark-accent;
   }
   .mark-complete {
     height: 50px;
-    background-color: $base-light-accent;
+    background-color: $base-dark-accent;
     display: flex;
     align-items: center;
     justify-content: center;

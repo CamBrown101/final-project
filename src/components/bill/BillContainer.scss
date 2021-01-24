@@ -107,28 +107,28 @@
   z-index: 1;
   margin-top: 30px;
   margin-right: -159px;
-  background-color: $base-light;
+  background-color: $base-dark;
 }
 .print-dropdown {
   position: absolute;
   min-width: 230px;
   overflow: auto;
   z-index: 1;
-  background-color: $base-light;
+  background-color: $base-dark;
 }
 .pay-dropdown {
   position: absolute;
   overflow: auto;
   z-index: 1;
-  background-color: $base-light;
+  background-color: $base-dark;
 }
 .pay-by-seat-button {
   border: thin solid black;
   font-size: 1.5em;
-  background-color: $base-light;
+  background-color: $base-dark;
 }
 .pay-by-seat-button:hover {
-  background-color: $base-light-accent;
+  background-color: $base-dark-accent;
 }
 .pay-button-text {
   padding: 5px;

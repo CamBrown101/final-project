@@ -1,4 +1,4 @@
-@import '../../base';
+@import "../../base";
 
 .new-category {
   color: $base-white;
@@ -50,7 +50,7 @@
 .create-category-button {
   display: block;
   background-color: $border-dark;
-  color: $base-light;
+  color: $base-white;
   width: 100%;
   border: none;
   border-radius: 4px;
@@ -58,7 +58,7 @@
 }
 .create-category-button:hover {
   color: $base-dark;
-  background-color: $base-light-accent;
+  background-color: $base-dark-accent;
 }
 textarea:focus,
 input:focus {

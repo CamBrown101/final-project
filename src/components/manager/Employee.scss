@@ -1,4 +1,4 @@
-@import '../../base';
+@import "../../base";
 .create-employee-container {
   margin-top: 150px;
 }
@@ -11,7 +11,7 @@
   grid-template-rows: 1fr;
   font-size: 20px;
   margin: 10px;
-  color: $base-light-accent;
+  color: $base-dark-accent;
 
   .employee-card-id {
     margin: 10px;

@@ -1,4 +1,4 @@
-@import '../../base';
+@import "../../base";
 
 .new-menu-item {
   color: $base-dark;
@@ -97,7 +97,7 @@
 }
 .create-menu-item-button:hover {
   color: $base-dark;
-  background-color: $base-light-accent;
+  background-color: $base-dark-accent;
 }
 textarea:focus,
 input:focus {
