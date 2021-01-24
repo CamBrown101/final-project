@@ -60,9 +60,8 @@ export default function DragAndDrop({ itemsToRender, tableInfo, bill }) {
               {itemsOnBill.map((item, innerId) => {
                 if (item.seat === index + 1)
                   return (
-                    <div className="draggable-container">
+                    <div key={innerId} className="draggable-container">
                       <Draggable
-                        key={innerId}
                         draggableId={
                           index.toString() +
                           item.name.toString() +
