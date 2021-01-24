@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 export default function EditSeatButton({
   data,
@@ -7,13 +7,15 @@ export default function EditSeatButton({
   tableInfo,
   bill,
 }) {
-  let cssClass = 'edit-seat-button button';
+  let cssClass = "edit-seat-button button";
   useEffect(() => {
     setEditSeat(false);
+
+    //eslint-disable-next-line
   }, [tableInfo]);
 
   if (!data.orderId) {
-    cssClass += ' opacity';
+    cssClass += " opacity";
   }
 
   return (
@@ -22,7 +24,8 @@ export default function EditSeatButton({
         className={cssClass}
         onClick={() => {
           setEditSeat(!editSeatToggle);
-        }}>
+        }}
+      >
         Edit Seats
       </div>
     </div>

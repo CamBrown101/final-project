@@ -1,20 +1,20 @@
-import './Employees.scss';
-import { useState, useEffect } from 'react';
-import Axios from 'axios';
-import Employee from './Employee';
-import ManagerNav from './ManagerNav';
-import CreateEmployee from './CreateEmployee';
+import "./Employees.scss";
+import { useState, useEffect } from "react";
+import Axios from "axios";
+import Employee from "./Employee";
+import ManagerNav from "./ManagerNav";
+import CreateEmployee from "./CreateEmployee";
 export default function Employees(props) {
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
     const URL = `/api/employees/`;
-    const promise = Axios.get(URL)
+    Axios.get(URL)
       .then((res) => {
         setEmployees(res.data);
       })
       .catch((err) => {
-        console.log('Error fetching employees');
+        console.log("Error fetching employees");
       });
   }, []);
 

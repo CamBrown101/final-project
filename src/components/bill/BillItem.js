@@ -41,10 +41,8 @@ export default function BillItem({
         {renderButton ? (
           <button
             onClick={() => {
-              {
-                deleteItem();
-                setDeleted(true);
-              }
+              deleteItem();
+              setDeleted(true);
             }}
           >
             X

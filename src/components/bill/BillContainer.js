@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
-import './BillContainer.scss';
-import BillHeader from './BillHeader';
-import BillItem from './BillItem';
+import React, { useEffect, useState, useContext } from "react";
+import "./BillContainer.scss";
+import BillHeader from "./BillHeader";
+import BillItem from "./BillItem";
 import {
   sendBill,
   printBill,
@@ -11,16 +11,16 @@ import {
   getUnpaidItems,
   getItemsToRender,
   updateBill,
-} from './BillHelpers';
-import PayButton from './PayButton';
-import SendButton from './SendButton';
-import CancelButton from './CancelButton';
-import EditButton from './EditButton';
-import PrintBillButton from './PrintBillButton';
-import BillTotals from './BillTotals';
-import { UserContext } from '../../UserContext';
-import DragAndDrop from './DragAndDrop';
-import EditSeatButton from './EditSeatButton';
+} from "./BillHelpers";
+import PayButton from "./PayButton";
+import SendButton from "./SendButton";
+import CancelButton from "./CancelButton";
+import EditButton from "./EditButton";
+import PrintBillButton from "./PrintBillButton";
+import BillTotals from "./BillTotals";
+import { UserContext } from "../../UserContext";
+import DragAndDrop from "./DragAndDrop";
+import EditSeatButton from "./EditSeatButton";
 
 export default function BillContainer({
   bill,
@@ -71,9 +71,8 @@ export default function BillContainer({
     // eslint-disable-next-line
   }, [seat, itemsToRender]);
   const [editSeatToggle, setEditSeat] = useState(true);
-  const [mod, setMod] = useState('');
+  const [mod, setMod] = useState("");
   const [billItem, setBillItem] = useState(true);
-  const [stripeToggle, setStripeToggle] = useState(true);
   const billItems = itemsToRender.map((item, index) => (
     <BillItem
       key={index}
@@ -91,9 +90,6 @@ export default function BillContainer({
       bill={bill}
     />
   ));
-  const togglePop = () => {
-    setStripeToggle(!stripeToggle);
-  };
 
   return (
     <article className="bill-container">
@@ -104,9 +100,7 @@ export default function BillContainer({
             tableInfo={tableInfo}
             bill={bill}
             itemsToRender={itemsToRender}
-            tableInfo={tableInfo}
             updateBill={updateBill}
-            bill={bill}
             setBill={setBill}
             menu={menu}
           />
