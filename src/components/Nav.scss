@@ -1,4 +1,4 @@
-@import "../base";
+@import '../base';
 
 #nav-bar {
   position: fixed;
@@ -9,7 +9,6 @@
 
   #nav-menu {
     display: flex;
-    background-color: $base-dark;
     height: 80px;
     font-size: 20px;
     font-weight: bolder;
@@ -22,7 +21,6 @@
       margin: 1%;
       color: $base-white;
       white-space: nowrap;
-      background-color: $base-dark;
       padding: 15px 10px;
     }
 
@@ -44,7 +42,6 @@
     text-align: right;
   }
 }
-
 .active {
   color: $base-dark;
   background-color: $base-dark-accent;
