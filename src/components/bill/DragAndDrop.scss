@@ -1,9 +1,8 @@
 @import "../../base";
 .dragAndDropContainer {
   width: 100%;
-  height: 320px;
+  height: 100%;
   color: $base-white;
-  overflow-y: scroll;
 }
 .drag-item {
   height: 30px;

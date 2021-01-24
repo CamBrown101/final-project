@@ -1,19 +1,81 @@
-@import "../../base";
+@import '../../base';
 .modal {
-  background-color: $base-light;
+  background-color: rgba($base-color, 0.8);
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  opacity: 0.6;
   .hidden {
     display: none;
   }
-  .close {
-    height: 250px;
-    width: 250px;
-    font-size: 200px;
-    background-color: $base-cancel;
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
   }
+  .close {
+    height: 50px;
+    width: 50px;
+    font-size: 50px;
+    color: $base-cancel;
+    opacity: 1;
+    background-color: rgba($base-white, 0);
+    border: none;
+    align-self: flex-end;
+    margin-bottom: -20px;
+  }
+  .close:focus {
+    border: none;
+    outline: none;
+  }
+}
+.stripe-container {
+  width: 500px;
+  background-color: $base-dark;
+  .confirmation-button {
+    background-color: $base-light;
+    color: $base-white;
+    border-color: $base-light;
+    margin: 2%;
+    font-size: 0.75em;
+  }
+  .confirmation-button:hover {
+    background-color: $base-white;
+    border-color: $base-white;
+    color: $base-dark;
+  }
+  .confirmation-button:focus {
+    border: none;
+    outline-color: $base-light;
+    border-radius: 0;
+  }
+  .cancel-payment-button {
+    background-color: $base-cancel;
+    color: $base-white;
+    border-color: $base-cancel;
+    margin: 2%;
+    font-size: 0.75em;
+  }
+  .cancel-payment-button:hover {
+    background-color: $base-white;
+    border-color: $base-white;
+    color: $base-dark;
+  }
+  .cancel-payment-button:focus {
+    border: none;
+    outline-color: $base-cancel;
+    border-radius: 0;
+  }
+  .payment-buttons {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+  }
+}
+.stripe-form {
+  display: flex;
+  flex-direction: column;
 }

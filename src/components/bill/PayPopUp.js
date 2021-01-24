@@ -22,16 +22,7 @@ export default function PayPopUp({
 }) {
   return (
     <div className={hidden ? 'hidden modal' : 'modal'}>
-      <div className="modal_content">
-        <button
-          onClick={(event) => {
-            event.stopPropagation();
-
-            setHidden(true);
-          }}
-          className="close">
-          X
-        </button>
+      <div className="modal-content">
         <Elements stripe={stripePromise}>
           <CheckoutForm
             cost={bill.total}
@@ -43,6 +34,7 @@ export default function PayPopUp({
             seat={seat}
             setBill={setBill}
             setTable={setTable}
+            setHidden={setHidden}
           />
         </Elements>
       </div>
