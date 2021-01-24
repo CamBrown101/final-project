@@ -11,51 +11,59 @@ export default function Nav(props) {
     <nav id="nav-bar">
       {user.auth ? (
         <nav id="nav-menu">
-          <NavLink
-            className="nav-menu-item"
-            id="nav-menu-home"
-            exact
-            to="/menu">
-            Menu
-          </NavLink>
-          <NavLink
-            className="nav-menu-item"
-            id="nav-menu-manager"
-            exact
-            to="/manager">
-            Manager
-          </NavLink>
-          <NavLink
-            className="nav-menu-item"
-            id="nav-menu-split"
-            exact
-            to="/timecard">
-            Clock In
-          </NavLink>
-          <NavLink
-            className="nav-menu-item"
-            id="nav-food-production"
-            to={{
-              pathname: '/food-production',
-              is_food: true,
-            }}>
-            Food Production
-          </NavLink>
-          <NavLink
-            className="nav-menu-item"
-            id="nav-drink-production"
-            to={{
-              pathname: '/drink-production',
-              is_food: false,
-            }}>
-            Drink Production
-          </NavLink>
-          <div className="logged-in">
-            <h1>Hello, {user.name}!</h1>
+          <div className="screens">
+            <NavLink
+              className="nav-menu-item"
+              id="nav-menu-home"
+              exact
+              to="/menu">
+              Menu
+            </NavLink>
+            <NavLink
+              className="nav-menu-item"
+              id="nav-menu-manager"
+              exact
+              to="/manager">
+              Manager
+            </NavLink>
+            <NavLink
+              className="nav-menu-item"
+              id="nav-menu-split"
+              exact
+              to="/timecard">
+              Clock In
+            </NavLink>
+            <NavLink
+              className="nav-menu-item"
+              id="nav-food-production"
+              to={{
+                pathname: '/food-production',
+                is_food: true,
+              }}>
+              Food Production
+            </NavLink>
+            <NavLink
+              className="nav-menu-item"
+              id="nav-drink-production"
+              to={{
+                pathname: '/drink-production',
+                is_food: false,
+              }}>
+              Drink Production
+            </NavLink>
           </div>
-          <button className="logout-button" onClick={logout}>
-            Logout
-          </button>
+          <div className="screens">
+            <div className="logged-in">
+              <h1>Hello, {user.name}!</h1>
+            </div>
+            <NavLink
+              to={'/login'}
+              id="nav-logout"
+              className="nav-menu-item logout"
+              onClick={logout}>
+              Logout
+            </NavLink>
+          </div>
         </nav>
       ) : null}
     </nav>
