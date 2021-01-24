@@ -76,16 +76,14 @@ export default function Tables(props) {
           );
         })}
       </section>
-      <section className="side-container">
-        <Side
-          tables={tables}
-          setTables={setTables}
-          tableInfo={tableInfo}
-          setTableInfo={setTableInfo}
-          selectValue={selectValue}
-          setSelectValue={setSelectValue}
-        ></Side>
-      </section>
+      <Side
+        tables={tables}
+        setTables={setTables}
+        tableInfo={tableInfo}
+        setTableInfo={setTableInfo}
+        selectValue={selectValue}
+        setSelectValue={setSelectValue}
+      ></Side>
     </div>
   );
 }

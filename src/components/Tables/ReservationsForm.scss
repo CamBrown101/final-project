@@ -1,0 +1,77 @@
+.reservations-form {
+  width: 200px;
+  border: solid;
+  border-width: thin;
+
+  .reservations-form-time {
+    border: solid;
+    border-width: thin;
+    border-left: 0;
+    border-right: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 2fr;
+
+    .reservations-form-hour {
+      grid-row: 1;
+      grid-column: 1;
+    }
+    .reservations-form-00 {
+      grid-row: 1;
+      grid-column: 2;
+    }
+    .reservations-form-15 {
+      grid-row: 1;
+      grid-column: 3;
+    }
+    .reservations-form-30 {
+      grid-row: 1;
+      grid-column: 4;
+    }
+    .reservations-form-45 {
+      grid-row: 1;
+      grid-column: 5;
+    }
+    .reservations-form-hour,
+    .reservations-form-00,
+    .reservations-form-15,
+    .reservations-form-30,
+    .reservations-form-45 {
+      user-select: none;
+    }
+    .reservations-form-hour:hover,
+    .reservations-form-00:hover,
+    .reservations-form-15:hover,
+    .reservations-form-30:hover,
+    .reservations-form-45:hover {
+      filter: invert(100%);
+    }
+    .reserve-button {
+      grid-row: 2;
+      grid-column: 1/3;
+    }
+    .cancel-button {
+      grid-row: 2;
+      grid-column: 3/4;
+    }
+
+    .reserve-button,
+    .cancel-button {
+      user-select: none;
+    }
+    .reserve-button:hover,
+    .cancel-button:hover {
+      filter: invert(100%);
+    }
+  }
+}
+
+// <div className="reservations-form">
+//       <div className="reservations-form-hour">
+//         <div className="reservations-form-hour">11am</div>
+//         <div className="reservations-form-00">.00</div>
+//         <div className="reservations-form-15">.15</div>
+//         <div className="reservations-form-30">.30</div>
+//         <div className="reservations-form-45">.45</div>
+//       </div>
+//     </div>

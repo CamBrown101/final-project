@@ -1,9 +1,10 @@
 import './Side.scss';
 import EditPanel from './EditPanel';
 import TableInfo from './TableInfo';
+import Reservations from './Reservations';
 export default function Side(props) {
   return (
-    <div>
+    <div className="side-container">
       <EditPanel tables={props.tables} setTables={props.setTables}></EditPanel>
       {props.tableInfo.table ? (
         <TableInfo
@@ -15,6 +16,7 @@ export default function Side(props) {
           setSelectValue={props.setSelectValue}
         ></TableInfo>
       ) : null}
+      <Reservations></Reservations>
     </div>
   );
 }

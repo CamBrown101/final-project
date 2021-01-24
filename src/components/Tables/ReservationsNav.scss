@@ -1,0 +1,59 @@
+.reservations-nav-upper {
+  width: 200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+
+  #reservations-nav-mon {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  #reservations-nav-tue {
+    grid-row: 1;
+    grid-column: 2;
+  }
+  #reservations-nav-wed {
+    grid-row: 1;
+    grid-column: 3;
+  }
+  #reservations-nav-thu {
+    grid-row: 1;
+    grid-column: 4;
+  }
+}
+
+.reservations-nav-lower {
+  width: 200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+
+  #reservations-nav-fri {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  #reservations-nav-sat {
+    grid-row: 1;
+    grid-column: 2;
+  }
+  #reservations-nav-sun {
+    grid-row: 1;
+    grid-column: 3;
+  }
+  #reservations-nav-all {
+    grid-row: 1;
+    grid-column: 4;
+  }
+}
+
+.reservations-nav-day {
+  margin: 4px;
+  padding: 4px;
+  text-align: center;
+  background-color: white;
+  user-select: none;
+}
+
+.reservations-nav-day:hover {
+  filter: invert(100%);
+}
