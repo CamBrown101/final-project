@@ -1,10 +1,14 @@
-@import "../base";
+@import '../base';
 
 .table-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  min-width: 210px;
+  min-width: 320px;
   overflow-y: hidden;
   background-color: $base-color;
+}
+.table-selectors {
+  display: flex;
+  margin-right: 10%;
 }
