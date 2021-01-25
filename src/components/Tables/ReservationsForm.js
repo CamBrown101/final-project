@@ -26,16 +26,7 @@ export default function ReservationsForm(props) {
   });
 
   useEffect(() => {
-    if (props.minute) {
-      let string = 'time' + props.minute;
-      setReservations({
-        ...reservations,
-        timeHour: true,
-        [string]: true,
-        reserved: true,
-      });
-    }
-    if (!props.minute) {
+    if (!props.name) {
       setReservations({
         ...reservations,
         timeHour: false,
@@ -44,6 +35,31 @@ export default function ReservationsForm(props) {
         time30: false,
         time45: false,
         reserved: false,
+      });
+    }
+    if (props.name) {
+      let string = 'time' + props.minute;
+
+      setReservations({
+        ...reservations,
+        timeHour: true,
+        time00: false,
+        time15: false,
+        time30: false,
+        time45: false,
+        [string]: true,
+        reserved: true,
+      });
+    }
+    if (props.minute === 0) {
+      setReservations({
+        ...reservations,
+        timeHour: true,
+        time00: true,
+        time15: false,
+        time30: false,
+        time45: false,
+        reserved: true,
       });
     }
   }, [props.tables.reservations]);
@@ -231,18 +247,6 @@ export default function ReservationsForm(props) {
       phone: event.target.value,
     });
   };
-  // const [tab, setTab] = useState({
-  //   mon: false,
-  //   tue: false,
-  //   wed: false,
-  //   thu: false,
-  //   fri: false,
-  //   sat: false,
-  //   sun: false,
-  //   all: false,
-  //   bgActive: 'darkgrey',
-  //   bgInActive: 'lightgrey',
-  // });
 
   const getDay = () => {
     let day = '';
@@ -269,6 +273,36 @@ export default function ReservationsForm(props) {
     }
     return day;
   };
+
+  // const createArr = (reservations) => {
+  //   let hours = [11, 12, 1, 2, 3, 4, 5, 6, 7, 8];
+  //   let arr = [];
+  //   for (let i = 0; i < 10; i++) {
+  //     let reservation = reservations.find((obj) => obj.hour === hours[i]);
+  //     arr.push({ hour: hours[i], reservation: reservation });
+  //   }
+  //   return arr;
+  // };
+  // const getDayReservations = (dayName) => {
+  //   const data = {
+  //     table: props.tableInfo.table,
+  //     day: dayName,
+  //   };
+  //   const promise = axios
+  //     .post('/api/reservations/day', data)
+  //     .then((response) => {
+  //       props.setTables({
+  //         ...props.tables,
+
+  //         reservations: [...createArr(response.data)],
+  //       });
+  //     })
+  //     .catch(function (error) {
+  //       console.log('Delete layout failed');
+  //     });
+  //   return promise;
+  // };
+
   const submitReservation = (event) => {
     event.preventDefault();
     let day = getDay();
@@ -284,13 +318,20 @@ export default function ReservationsForm(props) {
     const promise = axios
       .post('/api/reservations/', data)
       .then((response) => {
-        console.log(response);
+        // getDayReservations(day);
+        setReservations({
+          ...reservations,
+          name: '',
+          phone: '',
+          showForm: false,
+        });
       })
       .catch(function (error) {
         console.log('Submit Reservation failed');
       });
     return promise;
   };
+
   //map out the reservation form seat buttons
   const reserveSeats = () => {
     let seatsArr = [];
@@ -399,6 +440,7 @@ export default function ReservationsForm(props) {
             placeholder="Name"
             name="name"
             onChange={name}
+            value={reservations.name}
           />
           <input
             type="text"
@@ -407,6 +449,7 @@ export default function ReservationsForm(props) {
             placeholder="Phone"
             name="name"
             onChange={phone}
+            value={reservations.phone}
           />
           <div className="reserve-seats-select">
             <h3 className="reserve-seats-h3">Seats</h3>
@@ -426,10 +469,3 @@ export default function ReservationsForm(props) {
     </div>
   );
 }
-
-// key={hour}
-// id={hour}
-// minute={minute}
-// name={name}
-// phone={phone}
-// tables={props.tables}

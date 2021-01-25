@@ -16,8 +16,31 @@ export default function Reservations(props) {
     bgActive: 'darkgrey',
     bgInActive: 'lightgrey',
   });
-  const reservations = [...props.tables.reservations];
-  const mapHours = reservations.map((reservation) => {
+
+  const [reservations, setReservations] = useState({
+    timeHour: false,
+    time00: false,
+    time15: false,
+    time30: false,
+    time45: false,
+    seat1: false,
+    seat2: false,
+    seat3: false,
+    seat4: false,
+    seat5: false,
+    seat6: false,
+    seat: 1,
+    bgActive: 'darkgrey',
+    bgInActive: 'lightgrey',
+    showForm: false,
+    reserved: false,
+    name: '',
+    phone: '',
+    minute: 0,
+  });
+
+  const reservationsCopy = [...props.tables.reservations];
+  const mapHours = reservationsCopy.map((reservation) => {
     // let reservation = reservations.find((obj) => obj.hour === hour);
     let minute;
     let name;
@@ -42,6 +65,8 @@ export default function Reservations(props) {
         tables={props.tables}
         tableInfo={props.tableInfo}
         reservation={reservation.reservation}
+        reservations={reservations}
+        setReservations={setReservations}
       ></ReservationsForm>
     );
   });
@@ -55,6 +80,8 @@ export default function Reservations(props) {
         setTables={props.setTables}
         tableInfo={props.tableInfo}
         setTableInfo={props.setTableInfo}
+        reservations={reservations}
+        setReservations={setReservations}
       ></ReservationsNav>
       {mapHours}
     </div>
