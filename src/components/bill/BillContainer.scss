@@ -77,7 +77,6 @@
     background-color: #ff8c42;
   }
   .edit-input {
-    border: thin solid black;
     height: 1.5em;
     font-size: 1.5em;
     color: $base-white;
@@ -106,9 +105,10 @@
   min-width: 230px;
   overflow: auto;
   z-index: 1;
-  margin-top: 30px;
-  margin-right: -159px;
+  margin-right: -285px;
+  margin-bottom: 142px;
   background-color: $base-dark;
+  bottom: 0;
 }
 .print-dropdown {
   position: absolute;
