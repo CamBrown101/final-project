@@ -1,4 +1,4 @@
-@import "../../base";
+@import '../../base';
 .item {
   color: $base-white;
 }
@@ -8,9 +8,30 @@
 .deleted {
   color: $base-cancel;
 }
+.deleted:focus {
+  outline-color: $base-dark;
+  border-color: $base-dark;
+}
+.deleted:active {
+  border: none;
+  outline-color: $base-dark;
+}
 
 .item-delete {
   color: $base-cancel;
   background-color: $base-dark;
   border: none;
+}
+.item-delete:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+.item-delete:active {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+.item-delete:hover {
+  color: $base-white;
 }
