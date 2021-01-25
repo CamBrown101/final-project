@@ -80,6 +80,7 @@
     border: thin solid black;
     height: 1.5em;
     font-size: 1.5em;
+    color: $base-white;
   }
   .edit-seat-button {
     background-color: #b33951;
@@ -115,12 +116,18 @@
   overflow: auto;
   z-index: 1;
   background-color: $base-dark;
+  bottom: 0;
+  margin-bottom: 80px;
+  margin-left: 147px;
 }
 .pay-dropdown {
   position: absolute;
   overflow: auto;
   z-index: 1;
   background-color: $base-dark;
+  bottom: 0;
+  margin-bottom: 147px;
+  margin-left: 146px;
 }
 .pay-by-seat-button {
   border: thin solid black;
