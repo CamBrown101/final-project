@@ -70,7 +70,7 @@ export default function BillContainer({
     }
     // eslint-disable-next-line
   }, [seat, itemsToRender]);
-  const [editSeatToggle, setEditSeat] = useState(true);
+  const [editSeatToggle, setEditSeat] = useState(false);
   const [mod, setMod] = useState("");
   const [billItem, setBillItem] = useState(true);
   const billItems = itemsToRender.map((item, index) => (
