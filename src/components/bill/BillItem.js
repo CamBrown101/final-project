@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import './BillItem.scss';
-import Axios from 'axios';
+import React, { useState } from "react";
+import "./BillItem.scss";
+import Axios from "axios";
 export default function BillItem({
   name,
   price,
@@ -15,27 +15,30 @@ export default function BillItem({
   setBillItem,
   bill,
 }) {
+  //Delete an item from the order
   const deleteItem = () => {
     const orderItemId = unpaidItems[id].order_item_id;
     Axios.post(`api/orders/${orderItemId}/delete`);
     setBillItem(!billItem);
   };
+
   let renderButton = false;
   if (isAdmin && id + 1 > bill.items.length) {
     renderButton = true;
   }
   const [deleted, setDeleted] = useState(false);
-  const modBoolean = mods === 'null';
+  const modBoolean = mods === "null";
   return (
     <li
-      className={selected === id ? 'bill-item selected' : 'bill-item'}
+      className={selected === id ? "bill-item selected" : "bill-item"}
       onClick={() => {
         if (selected === id) {
           setSelected(null);
         } else {
           setSelected(id);
         }
-      }}>
+      }}
+    >
       <div className="item">
         <div className="bill-seat-x">
           {renderButton ? (
@@ -44,16 +47,17 @@ export default function BillItem({
               onClick={() => {
                 deleteItem();
                 setDeleted(true);
-              }}>
+              }}
+            >
               X
             </button>
           ) : (
             <></>
           )}
-          <p className={deleted ? 'deleted' : ''}>{seat}</p>
+          <p className={deleted ? "deleted" : ""}>{seat}</p>
         </div>
-        <p className={deleted ? 'deleted item-name' : 'item-name'}>{name}</p>
-        <p className={deleted ? 'deleted item-price' : 'item-price'}>
+        <p className={deleted ? "deleted item-name" : "item-name"}>{name}</p>
+        <p className={deleted ? "deleted item-price" : "item-price"}>
           ${price.toFixed(2)}
         </p>
       </div>
