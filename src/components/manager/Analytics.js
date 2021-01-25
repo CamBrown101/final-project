@@ -5,6 +5,7 @@ import Axios from "axios";
 import ManagerNav from "./ManagerNav";
 
 export default function Analytics() {
+  //Generates formatted Sales by Day to feed into graph
   const getSalesbyDay = (days) => {
     const data = days;
     return Axios.get("/api/analytics/gross-sales", {
@@ -28,6 +29,7 @@ export default function Analytics() {
     grossSales = res;
   });
 
+  //Generates formatted Labour by Day to feed into graph
   const getLabourByDay = (days) => {
     const data = days;
     return Axios.get("/api/analytics/labour", { params: { days: data } }).then(
@@ -65,6 +67,8 @@ export default function Analytics() {
   };
   let labour;
   let netSales;
+
+  //gets net sales for the day
   getLabourByDay(8).then((res) => {
     labour = res;
     netSales = JSON.parse(JSON.stringify(options1));
@@ -81,6 +85,7 @@ export default function Analytics() {
     netSales.title.text = "Net Sales Last Week";
   });
 
+  //Generates formatted Item Sales by Day to feed into graph
   const getItemSalesByDay = (days, top) => {
     const data = days;
     return Axios.get("/api/analytics/sales", {
@@ -98,6 +103,7 @@ export default function Analytics() {
     });
   };
 
+  //Generates formatted Category Sales by Day to feed into graph
   const getCategorySalesByDay = (days, food) => {
     const data = days;
     return Axios.get("/api/analytics/sales", {

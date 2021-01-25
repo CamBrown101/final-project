@@ -16,6 +16,7 @@ export default function EditButton({
   useEffect(() => {
     setInputToggle("hide");
   }, [tableInfo]);
+
   return (
     <div className="edit-section">
       <div

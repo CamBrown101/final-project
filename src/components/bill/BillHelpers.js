@@ -1,13 +1,16 @@
-import Axios from 'axios';
+import Axios from "axios";
 
+//Adds new items for an order to the database
 export const sendBill = (tableInfo, data) => {
   return Axios.post(`api/orders/${tableInfo.orderId}/items`, data);
 };
 
+//Updates the seat number of an order item.
 export const updateBill = (tableInfo, data) => {
   return Axios.post(`api/orders/${tableInfo.orderId}/seat-update`, data);
 };
 
+//Converts the bill into html to send in an email
 export const formatBillToPrint = (billToPrint) => {
   let formattedBill =
     '<head><style>h3{margin-bottom:0;}.item{margin:0;font-size:1.25em;}p{margin:0;font-size:1.5em}.total{font-size:2em;}.footer{margin-top:5%;}</style></head><div style="border:thin solid black; padding:3%; width:220px">';
@@ -32,9 +35,8 @@ export const formatBillToPrint = (billToPrint) => {
   return formattedBill;
 };
 
+//Sends bill to customer's email
 export const printBill = (emails, billsBySeat, table) => {
-  // console.log(formatBillToPrint(billsBySeat));
-
   emails.forEach((ele, index) => {
     if (ele) {
       const data = {
@@ -46,6 +48,7 @@ export const printBill = (emails, billsBySeat, table) => {
   });
 };
 
+//clears the bill being displayed
 export const clearBill = (setBill, setTable) => {
   setBill({
     items: [],
@@ -56,10 +59,11 @@ export const clearBill = (setBill, setTable) => {
   setTable([]);
 };
 
+//Mark items in the db as paid for a given order
 export const payBill = (orderId, unpaidItems) => {
   if (orderId !== null) {
     Axios.post(`/api/orders/${orderId}/pay`, {
-      paymentType: 'credit',
+      paymentType: "credit",
     });
   }
 
@@ -67,9 +71,10 @@ export const payBill = (orderId, unpaidItems) => {
   unpaidItems.forEach((element) => {
     orderIds.push(element.orderItemId ? element.orderItemId : element.id);
   });
-  return Axios.post('api/orders/pay', orderIds);
+  return Axios.post("api/orders/pay", orderIds);
 };
 
+//Creates a data object from the bill for use in axios calls
 export const getBillData = (orderId, items) => {
   const data = {
     itemId: [],
@@ -85,6 +90,7 @@ export const getBillData = (orderId, items) => {
   return data;
 };
 
+//Retuns an array of unpaid items
 export const getUnpaidItems = (allItems) => {
   let unpaidItems = [];
   let itemsOnBill = { ...allItems };
@@ -99,6 +105,7 @@ export const getUnpaidItems = (allItems) => {
   return unpaidItems;
 };
 
+//Returns an array of items to render on the bill
 export const getItemsToRender = (itemsOnBill, unpaidItems, menu) => {
   const billCopy = [...itemsOnBill];
   let itemsToRender = [...billCopy.reverse()];
@@ -118,6 +125,8 @@ export const getItemsToRender = (itemsOnBill, unpaidItems, menu) => {
   return itemsToRender;
 };
 
+//Returns an array of objects, with each order item divided by seat
+//Index 0 will have information for the entire table
 export const totalBillsBySeat = (itemsToRender, bill, tableInfo) => {
   const billsBySeat = [
     {
