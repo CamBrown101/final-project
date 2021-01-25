@@ -63,6 +63,7 @@ export default function Reservations(props) {
         phone={phone}
         seats={seats}
         tables={props.tables}
+        setTables={props.setTables}
         tableInfo={props.tableInfo}
         reservation={reservation.reservation}
         reservations={reservations}

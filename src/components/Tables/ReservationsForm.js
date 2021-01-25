@@ -26,6 +26,9 @@ export default function ReservationsForm(props) {
   });
 
   useEffect(() => {
+    console.log(props.tables);
+  }, [props.tables]);
+  useEffect(() => {
     if (!props.name) {
       setReservations({
         ...reservations,
@@ -154,7 +157,6 @@ export default function ReservationsForm(props) {
   };
 
   const seat1 = () => {
-    console.log('seat1');
     setReservations({
       ...reservations,
       seat1: true,
@@ -168,8 +170,6 @@ export default function ReservationsForm(props) {
   };
 
   const seat2 = () => {
-    console.log('seat2');
-
     setReservations({
       ...reservations,
       seat1: false,
@@ -274,34 +274,35 @@ export default function ReservationsForm(props) {
     return day;
   };
 
-  // const createArr = (reservations) => {
-  //   let hours = [11, 12, 1, 2, 3, 4, 5, 6, 7, 8];
-  //   let arr = [];
-  //   for (let i = 0; i < 10; i++) {
-  //     let reservation = reservations.find((obj) => obj.hour === hours[i]);
-  //     arr.push({ hour: hours[i], reservation: reservation });
-  //   }
-  //   return arr;
-  // };
-  // const getDayReservations = (dayName) => {
-  //   const data = {
-  //     table: props.tableInfo.table,
-  //     day: dayName,
-  //   };
-  //   const promise = axios
-  //     .post('/api/reservations/day', data)
-  //     .then((response) => {
-  //       props.setTables({
-  //         ...props.tables,
-
-  //         reservations: [...createArr(response.data)],
-  //       });
-  //     })
-  //     .catch(function (error) {
-  //       console.log('Delete layout failed');
-  //     });
-  //   return promise;
-  // };
+  const createArr = (reservations) => {
+    let hours = [11, 12, 1, 2, 3, 4, 5, 6, 7, 8];
+    let arr = [];
+    for (let i = 0; i < 10; i++) {
+      let reservation = reservations.find((obj) => obj.hour === hours[i]);
+      arr.push({ hour: hours[i], reservation: reservation });
+    }
+    return arr;
+  };
+  const getDayReservations = (dayName) => {
+    const data = {
+      table: props.tableInfo.table,
+      day: dayName,
+    };
+    console.log(data);
+    const promise = axios
+      .post('/api/reservations/day', data)
+      .then((response) => {
+        console.log(response.data);
+        props.setTables({
+          ...props.tables,
+          reservations: [...createArr(response.data)],
+        });
+      })
+      .catch(function (error) {
+        console.log('Get reservations failed');
+      });
+    return promise;
+  };
 
   const submitReservation = (event) => {
     event.preventDefault();
@@ -318,7 +319,7 @@ export default function ReservationsForm(props) {
     const promise = axios
       .post('/api/reservations/', data)
       .then((response) => {
-        // getDayReservations(day);
+        getDayReservations(day);
         setReservations({
           ...reservations,
           name: '',
@@ -361,7 +362,6 @@ export default function ReservationsForm(props) {
   };
 
   const seats = reserveSeats();
-  console.log(reserveSeats());
   return (
     <div className="reservations-form">
       <form className="reservations-form-time">
@@ -460,10 +460,15 @@ export default function ReservationsForm(props) {
         </form>
       ) : null}
       {reservations.reserved ? (
-        <div>
+        <div className="reservation-display">
+          <b>Name: </b>
           {props.name}
+          <br />
+          <b>Phone: </b>
           {props.phone}
-          {'Seats: ' + props.seats}
+          <br />
+          <b>Seats: </b>
+          {props.seats}
         </div>
       ) : null}
     </div>

@@ -3,6 +3,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
+  border: solid;
+  border-width: thin;
 
   #reservations-nav-mon {
     grid-row: 1;
@@ -27,6 +29,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
+  border: solid;
+  border-width: thin;
+  border-top: 0;
 
   #reservations-nav-fri {
     grid-row: 1;
@@ -52,6 +57,8 @@
   text-align: center;
   background-color: white;
   user-select: none;
+  border: solid;
+  border-width: thin;
 }
 
 .reservations-nav-day:hover {

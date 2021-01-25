@@ -143,6 +143,7 @@ export default function ReservationsNav(props) {
       table: props.tableInfo.table,
       day: dayName,
     };
+    console.log(data);
     const promise = axios
       .post('/api/reservations/day', data)
       .then((response) => {
@@ -153,7 +154,7 @@ export default function ReservationsNav(props) {
         });
       })
       .catch(function (error) {
-        console.log('Delete layout failed');
+        console.log('Get reservations failed');
       });
     return promise;
   };
