@@ -11,7 +11,19 @@ export default function ReservationsForm(props) {
     bgActive: 'darkgrey',
     bgInActive: 'lightgrey',
     showForm: false,
+    reserved: false,
   });
+
+  useEffect(() => {
+    if (props.minute) {
+      let string = 'time' + props.minute;
+      setReservations({
+        ...reservations,
+        timeHour: true,
+        [string]: true,
+      });
+    }
+  }, [props.tables.reservations]);
 
   const timeHour = () => {
     setReservations({
@@ -80,14 +92,15 @@ export default function ReservationsForm(props) {
   };
 
   const showForm = () => {
+    console.log(props.reservation);
     setReservations({
       ...reservations,
       showForm: true,
     });
   };
+
   return (
     <div className="reservations-form">
-      <h2>Reservations:</h2>
       <form className="reservations-form-time">
         <div
           onClick={timeHour}
@@ -98,7 +111,7 @@ export default function ReservationsForm(props) {
           }}
           className="reservations-form-hour"
         >
-          11
+          {props.id}
         </div>
         <div
           onClick={time00Click}
@@ -144,12 +157,16 @@ export default function ReservationsForm(props) {
         >
           45
         </div>
-        <div onClick={showForm} className="reserve-button">
-          Reserve
-        </div>
-        <div onClick={cancel} className="cancel-button">
-          Cancel
-        </div>
+        {!reservations.reserved ? (
+          <div onClick={showForm} className="reserve-button">
+            Reserve
+          </div>
+        ) : null}
+        {reservations.reserved ? (
+          <div onClick={cancel} className="cancel-button">
+            Cancel
+          </div>
+        ) : null}
       </form>
       {reservations.showForm ? (
         <form className="reserve-form">

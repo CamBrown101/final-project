@@ -74,7 +74,19 @@ export default function Table(props) {
   };
 
   const table = () => {
-    Promise.all([axios.get('/api/layout'), axios.get('/api/tables/open')])
+    const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    const d = new Date();
+    const dayName = days[d.getDay()];
+    console.log(dayName);
+    const data = {
+      table: props.id,
+      day: dayName,
+    };
+    Promise.all([
+      axios.get('/api/layout'),
+      axios.get('/api/tables/open'),
+      axios.post(`/api/reservations/day`, data),
+    ])
       .then((all) => {
         let table = all[0].data.find((obj) => obj.id === props.id);
         let employeeFind = props.tables.employees.data.find(
@@ -85,6 +97,7 @@ export default function Table(props) {
           ...props.tables,
           layout: all[0].data,
           open: all[1].data,
+          reservations: all[2].data,
         });
 
         props.setTableInfo({

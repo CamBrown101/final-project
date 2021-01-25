@@ -61,7 +61,7 @@ export default function TableInfo(props) {
     <div className="table-info">
       <h3 className="table-info-title">Table {props.tableInfo.table}</h3>
       <div className="set-table-employee">
-        <h4 className="table-info-subtitle">Employee:</h4>
+        <h4 className="table-info-employee-subtitle">Employee:</h4>
         <select
           className="select-item-employee"
           onChange={employeeChange}
@@ -82,11 +82,14 @@ export default function TableInfo(props) {
               })
             : null}
         </select>
-        <h4 className="table-info-subtitle">Number of seats:</h4>
+      </div>
+      <div className="set-table-seats">
+        <h4 className="table-info-seats-subtitle">Number of seats:</h4>
         <select
           onChange={seatsChange}
           name="seats"
           id="seats"
+          className="select-item-seats"
           value={props.selectValue.seats}
         >
           {' '}

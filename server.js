@@ -28,6 +28,7 @@ const categoryRoutes = require('./src/routes/categories');
 const timecardRoutes = require('./src/routes/timecards');
 const analyticRoutes = require('./src/routes/analytics');
 const layoutRoutes = require('./src/routes/layout');
+const reservationRoutes = require('./src/routes/reservations');
 
 app.use(cors());
 //use routes
@@ -40,6 +41,7 @@ app.use('/api/categories', categoryRoutes(db));
 app.use('/api/timecards', timecardRoutes(db));
 app.use('/api/analytics', analyticRoutes(db));
 app.use('/api/layout', layoutRoutes(db));
+app.use('/api/reservations', reservationRoutes(db));
 
 app.get('/', (req, res) => {
   console.log(req.session);

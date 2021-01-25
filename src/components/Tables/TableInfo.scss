@@ -1,3 +1,46 @@
+.table-info {
+  border: solid;
+  border-width: thin;
+  width: 200px;
+}
 .table-info-title {
   font-size: 24px;
+  margin: 0;
+  text-align: center;
+}
+
+.set-table-employee {
+  margin: 0;
+  max-height: 70px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  .table-info-employee-subtitle {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .select-item-employee {
+    font-size: 14px;
+    height: 24px;
+    grid-row: 2;
+    grid-column: 1;
+  }
+}
+
+.set-table-seats {
+  margin: 0;
+  max-height: 90px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  .table-info-seats-subtitle {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .select-item-seats {
+    font-size: 14px;
+    height: 24px;
+    grid-row: 2;
+    grid-column: 1;
+  }
 }
