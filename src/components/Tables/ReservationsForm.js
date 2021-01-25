@@ -136,19 +136,6 @@ export default function ReservationsForm(props) {
     }
   };
 
-  const cancel = () => {
-    setReservations({
-      ...reservations,
-      timeHour: false,
-      time00: false,
-      time15: false,
-      time30: false,
-      time45: false,
-      showForm: false,
-      minute: 0,
-    });
-  };
-
   const showForm = () => {
     setReservations({
       ...reservations,
@@ -300,6 +287,37 @@ export default function ReservationsForm(props) {
       })
       .catch(function (error) {
         console.log('Get reservations failed');
+      });
+    return promise;
+  };
+
+  const cancel = () => {
+    let day = getDay();
+
+    const data = {
+      table: props.tableInfo.table,
+      day: day,
+      hour: props.id,
+    };
+    console.log(data);
+
+    const promise = axios
+      .post('/api/reservations/close', data)
+      .then((response) => {
+        getDayReservations(day);
+        setReservations({
+          ...reservations,
+          timeHour: false,
+          time00: false,
+          time15: false,
+          time30: false,
+          time45: false,
+          showForm: false,
+          minute: 0,
+        });
+      })
+      .catch(function (error) {
+        console.log('Close Reservation failed');
       });
     return promise;
   };
@@ -467,8 +485,7 @@ export default function ReservationsForm(props) {
           <b>Phone: </b>
           {props.phone}
           <br />
-          <b>Seats: </b>
-          {props.seats}
+          <b>Seats:</b> {props.seats}
         </div>
       ) : null}
     </div>

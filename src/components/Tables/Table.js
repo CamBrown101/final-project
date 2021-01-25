@@ -2,7 +2,6 @@ import Draggable from 'react-draggable';
 import axios from 'axios';
 import './Table.scss';
 import { useState } from 'react';
-import Employee from '../manager/Employee';
 
 export default function Table(props) {
   const [position, setPosition] = useState({ x: 0, y: 0 });

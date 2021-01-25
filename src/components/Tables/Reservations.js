@@ -38,7 +38,6 @@ export default function Reservations(props) {
     phone: '',
     minute: 0,
   });
-
   const reservationsCopy = [...props.tables.reservations];
   const mapHours = reservationsCopy.map((reservation) => {
     // let reservation = reservations.find((obj) => obj.hour === hour);
@@ -66,25 +65,26 @@ export default function Reservations(props) {
         setTables={props.setTables}
         tableInfo={props.tableInfo}
         reservation={reservation.reservation}
-        reservations={reservations}
-        setReservations={setReservations}
       ></ReservationsForm>
     );
   });
   return (
-    <div className="reservations-containter">
-      <h2>Reservations:</h2>
-      <ReservationsNav
-        tab={tab}
-        setTab={setTab}
-        tables={props.tables}
-        setTables={props.setTables}
-        tableInfo={props.tableInfo}
-        setTableInfo={props.setTableInfo}
-        reservations={reservations}
-        setReservations={setReservations}
-      ></ReservationsNav>
-      {mapHours}
-    </div>
+    <>
+      {' '}
+      {!props.tables.edit ? (
+        <>
+          <h2 className="reservations-title">Reservations:</h2>
+          <ReservationsNav
+            tab={tab}
+            setTab={setTab}
+            tables={props.tables}
+            setTables={props.setTables}
+            tableInfo={props.tableInfo}
+            setTableInfo={props.setTableInfo}
+          ></ReservationsNav>
+          {mapHours}
+        </>
+      ) : null}
+    </>
   );
 }

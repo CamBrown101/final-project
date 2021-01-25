@@ -19,11 +19,11 @@ module.exports = (db) => {
     db.query(
       `SELECT * FROM reservations
               WHERE table_id = ${table}
-              AND day = '${day}';`,
+              AND day = '${day}'
+              AND closed = false;`,
       []
     )
       .then((data) => {
-        console.log(data.rows);
         res.status(200).send(data.rows);
       })
       .catch((err) => {
@@ -47,6 +47,29 @@ module.exports = (db) => {
       [table_id, name, phone, hour, minute, day, seats]
     )
       .then((data) => {
+        res.status(200).send(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.post('/close', (req, res) => {
+    const table = req.body.table;
+    const day = req.body.day;
+    const hour = req.body.hour;
+    console.log(table, day, hour);
+    console.log(table, day);
+    db.query(
+      `UPDATE reservations SET
+      closed = true
+      WHERE table_id = $1
+      AND day = $2
+      AND hour = $3
+      RETURNING *;`,
+      [table, day, hour]
+    )
+      .then((data) => {
         console.log(data.rows);
         res.status(200).send(data.rows);
       })
@@ -54,5 +77,6 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
   return router;
 };

@@ -1,13 +1,6 @@
 .edit-panel {
-  width: 200px;
-  height: 600px;
-  background-color: white;
-
-  display: inline;
-  grid-row: 1;
-  left: 0;
-  grid-column: 2;
+  position: relative;
+  top: 10px;
   .edit-layout-button {
-    display: block;
   }
 }

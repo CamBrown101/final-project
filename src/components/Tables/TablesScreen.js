@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './TablesScreen.scss';
 import Table from './Table';
+import EditPanel from './EditPanel';
+import TableInfo from './TableInfo';
 
 import Side from './Side';
 export default function Tables(props) {
@@ -57,37 +59,54 @@ export default function Tables(props) {
   };
 
   return (
-    <div className="layout-screen">
-      <section
-        style={{ backgroundColor: tables.edit ? 'red' : 'yellow' }}
-        className="tables-container"
-      >
-        {tables.layout.map((table) => {
-          return (
-            <Table
-              key={table.id}
-              id={table.id}
-              tables={tables}
-              setTables={setTables}
-              tableInfo={tableInfo}
-              setTableInfo={setTableInfo}
-              selectValue={selectValue}
-              setSelectValue={setSelectValue}
-              edit={tables.edit ? edit : lock}
-              x_pos={table.x_pos}
-              y_pos={table.y_pos}
-            />
-          );
-        })}
-      </section>
-      <Side
-        tables={tables}
-        setTables={setTables}
-        tableInfo={tableInfo}
-        setTableInfo={setTableInfo}
-        selectValue={selectValue}
-        setSelectValue={setSelectValue}
-      ></Side>
+    <div className="table-screen-container">
+      <div className="layout-screen">
+        <section
+          style={{ backgroundColor: tables.edit ? 'red' : 'yellow' }}
+          className="tables-container"
+        >
+          {tables.layout.map((table) => {
+            return (
+              <Table
+                key={table.id}
+                id={table.id}
+                tables={tables}
+                setTables={setTables}
+                tableInfo={tableInfo}
+                setTableInfo={setTableInfo}
+                selectValue={selectValue}
+                setSelectValue={setSelectValue}
+                edit={tables.edit ? edit : lock}
+                x_pos={table.x_pos}
+                y_pos={table.y_pos}
+              />
+            );
+          })}
+        </section>
+        <EditPanel tables={tables} setTables={setTables}></EditPanel>
+        {!tables.edit ? (
+          <>
+            {tableInfo.table ? (
+              <TableInfo
+                tables={tables}
+                setTables={setTables}
+                tableInfo={tableInfo}
+                setTableInfo={setTableInfo}
+                selectValue={selectValue}
+                setSelectValue={setSelectValue}
+              ></TableInfo>
+            ) : null}
+          </>
+        ) : null}
+        <Side
+          tables={tables}
+          setTables={setTables}
+          tableInfo={tableInfo}
+          setTableInfo={setTableInfo}
+          selectValue={selectValue}
+          setSelectValue={setSelectValue}
+        ></Side>
+      </div>
     </div>
   );
 }
