@@ -24,6 +24,9 @@
     margin: 10px 0 0 30px;
   }
 }
+.category-tab:active {
+  border-left: none;
+}
 .menu-item-container-inside {
   display: flex;
   flex-direction: column;
