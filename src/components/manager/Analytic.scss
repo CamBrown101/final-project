@@ -1,3 +1,5 @@
+@import '../../base';
+
 .analytic-container {
   margin-top: 150px;
   width: 96%;
@@ -5,8 +7,8 @@
 
   .options-button {
     display: flex;
-    background-color: rgb(63, 58, 58);
-    color: white;
+    background-color: #32373a;
+    color: $base-white;
     font-size: 1em;
     width: 200px;
     height: 50px;
@@ -14,7 +16,17 @@
     border-top-right-radius: 10px;
     border: thin solid black;
     justify-content: center;
-    align-content: center;
+    align-items: center;
+  }
+  .options-button:focus {
+    outline: none;
+    border: none;
+    border-bottom: none;
+  }
+  .options-button:active {
+    outline: none;
+    border: none;
+    border-bottom: none;
   }
 
   .chart-container {
