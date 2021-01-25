@@ -35,7 +35,6 @@ module.exports = (db) => {
   router.put('/seats', (req, res) => {
     const id = req.body.id;
     const number_of_seats = req.body.number_of_seats;
-    console.log(id, number_of_seats);
     db.query(
       `UPDATE tables SET
                 number_of_seats = $2
@@ -54,7 +53,6 @@ module.exports = (db) => {
   router.put('/employee', (req, res) => {
     const id = req.body.id;
     const employee_id = req.body.employee_id;
-    console.log(id, employee_id);
     db.query(
       `UPDATE tables SET
                 employee_id = $2

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import './ReservationsForm.scss';
 
 export default function ReservationsForm(props) {
@@ -8,10 +9,20 @@ export default function ReservationsForm(props) {
     time15: false,
     time30: false,
     time45: false,
+    seat1: false,
+    seat2: false,
+    seat3: false,
+    seat4: false,
+    seat5: false,
+    seat6: false,
+    seat: 1,
     bgActive: 'darkgrey',
     bgInActive: 'lightgrey',
     showForm: false,
     reserved: false,
+    name: '',
+    phone: '',
+    minute: 0,
   });
 
   useEffect(() => {
@@ -39,57 +50,71 @@ export default function ReservationsForm(props) {
 
   useEffect(() => {}, [props.hours]);
   const timeHour = () => {
-    setReservations({
-      ...reservations,
-      timeHour: true,
-      time00: true,
-      time15: false,
-      time30: false,
-      time45: false,
-    });
+    if (!props.minute) {
+      setReservations({
+        ...reservations,
+        timeHour: true,
+        time00: true,
+        time15: false,
+        time30: false,
+        time45: false,
+      });
+    }
   };
   const time00Click = () => {
-    setReservations({
-      ...reservations,
-      timeHour: true,
-      time00: true,
-      time15: false,
-      time30: false,
-      time45: false,
-    });
+    if (!props.minute) {
+      setReservations({
+        ...reservations,
+        timeHour: true,
+        time00: true,
+        time15: false,
+        time30: false,
+        time45: false,
+        minute: 0,
+      });
+    }
   };
 
   const time15Click = () => {
-    setReservations({
-      ...reservations,
-      timeHour: true,
-      time00: false,
-      time15: true,
-      time30: false,
-      time45: false,
-    });
+    if (!props.minute) {
+      setReservations({
+        ...reservations,
+        timeHour: true,
+        time00: false,
+        time15: true,
+        time30: false,
+        time45: false,
+        minute: 15,
+      });
+    }
   };
 
   const time30Click = () => {
-    setReservations({
-      ...reservations,
-      timeHour: true,
-      time00: false,
-      time15: false,
-      time30: true,
-      time45: false,
-    });
+    if (!props.minute) {
+      setReservations({
+        ...reservations,
+        timeHour: true,
+        time00: false,
+        time15: false,
+        time30: true,
+        time45: false,
+        minute: 30,
+      });
+    }
   };
 
   const time45Click = () => {
-    setReservations({
-      ...reservations,
-      timeHour: true,
-      time00: false,
-      time15: false,
-      time30: false,
-      time45: true,
-    });
+    if (!props.minute) {
+      setReservations({
+        ...reservations,
+        timeHour: true,
+        time00: false,
+        time15: false,
+        time30: false,
+        time45: true,
+        minute: 45,
+      });
+    }
   };
 
   const cancel = () => {
@@ -101,17 +126,201 @@ export default function ReservationsForm(props) {
       time30: false,
       time45: false,
       showForm: false,
+      minute: 0,
     });
   };
 
   const showForm = () => {
-    console.log(props.reservation);
     setReservations({
       ...reservations,
       showForm: true,
     });
   };
 
+  const seat1 = () => {
+    console.log('seat1');
+    setReservations({
+      ...reservations,
+      seat1: true,
+      seat2: false,
+      seat3: false,
+      seat4: false,
+      seat5: false,
+      seat6: false,
+      seat: 1,
+    });
+  };
+
+  const seat2 = () => {
+    console.log('seat2');
+
+    setReservations({
+      ...reservations,
+      seat1: false,
+      seat2: true,
+      seat3: false,
+      seat4: false,
+      seat5: false,
+      seat6: false,
+      seat: 2,
+    });
+  };
+
+  const seat3 = () => {
+    setReservations({
+      ...reservations,
+      seat1: false,
+      seat2: false,
+      seat3: true,
+      seat4: false,
+      seat5: false,
+      seat6: false,
+      seat: 3,
+    });
+  };
+
+  const seat4 = () => {
+    setReservations({
+      ...reservations,
+      seat1: false,
+      seat2: false,
+      seat3: false,
+      seat4: true,
+      seat5: false,
+      seat6: false,
+      seat: 4,
+    });
+  };
+
+  const seat5 = () => {
+    setReservations({
+      ...reservations,
+      seat1: false,
+      seat2: false,
+      seat3: false,
+      seat4: false,
+      seat5: true,
+      seat6: false,
+      seat: 5,
+    });
+  };
+
+  const seat6 = () => {
+    setReservations({
+      ...reservations,
+      seat1: false,
+      seat2: false,
+      seat3: false,
+      seat4: false,
+      seat5: false,
+      seat6: true,
+      seat: 6,
+    });
+  };
+
+  const name = (event) => {
+    setReservations({
+      ...reservations,
+      name: event.target.value,
+    });
+  };
+
+  const phone = (event) => {
+    setReservations({
+      ...reservations,
+      phone: event.target.value,
+    });
+  };
+  // const [tab, setTab] = useState({
+  //   mon: false,
+  //   tue: false,
+  //   wed: false,
+  //   thu: false,
+  //   fri: false,
+  //   sat: false,
+  //   sun: false,
+  //   all: false,
+  //   bgActive: 'darkgrey',
+  //   bgInActive: 'lightgrey',
+  // });
+
+  const getDay = () => {
+    let day = '';
+    if (props.tab.mon) {
+      day = 'mon';
+    }
+    if (props.tab.tue) {
+      day = 'tue';
+    }
+    if (props.tab.wed) {
+      day = 'wed';
+    }
+    if (props.tab.thu) {
+      day = 'thu';
+    }
+    if (props.tab.fri) {
+      day = 'fri';
+    }
+    if (props.tab.sat) {
+      day = 'sat';
+    }
+    if (props.tab.sun) {
+      day = 'sun';
+    }
+    return day;
+  };
+  const submitReservation = (event) => {
+    event.preventDefault();
+    let day = getDay();
+    const data = {
+      table: props.tableInfo.table,
+      name: reservations.name,
+      phone: reservations.phone,
+      hour: props.id,
+      minute: reservations.minute,
+      day: day,
+      seats: reservations.seat,
+    };
+    const promise = axios
+      .post('/api/reservations/', data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log('Submit Reservation failed');
+      });
+    return promise;
+  };
+  //map out the reservation form seat buttons
+  const reserveSeats = () => {
+    let seatsArr = [];
+    for (let i = 1; i < props.tableInfo.tableObj.number_of_seats + 1; i++) {
+      seatsArr.push({ seat: i });
+    }
+    const seats = seatsArr.map((e, i) => {
+      let seatsName = 'seat-' + e.seat;
+      let seatClickName = 'seat' + e.seat;
+      const seatFunctions = [seat1, seat2, seat3, seat4, seat5, seat6];
+      return (
+        <div
+          key={e.seat}
+          className={seatsName}
+          onClick={seatFunctions[i]}
+          style={{
+            backgroundColor: reservations[seatClickName]
+              ? reservations.bgActive
+              : reservations.bgInActive,
+          }}
+        >
+          {e.seat}
+        </div>
+      );
+    });
+    return seats;
+  };
+
+  const seats = reserveSeats();
+  console.log(reserveSeats());
   return (
     <div className="reservations-form">
       <form className="reservations-form-time">
@@ -177,7 +386,7 @@ export default function ReservationsForm(props) {
         ) : null}
         {reservations.reserved ? (
           <div onClick={cancel} className="cancel-button">
-            Cancel
+            Close Reservation
           </div>
         ) : null}
       </form>
@@ -189,6 +398,7 @@ export default function ReservationsForm(props) {
             required
             placeholder="Name"
             name="name"
+            onChange={name}
           />
           <input
             type="text"
@@ -196,14 +406,21 @@ export default function ReservationsForm(props) {
             required
             placeholder="Phone"
             name="name"
+            onChange={phone}
           />
-          <button>Submit</button>
+          <div className="reserve-seats-select">
+            <h3 className="reserve-seats-h3">Seats</h3>
+            {seats}
+          </div>
+
+          <button onClick={submitReservation}>Submit</button>
         </form>
       ) : null}
       {reservations.reserved ? (
         <div>
           {props.name}
           {props.phone}
+          {'Seats: ' + props.seats}
         </div>
       ) : null}
     </div>

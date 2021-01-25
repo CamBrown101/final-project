@@ -1,25 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import './ReservationsNav.scss';
 
 export default function ReservationsNav(props) {
-  const [tab, setTab] = useState({
-    mon: false,
-    tue: false,
-    wed: false,
-    thu: false,
-    fri: false,
-    sat: false,
-    sun: false,
-    all: false,
-    bgActive: 'darkgrey',
-    bgInActive: 'lightgrey',
-  });
-
   useEffect(() => {
     const day = getDay();
-    setTab({
-      ...tab,
+    props.setTab({
+      ...props.tab,
       [day]: true,
     });
   }, []);
@@ -34,8 +21,8 @@ export default function ReservationsNav(props) {
     getDayReservations('mon');
 
     getDay();
-    setTab({
-      ...tab,
+    props.setTab({
+      ...props.tab,
       mon: true,
       tue: false,
       wed: false,
@@ -50,8 +37,8 @@ export default function ReservationsNav(props) {
   const tueTab = () => {
     getDayReservations('tue');
 
-    setTab({
-      ...tab,
+    props.setTab({
+      ...props.tab,
       mon: false,
       tue: true,
       wed: false,
@@ -66,8 +53,8 @@ export default function ReservationsNav(props) {
   const wedTab = () => {
     getDayReservations('wed');
 
-    setTab({
-      ...tab,
+    props.setTab({
+      ...props.tab,
       mon: false,
       tue: false,
       wed: true,
@@ -82,8 +69,8 @@ export default function ReservationsNav(props) {
   const thuTab = () => {
     getDayReservations('thu');
 
-    setTab({
-      ...tab,
+    props.setTab({
+      ...props.tab,
       mon: false,
       tue: false,
       wed: false,
@@ -98,8 +85,8 @@ export default function ReservationsNav(props) {
   const friTab = () => {
     getDayReservations('fri');
 
-    setTab({
-      ...tab,
+    props.setTab({
+      ...props.tab,
       mon: false,
       tue: false,
       wed: false,
@@ -114,8 +101,8 @@ export default function ReservationsNav(props) {
   const satTab = () => {
     getDayReservations('sat');
 
-    setTab({
-      ...tab,
+    props.setTab({
+      ...props.tab,
       mon: false,
       tue: false,
       wed: false,
@@ -129,8 +116,8 @@ export default function ReservationsNav(props) {
 
   const sunTab = () => {
     getDayReservations('sun');
-    setTab({
-      ...tab,
+    props.setTab({
+      ...props.tab,
       mon: false,
       tue: false,
       wed: false,
@@ -139,20 +126,6 @@ export default function ReservationsNav(props) {
       sat: false,
       sun: true,
       all: false,
-    });
-  };
-
-  const allTab = () => {
-    setTab({
-      ...tab,
-      mon: false,
-      tue: false,
-      wed: false,
-      thu: false,
-      fri: false,
-      sat: false,
-      sun: false,
-      all: true,
     });
   };
 
@@ -191,7 +164,9 @@ export default function ReservationsNav(props) {
         <div
           onClick={monTab}
           style={{
-            backgroundColor: tab.mon ? tab.bgActive : tab.bgInActive,
+            backgroundColor: props.tab.mon
+              ? props.tab.bgActive
+              : props.tab.bgInActive,
           }}
           className="reservations-nav-day"
           id="reservations-nav-mon"
@@ -201,7 +176,9 @@ export default function ReservationsNav(props) {
         <div
           onClick={tueTab}
           style={{
-            backgroundColor: tab.tue ? tab.bgActive : tab.bgInActive,
+            backgroundColor: props.tab.tue
+              ? props.tab.bgActive
+              : props.tab.bgInActive,
           }}
           className="reservations-nav-day"
           id="reservations-nav-tue"
@@ -211,7 +188,9 @@ export default function ReservationsNav(props) {
         <div
           onClick={wedTab}
           style={{
-            backgroundColor: tab.wed ? tab.bgActive : tab.bgInActive,
+            backgroundColor: props.tab.wed
+              ? props.tab.bgActive
+              : props.tab.bgInActive,
           }}
           className="reservations-nav-day"
           id="reservations-nav-wed"
@@ -221,7 +200,9 @@ export default function ReservationsNav(props) {
         <div
           onClick={thuTab}
           style={{
-            backgroundColor: tab.thu ? tab.bgActive : tab.bgInActive,
+            backgroundColor: props.tab.thu
+              ? props.tab.bgActive
+              : props.tab.bgInActive,
           }}
           className="reservations-nav-day"
           id="reservations-nav-thurs"
@@ -233,7 +214,9 @@ export default function ReservationsNav(props) {
         <div
           onClick={friTab}
           style={{
-            backgroundColor: tab.fri ? tab.bgActive : tab.bgInActive,
+            backgroundColor: props.tab.fri
+              ? props.tab.bgActive
+              : props.tab.bgInActive,
           }}
           className="reservations-nav-day"
           id="reservations-nav-fri"
@@ -243,7 +226,9 @@ export default function ReservationsNav(props) {
         <div
           onClick={satTab}
           style={{
-            backgroundColor: tab.sat ? tab.bgActive : tab.bgInActive,
+            backgroundColor: props.tab.sat
+              ? props.tab.bgActive
+              : props.tab.bgInActive,
           }}
           className="reservations-nav-day"
           id="reservations-nav-sat"
@@ -253,22 +238,14 @@ export default function ReservationsNav(props) {
         <div
           onClick={sunTab}
           style={{
-            backgroundColor: tab.sun ? tab.bgActive : tab.bgInActive,
+            backgroundColor: props.tab.sun
+              ? props.tab.bgActive
+              : props.tab.bgInActive,
           }}
           className="reservations-nav-day"
           id="reservations-nav-sun"
         >
           Sun
-        </div>
-        <div
-          onClick={allTab}
-          style={{
-            backgroundColor: tab.all ? tab.bgActive : tab.bgInActive,
-          }}
-          className="reservations-nav-day"
-          id="reservations-nav-all"
-        >
-          All
         </div>
       </nav>
     </>

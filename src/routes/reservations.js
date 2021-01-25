@@ -31,5 +31,28 @@ module.exports = (db) => {
       });
   });
 
+  router.post('/', (req, res) => {
+    const table_id = req.body.table;
+    const name = req.body.name;
+    const phone = req.body.phone;
+    const hour = req.body.hour;
+    const minute = req.body.minute;
+    const day = req.body.day;
+    const seats = req.body.seats;
+
+    db.query(
+      `INSERT INTO reservations (table_id, name, phone, hour, minute, day, seats)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+            RETURNING *;`,
+      [table_id, name, phone, hour, minute, day, seats]
+    )
+      .then((data) => {
+        console.log(data.rows);
+        res.status(200).send(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
   return router;
 };

@@ -20,12 +20,14 @@ export default function Side(props) {
           ) : null}
         </>
       ) : null}
-      <Reservations
-        tables={props.tables}
-        setTables={props.setTables}
-        tableInfo={props.tableInfo}
-        setTableInfo={props.setTableInfo}
-      ></Reservations>
+      {props.tableInfo.table ? (
+        <Reservations
+          tables={props.tables}
+          setTables={props.setTables}
+          tableInfo={props.tableInfo}
+          setTableInfo={props.setTableInfo}
+        ></Reservations>
+      ) : null}
     </div>
   );
 }

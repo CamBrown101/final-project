@@ -52,7 +52,8 @@
     }
     .cancel-button {
       grid-row: 2;
-      grid-column: 3/4;
+      grid-column: 1/6;
+      white-space: nowrap;
     }
 
     .reserve-button,
@@ -66,6 +67,42 @@
   }
 }
 
+.reservation-phone,
+.reservation-name,
+.reservation-seats {
+  border: solid;
+  border-width: thin;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  width: 100%;
+}
+
+.reserve-seats-select {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  user-select: none;
+  max-height: 24px;
+}
+
+.seat-1,
+.seat-2,
+.seat-3,
+.seat-4,
+.seat-5,
+.seat-6 {
+  text-align: center;
+  max-height: 24px;
+}
+.seat-1:hover,
+.seat-2:hover,
+.seat-3:hover,
+.seat-4:hover,
+.seat-5:hover,
+.seat-6:hover {
+  filter: invert(100%);
+}
 // <div className="reservations-form">
 //       <div className="reservations-form-hour">
 //         <div className="reservations-form-hour">11am</div>
