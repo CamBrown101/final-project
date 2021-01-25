@@ -111,7 +111,7 @@ export default function Analytics() {
         });
       const sales = JSON.parse(JSON.stringify(options1));
       sales.data[0].dataPoints = [...temp];
-      sales.title.text = "Top Ten Items Last Week";
+      sales.title.text = `Top Ten ${food ? "Food" : "Drink"} Items Last Week`;
       return sales;
     });
   };
@@ -139,7 +139,7 @@ export default function Analytics() {
   const options1 = {
     animationEnabled: true,
     animationDuration: 2000,
-    height: 800,
+    height: 750,
     exportEnabled: true,
     theme: "dark2", //"light1", "dark1", "dark2"
     title: {
