@@ -1,4 +1,4 @@
-@import "../../base";
+@import '../../base';
 
 .menu-item-container {
   display: flex;
@@ -15,6 +15,8 @@
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border: thin solid black;
+  cursor: pointer;
+
   .category-selector {
     transform-origin: 0 0;
     transform: rotate(90deg);
