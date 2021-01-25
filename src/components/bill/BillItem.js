@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import "./BillItem.scss";
-import Axios from "axios";
+import React, { useState } from 'react';
+import './BillItem.scss';
+import Axios from 'axios';
 export default function BillItem({
   name,
   price,
@@ -25,35 +25,35 @@ export default function BillItem({
     renderButton = true;
   }
   const [deleted, setDeleted] = useState(false);
-  const modBoolean = mods === "null";
+  const modBoolean = mods === 'null';
   return (
     <li
-      className={selected === id ? "bill-item selected" : "bill-item"}
+      className={selected === id ? 'bill-item selected' : 'bill-item'}
       onClick={() => {
         if (selected === id) {
           setSelected(null);
         } else {
           setSelected(id);
         }
-      }}
-    >
+      }}>
       <div className="item">
-        {renderButton ? (
-          <button
-            className="item-delete"
-            onClick={() => {
-              deleteItem();
-              setDeleted(true);
-            }}
-          >
-            X
-          </button>
-        ) : (
-          <></>
-        )}
-        <p className={deleted ? "deleted" : ""}>{seat}</p>
-        <p className={deleted ? "deleted item-name" : "item-name"}>{name}</p>
-        <p className={deleted ? "deleted item-price" : "item-price"}>
+        <div className="bill-seat-x">
+          {renderButton ? (
+            <button
+              className="item-delete"
+              onClick={() => {
+                deleteItem();
+                setDeleted(true);
+              }}>
+              X
+            </button>
+          ) : (
+            <></>
+          )}
+          <p className={deleted ? 'deleted' : ''}>{seat}</p>
+        </div>
+        <p className={deleted ? 'deleted item-name' : 'item-name'}>{name}</p>
+        <p className={deleted ? 'deleted item-price' : 'item-price'}>
           ${price.toFixed(2)}
         </p>
       </div>
