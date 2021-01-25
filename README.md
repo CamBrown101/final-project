@@ -8,9 +8,16 @@
 
 ## Screen Shots
 
+![Home Screen](https://github.com/CamBrown101/final-project/blob/master/src/img/screenshots/main-layout.png?raw=true)
+![Analytic Screen](https://github.com/CamBrown101/final-project/blob/master/src/img/screenshots/analytics.png?raw=true)
+
+<!-- ![Login Screen](https://github.com/CamBrown101/final-project/blob/master/src/img/screenshots/login-screen.png?raw=true) -->
+
+![Production Screen](https://github.com/CamBrown101/final-project/blob/master/src/img/screenshots/production.png?raw=true)
+
 ---
 
-## Built With
+## Built With:
 
 ### Front End
 
