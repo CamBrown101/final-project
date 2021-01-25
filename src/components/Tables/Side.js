@@ -23,6 +23,8 @@ export default function Side(props) {
       <Reservations
         tables={props.tables}
         setTables={props.setTables}
+        tableInfo={props.tableInfo}
+        setTableInfo={props.setTableInfo}
       ></Reservations>
     </div>
   );

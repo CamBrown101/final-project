@@ -1,35 +1,41 @@
+import { useEffect } from 'react';
 import './Reservations.scss';
 import ReservationsNav from './ReservationsNav';
 
 import ReservationsForm from './ReservationsForm';
 export default function Reservations(props) {
-  const hours = [11, 12, 1, 2, 3, 4, 5, 6, 7, 8];
-  const reservations = props.tables.reservations;
-  const mapHours = hours.map((hour) => {
-    let reservation = reservations.find((obj) => obj.hour === hour);
+  const reservations = [...props.tables.reservations];
+  const mapHours = reservations.map((reservation) => {
+    // let reservation = reservations.find((obj) => obj.hour === hour);
     let minute;
     let name;
     let phone;
-    if (reservation) {
-      minute = reservation.minute;
-      name = reservation.name;
-      phone = reservation.phone;
+    if (reservation.reservation) {
+      minute = reservation.reservation.minute;
+      name = reservation.reservation.name;
+      phone = reservation.reservation.phone;
     }
     return (
       <ReservationsForm
-        key={hour}
-        id={hour}
+        key={reservation.hour}
+        id={reservation.hour}
         minute={minute}
         name={name}
         phone={phone}
         tables={props.tables}
+        reservation={reservation.reservation}
       ></ReservationsForm>
     );
   });
   return (
     <div className="reservations-containter">
       <h2>Reservations:</h2>
-      <ReservationsNav></ReservationsNav>
+      <ReservationsNav
+        tables={props.tables}
+        setTables={props.setTables}
+        tableInfo={props.tableInfo}
+        setTableInfo={props.setTableInfo}
+      ></ReservationsNav>
       {mapHours}
     </div>
   );

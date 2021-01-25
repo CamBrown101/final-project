@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import axios from 'axios';
 import './ReservationsNav.scss';
 
 export default function ReservationsNav(props) {
@@ -31,6 +31,8 @@ export default function ReservationsNav(props) {
     return dayName;
   };
   const monTab = () => {
+    getDayReservations('mon');
+
     getDay();
     setTab({
       ...tab,
@@ -46,6 +48,8 @@ export default function ReservationsNav(props) {
   };
 
   const tueTab = () => {
+    getDayReservations('tue');
+
     setTab({
       ...tab,
       mon: false,
@@ -60,6 +64,8 @@ export default function ReservationsNav(props) {
   };
 
   const wedTab = () => {
+    getDayReservations('wed');
+
     setTab({
       ...tab,
       mon: false,
@@ -74,6 +80,8 @@ export default function ReservationsNav(props) {
   };
 
   const thuTab = () => {
+    getDayReservations('thu');
+
     setTab({
       ...tab,
       mon: false,
@@ -88,6 +96,8 @@ export default function ReservationsNav(props) {
   };
 
   const friTab = () => {
+    getDayReservations('fri');
+
     setTab({
       ...tab,
       mon: false,
@@ -102,6 +112,8 @@ export default function ReservationsNav(props) {
   };
 
   const satTab = () => {
+    getDayReservations('sat');
+
     setTab({
       ...tab,
       mon: false,
@@ -116,6 +128,7 @@ export default function ReservationsNav(props) {
   };
 
   const sunTab = () => {
+    getDayReservations('sun');
     setTab({
       ...tab,
       mon: false,
@@ -142,6 +155,36 @@ export default function ReservationsNav(props) {
       all: true,
     });
   };
+
+  const createArr = (reservations) => {
+    let hours = [11, 12, 1, 2, 3, 4, 5, 6, 7, 8];
+    let arr = [];
+    for (let i = 0; i < 10; i++) {
+      let reservation = reservations.find((obj) => obj.hour === hours[i]);
+      arr.push({ hour: hours[i], reservation: reservation });
+    }
+    return arr;
+  };
+  const getDayReservations = (dayName) => {
+    const data = {
+      table: props.tableInfo.table,
+      day: dayName,
+    };
+    const promise = axios
+      .post('/api/reservations/day', data)
+      .then((response) => {
+        props.setTables({
+          ...props.tables,
+
+          reservations: [...createArr(response.data)],
+        });
+      })
+      .catch(function (error) {
+        console.log('Delete layout failed');
+      });
+    return promise;
+  };
+
   return (
     <>
       <nav className="reservations-nav-upper">

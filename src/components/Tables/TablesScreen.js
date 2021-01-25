@@ -15,6 +15,9 @@ export default function Tables(props) {
     seats: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }],
   });
 
+  useEffect(() => {
+    console.log(tables.reservations);
+  }, [tables]);
   const [tableInfo, setTableInfo] = useState({
     table: 0,
     tableObj: {},

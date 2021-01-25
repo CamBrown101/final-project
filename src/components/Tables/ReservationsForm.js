@@ -21,10 +21,23 @@ export default function ReservationsForm(props) {
         ...reservations,
         timeHour: true,
         [string]: true,
+        reserved: true,
+      });
+    }
+    if (!props.minute) {
+      setReservations({
+        ...reservations,
+        timeHour: false,
+        time00: false,
+        time15: false,
+        time30: false,
+        time45: false,
+        reserved: false,
       });
     }
   }, [props.tables.reservations]);
 
+  useEffect(() => {}, [props.hours]);
   const timeHour = () => {
     setReservations({
       ...reservations,
@@ -187,6 +200,19 @@ export default function ReservationsForm(props) {
           <button>Submit</button>
         </form>
       ) : null}
+      {reservations.reserved ? (
+        <div>
+          {props.name}
+          {props.phone}
+        </div>
+      ) : null}
     </div>
   );
 }
+
+// key={hour}
+// id={hour}
+// minute={minute}
+// name={name}
+// phone={phone}
+// tables={props.tables}

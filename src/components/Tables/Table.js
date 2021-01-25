@@ -72,12 +72,19 @@ export default function Table(props) {
 
     return promise;
   };
-
+  const createArr = (reservations) => {
+    let hours = [11, 12, 1, 2, 3, 4, 5, 6, 7, 8];
+    let arr = [];
+    for (let i = 0; i < 10; i++) {
+      let reservation = reservations.find((obj) => obj.hour === hours[i]);
+      arr.push({ hour: hours[i], reservation: reservation });
+    }
+    return arr;
+  };
   const table = () => {
     const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
     const d = new Date();
     const dayName = days[d.getDay()];
-    console.log(dayName);
     const data = {
       table: props.id,
       day: dayName,
@@ -97,7 +104,7 @@ export default function Table(props) {
           ...props.tables,
           layout: all[0].data,
           open: all[1].data,
-          reservations: all[2].data,
+          reservations: [...createArr(all[2].data)],
         });
 
         props.setTableInfo({
