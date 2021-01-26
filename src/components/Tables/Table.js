@@ -4,10 +4,7 @@ import './Table.scss';
 import { useState } from 'react';
 
 export default function Table(props) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
   const trackPos = (data) => {
-    setPosition({ x: data.x, y: data.y });
     const id = props.id;
     //Remove current layout info from layout array
     const tables = props.tables.layout.filter(function (obj) {
@@ -136,9 +133,7 @@ export default function Table(props) {
             X
           </strong>
         ) : null}
-        {/* <div className="layout-position-data">
-          x: {position.x.toFixed(0)}, y: {position.y.toFixed(0)}
-        </div> */}
+
         <h1>{props.id}</h1>
       </div>
     </Draggable>

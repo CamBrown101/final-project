@@ -3,7 +3,6 @@ import axios from 'axios';
 import './TablesScreen.scss';
 import Table from './Table';
 import EditPanel from './EditPanel';
-import TableInfo from './TableInfo';
 
 import Side from './Side';
 export default function Tables(props) {
@@ -61,7 +60,7 @@ export default function Tables(props) {
   return (
     <div className="table-screen-container">
       <div className="layout-screen">
-        <section
+        <div
           style={{ backgroundColor: tables.edit ? 'red' : 'yellow' }}
           className="tables-container"
         >
@@ -82,22 +81,16 @@ export default function Tables(props) {
               />
             );
           })}
-        </section>
-        <EditPanel tables={tables} setTables={setTables}></EditPanel>
-        {!tables.edit ? (
-          <>
-            {tableInfo.table ? (
-              <TableInfo
-                tables={tables}
-                setTables={setTables}
-                tableInfo={tableInfo}
-                setTableInfo={setTableInfo}
-                selectValue={selectValue}
-                setSelectValue={setSelectValue}
-              ></TableInfo>
-            ) : null}
-          </>
-        ) : null}
+        </div>
+        <EditPanel
+          tableInfo={tableInfo}
+          setTableInfo={setTableInfo}
+          tables={tables}
+          setTables={setTables}
+          selectValue={selectValue}
+          setSelectValue={setSelectValue}
+        ></EditPanel>
+
         <Side
           tables={tables}
           setTables={setTables}

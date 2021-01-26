@@ -17,27 +17,6 @@ export default function Reservations(props) {
     bgInActive: 'lightgrey',
   });
 
-  const [reservations, setReservations] = useState({
-    timeHour: false,
-    time00: false,
-    time15: false,
-    time30: false,
-    time45: false,
-    seat1: false,
-    seat2: false,
-    seat3: false,
-    seat4: false,
-    seat5: false,
-    seat6: false,
-    seat: 1,
-    bgActive: 'darkgrey',
-    bgInActive: 'lightgrey',
-    showForm: false,
-    reserved: false,
-    name: '',
-    phone: '',
-    minute: 0,
-  });
   const reservationsCopy = [...props.tables.reservations];
   const mapHours = reservationsCopy.map((reservation) => {
     // let reservation = reservations.find((obj) => obj.hour === hour);
@@ -73,7 +52,11 @@ export default function Reservations(props) {
       {' '}
       {!props.tables.edit ? (
         <>
-          <h2 className="reservations-title">Reservations:</h2>
+          <h2 className="reservations-title">
+            Table {props.tableInfo.table}
+            <br />
+            Reservations:
+          </h2>
           <ReservationsNav
             tab={tab}
             setTab={setTab}

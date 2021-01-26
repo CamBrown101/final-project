@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './EditPanel.scss';
 import axios from 'axios';
+import TableInfo from './TableInfo';
+
 export default function EditPanel(props) {
   const [edit, setEdit] = useState({
     button: 'Edit',
@@ -112,14 +114,14 @@ export default function EditPanel(props) {
   };
   return (
     <div className="edit-panel">
-      <button onClick={editClick} className="edit-layout-button">
+      <div onClick={editClick} className="edit-layout-button">
         {edit.button}
-      </button>
+      </div>
       {props.tables.edit ? (
         <form>
-          <button onClick={addTable} className="edit-layout-button">
+          <div onClick={addTable} className="edit-layout-button">
             Add Table
-          </button>
+          </div>
           <select required onChange={seatsChange} name="seats" id="seats">
             <option value="1">Seats: 1</option>
             <option value="2">2</option>
@@ -140,9 +142,24 @@ export default function EditPanel(props) {
         </select>
       ) : null}
       {props.tables.edit ? (
-        <button onClick={resetTables} className="edit-layout-button">
+        <div onClick={resetTables} className="edit-layout-button">
           Reset All
-        </button>
+        </div>
+      ) : null}
+
+      {props.tables.edit ? (
+        <>
+          {props.tableInfo.table ? (
+            <TableInfo
+              tables={props.tables}
+              setTables={props.setTables}
+              tableInfo={props.tableInfo}
+              setTableInfo={props.setTableInfo}
+              selectValue={props.selectValue}
+              setSelectValue={props.setSelectValue}
+            ></TableInfo>
+          ) : null}
+        </>
       ) : null}
     </div>
   );

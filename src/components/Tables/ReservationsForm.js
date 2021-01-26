@@ -322,6 +322,14 @@ export default function ReservationsForm(props) {
     return promise;
   };
 
+  const cancelSubmit = () => {
+    setReservations({
+      ...reservations,
+      showForm: false,
+      name: '',
+      phone: '',
+    });
+  };
   const submitReservation = (event) => {
     event.preventDefault();
     let day = getDay();
@@ -438,10 +446,15 @@ export default function ReservationsForm(props) {
         >
           45
         </div>
+
         {!reservations.reserved ? (
-          <div onClick={showForm} className="reserve-button">
-            Reserve
-          </div>
+          <>
+            {!reservations.showForm ? (
+              <div onClick={showForm} className="reserve-button">
+                Reserve
+              </div>
+            ) : null}
+          </>
         ) : null}
         {reservations.reserved ? (
           <div onClick={cancel} className="cancel-button">
@@ -473,8 +486,14 @@ export default function ReservationsForm(props) {
             <h3 className="reserve-seats-h3">Seats</h3>
             {seats}
           </div>
-
-          <button onClick={submitReservation}>Submit</button>
+          <div className="res-buttons">
+            <div className="res-buttons-submit" onClick={submitReservation}>
+              Submit
+            </div>
+            <div className="res-buttons-cancel" onClick={cancelSubmit}>
+              Cancel
+            </div>
+          </div>
         </form>
       ) : null}
       {reservations.reserved ? (

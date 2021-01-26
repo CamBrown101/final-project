@@ -143,12 +143,40 @@
   border-left: 0;
   border-right: 0;
 }
-// <div className="reservations-form">
-//       <div className="reservations-form-hour">
-//         <div className="reservations-form-hour">11am</div>
-//         <div className="reservations-form-00">.00</div>
-//         <div className="reservations-form-15">.15</div>
-//         <div className="reservations-form-30">.30</div>
-//         <div className="reservations-form-45">.45</div>
-//       </div>
-//     </div>
+
+.res-buttons {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  text-align: center;
+  border: solid;
+  border-width: thin;
+  border-left: 0;
+  border-color: black;
+  user-select: none;
+
+  .res-buttons-submit,
+  .res-buttons-cancel {
+    border: solid;
+    border-width: thin;
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-color: black;
+  }
+  .res-buttons-submit {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .res-buttons-cancel {
+    grid-row: 1;
+    grid-column: 2;
+    border-left: 0;
+    border-right: 0;
+  }
+  .res-buttons-submit:hover,
+  .res-buttons-cancel:hover {
+    color: white;
+  }
+}
