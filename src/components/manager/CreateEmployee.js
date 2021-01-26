@@ -54,8 +54,7 @@ export default function CreateEmployee(props) {
           console.log('Employee created');
         }
         const URL = `/api/employees/`;
-        const promise = axios
-          .get(URL)
+        const promise = Axios.get(URL)
           .then((response) => {
             props.setEmployees(response.data);
           })
