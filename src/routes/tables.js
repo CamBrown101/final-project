@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
+  //Get information on all tables
   router.get("/", (req, res) => {
-    console.log("table route");
     db.query(
       `SELECT tables.*, employees.firstName FROM tables
       JOIN employees On employee_id = employees.id;`
@@ -17,8 +17,8 @@ module.exports = (db) => {
       });
   });
 
+  //Get info on a specific table
   router.get("/:id", (req, res) => {
-    console.log("table id route");
     const table = req.params.id;
     db.query(
       `SELECT * FROM tables
@@ -36,7 +36,6 @@ module.exports = (db) => {
 
   //seats for a table
   router.get("/:id/seats", (req, res) => {
-    console.log("table id items route");
     const table = req.params.id;
     db.query(
       `
@@ -54,8 +53,8 @@ module.exports = (db) => {
       });
   });
 
+  //Get the current order on a table
   router.get("/:id/current-order", (req, res) => {
-    console.log("table id items route");
     const table = req.params.id;
     db.query(
       `

@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get('/', (req, res) => {
-    console.log('employee route');
+  //Info on all employees
+  router.get("/", (req, res) => {
     db.query(`SELECT * FROM employees;`)
       .then((data) => {
         const employees = data.rows;
@@ -14,9 +14,8 @@ module.exports = (db) => {
       });
   });
 
-  //Might be redundant with login route
-  router.get('/:id', (req, res) => {
-    console.log('employee id route');
+  //Info on a specific employee
+  router.get("/:id", (req, res) => {
     const employee = req.params.id;
     db.query(
       `SELECT * FROM employees
@@ -32,7 +31,8 @@ module.exports = (db) => {
       });
   });
 
-  router.post('/', (req, res) => {
+  //create an employee
+  router.post("/", (req, res) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const email = req.body.email;
@@ -46,11 +46,10 @@ module.exports = (db) => {
     )
       .then((data) => {
         if (data.rows[0] !== undefined) {
-          return res.send('exists');
+          return res.send("exists");
         }
 
         const queryParams = [firstName, lastName, email, pin, is_admin];
-        console.log(queryParams);
         db.query(
           `INSERT INTO employees (firstName, lastName, email, pin, start_date, is_admin)
               VALUES ($1, $2, $3, $4, CLOCK_TIMESTAMP(), $5)
@@ -59,12 +58,10 @@ module.exports = (db) => {
         )
           .then((data) => {
             const employee = data.rows[0];
-            console.log(employee);
             return res.status(200).send(employee);
           })
           .catch((err) => {
-            console.log('error');
-            return res.status(500).send('error');
+            return res.status(500).send("error");
           });
       })
       .catch();

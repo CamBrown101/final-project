@@ -91,7 +91,6 @@ export default function Analytics() {
     return Axios.get("/api/analytics/sales", {
       params: { days: data },
     }).then((res) => {
-      console.log(res.data);
       const dataEnd = top ? 10 : res.data.length;
       const temp = res.data.slice(dataEnd - 10, dataEnd).map((item) => {
         return { label: item.name, y: parseInt(item.sold) };

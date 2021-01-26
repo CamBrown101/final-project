@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import MenuItem from './MenuItem';
-import './MenuContainer.scss';
-import SearchBar from './SearchBar';
-import CategoryItem from './CategoryItem';
+import React, { useState } from "react";
+import MenuItem from "./MenuItem";
+import "./MenuContainer.scss";
+import SearchBar from "./SearchBar";
+import CategoryItem from "./CategoryItem";
 
 export default function MenuContainer({
   setBill,
@@ -13,8 +13,9 @@ export default function MenuContainer({
   setCategory,
   categories,
 }) {
-  const [menuSearch, setMenuSearch] = useState('');
+  const [menuSearch, setMenuSearch] = useState("");
 
+  //Filters menu items by category id with 0 displaying all items
   const menuItems = menu
     .filter((item) => item.category_id === category || category === 0)
     .filter(
@@ -36,6 +37,7 @@ export default function MenuContainer({
       />
     ));
 
+  //Generates category tabs
   const categoryItems = categories.map((cat) => (
     <CategoryItem
       key={cat.id}
@@ -45,7 +47,7 @@ export default function MenuContainer({
     />
   ));
   categoryItems.unshift(
-    <CategoryItem key={0} id={0} name={'All'} setCategory={setCategory} />
+    <CategoryItem key={0} id={0} name={"All"} setCategory={setCategory} />
   );
   return (
     <div className="menu-item-container">

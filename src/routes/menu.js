@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
+  //get all menu items
   router.get("/", (req, res) => {
-    console.log("menu route");
     db.query(
       `
               SELECT menu_items.*, categories.name AS category
@@ -19,8 +19,8 @@ module.exports = (db) => {
       });
   });
 
+  //get specific menu item
   router.get("/:id", (req, res) => {
-    console.log("menu item id route");
     const item = req.params.id;
     db.query(
       `SELECT * FROM menu_items
@@ -36,6 +36,7 @@ module.exports = (db) => {
       });
   });
 
+  //Create a menu item
   router.post("/", (req, res) => {
     const name = req.body.name;
     const price = req.body.price;
@@ -58,7 +59,6 @@ module.exports = (db) => {
         isActive,
         categoryName,
       ];
-      console.log(queryParams);
 
       db.query(
         `INSERT INTO menu_items (name, price, description, quantity, is_active, category_id)
@@ -68,11 +68,9 @@ module.exports = (db) => {
       )
         .then((data) => {
           const employee = data.rows[0];
-          console.log(employee);
           return res.status(200).send(employee);
         })
         .catch((err) => {
-          console.log("error");
           return res.status(500).send("error");
         });
     });

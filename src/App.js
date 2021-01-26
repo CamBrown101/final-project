@@ -1,23 +1,22 @@
-import './App.scss';
-import { useContext, useState } from 'react';
+import "./App.scss";
+import { useContext, useState } from "react";
 import {
   Redirect,
   BrowserRouter as Router,
   Route,
   Switch,
-} from 'react-router-dom';
-import { UserContext } from './UserContext';
-import Login from './components/Login';
-import Home from './components/Home';
-import Manager from './components/manager/Manager';
-import Nav from './components/Nav';
-import Employees from './components/manager/Employees.js';
-import CreateItem from './components/manager/CreateItem.js';
-import CreateCategory from './components/manager/CreateCategory.js';
-import TimecardEntry from './components/TimecardEntry';
-import Split from './components/Split';
-import ProductionContainer from './components/productionScreen/ProductionContainer';
-import Analytics from './components/manager/Analytics';
+} from "react-router-dom";
+import { UserContext } from "./UserContext";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import Manager from "./components/manager/Manager";
+import Nav from "./components/Nav";
+import Employees from "./components/manager/Employees.js";
+import CreateItem from "./components/manager/CreateItem.js";
+import CreateCategory from "./components/manager/CreateCategory.js";
+import TimecardEntry from "./components/TimecardEntry";
+import ProductionContainer from "./components/productionScreen/ProductionContainer";
+import Analytics from "./components/manager/Analytics";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -36,16 +35,6 @@ function App() {
           render={(props) =>
             user.auth ? (
               <Home {...props} bill={bill} setBill={setBill} />
-            ) : (
-              <Redirect to="/login" />
-            )
-          }
-        />
-        <Route
-          path="/split"
-          render={(props) =>
-            user.auth ? (
-              <Split {...props} bill={bill} setBill={setBill} />
             ) : (
               <Redirect to="/login" />
             )

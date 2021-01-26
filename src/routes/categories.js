@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
+  //Get info for all categories
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM categories;`, [])
       .then((data) => {
@@ -12,6 +13,7 @@ module.exports = (db) => {
       });
   });
 
+  //Create a category
   router.post("/", (req, res) => {
     const name = req.body.name;
     const is_food = req.body.isFood;
