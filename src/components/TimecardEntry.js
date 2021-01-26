@@ -8,13 +8,13 @@ export default function TimecardEntry() {
 
   const punchIn = (code) => {
     const data = { pin: code, login: true };
-    Axios.post('http://localhost:8080/api/timecards', data).then((res) => {
+    Axios.post('/api/timecards', data).then((res) => {
       window.alert(res.data);
     });
   };
   const punchOut = (code) => {
     const data = { pin: code, login: false };
-    Axios.post('http://localhost:8080/api/timecards', data).then((res) => {
+    Axios.post('/api/timecards', data).then((res) => {
       window.alert(res.data);
     });
   };
