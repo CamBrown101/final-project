@@ -34,7 +34,8 @@
     "webpack-plugin-serve": "^0.12.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
+    "heroku-postbuild": "cd public && npm install && npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
