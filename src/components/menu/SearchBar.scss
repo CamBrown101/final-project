@@ -1,11 +1,12 @@
-@import "../../base";
+@import '../../base';
 .menu-search-bar {
   background-color: $base-dark;
   height: 40px;
-  border: thin solid black;
+  padding-left: 2%;
 }
 .menu-search-input {
   background-color: $base-dark;
+  color: $base-white;
   height: 100%;
   font-size: 25px;
   width: 100%;
