@@ -13,7 +13,7 @@ const UserProvider = ({ children }) => {
   const login = (code) => {
     const data = { pin: code };
 
-    Axios.post('http://localhost:8080/login', data).then((res) => {
+    Axios.post('/login', data).then((res) => {
       if (res.data) {
         setUser((user) => ({
           name: `${res.data.firstname} ${res.data.lastname}`,
