@@ -48,6 +48,7 @@
 - Run `nodemon server.js`.
 - Run `npm start`.
 - Go to `http://localhost:3000/` in your browser.
+- Use 6666 as a login code.
 
 ---
 
