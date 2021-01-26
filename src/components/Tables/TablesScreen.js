@@ -20,9 +20,7 @@ export default function Tables(props) {
   const [edit, setEdit] = useState({
     button: 'Edit',
   });
-  useEffect(() => {
-    console.log(tables.reservations);
-  }, [tables]);
+  useEffect(() => {}, [tables]);
   const [tableInfo, setTableInfo] = useState({
     table: 0,
     tableObj: {},
@@ -35,10 +33,23 @@ export default function Tables(props) {
   });
 
   useEffect(() => {
+    const getDay = () => {
+      const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+      const d = new Date();
+      const dayName = days[d.getDay()];
+      return dayName;
+    };
+
+    const day = getDay();
+
+    const data = {
+      day: day,
+    };
     Promise.all([
       axios.get('/api/layout'),
       axios.get('/api/tables/open'),
       axios.get('/api/employees'),
+      axios.post('/api/reservations/all', data),
     ])
       .then((all) => {
         setTables({
@@ -46,14 +57,13 @@ export default function Tables(props) {
           layout: all[0].data,
           open: all[1].data,
           employees: all[2],
+          reservations: all[3].data,
         });
       })
       .catch();
   }, []);
 
-  useEffect(() => {
-    console.log(tables.open);
-  }, [tables]);
+  useEffect(() => {}, [tables]);
 
   const editFunc = () => {
     return true;
@@ -102,7 +112,6 @@ export default function Tables(props) {
           </div>
           {tables.layout.map((table) => {
             let open = tables.open.find((obj) => obj.table_id === table.id);
-            console.log(open);
             return (
               <Table
                 key={table.id}

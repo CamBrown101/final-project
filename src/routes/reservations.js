@@ -31,6 +31,24 @@ module.exports = (db) => {
       });
   });
 
+  router.post('/all', (req, res) => {
+    const day = req.body.day;
+    console.log(day);
+    db.query(
+      `SELECT * FROM reservations
+              WHERE day = $1
+              AND closed = false
+              ORDER BY hour;`,
+      [day]
+    )
+      .then((data) => {
+        res.status(200).send(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   router.post('/', (req, res) => {
     const table_id = req.body.table;
     const name = req.body.name;
