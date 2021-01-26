@@ -5,6 +5,10 @@ import Axios from "axios";
 
 export default function TableItem(props) {
   const { user } = useContext(UserContext);
+
+  //Gets order information for selected table
+  //Stores info into table state
+  //Creates new order if no order on table
   const getOrders = () => {
     const newItems = [];
     Axios.get(`/api/tables/${props.id}/current-order`).then((res) => {

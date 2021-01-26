@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
+  //Get all punchs in/out
   router.get("/", (req, res) => {
-    console.log("timecard route");
     db.query(`SELECT * FROM shifts;`)
       .then((data) => {
         const shifts = data.rows;
@@ -13,9 +13,8 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-
+  //Creates a punch in/out
   router.post("/", (req, res) => {
-    console.log("post to timecard");
     const pin = req.body.pin;
     const login = req.body.login;
     db.query(
@@ -36,7 +35,6 @@ module.exports = (db) => {
               res.status(200).send("Time punch accepted!");
             })
             .catch((err) => {
-              console.log(err);
               res.status(500).json({ error: err.message });
             });
         } else {

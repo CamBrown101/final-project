@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  router.post('/', (req, res) => {
+  router.post("/", (req, res) => {
     const pin = req.body.pin;
     db.query(
       `SELECT * FROM employees
@@ -11,7 +11,6 @@ module.exports = (db) => {
     )
       .then((data) => {
         if (data.rows) {
-          console.log(data.rows);
           res.status(200).send(data.rows[0]);
         } else {
           res.send(false);

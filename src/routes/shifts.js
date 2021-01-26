@@ -4,7 +4,6 @@ const router = express.Router();
 module.exports = (db) => {
   //gets all shifts, probably dont need this
   router.get("/", (req, res) => {
-    console.log("shifts route");
     db.query(`SELECT * FROM shifts;`)
       .then((data) => {
         const shifts = data.rows;
@@ -17,7 +16,6 @@ module.exports = (db) => {
 
   //get most recent shift for employee
   router.get("/:id", (req, res) => {
-    console.log("employee shifts");
     const employee = req.params.id;
     db.query(
       `
