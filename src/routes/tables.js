@@ -18,7 +18,11 @@ module.exports = (db) => {
   });
 
   router.get('/open', (req, res) => {
-    db.query('SELECT * FROM tables WHERE status = false;', [])
+    db.query(
+      `SELECT * FROM orders
+    WHERE payment_type IS NULL;`,
+      []
+    )
       .then((data) => {
         const tables = data.rows;
         res.send(tables);

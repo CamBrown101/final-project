@@ -89,33 +89,38 @@ export default function EditPanel(props) {
   return (
     <div className="edit-panel">
       {props.tables.edit ? (
-        <form>
-          <div onClick={addTable} className="edit-layout-button">
-            Add Table
-          </div>
-          <select required onChange={seatsChange} name="seats" id="seats">
-            <option value="1">Seats: 1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="5">6</option>
-          </select>
-        </form>
-      ) : null}
-      {props.tables.edit ? (
-        <select onChange={grid} name="grid" id="grid">
-          <option value="1">Grid Size 1</option>
-          <option value="5">Grid Size 5</option>
-          <option value="10">Grid Size 10</option>
-          <option value="25">Grid Size 25</option>
-          <option value="50">Grid Size 50</option>
-        </select>
-      ) : null}
-      {props.tables.edit ? (
-        <div onClick={resetTables} className="edit-layout-button">
-          Reset All
-        </div>
+        <>
+          <h1>Edit Floor Layout</h1>
+
+          <form className="edit-form">
+            <div onClick={addTable} className="add-table-button">
+              Add Table
+            </div>
+            <select
+              required
+              onChange={seatsChange}
+              name="seats"
+              className="seats-change-button"
+            >
+              <option value="1">Seats: 1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="5">6</option>
+            </select>
+            <select onChange={grid} name="grid" className="grid-size-select">
+              <option value="1">Grid Size 1</option>
+              <option value="5">Grid Size 5</option>
+              <option value="10">Grid Size 10</option>
+              <option value="25">Grid Size 25</option>
+              <option value="50">Grid Size 50</option>
+            </select>
+            <div onClick={resetTables} className="edit-layout-button">
+              Reset All
+            </div>
+          </form>
+        </>
       ) : null}
 
       {props.tables.edit ? (

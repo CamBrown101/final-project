@@ -1,9 +1,11 @@
+@import '../../base.scss';
 .reservations-nav-upper {
-  width: 200px;
+  width: 300px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   border: solid;
+  border-color: black;
   border-width: thin;
 
   #reservations-nav-mon {
@@ -25,13 +27,14 @@
 }
 
 .reservations-nav-lower {
-  width: 200px;
+  width: 300px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   border: solid;
   border-width: thin;
   border-top: 0;
+  border-color: black;
 
   #reservations-nav-fri {
     grid-row: 1;
@@ -55,12 +58,12 @@
   margin: 4px;
   padding: 4px;
   text-align: center;
-  background-color: white;
   user-select: none;
   border: solid;
   border-width: thin;
+  border-color: black;
 }
 
 .reservations-nav-day:hover {
-  filter: invert(100%);
+  color: $base-light-accent;
 }

@@ -3,7 +3,8 @@ import axios from 'axios';
 import './TablesScreen.scss';
 import Table from './Table';
 import EditPanel from './EditPanel';
-
+import Lock from '../../img/icons/locklight.png';
+import Edit from '../../img/icons/editlight.png';
 import Side from './Side';
 export default function Tables(props) {
   const [tables, setTables] = useState({
@@ -50,7 +51,9 @@ export default function Tables(props) {
       .catch();
   }, []);
 
-  useEffect(() => {}, [tables]);
+  useEffect(() => {
+    console.log(tables.open);
+  }, [tables]);
 
   const editFunc = () => {
     return true;
@@ -86,18 +89,26 @@ export default function Tables(props) {
     <div className="table-screen-container">
       <div className="layout-screen">
         <div
-          style={{ backgroundColor: tables.edit ? 'red' : '#141217' }}
+          style={{ backgroundColor: tables.edit ? '#4ba99a' : '#2c2636' }}
           className="tables-container"
         >
           <div onClick={editClick} className="edit-layout-button">
-            {edit.button}
+            {edit.button + ' '}
+            {tables.edit ? (
+              <img alt="lock" className="edit-icon" src={Lock}></img>
+            ) : (
+              <img alt="lock" className="edit-icon" src={Edit}></img>
+            )}
           </div>
           {tables.layout.map((table) => {
+            let open = tables.open.find((obj) => obj.table_id === table.id);
+            console.log(open);
             return (
               <Table
                 key={table.id}
                 id={table.id}
                 tables={tables}
+                open={open}
                 setTables={setTables}
                 tableInfo={tableInfo}
                 setTableInfo={setTableInfo}

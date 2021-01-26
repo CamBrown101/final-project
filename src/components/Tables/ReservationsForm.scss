@@ -1,19 +1,21 @@
 @import '../../base';
 .reservations-form {
-  width: 200px;
-
+  width: 300px;
+  background-color: $base-dark;
   border: solid;
   border-width: thin;
+  border-color: black;
+  overflow: hidden;
   border-bottom: 0;
   border-top: 0;
-
+  font-size: 18px;
   .reservations-form-time {
     border: solid;
     border-width: thin;
     border-left: 0;
     border-right: 0;
     border-top: 0;
-
+    border-color: black;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 2fr;
@@ -27,25 +29,24 @@
       user-select: none;
       border: solid;
       border-width: thin;
-
+      border-color: black;
       border-right: 0;
       border-top: 0;
+      background-color: $base-dark;
     }
     .reservations-form-hour:hover,
     .reservations-form-00:hover,
     .reservations-form-15:hover,
     .reservations-form-30:hover,
     .reservations-form-45:hover {
-      background-color: black;
-      color: #4ba99a;
-
-      border-color: white;
+      color: $base-light;
     }
     .reservations-form-hour {
       grid-row: 1;
       grid-column: 1;
       border-left: 0;
       border-right: 1;
+      border-color: black;
     }
     .reservations-form-00 {
       grid-row: 1;
@@ -77,10 +78,12 @@
     .reserve-button,
     .cancel-button {
       user-select: none;
+      color: $base-cancel;
+      text-align: center;
     }
     .reserve-button:hover,
     .cancel-button:hover {
-      filter: invert(100%);
+      color: $base-light;
     }
   }
 }
@@ -90,6 +93,8 @@
 .reservation-seats {
   border: solid;
   border-width: thin;
+  border-color: black;
+  color: white;
   border-left: 0;
   border-right: 0;
   border-top: 0;
@@ -98,10 +103,46 @@
 
 .reserve-seats-select {
   display: grid;
+  max-height: 24px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   user-select: none;
-  max-height: 24px;
+  .seats-0 {
+    font-size: 14px;
+    grid-row: 1;
+    max-height: 24px;
+    grid-column: 1;
+    display: inline;
+  }
+  .seats-1 {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .seats-2 {
+    grid-row: 1;
+    grid-column: 3;
+  }
+
+  .seats-3 {
+    grid-row: 1;
+    grid-column: 4;
+  }
+
+  .seats-4 {
+    grid-row: 1;
+    grid-column: 5;
+  }
+
+  .seats-5 {
+    grid-row: 1;
+    grid-column: 6;
+  }
+
+  .seats-6 {
+    grid-row: 1;
+    grid-column: 7;
+  }
 }
 
 .seat-1,
@@ -115,6 +156,7 @@
   border: solid;
   border-width: thin;
   border-top: 0;
+  border-color: black;
 }
 
 .seat-2,
@@ -134,7 +176,7 @@
 .seat-4:hover,
 .seat-5:hover,
 .seat-6:hover {
-  color: #4ba99a;
+  color: $base-light-accent;
 }
 
 .reservation-display {
@@ -143,6 +185,7 @@
   border-top: 0;
   border-left: 0;
   border-right: 0;
+  border-color: black;
 }
 
 .res-buttons {
@@ -154,7 +197,7 @@
   border: solid;
   border-width: thin;
   border-left: 0;
-  border-color: white;
+  border-color: black;
   user-select: none;
 
   .res-buttons-submit,
@@ -164,7 +207,7 @@
     border-top: 0;
     border-bottom: 0;
     border-left: 0;
-    border-color: white;
+    border-color: black;
   }
   .res-buttons-submit {
     grid-row: 1;
@@ -178,6 +221,6 @@
   }
   .res-buttons-submit:hover,
   .res-buttons-cancel:hover {
-    color: white;
+    color: $base-light;
   }
 }

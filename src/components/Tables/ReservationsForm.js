@@ -483,7 +483,7 @@ export default function ReservationsForm(props) {
             value={reservations.phone}
           />
           <div className="reserve-seats-select">
-            <h3 className="reserve-seats-h3">Seats</h3>
+            <h3 className="seats-0">Seats</h3>
             {seats}
           </div>
           <div className="res-buttons">

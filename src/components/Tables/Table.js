@@ -127,7 +127,11 @@ export default function Table(props) {
       onDrag={(e, data) => trackPos(data)}
       onStop={(e, data) => update(data)}
     >
-      <div className="table" onClick={table}>
+      <div
+        style={{ backgroundColor: props.open ? '#4ba99a' : '#2c2636' }}
+        className="table"
+        onClick={table}
+      >
         {props.tables.edit ? (
           <strong onClick={deleteTable} className="delete-table-layout">
             X
