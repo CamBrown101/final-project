@@ -2,7 +2,6 @@
   "name": "final-setup",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080/",
   "dependencies": {
     "@stripe/react-stripe-js": "^1.2.0",
     "@stripe/stripe-js": "^1.11.0",
