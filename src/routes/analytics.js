@@ -15,7 +15,8 @@ module.exports = (db) => {
           LEAD(punch_time) OVER (PARTITION BY employee_id order By id) as clockOutTime
        FROM shifts) AS foo
       JOIN employees ON employee_id = employees.id
-      where is_in = true;`
+      where is_in = true
+      ORDER BY clockInTime;`
     )
       .then((data) => {
         const shifts = data.rows;
