@@ -23,8 +23,7 @@ export default function CreateCategory(props) {
       isFood: isFood,
     };
     const URL = `/api/categories/`;
-    const promise = axios
-      .post(URL, data)
+    const promise = Axios.post(URL, data)
       .then((response) => {})
       .catch();
     return promise;

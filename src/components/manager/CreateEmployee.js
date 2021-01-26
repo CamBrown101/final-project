@@ -46,8 +46,7 @@ export default function CreateEmployee(props) {
       isAdmin: isAdmin,
     };
     const URL = `/api/employees/`;
-    const promise = axios
-      .post(URL, data)
+    const promise = Axios.post(URL, data)
       .then((response) => {
         clear();
 

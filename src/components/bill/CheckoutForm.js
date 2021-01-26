@@ -22,9 +22,8 @@ export function CheckoutForm({
   const handleSubmit = async (event) => {
     console.log(cost * 100);
     event.preventDefault();
-    axios
-      .get('/api/payments/secret', { params: { bill: cost * 100 } })
-      .then((res) => {
+    Axios.get('/api/payments/secret', { params: { bill: cost * 100 } }).then(
+      (res) => {
         stripe
           .confirmCardPayment(res.data.client_secret, {
             payment_method: {
@@ -56,7 +55,8 @@ export function CheckoutForm({
               }
             }
           });
-      });
+      }
+    );
   };
 
   return (
