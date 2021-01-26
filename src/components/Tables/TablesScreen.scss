@@ -1,4 +1,7 @@
+@import '../../base';
 .table-screen-container {
+  position: fixed;
+  top: 100px;
   width: 1048px;
   height: 800px;
   border: solid;
@@ -9,7 +12,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-
+  background-color: $base-color;
   .side-container {
     grid-column: 2;
     grid-row: 1;
@@ -20,7 +23,7 @@
   .tables-container {
     width: 840px;
     height: 800px;
-    background-color: #eae2b7;
+    background-color: $base-color;
     text-align: center;
   }
 }
@@ -28,4 +31,18 @@
   position: fixed;
   top: 0;
   left: 840px;
+}
+
+.edit-layout-button {
+  float: right;
+  user-select: none;
+  width: 100px;
+  height: 30px;
+  font-size: 24px;
+  font-weight: bolder;
+}
+
+.edit-layout-button:hover {
+  background-color: white;
+  color: black;
 }

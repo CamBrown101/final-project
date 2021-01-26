@@ -1,10 +1,11 @@
+@import '../../base';
 .table {
   position: absolute;
   width: 60px;
   height: 60px;
   cursor: move;
   color: white;
-  background-color: blue;
+  background-color: $base-light-accent;
   max-width: 215px;
   border-radius: 50%;
   padding: 1em;
@@ -24,7 +25,7 @@
   height: 20px;
   border-radius: 5px;
 
-  background-color: darkred;
+  background-color: $base-cancel;
   animation: jiggle 0.2s infinite;
   -webkit-animation: jiggle 0.2s infinite;
   -moz-animation-duration: 0.2s;

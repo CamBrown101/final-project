@@ -1,3 +1,4 @@
+@import '../../base';
 .reservations-form {
   width: 200px;
 
@@ -36,9 +37,9 @@
     .reservations-form-30:hover,
     .reservations-form-45:hover {
       background-color: black;
-      color: white;
+      color: #4ba99a;
 
-      border-color: black;
+      border-color: white;
     }
     .reservations-form-hour {
       grid-row: 1;
@@ -133,7 +134,7 @@
 .seat-4:hover,
 .seat-5:hover,
 .seat-6:hover {
-  filter: invert(100%);
+  color: #4ba99a;
 }
 
 .reservation-display {
@@ -153,7 +154,7 @@
   border: solid;
   border-width: thin;
   border-left: 0;
-  border-color: black;
+  border-color: white;
   user-select: none;
 
   .res-buttons-submit,
@@ -163,7 +164,7 @@
     border-top: 0;
     border-bottom: 0;
     border-left: 0;
-    border-color: black;
+    border-color: white;
   }
   .res-buttons-submit {
     grid-row: 1;

@@ -16,6 +16,9 @@ export default function Tables(props) {
     seats: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }],
   });
 
+  const [edit, setEdit] = useState({
+    button: 'Edit',
+  });
   useEffect(() => {
     console.log(tables.reservations);
   }, [tables]);
@@ -49,21 +52,46 @@ export default function Tables(props) {
 
   useEffect(() => {}, [tables]);
 
-  const edit = () => {
+  const editFunc = () => {
     return true;
   };
 
-  const lock = () => {
+  const lockFunc = () => {
     return false;
   };
 
+  const editClick = () => {
+    if (edit.button === 'Edit') {
+      setEdit({
+        ...edit,
+        button: 'Lock',
+      });
+      setTables({
+        ...tables,
+        edit: true,
+      });
+    }
+    if (edit.button === 'Lock') {
+      setEdit({
+        ...edit,
+        button: 'Edit',
+      });
+      setTables({
+        ...tables,
+        edit: false,
+      });
+    }
+  };
   return (
     <div className="table-screen-container">
       <div className="layout-screen">
         <div
-          style={{ backgroundColor: tables.edit ? 'red' : 'yellow' }}
+          style={{ backgroundColor: tables.edit ? 'red' : '#141217' }}
           className="tables-container"
         >
+          <div onClick={editClick} className="edit-layout-button">
+            {edit.button}
+          </div>
           {tables.layout.map((table) => {
             return (
               <Table
@@ -75,7 +103,7 @@ export default function Tables(props) {
                 setTableInfo={setTableInfo}
                 selectValue={selectValue}
                 setSelectValue={setSelectValue}
-                edit={tables.edit ? edit : lock}
+                edit={tables.edit ? editFunc : lockFunc}
                 x_pos={table.x_pos}
                 y_pos={table.y_pos}
               />
@@ -89,6 +117,8 @@ export default function Tables(props) {
           setTables={setTables}
           selectValue={selectValue}
           setSelectValue={setSelectValue}
+          edit={edit}
+          setEdit={setEdit}
         ></EditPanel>
 
         <Side

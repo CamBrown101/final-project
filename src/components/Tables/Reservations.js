@@ -13,8 +13,8 @@ export default function Reservations(props) {
     sat: false,
     sun: false,
     all: false,
-    bgActive: 'darkgrey',
-    bgInActive: 'lightgrey',
+    bgActive: '#4ba99a',
+    bgInActive: '#141217',
   });
 
   const reservationsCopy = [...props.tables.reservations];

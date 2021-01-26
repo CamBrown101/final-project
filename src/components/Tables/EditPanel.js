@@ -4,9 +4,6 @@ import axios from 'axios';
 import TableInfo from './TableInfo';
 
 export default function EditPanel(props) {
-  const [edit, setEdit] = useState({
-    button: 'Edit',
-  });
   const [seats, setSeats] = useState({
     numberOfSeats: 1,
   });
@@ -17,29 +14,6 @@ export default function EditPanel(props) {
       ...seats,
       numberOfSeats: seatsNum,
     });
-  };
-
-  const editClick = () => {
-    if (edit.button === 'Edit') {
-      setEdit({
-        ...edit,
-        button: 'Lock',
-      });
-      props.setTables({
-        ...props.tables,
-        edit: true,
-      });
-    }
-    if (edit.button === 'Lock') {
-      setEdit({
-        ...edit,
-        button: 'Edit',
-      });
-      props.setTables({
-        ...props.tables,
-        edit: false,
-      });
-    }
   };
 
   const addTable = (event) => {
@@ -114,9 +88,6 @@ export default function EditPanel(props) {
   };
   return (
     <div className="edit-panel">
-      <div onClick={editClick} className="edit-layout-button">
-        {edit.button}
-      </div>
       {props.tables.edit ? (
         <form>
           <div onClick={addTable} className="edit-layout-button">

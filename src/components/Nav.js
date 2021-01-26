@@ -1,8 +1,8 @@
-import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
 
-import "./Nav.scss";
-import { UserContext } from "../UserContext";
+import './Nav.scss';
+import { UserContext } from '../UserContext';
 
 export default function Nav(props) {
   const { user, logout } = useContext(UserContext);
@@ -39,7 +39,7 @@ export default function Nav(props) {
               className="nav-menu-item"
               id="nav-food-production"
               to={{
-                pathname: "/food-production",
+                pathname: '/food-production',
                 is_food: true,
               }}
             >
@@ -49,11 +49,21 @@ export default function Nav(props) {
               className="nav-menu-item"
               id="nav-drink-production"
               to={{
-                pathname: "/drink-production",
+                pathname: '/drink-production',
                 is_food: false,
               }}
             >
               Drink Production
+            </NavLink>
+            <NavLink
+              className="nav-menu-item"
+              id="nav-tables"
+              to={{
+                pathname: '/tables',
+                is_food: false,
+              }}
+            >
+              Tables
             </NavLink>
           </div>
           <div className="screens">
@@ -61,7 +71,7 @@ export default function Nav(props) {
               <h1>Hello, {user.name}!</h1>
             </div>
             <NavLink
-              to={"/login"}
+              to={'/login'}
               id="nav-logout"
               className="nav-menu-item logout"
               onClick={logout}
