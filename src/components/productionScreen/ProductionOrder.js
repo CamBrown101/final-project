@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './ProductionOrder.scss';
 import './ProductionOrderItem';
 import ProductionOrderItem from './ProductionOrderItem';
-import Axios from 'axios';
+import Axios from '../../helpers/axios';
 
 export default function ProductionOrder({
   setSelectedOrders,

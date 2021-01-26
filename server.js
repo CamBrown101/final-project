@@ -15,7 +15,6 @@ const db = new Client({
   connectionString: process.env.DATABASE_URL,
 });
 db.connect();
-
 const PORT = process.env.PORT || 8080;
 
 //import routes

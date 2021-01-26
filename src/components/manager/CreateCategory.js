@@ -1,10 +1,10 @@
-import { useState } from "react";
-import axios from "axios";
-import "./CreateCategory.scss";
-import ManagerNav from "./ManagerNav";
+import { useState } from 'react';
+import Axios from '../../helpers/axios';
+import './CreateCategory.scss';
+import ManagerNav from './ManagerNav';
 
 export default function CreateCategory(props) {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [isFood, setIsFood] = useState(false);
 
   const nameOnChange = (event) => {
@@ -49,16 +49,14 @@ export default function CreateCategory(props) {
           <select
             className="category-is-food"
             onChange={isFoodOnChange}
-            name="is-food"
-          >
+            name="is-food">
             <option value="false">False</option>
             <option value="true">True</option>
           </select>
           <button
             onClick={create}
             type="submit"
-            className="create-category-button"
-          >
+            className="create-category-button">
             Create category
           </button>
         </form>

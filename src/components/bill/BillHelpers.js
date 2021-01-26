@@ -1,4 +1,4 @@
-import Axios from "axios";
+import Axios from '../../helpers/axios';
 
 //Adds new items for an order to the database
 export const sendBill = (tableInfo, data) => {
@@ -63,7 +63,7 @@ export const clearBill = (setBill, setTable) => {
 export const payBill = (orderId, unpaidItems) => {
   if (orderId !== null) {
     Axios.post(`/api/orders/${orderId}/pay`, {
-      paymentType: "credit",
+      paymentType: 'credit',
     });
   }
 
@@ -71,7 +71,7 @@ export const payBill = (orderId, unpaidItems) => {
   unpaidItems.forEach((element) => {
     orderIds.push(element.orderItemId ? element.orderItemId : element.id);
   });
-  return Axios.post("api/orders/pay", orderIds);
+  return Axios.post('api/orders/pay', orderIds);
 };
 
 //Creates a data object from the bill for use in axios calls

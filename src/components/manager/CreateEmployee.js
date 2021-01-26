@@ -1,12 +1,12 @@
-import { useState } from "react";
-import axios from "axios";
-import "./CreateEmployee.scss";
+import { useState } from 'react';
+import Axios from '../../helpers/axios';
+import './CreateEmployee.scss';
 
 export default function CreateEmployee(props) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [pin, setPin] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [pin, setPin] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
 
   const firstNameOnChange = (event) => {
@@ -30,10 +30,10 @@ export default function CreateEmployee(props) {
   };
 
   const clear = () => {
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPin("");
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPin('');
   };
   const create = (event) => {
     event.preventDefault();
@@ -52,7 +52,7 @@ export default function CreateEmployee(props) {
         clear();
 
         if (response.data.email) {
-          console.log("Employee created");
+          console.log('Employee created');
         }
         const URL = `/api/employees/`;
         const promise = axios
@@ -61,7 +61,7 @@ export default function CreateEmployee(props) {
             props.setEmployees(response.data);
           })
           .catch(function (error) {
-            console.log("Error fetching employees");
+            console.log('Error fetching employees');
           });
 
         return promise;
@@ -118,16 +118,14 @@ export default function CreateEmployee(props) {
             className="employee-is-admin"
             onChange={isAdminOnChange}
             value={isAdmin}
-            name="is-admin"
-          >
+            name="is-admin">
             <option value="false">False</option>
             <option value="true">True</option>
           </select>
           <button
             onClick={create}
             type="submit"
-            className="create-employee-button"
-          >
+            className="create-employee-button">
             Create Employee
           </button>
         </form>
