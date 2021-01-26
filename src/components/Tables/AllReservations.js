@@ -16,13 +16,8 @@ export default function Reservations(props) {
     bgInActive: '#141217',
   });
 
-  useEffect(() => {
-    console.log(props.tables.reservations);
-  }, [props.tables.reservations]);
   const reservationsCopy = [...props.tables.reservations];
   const mapReservations = reservationsCopy.map((reservation) => {
-    console.log(reservation);
-
     return (
       <AllReservationsPartial
         key={reservation.id}

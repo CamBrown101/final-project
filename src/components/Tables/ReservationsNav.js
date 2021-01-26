@@ -129,6 +129,47 @@ export default function ReservationsNav(props) {
     });
   };
 
+  const allTab = () => {
+    props.setTab({
+      ...props.tab,
+      mon: false,
+      tue: false,
+      wed: false,
+      thu: false,
+      fri: false,
+      sat: false,
+      sun: false,
+      all: true,
+    });
+
+    props.setTableInfo({
+      ...props.tableInfo,
+      table: 0,
+    });
+    const getDay = () => {
+      const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+      const d = new Date();
+      const dayName = days[d.getDay()];
+      return dayName;
+    };
+    const dayName = getDay();
+    const data = {
+      day: dayName,
+    };
+    console.log(data);
+    const promise = axios
+      .post('/api/reservations/all', data)
+      .then((response) => {
+        props.setTables({
+          ...props.tables,
+          reservations: response.data,
+        });
+      })
+      .catch(function (error) {
+        console.log('Get reservations failed');
+      });
+    return promise;
+  };
   const createArr = (reservations) => {
     let hours = [11, 12, 1, 2, 3, 4, 5, 6, 7, 8];
     let arr = [];
@@ -247,6 +288,18 @@ export default function ReservationsNav(props) {
           id="reservations-nav-sun"
         >
           Sun
+        </div>
+        <div
+          onClick={allTab}
+          style={{
+            backgroundColor: props.tab.all
+              ? props.tab.bgActive
+              : props.tab.bgInActive,
+          }}
+          className="reservations-nav-day"
+          id="reservations-nav-all"
+        >
+          All
         </div>
       </nav>
     </>

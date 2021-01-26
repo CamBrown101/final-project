@@ -6,7 +6,8 @@ module.exports = (db) => {
     console.log('table route');
     db.query(
       `SELECT tables.*, employees.firstName FROM tables
-      JOIN employees On employee_id = employees.id;`
+      JOIN employees On employee_id = employees.id
+      ORDER BY id;`
     )
       .then((data) => {
         const tables = data.rows;
