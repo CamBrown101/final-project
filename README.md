@@ -1,6 +1,55 @@
-# Getting Started with Create React App
+# Buy Food, Sell Food
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+
+## A point of sails system for a restaurant. Including analytics, employee clock in, stripe intergration, the ability to email bills, sort bills by seat and a seperate screen for the kitchen and bar for items that need to be prepared. We also a sort by categories for menu items as well as a search bar that you can search by item name or category. This was our final project for Lighthouse Labs Web Development Bootcamp.
+
+---
+
+## Screen Shots
+
+![Home Screen](https://github.com/CamBrown101/final-project/blob/master/src/img/screenshots/main-layout.png?raw=true)
+![Analytic Screen](https://github.com/CamBrown101/final-project/blob/master/src/img/screenshots/analytics.png?raw=true)
+
+<!-- ![Login Screen](https://github.com/CamBrown101/final-project/blob/master/src/img/screenshots/login-screen.png?raw=true) -->
+
+![Production Screen](https://github.com/CamBrown101/final-project/blob/master/src/img/screenshots/production.png?raw=true)
+
+---
+
+## Built With:
+
+### Front End
+
+- React
+- SASS
+- React-beautiful-dnd
+- React-Router
+- Stripe
+- CanvasJS
+- Axios
+
+### Back End
+
+- Node / Express
+- PostgreSQL
+- Nodemailer
+- Cors
+- Body-Parser
+- DotENV
+- Nodemon
+
+---
+
+## Getting Started
+
+- Clone this repo.
+- Run `npm install`.
+- Run `nodemon server.js`.
+- Run `npm start`.
+- Go to `http://localhost:3000/` in your browser.
+
+---
 
 ## Available Scripts
 
@@ -14,57 +63,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+### `nodemon server.js`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Runs the API the app uses on port 8080. This must be running for the app to work.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Contributors
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Michael Krishna [Github](https://github.com/mkrishna768)
+- Cameron Brown [Github](https://github.com/CamBrown101)
+- Marcel Mueller [Github](https://github.com/marcellmueller)

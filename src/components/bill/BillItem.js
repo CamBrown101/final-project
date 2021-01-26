@@ -15,11 +15,13 @@ export default function BillItem({
   setBillItem,
   bill,
 }) {
+  //Delete an item from the order
   const deleteItem = () => {
     const orderItemId = unpaidItems[id].order_item_id;
     Axios.post(`api/orders/${orderItemId}/delete`);
     setBillItem(!billItem);
   };
+
   let renderButton = false;
   if (isAdmin && id + 1 > bill.items.length) {
     renderButton = true;
@@ -38,21 +40,22 @@ export default function BillItem({
       }}
     >
       <div className="item">
-        {renderButton ? (
-          <button
-            onClick={() => {
-              {
+        <div className="bill-seat-x">
+          {renderButton ? (
+            <button
+              className="item-delete"
+              onClick={() => {
                 deleteItem();
                 setDeleted(true);
-              }
-            }}
-          >
-            X
-          </button>
-        ) : (
-          <></>
-        )}
-        <p className={deleted ? "deleted" : ""}>{seat}</p>
+              }}
+            >
+              X
+            </button>
+          ) : (
+            <></>
+          )}
+          <p className={deleted ? "deleted" : ""}>{seat}</p>
+        </div>
         <p className={deleted ? "deleted item-name" : "item-name"}>{name}</p>
         <p className={deleted ? "deleted item-price" : "item-price"}>
           ${price.toFixed(2)}

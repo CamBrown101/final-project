@@ -5,34 +5,44 @@
   top: 0;
   width: 100%;
   min-width: 100%;
-  background-color: $dark;
+  background-color: $base-dark;
+
   #nav-menu {
     display: flex;
-    background-color: $dark;
-    width: 100%;
-    max-width: 300px;
-    height: 56px;
+    height: 80px;
     font-size: 20px;
     font-weight: bolder;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2%;
 
     .nav-menu-item {
-      margin: auto;
-      padding-top: 14px;
-      height: 42px;
-      padding-left: 0.5em;
-      padding-right: 0.5em;
-      color: $base-lighter;
+      height: 90%;
+      margin: 1%;
+      color: $base-white;
       white-space: nowrap;
+      padding: 15px 10px;
     }
 
     .nav-menu-item:hover {
-      color: $dark;
-      background-color: $border-dark;
+      background-color: $base-dark-accent;
+    }
+    .nav-menu-item:link {
+      text-decoration: none;
+    }
+    .screens {
+      display: flex;
+      align-items: center;
     }
   }
+  .logged-in {
+    color: $base-white;
+    margin-right: 1%;
+    width: 300px;
+    text-align: right;
+  }
 }
-
 .active {
-  color: $dark;
-  background-color: $project-white;
+  color: $base-dark;
+  background-color: $base-dark-accent;
 }

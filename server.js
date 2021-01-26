@@ -29,8 +29,10 @@ const timecardRoutes = require('./src/routes/timecards');
 const analyticRoutes = require('./src/routes/analytics');
 const layoutRoutes = require('./src/routes/layout');
 const reservationRoutes = require('./src/routes/reservations');
+const paymentRoutes = require('./src/routes/payments');
 
 app.use(cors());
+
 //use routes
 app.use('/login', loginRoutes(db));
 app.use('/api/employees', employeeRoutes(db));
@@ -42,6 +44,7 @@ app.use('/api/timecards', timecardRoutes(db));
 app.use('/api/analytics', analyticRoutes(db));
 app.use('/api/layout', layoutRoutes(db));
 app.use('/api/reservations', reservationRoutes(db));
+app.use('/api/payments', paymentRoutes(db));
 
 app.get('/', (req, res) => {
   console.log(req.session);

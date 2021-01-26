@@ -1,7 +1,7 @@
 @import '../base';
 
 .table-item {
-  background-color: $project-white;
+  background-color: $base-dark;
   border: black solid 1px;
   width: 100px;
   height: 100px;
@@ -9,9 +9,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+.table-item:hover {
+  border: 0.5px solid $base-white;
+}
+.table-item:focus {
+  border: 0.5px solid $base-white;
 }
 .selected {
-  background-color: lightgrey;
+  background-color: $base-dark-accent;
 }
 .seats {
   margin: 0;

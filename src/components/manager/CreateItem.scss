@@ -1,13 +1,13 @@
-@import '../../base';
+@import "../../base";
 
 .new-menu-item {
-  color: $dark;
-  background-color: white;
+  color: $base-dark;
+  background-color: $base-light;
   width: 300px;
   height: 480px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 12em;
+  margin-top: 150px;
   display: block;
   border-radius: 6px;
   border-width: 1px;
@@ -23,7 +23,7 @@
     .menu-item-description {
       border: 0;
       border-bottom: solid;
-      border-color: $dark;
+      border-color: $base-dark;
       display: block;
       width: 90%;
       margin-bottom: 0.5em;
@@ -35,7 +35,7 @@
     .menu-item-name {
       border: 0;
       border-bottom: solid;
-      border-color: $dark;
+      border-color: $base-dark;
       display: block;
       width: 90%;
       margin-bottom: 0.5em;
@@ -47,7 +47,7 @@
     .menu-item-price {
       border: 0;
       border-bottom: solid;
-      border-color: $dark;
+      border-color: $base-dark;
       display: block;
       width: 90%;
       margin-bottom: 0.5em;
@@ -89,15 +89,15 @@
 .create-menu-item-button {
   display: block;
   background-color: $border-dark;
-  color: $dark;
+  color: $base-light;
   width: 100%;
   border: none;
   border-radius: 4px;
   padding: 0.4em;
 }
 .create-menu-item-button:hover {
-  color: $dark;
-  background-color: $base-lighter;
+  color: $base-dark;
+  background-color: $base-dark-accent;
 }
 textarea:focus,
 input:focus {

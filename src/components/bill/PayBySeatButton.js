@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from 'react';
+import PayPopUp from './PayPopUp';
 
 export default function PayBySeatButton({
   payBill,
@@ -12,29 +13,35 @@ export default function PayBySeatButton({
   setBill,
   setTable,
   bill,
+  cost,
 }) {
+  const [hidden, setHidden] = useState(true);
   return (
     <div
       className="pay-by-seat-button"
       onClick={() => {
-        if (bill.items.length !== 0) {
-          sendBill(tableInfo, data).then((res) => {
-            console.log(res.data);
-            payBill(orderId, [
-              ...items,
-              ...res.data.filter((item) => {
-                return item.seat_number === seat;
-              }),
-            ]).then(() => clearBill(setBill, setTable));
-          });
-        } else {
-          payBill(orderId, items).then(() => clearBill(setBill, setTable));
-        }
-      }}
-    >
+        setHidden(false);
+      }}>
       <p className="pay-button-text">
-        {seat ? `Pay for seat ${seat}` : "Pay total bill for table"}
+        {seat ? `Pay for seat ${seat}` : 'Pay total bill for table'}
       </p>
+      {hidden ? (
+        <></>
+      ) : (
+        <PayPopUp
+          cost={cost}
+          bill={bill}
+          tableInfo={tableInfo}
+          data={data}
+          orderId={tableInfo.orderId}
+          items={items}
+          seat={seat}
+          setBill={setBill}
+          setTable={setTable}
+          hidden={hidden}
+          setHidden={setHidden}
+        />
+      )}
     </div>
   );
 }

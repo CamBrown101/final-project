@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Analytic.scss";
 import { CanvasJSChart } from "canvasjs-react-charts";
 import Axios from "axios";
+import ManagerNav from "./ManagerNav";
 
 export default function Analytics() {
+  //Generates formatted Sales by Day to feed into graph
   const getSalesbyDay = (days) => {
     const data = days;
     return Axios.get("/api/analytics/gross-sales", {
@@ -27,6 +29,7 @@ export default function Analytics() {
     grossSales = res;
   });
 
+  //Generates formatted Labour by Day to feed into graph
   const getLabourByDay = (days) => {
     const data = days;
     return Axios.get("/api/analytics/labour", { params: { days: data } }).then(
@@ -64,9 +67,12 @@ export default function Analytics() {
   };
   let labour;
   let netSales;
+
+  //gets net sales for the day
   getLabourByDay(8).then((res) => {
     labour = res;
     netSales = JSON.parse(JSON.stringify(options1));
+    //eslint-disable-next-line
     const temp = grossSales.data[0].dataPoints.map((day) => {
       for (const lday of labour.data[0].dataPoints) {
         if (day.label === lday.label) {
@@ -79,6 +85,7 @@ export default function Analytics() {
     netSales.title.text = "Net Sales Last Week";
   });
 
+  //Generates formatted Item Sales by Day to feed into graph
   const getItemSalesByDay = (days, top) => {
     const data = days;
     return Axios.get("/api/analytics/sales", {
@@ -96,6 +103,7 @@ export default function Analytics() {
     });
   };
 
+  //Generates formatted Category Sales by Day to feed into graph
   const getCategorySalesByDay = (days, food) => {
     const data = days;
     return Axios.get("/api/analytics/sales", {
@@ -109,7 +117,7 @@ export default function Analytics() {
         });
       const sales = JSON.parse(JSON.stringify(options1));
       sales.data[0].dataPoints = [...temp];
-      sales.title.text = "Top Ten Items Last Week";
+      sales.title.text = `Top Ten ${food ? "Food" : "Drink"} Items Last Week`;
       return sales;
     });
   };
@@ -137,7 +145,7 @@ export default function Analytics() {
   const options1 = {
     animationEnabled: true,
     animationDuration: 2000,
-    height: 800,
+    height: 750,
     exportEnabled: true,
     theme: "dark2", //"light1", "dark1", "dark2"
     title: {
@@ -161,7 +169,6 @@ export default function Analytics() {
 
   return (
     <div className="analytic-container">
-      <h1>Analytics</h1>
       <div className="analytic-buttons">
         <button
           className="options-button"
@@ -230,6 +237,7 @@ export default function Analytics() {
       <div className="chart-container">
         <CanvasJSChart options={option} key={key} />
       </div>
+      <ManagerNav />
     </div>
   );
 }

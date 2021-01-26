@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
-import './BillContainer.scss';
-import BillHeader from './BillHeader';
-import BillItem from './BillItem';
+import React, { useEffect, useState, useContext } from "react";
+import "./BillContainer.scss";
+import BillHeader from "./BillHeader";
+import BillItem from "./BillItem";
 import {
   sendBill,
   printBill,
@@ -11,14 +11,16 @@ import {
   getUnpaidItems,
   getItemsToRender,
   updateBill,
-} from './BillHelpers';
-import PayButton from './PayButton';
-import SendButton from './SendButton';
-import CancelButton from './CancelButton';
-import EditButton from './EditButton';
-import PrintBillButton from './PrintBillButton';
-import BillTotals from './BillTotals';
-import { UserContext } from '../../UserContext';
+} from "./BillHelpers";
+import PayButton from "./PayButton";
+import SendButton from "./SendButton";
+import CancelButton from "./CancelButton";
+import EditButton from "./EditButton";
+import PrintBillButton from "./PrintBillButton";
+import BillTotals from "./BillTotals";
+import { UserContext } from "../../UserContext";
+import DragAndDrop from "./DragAndDrop";
+import EditSeatButton from "./EditSeatButton";
 
 export default function BillContainer({
   bill,
@@ -61,13 +63,15 @@ export default function BillContainer({
       const upData = { seat: seat, item: itemsToRender[selected].orderItemId };
       updateBill(tableInfo, upData);
 
+      // if selected is in the items that aren't sent
       if (selected >= bill.items.length)
         unpaidItems[selected - bill.items.length].seat_number = seat;
       itemsToRender[selected].seat = seat;
     }
     // eslint-disable-next-line
   }, [seat, itemsToRender]);
-  const [mod, setMod] = useState('');
+  const [editSeatToggle, setEditSeat] = useState(false);
+  const [mod, setMod] = useState("");
   const [billItem, setBillItem] = useState(true);
   const billItems = itemsToRender.map((item, index) => (
     <BillItem
@@ -86,11 +90,24 @@ export default function BillContainer({
       bill={bill}
     />
   ));
+
   return (
     <article className="bill-container">
       <div>
         <BillHeader table={tableInfo} />
-        <ul className="bill-items">{billItems}</ul>
+        {editSeatToggle ? (
+          <DragAndDrop
+            tableInfo={tableInfo}
+            bill={bill}
+            itemsToRender={itemsToRender}
+            updateBill={updateBill}
+            setBill={setBill}
+            menu={menu}
+            setTable={setTable}
+          />
+        ) : (
+          <ul className="bill-items">{billItems}</ul>
+        )}
       </div>
       <div className="bill-footer">
         <BillTotals bill={bill} />
@@ -115,7 +132,6 @@ export default function BillContainer({
             setBill={setBill}
             setTable={setTable}
             itemsToRender={itemsToRender}
-            tableInfo={tableInfo}
           />
           <EditButton
             data={data}
@@ -123,6 +139,12 @@ export default function BillContainer({
             setMod={setMod}
             bill={bill}
             selected={selected}
+            tableInfo={tableInfo}
+          />
+          <EditSeatButton
+            data={data}
+            editSeatToggle={editSeatToggle}
+            setEditSeat={setEditSeat}
             tableInfo={tableInfo}
           />
           <PrintBillButton

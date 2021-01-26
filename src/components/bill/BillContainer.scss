@@ -3,11 +3,12 @@
 .bill-container {
   padding: 2%;
   margin-left: 2%;
-  background-color: $project-white;
-  height: auto;
+  background-color: $base-dark;
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
+  max-height: 738px;
 
   .bill-item {
     display: flex;
@@ -15,13 +16,21 @@
     justify-content: space-between;
   }
   .bill-items {
-    max-height: 475px;
+    max-height: 320px;
     overflow-y: scroll;
+    background-color: $base-dark;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+  .bill-items::-webkit-scrollbar {
+    display: none;
+  }
+
   .item {
     display: flex;
     justify-content: space-between;
     font-size: 2em;
+    cursor: pointer;
   }
   .mod {
     align-self: flex-start;
@@ -50,6 +59,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 5px;
+    cursor: pointer;
   }
   .edit-section {
     display: flex;
@@ -60,24 +70,27 @@
     display: flex;
   }
   .send-button {
-    background-color: green;
+    background-color: #99c24d;
   }
   .print-button {
-    background-color: blue;
+    background-color: #020887;
   }
   .edit-button {
-    background-color: yellow;
+    background-color: #ff8c42;
   }
   .edit-input {
-    border: thin solid black;
     height: 1.5em;
     font-size: 1.5em;
+    color: $base-white;
+  }
+  .edit-seat-button {
+    background-color: #b33951;
   }
   .cancel-button {
-    background-color: red;
+    background-color: $base-cancel;
   }
   .pay-button {
-    background-color: purple;
+    background-color: #8783d1;
   }
   .show {
     display: block;
@@ -94,30 +107,37 @@
   min-width: 230px;
   overflow: auto;
   z-index: 1;
-  margin-top: 30px;
-  margin-right: -159px;
-  background-color: $project-white;
+  margin-right: -285px;
+  margin-bottom: 142px;
+  background-color: $base-dark;
+  bottom: 0;
 }
 .print-dropdown {
   position: absolute;
   min-width: 230px;
   overflow: auto;
   z-index: 1;
-  background-color: $project-white;
+  background-color: $base-dark;
+  bottom: 0;
+  margin-bottom: 80px;
+  margin-left: 147px;
 }
 .pay-dropdown {
   position: absolute;
   overflow: auto;
   z-index: 1;
-  background-color: darkgray;
+  background-color: $base-dark;
+  bottom: 0;
+  margin-bottom: 147px;
+  margin-left: 146px;
 }
 .pay-by-seat-button {
   border: thin solid black;
   font-size: 1.5em;
-  background-color: $project-white;
+  background-color: $base-dark;
 }
 .pay-by-seat-button:hover {
-  background-color: greenyellow;
+  background-color: $base-dark-accent;
 }
 .pay-button-text {
   padding: 5px;
