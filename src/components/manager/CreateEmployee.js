@@ -51,9 +51,6 @@ export default function CreateEmployee(props) {
       .then((response) => {
         clear();
 
-        if (response.data.email) {
-          console.log("Employee created");
-        }
         const URL = `/api/employees/`;
         const promise = axios
           .get(URL)

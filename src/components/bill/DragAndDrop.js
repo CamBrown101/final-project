@@ -51,7 +51,6 @@ export default function DragAndDrop({
       item: reorderedItem.orderItemId,
     };
     updateBill(tableInfo, upData);
-    console.log(columns[parseInt(destination.droppableId)]);
 
     const newItems = [];
     Axios.get(`/api/orders/${tableInfo.orderId}/items`).then((res) => {

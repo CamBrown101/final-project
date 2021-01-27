@@ -1,10 +1,11 @@
-import './App.scss';
-import { useContext, useState } from 'react';
+import "./App.scss";
+import { useContext, useState } from "react";
 import {
   Redirect,
   BrowserRouter as Router,
   Route,
   Switch,
+<<<<<<< HEAD
 } from 'react-router-dom';
 import { UserContext } from './UserContext';
 import Login from './components/Login';
@@ -19,6 +20,21 @@ import Split from './components/Split';
 import ProductionContainer from './components/productionScreen/ProductionContainer';
 import Analytics from './components/manager/Analytics';
 import Tables from './components/Tables/TablesScreen';
+=======
+} from "react-router-dom";
+import { UserContext } from "./UserContext";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import Manager from "./components/manager/Manager";
+import Nav from "./components/Nav";
+import Employees from "./components/manager/Employees.js";
+import CreateItem from "./components/manager/CreateItem.js";
+import CreateCategory from "./components/manager/CreateCategory.js";
+import TimecardEntry from "./components/TimecardEntry";
+import ProductionContainer from "./components/productionScreen/ProductionContainer";
+import Analytics from "./components/manager/Analytics";
+
+>>>>>>> 20ce730629a64c5d3cb9e952be55b1678c38e5e7
 function App() {
   const { user } = useContext(UserContext);
   const [bill, setBill] = useState({
@@ -38,16 +54,6 @@ function App() {
           render={(props) =>
             user.auth ? (
               <Home {...props} bill={bill} setBill={setBill} />
-            ) : (
-              <Redirect to="/login" />
-            )
-          }
-        />
-        <Route
-          path="/split"
-          render={(props) =>
-            user.auth ? (
-              <Split {...props} bill={bill} setBill={setBill} />
             ) : (
               <Redirect to="/login" />
             )

@@ -4,7 +4,6 @@ const router = express.Router();
 module.exports = (db) => {
   //gets all shifts
   router.get("/labour", (req, res) => {
-    console.log("shifts route");
     db.query(
       `SELECT foo.*, employees.wage
       from (SELECT 
@@ -26,8 +25,8 @@ module.exports = (db) => {
       });
   });
 
+  //Gets a count of sales for each menu item in a span of days
   router.get("/sales", (req, res) => {
-    console.log("sales route");
     const days = req.query.days;
     const queryString = `
     SELECT menu_items.name, count(menu_items.name) AS sold, categories.is_food
@@ -44,13 +43,12 @@ module.exports = (db) => {
         res.send(shifts);
       })
       .catch((err) => {
-        console.log(err);
         res.status(500).json({ error: err.message });
       });
   });
 
+  //Gets the total dollar amount of sales in a span of days
   router.get("/gross-sales", (req, res) => {
-    console.log("gross sales route");
     const days = req.query.days;
     const queryString = `
       SELECT sum(price), CAST(timestamp AS DATE) from order_items

@@ -1,9 +1,9 @@
-import React from 'react';
-import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+import React from "react";
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 
-import CardSection from './CardSection';
-import axios from 'axios';
-import { sendBill, payBill, clearBill } from './BillHelpers';
+import CardSection from "./CardSection";
+import axios from "axios";
+import { sendBill, payBill, clearBill } from "./BillHelpers";
 export function CheckoutForm({
   cost,
   bill,
@@ -20,25 +20,24 @@ export function CheckoutForm({
   const elements = useElements();
 
   const handleSubmit = async (event) => {
-    console.log(cost * 100);
     event.preventDefault();
     axios
-      .get('/api/payments/secret', { params: { bill: cost * 100 } })
+      .get("/api/payments/secret", { params: { bill: cost * 100 } })
       .then((res) => {
         stripe
           .confirmCardPayment(res.data.client_secret, {
             payment_method: {
               card: elements.getElement(CardElement),
               billing_details: {
-                name: 'Jenny Rosen',
+                name: "Jenny Rosen",
               },
             },
           })
           .then((result) => {
             if (result.error) {
             } else {
-              if (result.paymentIntent.status === 'succeeded') {
-                window.alert('Payment Accepted');
+              if (result.paymentIntent.status === "succeeded") {
+                window.alert("Payment Accepted");
                 if (bill.items.length !== 0) {
                   sendBill(tableInfo, data).then((res) => {
                     payBill(orderId, [
@@ -68,7 +67,8 @@ export function CheckoutForm({
 
             setHidden(true);
           }}
-          className="close">
+          className="close"
+        >
           X
         </button>
         <CardSection setHidden={setHidden} />
@@ -83,7 +83,8 @@ export function CheckoutForm({
               setHidden(true);
             }}
             className="cancel-payment-button button"
-            disabled={!stripe}>
+            disabled={!stripe}
+          >
             Cancel Payment
           </button>
         </div>

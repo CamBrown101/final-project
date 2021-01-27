@@ -2,8 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
+<<<<<<< HEAD
   router.get('/', (req, res) => {
     console.log('table route');
+=======
+  //Get information on all tables
+  router.get("/", (req, res) => {
+>>>>>>> 20ce730629a64c5d3cb9e952be55b1678c38e5e7
     db.query(
       `SELECT tables.*, employees.firstName FROM tables
       JOIN employees On employee_id = employees.id
@@ -18,6 +23,7 @@ module.exports = (db) => {
       });
   });
 
+<<<<<<< HEAD
   router.get('/open', (req, res) => {
     db.query(
       `SELECT * FROM orders
@@ -34,6 +40,10 @@ module.exports = (db) => {
   });
   router.get('/:id', (req, res) => {
     console.log('table id route');
+=======
+  //Get info on a specific table
+  router.get("/:id", (req, res) => {
+>>>>>>> 20ce730629a64c5d3cb9e952be55b1678c38e5e7
     const table = req.params.id;
     db.query(
       `SELECT * FROM tables
@@ -50,8 +60,12 @@ module.exports = (db) => {
   });
 
   //seats for a table
+<<<<<<< HEAD
   router.get('/:id/seats', (req, res) => {
     console.log('table id items route');
+=======
+  router.get("/:id/seats", (req, res) => {
+>>>>>>> 20ce730629a64c5d3cb9e952be55b1678c38e5e7
     const table = req.params.id;
     db.query(
       `
@@ -69,8 +83,13 @@ module.exports = (db) => {
       });
   });
 
+<<<<<<< HEAD
   router.get('/:id/current-order', (req, res) => {
     console.log('table id items route');
+=======
+  //Get the current order on a table
+  router.get("/:id/current-order", (req, res) => {
+>>>>>>> 20ce730629a64c5d3cb9e952be55b1678c38e5e7
     const table = req.params.id;
     db.query(
       `
