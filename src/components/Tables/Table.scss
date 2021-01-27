@@ -14,6 +14,9 @@
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.8);
 }
 
+.table-number {
+  padding-bottom: 10px;
+}
 .delete-table-layout {
   background: #fed32c;
 
@@ -24,7 +27,6 @@
   width: 20px;
   height: 20px;
   border-radius: 5px;
-
   background-color: $base-cancel;
   animation: jiggle 0.2s infinite;
   -webkit-animation: jiggle 0.2s infinite;

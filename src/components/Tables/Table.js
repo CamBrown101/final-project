@@ -11,6 +11,7 @@ export default function Table(props) {
       return obj.id !== id;
     });
     //push new layout information into array
+    console.log(data.x, data.y);
     tables.push({ id: id, x_pos: data.x, y_pos: data.y });
     props.setTables({
       ...props.tables,
@@ -138,7 +139,7 @@ export default function Table(props) {
           </strong>
         ) : null}
 
-        <h1>{props.id}</h1>
+        <h1 className="table-number">{props.id}</h1>
       </div>
     </Draggable>
   );
