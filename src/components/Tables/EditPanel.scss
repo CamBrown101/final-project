@@ -2,11 +2,13 @@
 .edit-panel {
   color: white;
   margin-top: 60px;
-
+  user-select: none;
+  text-align: center;
   .edit-form {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr;
+    height: 80px;
     .add-table-button {
       grid-row: 1;
       grid-column: 1/3;
@@ -18,23 +20,54 @@
       width: 100px;
     }
     .grid-size-select {
-      grid-row: 3;
-      grid-column: 1/3;
-      background-color: $base-light;
-      font-size: 24px;
-    }
-
-    .edit-layout-button {
       grid-row: 4;
       grid-column: 1/3;
+      background-color: $base-dark;
+      font-size: 24px;
+      margin-left: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+    }
+
+    .reset-layout-button {
+      grid-row: 3;
+      grid-column: 1/3;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .add-table-button,
+    .reset-layout-button {
+      font-size: 24px;
+    }
+    .add-table-button:hover,
+    .reset-layout-button:hover {
+      color: $base-light-accent;
     }
   }
 }
 
 .grid-1 {
   display: inline;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 32px;
+  height: 32px;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
 }
 
+.grid-1:hover {
+  color: $base-light-accent;
+}
 .grid-logo {
-  size: 80%;
+  margin-top: 4px;
+  size: 100%;
+}
+
+.plus-icon,
+.delete2-icon {
+  width: 20px;
 }
