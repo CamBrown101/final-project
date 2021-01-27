@@ -59,7 +59,7 @@ export default function TableInfo(props) {
 
   return (
     <div className="table-info">
-      <h3 className="table-info-title">Table {props.tableInfo.table}</h3>
+      <h3 className="table-info-title">Edit Table {props.tableInfo.table}</h3>
       <div className="set-table-employee">
         <h4 className="table-info-employee-subtitle">Employee:</h4>
         <select

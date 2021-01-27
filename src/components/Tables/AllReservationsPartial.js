@@ -8,13 +8,20 @@ export default function AllReservationsPartial(props) {
   }
   return (
     <div className="all-reservations-partial">
-      <h2 className="all-reservations-partial-title">Table {props.table}</h2>
-      <p className="all-reservations-partial-time">
-        Time: {props.hour}:{minute}
-      </p>
-      <p className="all-reservations-partial-seats">Seats: {props.seats}</p>
-      <p className="all-reservations-partial-name">Name: {props.name}</p>
-      <p className="all-reservations-partial-seats">Seats: {props.seats}</p>
+      <b>Table: </b>
+      {props.table}
+      <br />
+      <b>Time: </b>
+      {props.hour + ':' + minute}
+      <br />
+      <b>Seats: </b>
+      {props.seats}
+      <br />
+      <b>Name: </b>
+      {props.name}
+      <br />
+      <b>Phone: </b>
+      {props.phone}
     </div>
   );
 }

@@ -4,5 +4,73 @@
   border-width: thin;
   border-color: black;
   border-top: 0;
+  width: 300px;
   user-select: none;
+  display: grid;
+  text-align: left;
+  margin: 0;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  max-height: 300px;
+  .table-title {
+    grid-row: 1;
+    grid-column: 1;
+    margin: 0;
+  }
+  .time-title {
+    grid-row: 2;
+    grid-column: 1;
+  }
+  .seats-title {
+    grid-row: 3;
+    grid-column: 1;
+  }
+  .name-title {
+    grid-row: 4;
+    grid-column: 1;
+  }
+  .phone-title {
+    grid-row: 5;
+    grid-column: 1;
+  }
+  .all-reservations-partial-table {
+    text-align: center;
+    font-size: 14px;
+    grid-row: 1;
+    grid-column: 2;
+  }
+  .all-reservations-partial-time {
+    grid-row: 2;
+    grid-column: 2;
+  }
+
+  .all-reservations-partial-seats {
+    text-align: left;
+    grid-row: 3;
+    grid-column: 2;
+  }
+  .all-reservations-partial-name {
+    grid-row: 4;
+    grid-column: 2;
+  }
+  .all-reservations-partial-phone {
+    white-space: nowrap;
+    grid-row: 5;
+    grid-column: 2;
+  }
 }
+
+// <div className="all-reservations-partial">
+// <div className="table-title">Table</div>
+// <div className="time-title">Time</div>
+// <div className="seats-title">Seats</div>
+// <div className="name-title">Name</div>
+// <div classNAme="Phone-title">Phone</div>
+// <h2 className="all-reservations-partial-title"> {props.table}</h2>
+// <p className="all-reservations-partial-time">
+//   {props.hour}:{minute}
+// </p>
+// <p className="all-reservations-partial-seats">{props.seats}</p>
+// <p className="all-reservations-partial-name">{props.name}</p>
+// <p className="all-reservations-partial-phone">{props.phone}</p>
+// </div>

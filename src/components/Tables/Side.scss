@@ -3,4 +3,9 @@
 .side-container {
   width: 300px;
   background-color: $base-dark;
+  max-height: 800px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-right: 14px;
+  scrollbar-color: #4ba99a #2c2636;
 }

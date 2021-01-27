@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './TablesScreen.scss';
 import Table from './Table';
-import EditPanel from './EditPanel';
 import Lock from '../../img/icons/locklight.png';
 import Edit from '../../img/icons/editlight.png';
 import Side from './Side';
@@ -130,16 +129,6 @@ export default function Tables(props) {
             );
           })}
         </div>
-        <EditPanel
-          tableInfo={tableInfo}
-          setTableInfo={setTableInfo}
-          tables={tables}
-          setTables={setTables}
-          selectValue={selectValue}
-          setSelectValue={setSelectValue}
-          edit={edit}
-          setEdit={setEdit}
-        ></EditPanel>
 
         <Side
           tables={tables}

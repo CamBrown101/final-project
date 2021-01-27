@@ -4,6 +4,7 @@
   top: 100px;
   width: 1048px;
   height: 800px;
+  margin-left: 4em;
 }
 
 .layout-screen {
@@ -26,11 +27,10 @@
     background-color: $base-main-color;
     text-align: center;
   }
-}
-.edit-panel {
-  position: fixed;
-  top: 0;
-  left: 840px;
+  .edit-panel {
+    grid-column: 2;
+    grid-row: 1;
+  }
 }
 
 .edit-layout-button {

@@ -201,7 +201,7 @@ export default function ReservationsNav(props) {
   };
 
   return (
-    <>
+    <div className="reservations-nav">
       <nav className="reservations-nav-upper">
         <div
           onClick={monTab}
@@ -302,6 +302,6 @@ export default function ReservationsNav(props) {
           All
         </div>
       </nav>
-    </>
+    </div>
   );
 }

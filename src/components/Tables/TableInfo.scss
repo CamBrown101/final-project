@@ -1,9 +1,5 @@
+@import '../../base.scss';
 .table-info {
-  border: solid;
-  border-width: thin;
-  border-color: black;
-  border: solid;
-  border-width: thin;
   width: 300px;
 }
 
@@ -11,6 +7,7 @@
   font-size: 24px;
   margin: 0;
   text-align: center;
+  border-color: black;
 }
 
 .set-table-employee {
@@ -19,6 +16,8 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
+  border-color: black;
+
   .table-info-employee-subtitle {
     grid-row: 1;
     grid-column: 1;
@@ -28,6 +27,7 @@
     height: 24px;
     grid-row: 2;
     grid-column: 1;
+    background-color: $base-light;
   }
 }
 
@@ -37,6 +37,7 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
+
   .table-info-seats-subtitle {
     grid-row: 1;
     grid-column: 1;
@@ -46,5 +47,7 @@
     height: 24px;
     grid-row: 2;
     grid-column: 1;
+    background-color: $base-light;
+    background-color: $base-light;
   }
 }
