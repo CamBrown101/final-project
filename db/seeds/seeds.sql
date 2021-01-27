@@ -1,5 +1,5 @@
 INSERT INTO employees (firstName, lastName, email, pin, is_admin, wage)
-VALUES ('Cam', 'Brown', 'cameron-brown@live.com', '1111',  TRUE, 3),
+VALUES ('Cam', 'Brown', 'cameron-brown@live.com', '1111',  FALSE, 3),
 ('Michael', 'Krishna', 'test@test.com', '2222',  TRUE, 15),
 ('James', 'Smith', 'test@test.com', '7777',  FALSE, 13),
 ('Shawn', 'Connery', 'test@test.com', '4444',  FALSE, 13),
