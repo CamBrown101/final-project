@@ -15,9 +15,9 @@
 
 ![Production Screen](https://github.com/CamBrown101/final-project/blob/master/src/img/screenshots/production.png?raw=true)
 
-![Table Layout](https://github.com/CamBrown101/final-project/blob/master/src/img/screenshots/tables.png?raw=true)
+![Table Layout](https://github.com/CamBrown101/final-project/blob/feature/table-screen/src/img/screenshots/tables.png)
 
-![Table Edit](https://github.com/CamBrown101/final-project/blob/master/src/img/screenshots/tables2.png?raw=true)
+![Table Edit](https://github.com/CamBrown101/final-project/blob/feature/table-screen/src/img/screenshots/tables2.png)
 
 ## Built With:
 
