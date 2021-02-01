@@ -2,7 +2,7 @@
 
 ## Description
 
-## A point of sales system for a restaurant. Including analytics, employee clock in, stripe intergration, the ability to email bills, sort bills by seat and a seperate screen for the kitchen and bar for items that need to be prepared. We also a sort by categories for menu items as well as a search bar that you can search by item name or category. This was our final project for Lighthouse Labs Web Development Bootcamp.
+## A point of sales system for a restaurant. Including analytics, employee clock in, stripe integration, the ability to email bills, sort bills by seat and a separate screen for the kitchen and bar for items that need to be prepared. We also a sort by categories for menu items as well as a search bar that you can search by item name or category. This was our final project for Lighthouse Labs Web Development Bootcamp.
 
 ---
 
